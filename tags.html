@@ -1,0 +1,33 @@
+---
+layout: default
+title: 文章标签
+---
+
+<p class="lotus-breadcrub">
+    <a href="{{ site.url }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
+    <span> &gt; </span>
+    {{ page.title }}
+</p>
+
+<h1 class="lotus-pagetit">Tags</h1>
+<article id="tags">
+  <div id='tag_cloud'>
+  {% for tag in site.tags %}
+  <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+  {% endfor %}
+  </div>
+{% if site.tags.size %}
+  <ul>
+    {% for tag in site.tags %}
+    <li>
+      <span id="{{ tag[0] }}">{{ tag[0] }}</span>
+      <ul>
+        {% for post in tag[1] %}
+        <li>{{ post.date | date: "%Y-%m-%d" }} : <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</article>

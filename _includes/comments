@@ -1,0 +1,10 @@
+{% if site.iLotus.comments.provider and page.comments != false %}
+
+<div id="comments">
+{% case site.iLotus.comments.provider %}
+{% when "duoshuo" %}
+  {% include comments-providers/duoshuo %}
+{% endcase %}
+</div>
+
+{% endif %}

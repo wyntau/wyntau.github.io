@@ -1,0 +1,33 @@
+---
+layout: default
+title: 文章分类
+---
+
+<p class="lotus-breadcrub">
+    <a href="{{ site.url }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
+    <span> &gt; </span>
+    {{ page.title }}
+</p>
+
+<h1 class="lotus-pagetit">Categories</h1>
+<article id="categories">
+  <div id='category_cloud'>
+  {% for category in site.categories %}
+  <a href="#{{ category[0] }}" title="{{ category[0] }}" rel="{{ category[1].size }}">{{ category[0] }}</a>
+  {% endfor %}
+  </div>
+{% if site.categories.size %}
+  <ul>
+    {% for category in site.categories %}
+    <li>
+      <span id="{{ category[0] }}">{{ category[0] }}</span>
+      <ul>
+        {% for post in category[1] %}
+        <li>{{ post.date | date: "%Y-%m-%d" }} : <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</article>
