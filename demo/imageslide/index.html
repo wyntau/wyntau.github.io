@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>图片轮播</title>
+        <style type="text/css">
+            *{margin:0;padding:0;}
+            .scroll_list{margin:0 auto;overflow:hidden;position:relative;}
+            .scroll_ul{width:9999px;position:relative;overflow:hidden;clear:both;*zoom:1;}
+            .scroll_ul li{width:50px;height:50px;background:#ccc;margin:5px;line-height:50px;text-align:center;list-style:none;float:left;}
+            .hightlight{padding:1px;border:1px solid blue;}
+            .photo{text-align: center;}
+            h4{text-align: center;margin:30px 0 0 0;}
+
+        </style>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var showNum = 5,
+                    //设置滚动的显示个数
+                    currentThumb = 1,
+                    //当前展示缩略图
+                    middle = 3,
+                    //中间的缩略图标记
+                    nextLoadThumb = 6,
+                    //下一个加载的缩略图序列
+                    thumb = ["thumb1.png", "thumb2.png", "thumb3.png", "thumb4.png", "thumb5.png", "thumb6.png", "thumb7.png", "thumb8.png", "thumb9.png", "thumb10.png"],
+                    //预先输出所有的约略图地址
+                    photo = ["photo1.png", "photo2.png", "photo3.jpg", "photo4.png", "photo5.png", "photo6.png", "photo7.png", "photo8.jpg", "photo9.png", "photo10.png"]; //预先输出所有的图片地址
+
+                scrollUlWidth = $('.scroll_ul li').outerWidth(true); //单个 li 的宽度
+                scrollUlLeft = 0; //.scroll_ul 初使化时的 left 值为 0
+                prevAllow = true; //为了防止连续点击上一页按钮
+                nextAllow = true; //为了防止连续点击下一页按钮
+                $('.scroll_list').width(showNum * scrollUlWidth); //计算父容量限宽
+
+                function prevOne() {
+                    if (prevAllow) {
+                        prevAllow = false;
+                        if (currentThumb > 1) {
+                            currentThumb--;
+                            $('.photo img').attr('src', photo[currentThumb - 1]);
+                            $('.hightlight').removeClass('hightlight').parent().prev().children('img').addClass('hightlight');
+                        }
+                        $('.scroll_ul').animate({
+                            left: middle > 3 ? (scrollUlLeft + scrollUlWidth) : scrollUlLeft
+                        }, 300, function() {
+                            scrollUlLeft = parseInt($('.scroll_ul').css('left'), 10);
+                            prevAllow = true;
+                        })
+                        if (middle > 3) middle--;
+                    }
+                }
+
+                function nextOne() {
+                    if (nextAllow) {
+                        nextAllow = false;
+                        if (currentThumb < thumb.length) {
+                            currentThumb++;
+                            $('.photo img').attr('src', photo[currentThumb - 1]);
+                            $('.hightlight').removeClass('hightlight').parent().next().children('img').addClass('hightlight');
+                        }
+                        $('.scroll_ul').animate({
+                            left: middle >= (thumb.length - 2) ? scrollUlLeft : (scrollUlLeft - scrollUlWidth)
+                        }, 300, function() {
+                            scrollUlLeft = parseInt($('.scroll_ul').css('left'), 10);
+                            nextAllow = true;
+                        })
+                        if (nextLoadThumb <= thumb.length) {
+                            $('<li><img src="' + thumb[nextLoadThumb++-1] + '" alt="" /></li>').appendTo($('.scroll_ul'));
+                        }
+                        if (middle < thumb.length - 2) middle++;
+                    }
+                }
+
+                $(".photo img").mousemove(function(e) {
+                    var e = e || window.event;
+                    var X = e.clientX;
+                    var thisX = $(this).offset().left + $(this).width() / 2;
+                    if (X <= thisX) {
+                        if (currentThumb == 1) {
+                            this.style.cursor = 'auto';
+                            $(this).attr('title', '前面没有啦');
+                        } else {
+                            this.style.cursor = 'url("pre.cur"),auto';
+                            $(this).attr('title', '点击查看上一张');
+                        }
+                    } else {
+                        if (currentThumb == thumb.length) {
+                            this.style.cursor = 'auto';
+                            $(this).attr('title', '后面没有啦');
+                        } else {
+                            this.style.cursor = 'url("next.cur"),auto';
+                            $(this).attr('title', '点击查看下一张');
+                        }
+                    }
+                });
+
+                $(".photo img").click(function(e) {
+                    var e = e || window.event;
+                    var X = e.clientX;
+                    var thisX = $(this).offset().left + $(this).width() / 2;
+                    if (X <= thisX) {
+                        if (currentThumb == 1) {
+                            //nextOne();
+                        } else {
+                            prevOne();
+                        }
+                    } else {
+                        if (currentThumb == thumb.length) {
+                            //prevOne();
+                        } else {
+                            nextOne();
+                        }
+                    }
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <h4>Ajax相册效果</h4>
+        <div style="width:550px;margin:20px auto;border:1px dashed #ddd">
+            <div class="scroll_list">
+                <ul class="scroll_ul">
+                    <li><img class="hightlight" src="thumb1.png" alt="" /></li>
+                    <li><img src="thumb2.png" alt="" /></li>
+                    <li><img src="thumb3.png" alt="" /></li>
+                    <li><img src="thumb4.png" alt="" /></li>
+                    <li><img src="thumb5.png" alt="" /></li>
+                </ul>
+            </div>
+            <div class="photo">
+                <img src="photo1.png" alt="" />
+            </div>
+        </div>
+    </body>
+</html>
