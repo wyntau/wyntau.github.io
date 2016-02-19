@@ -76,7 +76,7 @@ iLotus:
   comments:
     provider: duoshuo
     duoshuo:
-      short_name: short_name
+      short_name: isayme
 
   archives_path: /archives.html
   categories_path: /categories.html
@@ -100,21 +100,23 @@ iLotus:
       url: /contact.html
       icon: icon-envelope-alt
       class: none
-    - text: 联系我
-      url: http://www.zhanxin.info/contact.html
-      icon: icon-heart
-      class: none
     - text: 博客源代码
-      url: https://github.com/pizn/iLotus
+      url: https://github.com/Treri/iLotus-jekyll
       icon: icon-github
       class: none
 
 #站点基础配置
-title: iLotus
-subTitle: Just another Jekyll blog.
-description: 这是 PIZn 的又一个博客，它是基于 Jekyll 搭建起来的。在这里，不仅仅是用来快速记录工作，学习，生活的一点一滴的地方，更是 PIZn 对 Jekyll 的学习和使用的一次有意义的实践。
-keywords: PIZn, GitHub, Jekyll, Plugins, Works, Archives, Quotes, Violet, css, html, javascript, wordpress, logo, design, geek
-url: http://localhost:4000
+title: 自说Me话
+subTitle: I Say Me | 我说我自己 | 我说世界
+description: Treri's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.
+keywords: Treri,Linux,Web,前端开发,自说Me话,ISayme,Internet
+url: http://isay.me
 
 author:
-  name: PIZn
+  name : Treri
+  email: treri.liu@gmail.com
+  github: Treri
+  twitter: Treri_liu
+  douban: lwent
+  QQ: 83692901
+  weibo: leftupme
