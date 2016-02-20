@@ -4,13 +4,13 @@ title:
 ---
 <section class="lotus-logo fn-clear">
     <hgroup class="violet-site">
-        <h1><a href="{{ site.url }}" >{{ site.title }}</a></h1>
+        <h1><a href="{{ site.url | append: site.baseurl }}" >{{ site.title }}</a></h1>
         <h2>{{ site.subTitle }}</h2>
     </hgroup><!-- //violet-site -->
 </section>
 {% for rpost in site.posts limit:4 %}
 <article class="lotus-article">
-    <h3><a href="{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
+    <h3><a href="{{ site.url | append: site.baseurl }}{{ rpost.url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
     <p itemprop="description">{{ rpost.content }}</p>
 </article>
 {% endfor %}
@@ -19,7 +19,7 @@ title:
     <h3>最新文章</h3>
         <ul>
             {% for npost in site.posts limit:3 offset:5 %}
-            <li><a href="{{ npost.url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
+            <li><a href="{{ site.url | append: site.baseurl }}{{ npost.url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
             {% endfor %}
         </ul>
     </article>
@@ -29,7 +29,7 @@ title:
         <li>
             {% for page in site.html_pages %}
             {% if page.url != '/'%}
-            <a href="{{ page.url }}" rel="bookmark" title="{{page.title}}">{{ page.title }}</a>
+            <a href="{{ site.url | append: site.baseurl }}{{ page.url }}" rel="bookmark" title="{{page.title}}">{{ page.title }}</a>
             {% endif %}
             {% endfor %}
         </li>

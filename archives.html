@@ -4,7 +4,7 @@ title: 文章归档
 ---
 
 <p class="lotus-breadcrub">
-    <a href="{{ site.url }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
+    <a href="{{ site.url | append: site.baseurl }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
     <span> &gt; </span>
     {{ page.title }}
 </p>
@@ -22,7 +22,7 @@ title: 文章归档
             <ul>
   {% endif %}
 
-                <li>{{ post.date | date: "%m-%d" }} : <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+                <li>{{ post.date | date: "%m-%d" }} : <a href="{{ site.url | append: site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
 
   {% if forloop.last %}
             </ul>

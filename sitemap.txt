@@ -1,6 +1,6 @@
 ---
 ---
 {% for post in site.posts %}
-{{ site.url }}{{ post.url }}{% endfor %}
+{{ site.url | append: site.baseurl }}{{ post.url }}{% endfor %}
 {% for page in site.html_pages %}
-{{ site.url }}{{ page.url }}{% endfor %}
+{{ site.url | append: site.baseurl }}{{ page.url }}{% endfor %}
