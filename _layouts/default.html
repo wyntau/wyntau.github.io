@@ -37,18 +37,18 @@
 <body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
     <nav class="lotus-nav">
         <ul>
-            {% for link in site.nav %}
+            {% for nav in site.iLotus.navs %}
             {% assign active = nil %}
             {% assign homeClass = nil %}
-            {% if page.url == link.url%}
+            {% if page.url == nav.url%}
               {% assign active = 'current' %}
             {% endif %}
-            {% if link.class == 'home' %}
+            {% if nav.class == 'home' %}
                 {% assign homeClass = 'home ' %}
             {% endif %}
             <li class="{{ homeClass }}{{ active }}">
-                <a href="{{ link.url }}" rel="bookmark" title="{{link.text}}">
-                    <i class="{{ link.icon }}"></i>
+                <a href="{{ nav.url }}" rel="bookmark" title="{{nav.text}}">
+                    <i class="{{ nav.icon }}"></i>
                 </a>
                 {{ indicator }}
             </li>
