@@ -5,7 +5,10 @@ plugins_dir: ./_plugins
 layouts_dir: ./_layouts
 data_dir: ./_data
 includes_dir: ./_includes
-collections: null
+
+# this config will lead github pages blog(jekyll 3.0.3) generate no rendered posts
+# so comment out this until github used jekyll updated
+# collections: null
 
 # Handling Reading
 safe: false
