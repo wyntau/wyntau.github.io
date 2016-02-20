@@ -26,13 +26,13 @@ title:
     <article class="article article-last">
     <h3>相关页面</h3>
     <ul>
+        {% for page in site.html_pages %}
+        {% if page.url != '/'%}
         <li>
-            {% for page in site.html_pages %}
-            {% if page.url != '/'%}
             <a href="{{ site.url | append: site.baseurl }}{{ page.url }}" rel="bookmark" title="{{page.title}}">{{ page.title }}</a>
-            {% endif %}
-            {% endfor %}
         </li>
+        {% endif %}
+        {% endfor %}
     </ul>
     </article>
 </section>

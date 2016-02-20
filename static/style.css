@@ -508,16 +508,6 @@ h1, h2, h3, h4, h5, h6{ font-weight: 500; font-weight: 700\9; color:#333; }
 	width: 42%;
 	margin-left: 1.5em;
 }
-.lotus-double .article-last a{
-  padding: 0 10px;
-  border-right: 1px solid #a8a8a8;
-}
-.lotus-double .article-last a:first-child{
-  padding-left: 0;
-}
-.lotus-double .article-last a:last-child{
-  border-right: none;
-}
 .lotus-breadcrub {
 	padding-bottom: 1em;
 }
