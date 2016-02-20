@@ -39,7 +39,7 @@ host: 127.0.0.1
 baseurl: "" # does not include hostname
 
 # Outputting
-permalink: date
+permalink: /:year/:month/:title.html
 # paginate: 8
 paginate_path: /page:num
 timezone: Asia/Shanghai
