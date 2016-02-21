@@ -4,7 +4,7 @@ title: PhilNa2增加自定义导航菜单
 pid: 86
 comments: true
 tags: [PhilNa2, WordPress]
-categories: [Wordpress]
+categories: [WordPress]
 ---
 使用PhilNa2主题的人肯定一直都梦想着能够添加自定义导航菜单吧.这样我们就可以随便添加自己想要的栏目,不管是内链还是外链.据我所知,大部分童鞋使用的都是 新建一个页面,然后使用**page link to**插件改写那个页面的链接,然后连接到一个新的地方.
 今天我就给你们一个解放.

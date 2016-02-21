@@ -4,7 +4,7 @@ title: 博客右侧欢迎信息
 pid: 163
 comments: true
 tags: [PhilNa2, WordPress]
-categories: [Wordpress]
+categories: [WordPress]
 ---
 来我这里的朋友是否注意到这个小玩意了呢?嘻嘻,早就弄上了,
 

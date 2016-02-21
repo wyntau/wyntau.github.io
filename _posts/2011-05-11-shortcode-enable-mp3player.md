@@ -4,7 +4,7 @@ title: 短代码 mp3player
 pid: 127
 comments: true
 tags: [WordPress, 原创]
-categories: [Wordpress]
+categories: [WordPress]
 ---
 代码来源
 
