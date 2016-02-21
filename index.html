@@ -15,9 +15,9 @@ layout: default
 {% endfor %}
 <section class="lotus-double fn-clear">
     <article class="article article-first">
-    <h3>最新文章</h3>
+    <h3>近期文章</h3>
         <ul>
-            {% for npost in site.posts limit:3 offset:5 %}
+            {% for npost in site.posts limit:4 offset:4 %}
             <li><a href="{{ site.url | append: site.baseurl }}{{ npost.url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
             {% endfor %}
         </ul>
