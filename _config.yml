@@ -48,7 +48,19 @@ paginate_path: /page:num
 timezone: Asia/Shanghai
 
 quiet: false
-defaults: []
+defaults:
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: posts   # limit to posts
+    values:
+      comments: true
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: pages   # limit to posts
+    values:
+      comments: false
 
 # Markdown Processors
 kramdown:

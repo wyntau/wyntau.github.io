@@ -1,4 +1,5 @@
-{% if site.iLotus.comments.provider and page.comments != false %}
+{% if site.iLotus.comments.provider %}
+  {% if page.comments %}
 
 <div id="comments">
 {% case site.iLotus.comments.provider %}
@@ -7,4 +8,5 @@
 {% endcase %}
 </div>
 
+  {% endif %}
 {% endif %}
