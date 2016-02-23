@@ -1333,15 +1333,7 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
 .lotus dl,
 .lotus form,
 .lotus hr,
-.lotus table,
-.lotus-p,
-.lotus-pre,
-.lotus-ul,
-.lotus-ol,
-.lotus-dl,
-.lotus-form,
-.lotus-hr,
-.lotus-table {
+.lotus table {
   margin-bottom: 1em;
   vertical-align: middle;
 }
@@ -1386,29 +1378,20 @@ h6 {
 .lotus h3,
 .lotus h4,
 .lotus h5,
-.lotus h6,
-.lotus-h1,
-.lotus-h2,
-.lotus-h3,
-.lotus-h4,
-.lotus-h5,
-.lotus-h6 {
+.lotus h6 {
   margin-bottom: 0.4em;
   line-height: 1.5;
 }
 
-.lotus h1,
-.lotus-h1 {
+.lotus h1 {
   font-size: 1.8em;
 }
 
-.lotus h2,
-.lotus-h2 {
+.lotus h2 {
   font-size: 1.6em;
 }
 
-.lotus h3,
-.lotus-h3 {
+.lotus h3 {
   font-size: 1.4em;
   border-bottom: 1px dotted #d8d8d8;
   margin-top: 1.4em;
@@ -1418,25 +1401,13 @@ h6 {
   margin-top: 0;
 }
 
-.lotus h4,
-.lotus-h4 {
+.lotus h4 {
   font-size: 1.2em;
 }
 
 .lotus h5,
-.lotus h6,
-.lotus-h5,
-.lotus-h6 {
+.lotus h6 {
   font-size: 1em;
-}
-
-.lotus .lotus-break {
-  line-height: 18px;
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 400;
-  border-bottom: 1px dotted #e8e8e8;
-  color: #898989;
 }
 
 .lotus .lotus-pagetit {
@@ -1445,94 +1416,43 @@ h6 {
   border-bottom: 1px solid #C5C5C5;
 }
 
-.lotus .lotus-tagline {
-  color: #888;
-  font-size: 13px;
-  margin: 0 0 1.2em;
-  font-weight: 400;
-}
-
-.lotus .lotus-tagline .lotus-tagline-catg {
-  margin-left: 1em;
-}
-
-.lotus ul,
-.lotus-ul {
+.lotus ul{
   margin-left: 1.3em;
   list-style: disc;
 }
 
-.lotus ol,
-.lotus-ol {
+.lotus ol{
   list-style: decimal;
   margin-left: 1.9em;
 }
 
 .lotus li ul,
-.lotus li ol,
-.lotus-ul ul,
-.lotus-ul ol,
-.lotus-ol ul,
-.lotus-ol ol {
+.lotus li ol{
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 2em;
 }
 
-.lotus li ul,
-.lotus-ul ul,
-.lotus-ol ul {
+.lotus li ul{
   list-style: circle;
 }
 
 .lotus table th,
-.lotus table td,
-.lotus-table th,
-.lotus-table td {
+.lotus table td {
   border: 1px solid #d0d0d0;
   padding: 5px 10px;
 }
 
-.lotus table th,
-.lotus-table th {
+.lotus table th {
   background: rgba(214, 214, 214, 0.5);
 }
 
-.lotus table thead th,
-.lotus-table thead th {
+.lotus table thead th {
   background: rgba(214, 214, 214, 0.8);
 }
 
-.lotus-em,
 .lotus em {
   font-weight: 700;
-}
-
-.lotus-first:first-letter {
-  display: block;
-  float: left;
-  line-height: 36px;
-  height: 36px;
-  font-size: 280%;
-  padding: 3px 3px;
-  margin: 5px 10px 0 0;
-  font-weight: blod;
-  overflow: hidden;
-}
-
-.lotus .lotus-last {
-  margin-bottom: 0;
-}
-
-.lotus .lotus-last-view {
-  color: #a8a8a8;
-  font-size: 12px;
-}
-
-.lotus .lotus-pagebtn {
-  border-bottom: 1px solid #dedede;
-  margin-top: 2.2em;
-  margin-bottom: 3px;
 }
 
 .lotus .lotus-anno {
@@ -1632,10 +1552,6 @@ h6 {
   border-bottom: 1px dotted #c8c8c8;
 }
 
-.lotus-date {
-  color: #a0a0a0;
-}
-
 .lotus-double {
   margin-bottom: 3em;
 }
@@ -1658,110 +1574,6 @@ h6 {
   padding-bottom: 1em;
 }
 
-.lotus-archives {
-  margin-top: 1.5em;
-}
-
-.lotus-archives .count {
-  color: #898989;
-  font-weight: 400;
-}
-
-.lotus-pages {
-  margin-top: 1em;
-}
-
-.lotus-pages a,
-.lotus-pages span {
-  text-decoration: none;
-  float: left;
-  display: inline;
-  margin: 0 5px 0 0;
-}
-
-.lotus-pages .pages {
-  line-height: 22px;
-  float: left;
-  display: inline;
-  margin-right: 10px;
-  margin-left: 0;
-  height: 22px;
-  position: relative;
-  top: -1px;
-}
-
-.lotus-pages a.page,
-.lotus-pages .last,
-.lotus-pages .first {
-  height: 20px;
-  line-height: 20px;
-  padding: 0 8px;
-  margin-top: 1px;
-  font-weight: normal;
-}
-
-.lotus-pages a:hover,
-.lotus-pages span.current,
-.lotus-pages a.last:hover,
-.lotus-pages a.first:hover {
-  height: 20px;
-  line-height: 20px;
-  padding: 0 8px;
-}
-
-.lotus-pages a.page:hover {
-  height: 20px;
-  line-height: 20px;
-  padding: 0 8px;
-  background: #065588;
-  color: #f3f2ee;
-}
-
-.iLight .lotus-pages a.page:hover {
-  background: #9C0001;
-}
-
-.lotus-pages span.current {
-  height: 20px;
-  line-height: 20px;
-  padding: 0 8px;
-}
-
-.lotus-pages .extend {
-  float: left;
-  display: inline;
-  margin: 0 5px;
-  line-height: 16px;
-  font-weight: bold;
-}
-
-.lotus-tags a,
-.lotus-tags .tags-normal {
-  display: inline;
-  padding: 2px 8px;
-}
-
-.lotus-tags .tags-big {
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.lotus-tag .tags-larget {
-  font-size: 28px;
-  font-weight: 500;
-}
-
-.lotus-tags a:hover {}
-
-#link .lotus-link {
-  list-style: none;
-  margin-left: 0;
-}
-
-#link .lotus-link-item {
-  margin-bottom: 1em;
-}
-
 .lotus-404 {
   padding-top: 20em;
   background: url(images/404.png) no-repeat center 0;
@@ -1775,38 +1587,6 @@ h6 {
   cursor: pointer;
 }
 
-.lotus-post .lotus-post-end {
-  height: 21px;
-  text-align: center;
-  vertical-align: top;
-  border-bottom: 1px dotted #e0e0e0;
-}
-
-.lotus-post .lotus-post-end span {
-  width: 94px;
-  padding-left: 4px;
-  height: 21px;
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  top: 10px;
-  font-style: italic;
-  line-height: 21px;
-  background: #f3f2ed;
-  color: #d2d1cd;
-}
-
-.lotus-post .lotus-post-end span i {
-  float: left;
-  width: 21px;
-  height: 21px;
-  display: block;
-  background: url(images/logo.jpg) no-repeat 0 0;
-  background-size: cover;
-  overflow: hidden;
-  opacity: .2;
-}
-
 .lotus-nextpage {
   margin-top: 1em;
 }
@@ -1817,10 +1597,6 @@ h6 {
 
 .lotus-nextpage .lotus-nextpage-right {
   float: right;
-}
-
-.lotus-disqus {
-  margin-top: 2em;
 }
 
 .lotus-footer {
@@ -1850,201 +1626,6 @@ h6 {
 .lotus-meta {
   color: #a8a8a8;
 }
-
-
-/*************************
- * violet logo
-*************************/
-
-.violet-logo {
-  float: left;
-  position: relative;
-  width: 66px;
-  height: 66px;
-  margin: 20px 0 12px 0px;
-  -moz-border-radius: 33px 33px;
-  -webkit-border-radius: 33px 33px;
-  -o-border-radius: 33px 33px;
-  border-radius: 33px 33px;
-}
-
-.v-position-1,
-.v-position-2,
-.v-position-3,
-.v-position-4,
-.v-position-5,
-.v-position-6,
-.v-position-7 {
-  position: absolute;
-}
-
-.violet-logo .v-position-1 {
-  top: 0;
-  left: 23px;
-}
-
-.violet-logo .v-position-2 {
-  top: 9px;
-  right: 6px;
-}
-
-.violet-logo .v-position-3 {
-  bottom: 9px;
-  right: 6px;
-}
-
-.violet-logo .v-position-4 {
-  bottom: 0;
-  left: 23px;
-}
-
-.violet-logo .v-position-5 {
-  bottom: 9px;
-  left: 6px;
-}
-
-.violet-logo .v-position-6 {
-  top: 9px;
-  left: 6px;
-}
-
-.violet-logo .v-petal {
-  position: relative;
-  width: 20px;
-  height: 28px;
-}
-
-.v-deg-0 {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-
-.v-deg-60 {
-  -webkit-transform: rotate(60deg);
-  -moz-transform: rotate(60deg);
-  -o-transform: rotate(60deg);
-  transform: rotate(60deg);
-}
-
-.v-deg-120 {
-  -webkit-transform: rotate(120deg);
-  -moz-transform: rotate(120deg);
-  -o-transform: rotate(120deg);
-  transform: rotate(120deg);
-}
-
-.v-deg-180 {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-.v-deg-240 {
-  -webkit-transform: rotate(-120deg);
-  -moz-transform: rotate(-120deg);
-  -o-transform: rotate(-120deg);
-  transform: rotate(-120deg);
-}
-
-.v-deg-300 {
-  -webkit-transform: rotate(-60deg);
-  -moz-transform: rotate(-60deg);
-  -o-transform: rotate(-60deg);
-  transform: rotate(-60deg);
-}
-
-.v-color-1 .v-petal-top,
-.v-color-1 .v-petal-left-det,
-.v-color-1 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-color-2 .v-petal-top,
-.v-color-2 .v-petal-left-det,
-.v-color-2 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-color-3 .v-petal-top,
-.v-color-3 .v-petal-left-det,
-.v-color-3 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-color-4 .v-petal-top,
-.v-color-4 .v-petal-left-det,
-.v-color-4 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-color-5 .v-petal-top,
-.v-color-5 .v-petal-left-det,
-.v-color-5 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-color-6 .v-petal-top,
-.v-color-6 .v-petal-left-det,
-.v-color-6 .v-petal-right-det {
-  background: #525252;
-}
-
-.v-petal-left,
-.v-petal-right {
-  position: absolute;
-  top: 8px;
-  height: 20px;
-  overflow: hidden;
-}
-
-.v-petal-left {
-  left: 0;
-  width: 11px;
-}
-
-.v-petal-right {
-  right: 0px;
-  width: 10px;
-}
-
-.v-petal-top,
-.v-petal-left-det,
-.v-petal-right-det {
-  position: absolute;
-  width: 20px;
-}
-
-.v-petal-top {
-  top: 0;
-  right: 0;
-  height: 10px;
-  -moz-border-radius: 9px 9px 0 0;
-  -webkit-border-radius: 9px 9px 0 0;
-  -o-border-radius: 9px 9px 0 0;
-  border-radius: 9px 9px 0px 0px;
-}
-
-.v-petal-left-det {
-  left: 0;
-  height: 20px;
-  -moz-border-radius: 0 0 0 20px;
-  -webkit-border-radius: 0 0 0 20px;
-  -o-border-radius: 0 0 0 20px;
-  border-radius: 0 0 0 20px;
-}
-
-.v-petal-right-det {
-  right: 0;
-  height: 20px;
-  -moz-border-radius: 0 0 20px 0;
-  -webkit-border-radius: 0 0 20px 0;
-  -o-border-radius: 0 0 20px 0;
-  border-radius: 0px 0px 20px 0px;
-}
-
 
 /** violet-site **/
 
@@ -2159,10 +1740,6 @@ h6 {
   border: 1px solid #d4d4d4;
 }
 
-.iLight .lotus-post .lotus-post-end span {
-  background: #FEFEFE;
-}
-
 .iLight .lotus-backtop {
   color: #c5c5bb;
 }
@@ -2211,9 +1788,7 @@ h6 {
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
   .lotus table th,
-  .lotus table td,
-  .lotus-table th,
-  .lotus-table td {
+  .lotus table td {
     padding: 2px 0;
     text-align: center;
     vertical-align: middle;
@@ -2283,66 +1858,8 @@ h6 {
 /*
  * for print
  */
-
 @media print {
   .lotus-nav {
     display: none;
   }
-}
-
-
-/**
- * for post img
- */
-
-.lotus-lightbox-overlay {
-  background-color: black;
-  display: none;
-  left: 0;
-  opacity: 0.8;
-  position: fixed;
-  top: 0;
-  z-index: 9999;
-}
-
-.lotus-lightbox {
-  display: none;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  line-height: 0;
-  z-index: 10000;
-}
-
-.lotus-lightbox img {
-  width: auto;
-  height: auto;
-  display: none;
-}
-
-.lotus-lightbox .lotus-lightbox-cnt {
-  position: relative;
-  box-shadow: 4px 4px 10px #000;
-  border-radius: 4px 4px 4px 4px;
-  margin: 0 auto;
-  background: #f3f2ee url(images/logo.jpg) no-repeat center center;
-  padding: 10px 10px;
-  width: 250px;
-  height: 250px;
-}
-
-.lotus-lightbox .lotus-lightbox-close {
-  position: absolute;
-  display: none;
-  margin: 0 auto;
-  top: 0;
-  width: 24px;
-  height: 24px;
-  font-size: 12px;
-  text-align: center;
-  line-height: 24px;
-  background: #f3f2ee;
-  z-index: 10001;
-  border-radius: 3px 3px;
-  cursor: pointer;
 }
