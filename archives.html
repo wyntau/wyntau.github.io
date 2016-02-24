@@ -1,16 +1,7 @@
 ---
-layout: default
+layout: page
 title: 文章归档
 ---
-
-<p class="lotus-breadcrub">
-    <a href="{{ site.url | append: site.baseurl }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
-    <span> &gt; </span>
-    {{ page.title }}
-</p>
-
-<h1 class="lotus-pagetit">Archives</h1>
-<article id="archives">
 
 {% for post in site.posts  %}
   {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
@@ -41,8 +32,3 @@ title: 文章归档
 
 
 {% endfor %}
-
-
-
-
-</article>

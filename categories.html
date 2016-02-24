@@ -1,16 +1,8 @@
 ---
-layout: default
+layout: page
 title: 文章分类
 ---
 
-<p class="lotus-breadcrub">
-    <a href="{{ site.url | append: site.baseurl }}/index.html" rel="nofollow" rel="nofollow" title="首页">Home</a>
-    <span> &gt; </span>
-    {{ page.title }}
-</p>
-
-<h1 class="lotus-pagetit">Categories</h1>
-<article id="categories">
   <div id='category_cloud'>
   {% for category in site.categories %}
   <a href="#{{ category[0] }}" title="{{ category[0] }}" rel="{{ category[1].size }}">{{ category[0] }}</a>
@@ -30,4 +22,3 @@ title: 文章分类
     {% endfor %}
   </ul>
 {% endif %}
-</article>
