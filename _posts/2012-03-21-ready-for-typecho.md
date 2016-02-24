@@ -2,7 +2,6 @@
 layout: post
 title: 准备更换typecho
 pid: 244
-comments: true
 tags: [PhilNa2, Typecho]
 categories: [唠唠叨叨]
 ---

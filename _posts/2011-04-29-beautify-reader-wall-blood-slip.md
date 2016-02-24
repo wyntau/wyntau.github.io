@@ -2,7 +2,6 @@
 layout: post
 title: 读者墙血条显示
 pid: 106
-comments: true
 tags: [WordPress, 转载]
 categories: [WordPress]
 ---

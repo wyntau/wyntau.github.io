@@ -2,7 +2,6 @@
 layout: post
 title: Debian6安装小记
 pid: 111
-comments: true
 tags: [Debian, Linux, 原创]
 categories: [系统相关]
 ---

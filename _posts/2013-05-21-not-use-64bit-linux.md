@@ -2,7 +2,6 @@
 layout: post
 title: 64位Debian安装感受
 pid: 2013052101
-comments: true
 keywords: "64bitLinux"
 description: "64位Debian安装感受"
 categories: [唠唠叨叨]

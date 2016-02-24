@@ -2,7 +2,6 @@
 layout: post
 title: 艹,牛逼的校园网认证
 pid: 213
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

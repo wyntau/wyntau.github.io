@@ -2,7 +2,6 @@
 layout: post
 title: 服务器恢复正常
 pid: 104
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

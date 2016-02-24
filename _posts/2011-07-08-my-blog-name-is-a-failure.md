@@ -2,7 +2,6 @@
 layout: post
 title: 我起的名字很失败
 pid: 185
-comments: true
 tags: [Blog, 点滴]
 categories: [唠唠叨叨]
 ---

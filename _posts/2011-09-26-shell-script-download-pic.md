@@ -2,7 +2,6 @@
 layout: post
 title: 一段shell程序下载图片
 pid: 224
-comments: true
 tags: [Bash, Linux]
 categories: [学习笔记]
 ---

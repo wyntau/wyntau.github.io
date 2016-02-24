@@ -2,7 +2,6 @@
 layout: post
 title: wordpress升级3.2成功
 pid: 187
-comments: true
 tags: [Upgrade, WordPress]
 categories: [WordPress]
 ---

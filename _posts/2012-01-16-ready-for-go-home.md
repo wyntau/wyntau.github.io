@@ -2,7 +2,6 @@
 layout: post
 title: 收拾行李,准备回家
 pid: 242
-comments: true
 categories: [唠唠叨叨]
 ---
 考了一个星期的试,终于在上午结束了.

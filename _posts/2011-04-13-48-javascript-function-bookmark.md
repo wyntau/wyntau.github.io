@@ -2,7 +2,6 @@
 layout: post
 title: 咱也来段JavaScript功能书签(4.16更新)
 pid: 48
-comments: true
 tags: [Blog, JavaScript]
 categories: [他山之石]
 ---

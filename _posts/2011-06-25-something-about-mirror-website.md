@@ -2,7 +2,6 @@
 layout: post
 title: 镜像网站遇到的那些事儿
 pid: 175
-comments: true
 tags: [Linux, website, 原创]
 categories: [互联网络, 学习笔记]
 ---

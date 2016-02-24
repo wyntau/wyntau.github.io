@@ -2,7 +2,6 @@
 layout: post
 title: 转-去除wp头部代码中不需要的
 pid: 124
-comments: true
 tags: [WordPress, 转载]
 categories: [WordPress]
 ---

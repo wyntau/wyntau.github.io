@@ -2,7 +2,6 @@
 layout: post
 title: js函数重新加载,不会~
 pid: 140
-comments: true
 tags: [Ajax, jQuery, PhilNa2]
 categories: [唠唠叨叨]
 ---

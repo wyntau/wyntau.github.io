@@ -4,7 +4,6 @@ title: pjax使用初体验
 pid: 2013050501
 keywords: "pjax,jQuery,JavaScript"
 description: ""
-comments: true
 categories: [学习笔记]
 tags: [Ajax, jQuery]
 ---

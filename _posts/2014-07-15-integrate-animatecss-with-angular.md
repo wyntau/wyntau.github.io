@@ -2,7 +2,6 @@
 layout: post
 title: "Angular.js与animate.css集成"
 pid: 2014071501
-comments: true
 keywords: ""
 description: ""
 categories: [学习笔记]

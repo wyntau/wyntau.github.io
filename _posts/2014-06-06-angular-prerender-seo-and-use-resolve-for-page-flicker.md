@@ -2,7 +2,6 @@
 layout: post
 title: "Angular Prerender SEO实践"
 pid: 2014060601
-comments: true
 keywords: "angular prerender autoscroll seo ngcloak uirouter"
 description: ""
 categories: [学习笔记]

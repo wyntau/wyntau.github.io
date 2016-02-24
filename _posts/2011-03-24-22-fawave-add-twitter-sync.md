@@ -2,7 +2,6 @@
 layout: post
 title: 发微(FaWave)添加twitter同步
 pid: 22
-comments: true
 tags: [Twitter]
 categories: [互联网络, 学习笔记]
 ---

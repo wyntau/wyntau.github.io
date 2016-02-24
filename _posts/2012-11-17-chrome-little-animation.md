@@ -2,7 +2,6 @@
 layout: post
 title: Chrome下载页面小效果一个
 pid: 251
-comments: true
 tags: [Chrome, JavaScript]
 categories: [互联网络]
 ---

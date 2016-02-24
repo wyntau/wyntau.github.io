@@ -2,7 +2,6 @@
 layout: post
 title: 一个扩展DOM的函数
 pid: 230
-comments: true
 tags: [DOM, JavaScript]
 categories: [学习笔记]
 ---

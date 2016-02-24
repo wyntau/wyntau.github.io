@@ -2,7 +2,6 @@
 layout: post
 title: chrome扩展Super Google Reader一枚
 pid: 101
-comments: true
 tags: [Chrome, Greader]
 categories: [互联网络]
 ---

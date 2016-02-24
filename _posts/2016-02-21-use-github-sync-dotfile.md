@@ -2,7 +2,6 @@
 layout: post
 title: 使用Github管理配置文件
 pid: 2016022102
-comments: true
 tags: [GitHub]
 categories: [也来推荐]
 ---

@@ -2,7 +2,6 @@
 layout: post
 title: 准备重构主题为html5
 pid: 229
-comments: true
 tags: [HTML5, 点滴]
 categories: [唠唠叨叨]
 ---

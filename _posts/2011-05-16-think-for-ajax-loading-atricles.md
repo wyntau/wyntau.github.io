@@ -2,7 +2,6 @@
 layout: post
 title: 关于Ajax加载首页文章的想法
 pid: 135
-comments: true
 tags: [Ajax, WordPress, 点滴]
 categories: [唠唠叨叨 ]
 ---

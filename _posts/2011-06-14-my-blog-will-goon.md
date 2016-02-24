@@ -2,7 +2,6 @@
 layout: post
 title: 我还在坚持
 pid: 168
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

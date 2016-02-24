@@ -2,7 +2,6 @@
 layout: post
 title: "切换域名至isay.me"
 pid: 2014030801
-comments: true
 keywords: ""
 description: ""
 categories: [唠唠叨叨]

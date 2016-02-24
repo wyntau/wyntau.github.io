@@ -2,7 +2,6 @@
 layout: post
 title: 还是决定恢复显示博主回复~~
 pid: 130
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

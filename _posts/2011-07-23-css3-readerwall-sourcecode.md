@@ -2,7 +2,6 @@
 layout: post
 title: css3读者墙 源代码
 pid: 192
-comments: true
 tags: [CSS3, PHP, 原创, 读者墙]
 categories: [WordPress]
 ---

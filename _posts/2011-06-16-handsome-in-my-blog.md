@@ -2,7 +2,6 @@
 layout: post
 title: 我瞎弄的帅哥认证
 pid: 169
-comments: true
 tags: [Blog, WordPress, 原创]
 categories: [WordPress]
 ---

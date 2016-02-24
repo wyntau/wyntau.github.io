@@ -2,7 +2,6 @@
 layout: post
 title: 扩展后台侧栏小工具初记
 pid: 177
-comments: true
 tags: [Widget, WordPress]
 categories: [WordPress]
 ---

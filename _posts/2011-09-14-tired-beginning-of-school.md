@@ -2,7 +2,6 @@
 layout: post
 title: 开学真累啊
 pid: 220
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

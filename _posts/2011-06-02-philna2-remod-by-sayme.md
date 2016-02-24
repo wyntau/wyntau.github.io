@@ -2,7 +2,6 @@
 layout: post
 title: PhilNa2-自说Me话扩展版
 pid: 160
-comments: true
 tags: [PhilNa2, Themes, WordPress, 原创]
 categories: [WordPress]
 ---

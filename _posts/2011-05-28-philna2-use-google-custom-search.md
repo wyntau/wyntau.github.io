@@ -2,7 +2,6 @@
 layout: post
 title: PhilNa2使用google自定义搜索
 pid: 150
-comments: true
 tags: [Google, PhilNa2, WordPress, 原创]
 categories: [WordPress]
 ---

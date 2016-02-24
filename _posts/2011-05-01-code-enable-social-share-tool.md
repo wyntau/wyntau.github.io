@@ -2,7 +2,6 @@
 layout: post
 title: 转-代码实现社会化分享工具
 pid: 110
-comments: true
 tags: [Blog, 转载]
 categories: [他山之石]
 ---

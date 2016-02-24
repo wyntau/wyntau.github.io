@@ -2,7 +2,6 @@
 layout: post
 title: 解密ineo1.0.2
 pid: 137
-comments: true
 tags: [Linux, PHP, Themes, 点滴]
 categories: [唠唠叨叨]
 ---

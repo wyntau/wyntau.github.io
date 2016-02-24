@@ -2,7 +2,6 @@
 layout: post
 title: 自制两个英文版kindle格式小说
 pid: 236
-comments: true
 tags: [Kindle]
 categories: [学习笔记]
 ---

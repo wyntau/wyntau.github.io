@@ -2,7 +2,6 @@
 layout: post
 title: 修改js获取主题地址函数
 pid: 200
-comments: true
 tags: [JavaScript, Themes, WordPress]
 categories: [WordPress]
 ---

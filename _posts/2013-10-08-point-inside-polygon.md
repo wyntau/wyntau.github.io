@@ -2,7 +2,6 @@
 layout: post
 title: "判断一个点是否在多边形内"
 pid: 2013100801
-comments: true
 keywords: ""
 description: ""
 categories: [学习笔记]

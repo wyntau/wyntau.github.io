@@ -2,7 +2,6 @@
 layout: post
 title: 给WP增加多套表情
 pid: 24
-comments: true
 tags: [WordPress, 原创]
 categories: [WordPress]
 ---

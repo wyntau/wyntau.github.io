@@ -2,7 +2,6 @@
 layout: post
 title: "在C中初始化变量"
 pid: 2013100701
-comments: true
 keywords: ""
 description: ""
 categories: [学习笔记]

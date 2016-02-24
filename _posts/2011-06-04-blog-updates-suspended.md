@@ -2,7 +2,6 @@
 layout: post
 title: 博客暂停更新
 pid: 161
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

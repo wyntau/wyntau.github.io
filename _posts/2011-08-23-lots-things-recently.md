@@ -2,7 +2,6 @@
 layout: post
 title: 最近琐事多多
 pid: 208
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

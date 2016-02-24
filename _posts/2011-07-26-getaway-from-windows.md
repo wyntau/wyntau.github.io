@@ -2,7 +2,6 @@
 layout: post
 title: 终于决定放弃windows
 pid: 194
-comments: true
 tags: [Linux, Windows]
 categories: [唠唠叨叨]
 ---

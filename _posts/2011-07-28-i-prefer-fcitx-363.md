@@ -2,7 +2,6 @@
 layout: post
 title: 我选择Fcitx 3.6.3
 pid: 196
-comments: true
 tags: [Fcitx, Linux]
 categories: [学习笔记]
 ---

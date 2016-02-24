@@ -2,7 +2,6 @@
 layout: post
 title: 自己写的几个js函数
 pid: 232
-comments: true
 tags: [JavaScript, jQuery]
 categories: [学习笔记]
 ---

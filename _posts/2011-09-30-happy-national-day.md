@@ -2,7 +2,6 @@
 layout: post
 title: 几天没上,祝各位国庆快乐~~
 pid: 225
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

@@ -2,7 +2,6 @@
 layout: post
 title: Linux记录总结
 pid: 125
-comments: true
 tags: [Linux, Ubuntu]
 categories: [学习笔记]
 ---

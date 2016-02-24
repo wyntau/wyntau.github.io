@@ -2,7 +2,6 @@
 layout: post
 title: 昨天无故被流量宝瞄上
 pid: 100
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

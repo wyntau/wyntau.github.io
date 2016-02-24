@@ -2,7 +2,6 @@
 layout: post
 title: W1s自说Me话扩展版
 pid: 190
-comments: true
 tags: [Themes, w1s, 原创]
 categories: [WordPress]
 ---

@@ -2,7 +2,6 @@
 layout: post
 title: sublime text2 v2.0.1汉化文件
 pid: 247
-comments: true
 tags: [SublimeText2]
 categories: [也来推荐]
 ---

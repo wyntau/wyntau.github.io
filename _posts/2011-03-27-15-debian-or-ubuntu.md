@@ -2,7 +2,6 @@
 layout: post
 title: Debian or Ubuntu?
 pid: 15
-comments: true
 tags: [Linux]
 categories: [系统相关]
 ---

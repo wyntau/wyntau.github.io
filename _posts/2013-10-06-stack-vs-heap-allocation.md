@@ -2,7 +2,6 @@
 layout: post
 title: "C语言中的堆栈小议"
 pid: 2013100601
-comments: true
 keywords: "C"
 description: "堆栈"
 categories: [学习笔记]

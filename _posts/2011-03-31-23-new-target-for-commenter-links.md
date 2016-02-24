@@ -2,7 +2,6 @@
 layout: post
 title: 让评论者链接在新窗口打开
 pid: 23
-comments: true
 tags: [WordPress]
 categories: [WordPress]
 ---

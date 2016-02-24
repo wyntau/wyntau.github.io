@@ -2,7 +2,6 @@
 layout: post
 title: 考试结束,新生活开始
 pid: 181
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

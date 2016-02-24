@@ -2,7 +2,6 @@
 layout: post
 title: Gentoo安装xfce桌面环境
 pid: 2015011802
-comments: true
 keywords: ""
 description: ""
 categories: [学习笔记]

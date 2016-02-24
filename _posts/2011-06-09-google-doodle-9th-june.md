@@ -2,7 +2,6 @@
 layout: post
 title: 6月9日Google Doodle
 pid: 164
-comments: true
 tags: [Doodle, Google]
 categories: [互联网络]
 ---

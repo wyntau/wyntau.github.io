@@ -2,7 +2,6 @@
 layout: post
 title: 组织好css代码文件的结构.
 pid: 228
-comments: true
 tags: [CSS]
 categories: [学习笔记]
 ---

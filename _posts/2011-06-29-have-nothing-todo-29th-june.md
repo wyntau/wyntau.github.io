@@ -2,7 +2,6 @@
 layout: post
 title: 无事可做的唠叨
 pid: 178
-comments: true
 tags: [点滴]
 categories: [唠唠叨叨]
 ---

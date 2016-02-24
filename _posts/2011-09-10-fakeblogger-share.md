@@ -2,7 +2,6 @@
 layout: post
 title: FakeBlogger主题分享
 pid: 219
-comments: true
 tags: [Themes]
 categories: [WordPress]
 ---

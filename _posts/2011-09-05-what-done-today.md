@@ -2,7 +2,6 @@
 layout: post
 title: 今日主题进展
 pid: 217
-comments: true
 tags: [Themes]
 categories: [唠唠叨叨]
 ---
