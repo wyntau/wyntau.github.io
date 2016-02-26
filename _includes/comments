@@ -1,4 +1,4 @@
-{% if site.iLotus.comments.provider %}
+{% if jekyll.environment == 'production' and site.iLotus.comments.provider %}
   {% if page.comments %}
 
 <div id="comments">
