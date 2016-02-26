@@ -65,6 +65,7 @@ defaults:
 # Markdown Processors
 kramdown:
   input: GFM
+  hard_wrap: false
   syntax_highlighter: rouge
   auto_ids: true
   footnote_nr: 1
