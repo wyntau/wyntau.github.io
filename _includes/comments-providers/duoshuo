@@ -3,6 +3,7 @@
 #ds-thread{
   background-color: transparent !important;
   border: none !important;
+  padding: 0 !important;
 }
 #ds-thread #ds-reset .ds-login-buttons .ds-social-links{
   width: auto !important;
