@@ -11,13 +11,13 @@ categories: [学习笔记]
 
 ```
 .
-├──controllers/
-├──directives/
-├──services/
-├──styles/
-├──views/
-├──app.js
-└──boot.js
+├── controllers/
+├── directives/
+├── services/
+├── styles/
+├── views/
+├── app.js
+└── boot.js
 ```
 
 app.js 中的主要内容如下
