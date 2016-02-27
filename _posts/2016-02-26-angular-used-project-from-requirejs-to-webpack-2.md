@@ -162,7 +162,7 @@ $stateProvider
   })
 ```
 
-你可以将代码进行抽象, 封装成一个方法. 对于 css 文件的加载, 可以在开发模式, 使用 `RequireJS` 进行加载. 而在发布模式时, 不单独加载 css 文件, 而是配合下篇讲的方法, 将 css 的内容注入到对应的 controller 中.
+你可以将这些代码进行抽象, 封装成一个方法. 对于 css 文件的加载, 可以在开发模式, 使用 `RequireJS` 进行加载. 而在发布模式时, 不单独加载 css 文件, 而是配合下篇讲的方法, 将 css 的内容注入到对应的 controller 中.
 
 为了简化代码, 我写了一个 angular 的 模块, [angular-require](https://github.com/Treri/angular-require). 本篇写的代码, 就是这个小项目的原型.
 
