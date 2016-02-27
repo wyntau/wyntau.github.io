@@ -94,7 +94,6 @@ iLotus:
       short_name: short_name
 
   archives_path: /archives.html
-  categories_path: /categories.html
   contact_path: /contact.html
   links_path: /links.html
   tags_path: /tags.html
@@ -105,23 +104,23 @@ iLotus:
   navs:
     - text: 首页
       url: /index.html
-      icon: icon-home
+      icon: fa fa-home
       class: home
     - text: 文章归档
       url: /archives.html
-      icon: icon-reorder
+      icon: fa fa-reorder
+      class: none
+    - text: 文章标签
+      url: /tags.html
+      icon: fa fa-tags
       class: none
     - text: 关于我
       url: /contact.html
-      icon: icon-envelope-alt
-      class: none
-    - text: 联系我
-      url: http://www.zhanxin.info/contact.html
-      icon: icon-heart
+      icon: fa fa-user
       class: none
     - text: 博客源代码
       url: https://github.com/pizn/iLotus
-      icon: icon-github
+      icon: fa fa-github-square
       class: none
 
 #站点基础配置

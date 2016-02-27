@@ -56,7 +56,7 @@ $(document).ready(function() {
             return right;
         },
         run: function() {
-            var that = this, topLink = $('<a id="' + that.nodeName + '" href="#" class="lotus-backtop"><i class="icon-circle-arrow-up"></i></a>');
+            var that = this, topLink = $('<a id="' + that.nodeName + '" href="#" class="lotus-backtop"><i class="fa fa-arrow-circle-up"></i></a>');
             topLink.appendTo($('body'));
             topLink.css({
                 'display': 'none',

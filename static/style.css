@@ -31,15 +31,6 @@ Author: 展新(pizner@gmail.com)
   src: local('PT Serif'), local('PTSerif-Regular'), url(font/PTSerif.woff) format('woff');
 }
 
-@font-face {
-  font-family: "FontAwesome";
-  src: url('font/fontawesome-webfont.eot');
-  src: url('font/fontawesome-webfont.eot?#iefix') format('eot'), url('font/fontawesome-webfont.woff') format('woff'), url('font/fontawesome-webfont.ttf') format('truetype'), url('../font/fontawesome-webfont.svg#FontAwesome') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 /*************************
  * reset style
 *************************/
@@ -1627,9 +1618,9 @@ h6 {
 }
 
 .lotus-backtop {
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
+  width: 35px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
   overflow: hidden;
   font-size: 40px;
