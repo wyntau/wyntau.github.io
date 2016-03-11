@@ -119,7 +119,7 @@ iLotus:
       icon: fa fa-user
       class: none
     - text: 博客源代码
-      url: https://github.com/Treri/iLotus-jekyll
+      url: https://github.com/Treri/jekyll-theme-iLotus
       icon: fa fa-github-square
       class: none
 
