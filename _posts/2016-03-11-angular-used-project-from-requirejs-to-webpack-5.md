@@ -38,10 +38,10 @@ categories: [学习笔记]
 1. 加载 `webpack-source-code-loader.js`
 2. 写一个 `webpack-source-code-entry.js`来加载上篇文章中讲到的 `boot.js`
 
-    ```js
-    require.config({
-      baseUrl: './'
-    });
+   ```js
+   require.config({
+     baseUrl: './'
+   });
 
-    require(['boot.js'])
-    ```
+   require(['boot.js'])
+   ```
