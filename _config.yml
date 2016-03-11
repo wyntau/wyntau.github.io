@@ -26,7 +26,9 @@ unpublished: false
 
 # Plugins
 whitelist: []
-gems: []
+gems:
+  - jekyll-feed
+  - jekyll-sitemap
 
 # Conversion
 markdown: kramdown
@@ -46,6 +48,9 @@ permalink: /:year/:month/:title.html
 # paginate: 8
 paginate_path: /page:num
 timezone: Asia/Shanghai
+
+feed:
+  path: feed.xml
 
 quiet: false
 defaults:
@@ -97,8 +102,6 @@ iLotus:
   contact_path: /contact.html
   links_path: /links.html
   tags_path: /tags.html
-
-  feed_path: /feed.xml
 
   #菜单配置
   navs:
