@@ -15,9 +15,14 @@ categories: [唠唠叨叨]
 
 喜欢的朋友可以查看 <https://github.com/pizn/iLotus>
 
-在原版的基础上, 本人进行了一些修改, 修改版地址: <https://github.com/Treri/iLotus-jekyll>
+在原版的基础上, 本人进行了一些修改, 修改版地址: <https://github.com/Treri/jekyll-theme-iLotus>
 
-- 添加分类页面
+主要修改内容:
+
 - 添加标签页面
 - 配置信息更新
 - 支持多说评论系统
+- 动态的 sitemap 和 feed 生成
+- 支持GFM代码高亮
+- 全站支持site.baseurl
+- 其它更新
