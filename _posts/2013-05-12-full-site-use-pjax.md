@@ -2,8 +2,6 @@
 layout: post
 title: 全站启用pjax加载
 pid: 2013051201
-keywords: ""
-description: ""
 tags: [JavaScript, Ajax]
 ---
 前段时间,把首页部分的pjax加载完成了.

@@ -3,7 +3,6 @@ layout: post
 title: "nginx配置phpmyadmin, 解决#2002错误"
 pid: 2014052201
 keywords: "phpMyadmin"
-description: ""
 tags: [Nginx, phpMyadmin]
 ---
 

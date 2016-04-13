@@ -2,8 +2,6 @@
 layout: post
 title: Gentoo xfce桌面安装fcitx 以及firefox
 pid: 2015011803
-keywords: ""
-description: ""
 tags: [Linux, Gentoo]
 ---
 

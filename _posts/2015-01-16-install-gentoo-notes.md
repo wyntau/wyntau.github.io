@@ -2,8 +2,6 @@
 layout: post
 title: Gentoo安装手记
 pid: 2015011601
-keywords: ""
-description: ""
 tags: [Linux, Gentoo]
 ---
 

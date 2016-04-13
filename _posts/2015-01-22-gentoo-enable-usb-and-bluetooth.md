@@ -2,8 +2,6 @@
 layout: post
 title: Gentoo设置内核, 开启USB及蓝牙支持
 pid: 2015012201
-keywords: ""
-description: ""
 tags: [Linux, Gentoo]
 ---
 

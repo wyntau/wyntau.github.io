@@ -3,7 +3,6 @@ layout: post
 title: "副路由器开启WDS功能连接主路由器上网"
 pid: 2014081501
 keywords: "WDS"
-description: ""
 tags: [Router, WDS]
 ---
 **背景:** 新买了一台台式电脑, 没有无线网卡, 而且由于场地原因, 无法直接使用网线将电脑和路由器连接起来, 致使台式机无法上网.

@@ -3,7 +3,6 @@ layout: post
 title: "OS X 10.9 安装配置 laravel4"
 pid: 2014080601
 keywords: "Laravel"
-description: ""
 tags: [PHP, Laravel]
 ---
 

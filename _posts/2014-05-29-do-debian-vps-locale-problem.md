@@ -2,8 +2,6 @@
 layout: post
 title: DO vps locale错误
 pid: 2014052901
-keywords: ""
-description: ""
 tags: [VPS]
 ---
 

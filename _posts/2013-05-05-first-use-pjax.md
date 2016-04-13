@@ -3,7 +3,6 @@ layout: post
 title: pjax使用初体验
 pid: 2013050501
 keywords: "pjax,jQuery,JavaScript"
-description: ""
 tags: [Ajax, jQuery]
 ---
 一直对GitHub上目录翻页效果很喜欢,ajax加载,但是地址栏同样也改变.这个效果不是一般的赞.
