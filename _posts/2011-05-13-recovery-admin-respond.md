@@ -3,7 +3,6 @@ layout: post
 title: 还是决定恢复显示博主回复~~
 pid: 130
 tags: [点滴]
-categories: [唠唠叨叨]
 ---
 昨天弄的那个[侧边栏去掉博主回复](/2011/05/remove-sidebar-admin-respond.html)
 使用了一天.我最终还是决定 显示博主回复.而且恢复到主题的默认样式.不再搞两行显示了.

@@ -3,7 +3,6 @@ layout: post
 title: CSS3进度条
 pid: 257
 tags: [CSS3]
-categories: [学习笔记]
 ---
 <pre>
 <style>

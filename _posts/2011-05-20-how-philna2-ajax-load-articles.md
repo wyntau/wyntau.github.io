@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2首页Ajax加载文章
 pid: 141
 tags: [Ajax, jQuery, PhilNa2, 原创]
-categories: [WordPress]
 ---
 前几天弄出来的东西,没用几天就换主题了, :jiong: 但是还是和大家分享一下.免得时间长了,我自己也忘记了.
 

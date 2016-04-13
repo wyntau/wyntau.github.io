@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2主题feed输出版权最终版
 pid: 42
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 昨天晚上[Japhia童鞋](http://japhia.info/)问我关于PhilNa2主题 在feed中输出版权信息的问题.主要需求就是将版权信息放在主题自带的相关文章之前.以前在feed中输出版权信息,用的是[wordpress的feed输出版权信息](/2011/03/9-wordpresss-feed-output-copyright-information.html)中讲到的方法,在functions.php中增加函数. 但是此方法无法控制版权信息在feed中的位置.效果出来后排在了相关文章.无觅推荐还有无觅网络的后面,位置很不明显.
 

@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2-自说Me话扩展版
 pid: 160
 tags: [PhilNa2, Themes, WordPress, 原创]
-categories: [WordPress]
 ---
 经过我好长时间的鼓捣,终于弄的差不多了.由于马上就要考试了,端午回来后还有好多测试之类的东西.所以端午期间要好好学习,没时间修改了,所以把改的差不多的主题分享给大家.
 

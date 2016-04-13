@@ -3,7 +3,6 @@ layout: post
 title: wp后台编辑器添加表情
 pid: 34
 tags: [PhilNa2, WordPress]
-categories: [WordPress]
 ---
 今天又弄了个侧边栏3栏显示,感觉不错. 但是我发现我在编辑的时候喜欢加点表情,觉得只有表情才能表达某个时刻的心情.
 

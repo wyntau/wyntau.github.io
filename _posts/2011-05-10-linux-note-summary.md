@@ -3,7 +3,6 @@ layout: post
 title: Linux记录总结
 pid: 125
 tags: [Linux, Ubuntu]
-categories: [学习笔记]
 ---
 ***非Linux用户可以不用看此文啦.***
 

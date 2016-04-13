@@ -3,7 +3,6 @@ layout: post
 title: 初识 八皇后问题
 pid: 10
 tags: [数据结构]
-categories: [学习笔记]
 ---
 数据结构课上老师讲到了 数据结构的习题.就是八皇后问题.
 

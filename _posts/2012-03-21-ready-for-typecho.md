@@ -3,7 +3,6 @@ layout: post
 title: 准备更换typecho
 pid: 244
 tags: [PhilNa2, Typecho]
-categories: [唠唠叨叨]
 ---
 前两天换到了typecho,由于对typecho不了解,用的不舒服,所以又换回来了.
 

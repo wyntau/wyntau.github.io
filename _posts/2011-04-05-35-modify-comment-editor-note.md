@@ -3,7 +3,6 @@ layout: post
 title: 评论框编辑器修改小记
 pid: 35
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 前几天看了IM路人的文章,[为评论框添加简单文字编辑器](http://imluren.com/2011/01/simple-editor-tools.html),讲的是给评论框添加简单的编辑器.我看了以后,感觉很好用.所以就到luren那里取经.给自己的博客也弄上了. :lol:
 

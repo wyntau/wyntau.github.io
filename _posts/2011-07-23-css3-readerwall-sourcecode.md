@@ -3,7 +3,6 @@ layout: post
 title: css3读者墙 源代码
 pid: 192
 tags: [CSS3, PHP, 原创, 读者墙]
-categories: [WordPress]
 ---
 这两天累死了,每天干活,快受不鸟了....囧
 

@@ -3,7 +3,6 @@ layout: post
 title: W1s 首页Ajax翻页新效果
 pid: 148
 tags: [Ajax, w1s, WordPress, 原创]
-categories: [WordPress]
 ---
 最近真的累了,鼓捣了这么多感到有点身心俱疲...,现在我越来越发现PhilNa2的省心了...神马都不用操心,yinheli童鞋都弄好了.
 有一种想要换回PhilNa2的冲动了.

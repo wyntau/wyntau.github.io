@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2主题修改优化细节记录
 pid: 40
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 一直都是把这个放在了 [关于](http://isayme.com/about) 页面里面,但是觉得放在那里面始终不是个办法.早点独立出来吧.
 

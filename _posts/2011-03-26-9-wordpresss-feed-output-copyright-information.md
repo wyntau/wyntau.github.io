@@ -3,7 +3,6 @@ layout: post
 title: wordpress的feed输出版权信息
 pid: 9
 tags: [WordPress]
-categories: [WordPress]
 ---
 自从 使用上了wordpress 就在一直寻找优化,修改模板的文章.原来在blogger里面的文章版权也只是在模板里面加了一句话而已.
 

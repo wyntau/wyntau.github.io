@@ -3,7 +3,6 @@ layout: post
 title: 做一个懒惰的程序员
 pid: 14
 tags: [Programmer]
-categories: [互联网络]
 ---
 本文写给所有可爱的程序员，(我)你们都是一群可爱的，用双手建造世界的思想家。
 

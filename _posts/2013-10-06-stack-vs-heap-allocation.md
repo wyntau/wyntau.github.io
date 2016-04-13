@@ -4,7 +4,6 @@ title: "C语言中的堆栈小议"
 pid: 2013100601
 keywords: "C"
 description: "堆栈"
-categories: [学习笔记]
 tags: [C]
 ---
 当你使用Ruby或者python时,你仅仅需要定义对象或者变量,而不用去关心它们在哪里.你不用去关心它是在堆(stack)还是在栈(heap)中.也许你选择的语言根本就不把变量放在栈中.

@@ -4,7 +4,6 @@ title: 全站启用pjax加载
 pid: 2013051201
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [JavaScript, Ajax]
 ---
 前段时间,把首页部分的pjax加载完成了.

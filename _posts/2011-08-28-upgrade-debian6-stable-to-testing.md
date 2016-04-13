@@ -3,7 +3,6 @@ layout: post
 title: debian 6 stable蛋疼升级记
 pid: 211
 tags: [debian, Linux, 原创]
-categories: [学习笔记 ]
 ---
 **升级前**
 

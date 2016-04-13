@@ -3,7 +3,6 @@ layout: post
 title: 换主题成功
 pid: 138
 tags: [Themes, 点滴]
-categories: [唠唠叨叨]
 ---
 昨天晚上开始想要换主题,今天中午的时候已经换完了.
 靠着原来折腾philna2主题的之后积累的一点知识,给W1s主题添加了一点功能.

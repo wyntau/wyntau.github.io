@@ -3,7 +3,6 @@ layout: post
 title: 几天没上,祝各位国庆快乐~~
 pid: 225
 tags: [点滴]
-categories: [唠唠叨叨]
 ---
 首先祝各位国庆快乐了,呵呵.假期好好玩~~
 

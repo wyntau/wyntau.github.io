@@ -3,7 +3,6 @@ layout: post
 title: chrome扩展Super Google Reader一枚
 pid: 101
 tags: [Chrome, Greader]
-categories: [互联网络]
 ---
 今天早早就醒了.于是就看看google Reader里面的订阅.同时我又看到了谷奥扩展有好多未读条目.点开一看.一个标题吸引了我.[Chrome 扩展 Super Google Reader 把所有 RSS 都变成全文输出](http://www.guao.hk/posts/super-google-reader-converts-all-partial-rss-feeds-into-full-feeds.html)
 

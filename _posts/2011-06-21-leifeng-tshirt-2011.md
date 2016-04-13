@@ -3,7 +3,6 @@ layout: post
 title: 独立博客文化衫定制活动
 pid: 173
 tags: [Blog, 雷锋群]
-categories: [互联网络]
 ---
 原文地址:<http://laob.me/leifeng-tshirt-2011/>
 

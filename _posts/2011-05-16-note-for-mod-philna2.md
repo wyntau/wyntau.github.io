@@ -3,7 +3,6 @@ layout: post
 title: 数数我对PhilNa2的Mod
 pid: 134
 tags: [PhilNa2, 原创, 点滴]
-categories: [唠唠叨叨]
 ---
 *服务器硬件升级之前,给我发了一封邮件,要求在升级完成之前,不要更新网站数据,可惜我没有看到,发了这篇文章.*
 

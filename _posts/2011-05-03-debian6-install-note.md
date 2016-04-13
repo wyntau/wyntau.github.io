@@ -3,7 +3,6 @@ layout: post
 title: Debian6安装小记
 pid: 111
 tags: [Debian, Linux, 原创]
-categories: [系统相关]
 ---
 今天终于装上了 debian6,代号叫squeeze是吧?前几天的时候在[Microhu's Blog](http://www.microhu.com/) 中,正好遇到了博主问我用的是什么linx系统,于是聊起来了.当时Microhu说他用的是debian感觉速度很快的时候,我就心里痒痒了.
 

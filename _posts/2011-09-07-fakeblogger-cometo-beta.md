@@ -3,7 +3,6 @@ layout: post
 title: FakeBlogger主题初步完成
 pid: 218
 tags: [Themes, WordPress]
-categories: [WordPress]
 ---
 主题终于基本上算是完成了.上次给大家说的那个快完成的,我还是重新写了一遍.
 

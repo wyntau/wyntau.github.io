@@ -3,7 +3,6 @@ layout: post
 title: 我起的名字很失败
 pid: 185
 tags: [Blog, 点滴]
-categories: [唠唠叨叨]
 ---
 来俺博客的朋友们,感谢你们的支持.但是,俺的博客名字叫 **自说Me话**,不是 自说自话
 

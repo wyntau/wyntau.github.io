@@ -3,7 +3,6 @@ layout: post
 title: 转-女生应该找个有独立博客的男朋友
 pid: 44
 tags: [转载]
-categories: [他山之石]
 ---
 注:网上闲逛的时候看到了这篇文章.看后感觉很好玩.所以就转过来啦.原文地址点击[此处](http://www.binjoo.net/2011/02/girl-should-have-boyfriend-with-i-blog)
 

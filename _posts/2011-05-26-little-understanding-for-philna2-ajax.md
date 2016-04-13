@@ -3,7 +3,6 @@ layout: post
 title: 对PhilNa2的Ajax的一丁点理解
 pid: 145
 tags: [Ajax, jQuery, PhilNa2, 原创]
-categories: [唠唠叨叨]
 ---
 这个要从无冷以及木木的博客说起了.看到了他们的首页文章的预加载以及平滑滚动,好喜欢.可是咱票子不够,买不起,所以还是看看自己鼓捣着玩玩吧.
 看了木木的一篇文章[Ajax平滑翻页+预加载](http://immmmm.com/ajax-smooth-flip-and-preload.html)  于是有了点想法.

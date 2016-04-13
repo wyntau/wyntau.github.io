@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2自说Me话扩展版 v1.5
 pid: 254
 tags: [PhilNa2, Themes]
-categories: [WordPress]
 ---
 - 更新读者墙模板,使用我现在用的CSS3读者墙
 - 更新侧边栏,默认只有我现在用的侧边栏样式,其它想要添加的如日历 链接 等等可以在后台小工具中添加,或者直接去sidebar.php中修改

@@ -3,7 +3,6 @@ layout: post
 title: 在Angular.js项目中使用异步加载(五)
 pid: 2016031101
 tags: [webpack, Angular, RequireJS]
-categories: [学习笔记]
 ---
 
 本篇是对于上篇在一个改进, 作用是在以 webpack 为构建系统的项目中, 不使用 webpack-dev-server 而是直接加载源码的方式进行开发.

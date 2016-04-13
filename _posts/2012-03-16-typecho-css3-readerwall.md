@@ -3,7 +3,6 @@ layout: post
 title: Typecho版 css3读者墙
 pid: 243
 tags: [CSS3, Typecho, 读者墙]
-categories: [学习笔记]
 ---
 昨天换上typecho没有怎么弄就去玩跑跑了,留下好多工作没有做完,所以今天要解决掉.
 第一个任务就是做完使用wordpress时候弄的css3读者墙.

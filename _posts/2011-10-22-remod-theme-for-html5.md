@@ -3,7 +3,6 @@ layout: post
 title: 准备重构主题为html5
 pid: 229
 tags: [HTML5, 点滴]
-categories: [唠唠叨叨]
 ---
 额,又是几天了.同样没有什么可写的.因为课太多了,没有多少时间.而且也一直在看书.
 

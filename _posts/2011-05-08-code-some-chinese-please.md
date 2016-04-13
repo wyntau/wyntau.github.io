@@ -3,7 +3,6 @@ layout: post
 title: "[PhilNa2]some chinese please"
 pid: 120
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 今天又看到了垃圾评论.自从我使用wp之后,虽然来的垃圾评论不多,但是也挺烦人的.都是些纯英文评论,关于loan的,关于credit的,干嘛的都有.
 但是邮箱 网址神马的都是无效的.所以打算把这些英文评论挡在外面.

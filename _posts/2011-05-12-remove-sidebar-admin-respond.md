@@ -3,7 +3,6 @@ layout: post
 title: PhilNa2-侧栏去掉博主回复
 pid: 129
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 没事乱折腾的.说不定哪天就换回去了.但是弄出来东西还是想和大家分享一下,刚用这个主题的时候一心想着怎么把侧边栏的博主回复去掉,但是不会,也没找到方法.
 时间长了,感觉侧栏有博主的回复也挺好的.

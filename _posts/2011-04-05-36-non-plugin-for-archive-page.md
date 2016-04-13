@@ -3,7 +3,6 @@ layout: post
 title: 归档页面非插件化
 pid: 36
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 看题目就知道是神马意思了吧.效果可以看我的[归档页面](http://isayme.com/archive),原来我是使用的 clean archive reload插件,到网上逛的时候正好看到了非插件使用的方法.所以拿过来试验了一下,成功了.所以就写一下咯.(优点:所有的东西都在模板文件里面,一个归档页面就只用它本身)
 

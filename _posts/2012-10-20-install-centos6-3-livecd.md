@@ -3,7 +3,6 @@ layout: post
 title: Centos6.3 LiveCD安装手记
 pid: 249
 tags: [CentOS, Linux]
-categories: [学习笔记]
 ---
 #### 原因 ####
 一直用的是debian系统,时间长了就想换点新鲜的.曾经用过fedora一段时间,但是感觉不习惯rpm系的使用习惯,所以又换回了debian,这次决定使用centos系统试试.经过一番权衡,选用centos LiveCD版.因为这个感觉最清爽,没有多余的软件,想用什么可以自己安装

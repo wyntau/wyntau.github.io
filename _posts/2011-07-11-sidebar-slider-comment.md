@@ -3,7 +3,6 @@ layout: post
 title: 侧栏最新评论滑动显示
 pid: 188
 tags: [JavaScript, WordPress]
-categories: [WordPress]
 ---
 昨天下了火车已经是晚上了,想办法回到家后,收拾一下就睡觉了.今天起来感觉有必要弄点东西.所以翻看了一下别人的文章,得充下电.
 到了 loosky那里找了一篇文章,然后弄了个效果

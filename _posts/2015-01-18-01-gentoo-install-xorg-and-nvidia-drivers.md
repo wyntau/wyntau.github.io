@@ -4,7 +4,6 @@ title: Gentoo安装Xorg server和nvidia官方闭源驱动
 pid: 2015011801
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [Linux, Gentoo]
 ---
 接上篇文章, 将console的分辨率提高后, 接下来要做的就是把Xorg server以及显卡驱动装上, 为后面安装xfce桌面做准备.

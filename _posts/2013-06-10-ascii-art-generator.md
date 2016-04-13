@@ -4,7 +4,6 @@ title: "ASCII Art 生成器"
 pid: 2013061001
 keywords: "ASCII Art"
 description: "两个用于生成ASCII Art的小软件"
-categories: [也来推荐]
 tags: [ASCII]
 ---
 **figlet**

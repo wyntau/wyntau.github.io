@@ -3,7 +3,6 @@ layout: post
 title: ubuntu安装dropbox失败 解决方法
 pid: 199
 tags: [Dropbox, Ubuntu]
-categories: [互联网络]
 ---
 dropbox响当当的大名,想必大家都知道吧? 好久之前,就听说了这个网盘.但是一直都没有尝试.前几天安装ubuntu的时候,就把dropbox装上试了一下.发现,速度很快,而且使用起来很好用.
 

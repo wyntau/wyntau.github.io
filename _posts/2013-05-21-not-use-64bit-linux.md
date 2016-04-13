@@ -4,7 +4,6 @@ title: 64位Debian安装感受
 pid: 2013052101
 keywords: "64bitLinux"
 description: "64位Debian安装感受"
-categories: [唠唠叨叨]
 tags: [点滴]
 ---
 前几天在淘宝上买了一个4G内存条，加上我电脑中已经有的2G内存条，共有6G。为了充分利用起来6G内存，我安装了64位的Win7.安装后没有什么问题。

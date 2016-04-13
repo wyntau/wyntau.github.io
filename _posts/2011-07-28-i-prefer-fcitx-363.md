@@ -3,7 +3,6 @@ layout: post
 title: 我选择Fcitx 3.6.3
 pid: 196
 tags: [Fcitx, Linux]
-categories: [学习笔记]
 ---
 我用过的linux中的中文输入法,一共就两种.ibus和Fcitx.
 由于使用fcitx的时间比较长,已经形成了习惯,所以这次装上ubuntu后,直接将ubuntu自带的ibus删掉了.换上了我原来备份好的fcitx输入法.

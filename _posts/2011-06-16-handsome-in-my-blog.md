@@ -3,7 +3,6 @@ layout: post
 title: 我瞎弄的帅哥认证
 pid: 169
 tags: [Blog, WordPress, 原创]
-categories: [WordPress]
 ---
 在别人博客上看到的这个创意.就想弄到自己的博客上.自己刚看了一点php语句,结合着我学的C,自己鼓捣了一段代码.可惜得手动更新帅哥名单.木办法.没时间看书,等考试结束后再说吧.
 

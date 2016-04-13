@@ -3,7 +3,6 @@ layout: post
 title: 把PhilNa2分类添加到导航菜单
 pid: 30
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 一直都想这么干了.可是我用的这个主题和别的主题文件结构不一样.别的主题有的文件.这个主题都有,可是里面的内容就和普通的主题文件差太多了.
 唉,不说了.主题作者的事,咱管不着啊.还是说说正事吧.

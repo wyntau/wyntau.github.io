@@ -3,7 +3,6 @@ layout: post
 title: 让PhilNa2用上Anti Spam小墙
 pid: 132
 tags: [PhilNa2, spam, WordPress, 原创]
-categories: [WordPress]
 ---
 先说两句废话,Anti Spam小墙,老早就用过,但是主题原因,导致使用小墙后任何人都无法发表评论,所以撤下来了,但是人民的力量是强大滴~~最终这个难题还是被拿下啦,哈哈~~ :eek:
 

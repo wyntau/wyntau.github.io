@@ -3,7 +3,6 @@ layout: post
 title: 又一次更换主题
 pid: 157
 tags: [Themes, 点滴]
-categories: [唠唠叨叨]
 ---
 今天无意间看到了这个主题,大爱啊.哈哈.
 我就喜欢这样风格的主题.既简洁又功能强大.

@@ -3,7 +3,6 @@ layout: post
 title: CSS3 Brower Support mirror(2012-10-4)
 pid: 248
 tags: [CSS3]
-categories: [学习笔记]
 ---
 CSS3 is not yet a W3C standard, but all the major browsers are already supporting many of the new features.
 

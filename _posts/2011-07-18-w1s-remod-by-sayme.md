@@ -3,7 +3,6 @@ layout: post
 title: W1s自说Me话扩展版
 pid: 190
 tags: [Themes, w1s, 原创]
-categories: [WordPress]
 ---
 首先声明一点,写这篇文章或者分享此主题,并不是要对Winy或者是对winy的W1p主题怎么样.只是单纯的和大家分享.
 

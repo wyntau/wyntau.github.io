@@ -3,7 +3,6 @@ layout: post
 title: wordpress升级3.2成功
 pid: 187
 tags: [Upgrade, WordPress]
-categories: [WordPress]
 ---
 今天看到了willinkan大师的文章.他说wp3.2代码改善的非常好,另外后台样式也变了,所以听了willinkan大师的建议.将wordpress升级到了3.2.
 

@@ -3,7 +3,6 @@ layout: post
 title: 6月9日Google Doodle
 pid: 164
 tags: [Doodle, Google]
-categories: [互联网络]
 ---
 今天打开google主页,被惊艳的Doodle震住了.看到今天的doodle我只能说google太牛逼了.一个logo还可以做成这样!!!
 把鼠标放上去竟然还可以出声音.下午在谷奥看到好多人写的曲子.嘻嘻

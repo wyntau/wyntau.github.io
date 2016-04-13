@@ -4,7 +4,6 @@ title: Gentoo使用uvesafb配置Framebuffer
 pid: 2015011701
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [Linux, Gentoo]
 ---
 

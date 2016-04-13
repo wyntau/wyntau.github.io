@@ -3,7 +3,6 @@ layout: post
 title: 停用无限翻页,准备换新版~
 pid: 146
 tags: [Ajax, WordPress, 点滴]
-categories: [唠唠叨叨]
 ---
 经过我昨天的努力,对于philna2的ajax的php响应部分大体上有了一个了解.在本地测试一切正常.
 

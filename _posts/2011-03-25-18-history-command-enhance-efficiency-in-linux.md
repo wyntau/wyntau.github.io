@@ -3,7 +3,6 @@ layout: post
 title: Linux中使用history命令提升效率
 pid: 18
 tags: [Linux]
-categories: [学习笔记, 系统相关]
 ---
 ![](/uploads/2011/03/25_01.png)
 

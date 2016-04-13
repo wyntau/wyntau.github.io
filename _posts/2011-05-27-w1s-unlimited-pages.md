@@ -3,7 +3,6 @@ layout: post
 title: W1免费版无限翻页
 pid: 147
 tags: [Ajax, jQuery, w1s, WordPress]
-categories: [WordPress]
 ---
 效果我这里没有了,想要看的,去winy博客上看吧,很给力哟~~
 

@@ -3,7 +3,6 @@ layout: post
 title: 侧栏友链3栏显示
 pid: 33
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 **注:** 此文章针对我所使用的PhilNa2主题,不保证对所有主题有效. 喜欢钻研的童鞋可以再多问问google还有其他博客.
 

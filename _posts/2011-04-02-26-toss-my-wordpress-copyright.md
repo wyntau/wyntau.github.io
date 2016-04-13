@@ -3,7 +3,6 @@ layout: post
 title: 我的wordpress文章版权折腾记
 pid: 26
 tags: [WordPress, 原创]
-categories: [WordPress]
 ---
 昨天在feedburner里面开启了邮件订阅的功能.现在用chrome(FF会直接出现我的文章列表,没有订阅器选项)打开[我的feedburner地址](http://feedburner.google.com/fb/a/mailverify?uri=isayme),可以看到除了我列出来的众多RSS订阅器外,下面还给出了一个使用EMail订阅的功能.点击一下,就弹出了一个高550宽520px的新窗口.输入邮箱地址就订阅OK啦.
 

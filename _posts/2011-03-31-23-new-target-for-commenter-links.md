@@ -3,7 +3,6 @@ layout: post
 title: 让评论者链接在新窗口打开
 pid: 23
 tags: [WordPress]
-categories: [WordPress]
 ---
 最近发现,当我在查看评论者的网站链接的时候会是在当前窗口打开.
 

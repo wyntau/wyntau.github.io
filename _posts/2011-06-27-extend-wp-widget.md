@@ -3,7 +3,6 @@ layout: post
 title: 扩展后台侧栏小工具初记
 pid: 177
 tags: [Widget, WordPress]
-categories: [WordPress]
 ---
 又想着更新一下我的修改的philna2,但是找不到哪里可以更新,于是我就四处逛一逛.发现了一个值得鼓捣的地方.
 

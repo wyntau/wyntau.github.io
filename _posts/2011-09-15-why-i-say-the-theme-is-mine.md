@@ -3,7 +3,6 @@ layout: post
 title: 为什么我认定是我的!!
 pid: 221
 tags: [PhilNa2, WordPress]
-categories: [唠唠叨叨]
 ---
 对于一个对PhilN2主题基本上了如指掌的人,我来给你说说为什么我看了几眼就认定是我的修改版,OK?
 

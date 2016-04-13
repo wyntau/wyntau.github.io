@@ -3,7 +3,6 @@ layout: post
 title: wp后台回复添加表情
 pid: 27
 tags: [WordPress, 原创]
-categories: [WordPress]
 ---
 本文参考了[奚少收藏小窝](http://www.xishao.net/wp/547.html),增加多行表情的方法姑且算是我找到的吧.呵呵.
 

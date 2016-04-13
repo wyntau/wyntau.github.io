@@ -4,7 +4,6 @@ title: Gentoo安装手记
 pid: 2015011601
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [Linux, Gentoo]
 ---
 

@@ -3,7 +3,6 @@ layout: post
 title: 给feed输出 添加评论条数
 pid: 131
 tags: [PhilNa2, WordPress]
-categories: [WordPress]
 ---
 **update:**刚刚在网上转了一圈,发现这个玩意已经被人用烂了,无奈我一直没有看到....
 想看的就凑活着看,反正我是不想看了....一点新意都没有了....

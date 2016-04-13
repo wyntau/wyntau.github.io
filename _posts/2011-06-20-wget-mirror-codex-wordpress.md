@@ -3,7 +3,6 @@ layout: post
 title: wget镜像codex.wordpress.org
 pid: 172
 tags: [Linux, Wget, WordPress]
-categories: [互联网络]
 ---
 **wget 使用实例一则**
 

@@ -3,7 +3,6 @@ layout: post
 title: Debian or Ubuntu?
 pid: 15
 tags: [Linux]
-categories: [系统相关]
 ---
 作为一名用户,从debian和ubuntu中选择很容易.每个人都有他们自己的喜好,即使每个发行版都尝试过来也不会花费很多的时间.  但是当谈到投资大量的时间来为其作捐助,你可能就要好好想一想了,你的时间花费在哪里更好.
 

@@ -3,7 +3,6 @@ layout: post
 title: 本地wordpress后台需要FTP密码解决办法
 pid: 182
 tags: [Linux, Ubuntu, WordPress]
-categories: [学习笔记]
 ---
 一直在本地安装一个wordpress用来测试主题和插件等等.但是本地大唯一不好的地方就是在后台安装主题,删除主题,安装插件,或者是删除插件的时候需要我输入一个FTP的账号和密码.FTP这玩意,我机子上本来都没有,我自己都不知道我的FTP账号是密码是什么,wordpress这货还来问我.
 

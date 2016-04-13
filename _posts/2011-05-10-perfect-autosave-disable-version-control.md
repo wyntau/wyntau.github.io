@@ -3,7 +3,6 @@ layout: post
 title: WP3.1.2-完美自动保存,禁用版本控制
 pid: 122
 tags: [Blog, WordPress, 转载]
-categories: [WordPress]
 ---
 前两天把wp的默认表情图片的路径改了一下,然后又看了下木木的文章[新窗口中打开评论者链接](http://immmmm.com/jquery-notes-open-comment-link-new-window.html) 感觉没有什么东西值得留恋的了.
 

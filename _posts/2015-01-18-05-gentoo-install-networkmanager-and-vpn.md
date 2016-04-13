@@ -4,7 +4,6 @@ title: Gentoo安装networkmanager以及配置vpn
 pid: 2015011805
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [Linux, Gentoo]
 ---
 

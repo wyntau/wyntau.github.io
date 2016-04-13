@@ -3,7 +3,6 @@ layout: post
 title: 看书找到的一个ajax函数封装
 pid: 233
 tags: [Ajax, JavaScript]
-categories: [学习笔记]
 ---
 几天好像又过去了,不知道写点什么东西.
 题目是一个ajax函数,就是看书找到的一个实现ajax过程的封装.

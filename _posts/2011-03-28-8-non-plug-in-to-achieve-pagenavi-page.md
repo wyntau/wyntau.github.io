@@ -3,7 +3,6 @@ layout: post
 title: 非插件实现Pagenavi 翻页
 pid: 8
 tags: [WordPress]
-categories: [WordPress]
 ---
 今天 逛博客的时候看到了[IM路人](http://imluren.com/)的一篇文章.讲的是 [非插件实现Pagenavi 翻页](http://imluren.com/2010/10/wordpress-mini-pagenavi.html),本着能少用插件就少用的原则.我也COPY了一下.记录一下.
 

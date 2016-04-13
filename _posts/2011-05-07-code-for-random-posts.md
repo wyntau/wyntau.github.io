@@ -3,7 +3,6 @@ layout: post
 title: 代码访问随机日志
 pid: 118
 tags: [WordPress, 转载]
-categories: [WordPress]
 ---
 不记得是怎么找到这篇文章的,但是很庆幸,又找到了好东西.哈哈
 

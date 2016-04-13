@@ -4,7 +4,6 @@ title: "切换域名至isay.me"
 pid: 2014030801
 keywords: ""
 description: ""
-categories: [唠唠叨叨]
 tags: [点滴]
 ---
 

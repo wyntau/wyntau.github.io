@@ -3,7 +3,6 @@ layout: post
 title: 单PHP文件原生js版PhilnaSay
 pid: 250
 tags: [PhilNa2, JavaScript]
-categories: [学习笔记]
 ---
 刚有个朋友问我博客右上角的PhilnaSay,想让我帮忙提取出来,所以弄了一下,先是给那位朋友弄了一个用jq库的.然后我又弄了一下,搞了一个原生js版单PHP文件版的
 

@@ -3,7 +3,6 @@ layout: post
 title: 搬家到主机格调
 pid: 162
 tags: [WordPress, 主机格调, 点滴]
-categories: [唠唠叨叨]
 ---
 今天中午睡觉醒来,忽然就看到了邮箱中的一封邮件.我中奖啦.哈哈.我在万戈大神那里的T楼中奖啦.哈哈.
 

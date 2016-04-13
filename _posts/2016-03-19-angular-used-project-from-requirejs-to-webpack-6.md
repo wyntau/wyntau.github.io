@@ -3,7 +3,6 @@ layout: post
 title: 在Angular.js项目中使用异步加载(六) - 动态加载第三方模块
 pid: 2016031901
 tags: [webpack, Angular, RequireJS]
-categories: [学习笔记]
 ---
 
 在 Anguarl.js 中使用异步加载, 并配合构建工具, 基本已经可以在生产环境中进行使用. 但是还有一些情况并没有覆盖到.

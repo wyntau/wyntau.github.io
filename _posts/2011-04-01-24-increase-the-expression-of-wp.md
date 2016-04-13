@@ -3,7 +3,6 @@ layout: post
 title: 给WP增加多套表情
 pid: 24
 tags: [WordPress, 原创]
-categories: [WordPress]
 ---
 最近发现WP自带的默认表情有点小丑,嘿嘿.想换个新的.于是就到网上搜索一番.确实找到了方法.可是是在原表情的基础上添加新的表情.没有达到我想要的效果.可是起码比没有强吧.呵呵.
 

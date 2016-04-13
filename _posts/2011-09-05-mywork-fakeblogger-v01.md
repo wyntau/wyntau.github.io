@@ -3,7 +3,6 @@ layout: post
 title: 移植主题FakeBlogger 0.1
 pid: 216
 tags: [MyWorks, Themes, WordPress]
-categories: [WordPress]
 ---
 移植主题FakeBlogger 0.1
 昨天说过了,移植了一个主题.今天看着差不多完成了.所以先发发看吧.剩下的细节以后再说.

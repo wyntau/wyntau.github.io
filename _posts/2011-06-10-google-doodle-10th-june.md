@@ -3,7 +3,6 @@ layout: post
 title: 6月10日Google Doodle
 pid: 166
 tags: [Doodle, Google]
-categories: [互联网络]
 ---
 __6月10日__Google Doodle再次更新 :love:  :love: 在www.google.com推出了带录音回放功能电吉他，按下原来的键盘图标就可以，弹完以后再按一次，点播放键。
 

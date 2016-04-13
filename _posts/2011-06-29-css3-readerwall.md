@@ -3,7 +3,6 @@ layout: post
 title: css3版读者墙
 pid: 179
 tags: [CSS3, 读者墙]
-categories: [WordPress]
 ---
 先说明一下,在看本篇文章之前,请确定你使用的是Chrome或者是firefox浏览器.IE家族效果不敢保证~~
 

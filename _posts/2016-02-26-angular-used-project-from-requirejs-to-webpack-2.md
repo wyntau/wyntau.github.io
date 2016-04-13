@@ -3,7 +3,6 @@ layout: post
 title: 在Angular.js项目中使用异步加载(二)
 pid: 2016022602
 tags: [webpack, Angular, RequireJS]
-categories: [学习笔记]
 ---
 上篇讲了, 在以 Angular.js 为框架的项目中, 使用 `RequireJS` 进行模块化加载的关键代码. 本篇介绍如何将上述的代码应用到实际中.
 

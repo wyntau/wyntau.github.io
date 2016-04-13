@@ -3,7 +3,6 @@ layout: post
 title: 艹,牛逼的校园网认证
 pid: 213
 tags: [点滴]
-categories: [唠唠叨叨]
 ---
 本想要安装一个Archlinux试试的,但是在安装后需要安装桌面环境,因此需要联网.
 

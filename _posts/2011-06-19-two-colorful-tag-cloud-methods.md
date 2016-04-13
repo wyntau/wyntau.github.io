@@ -3,7 +3,6 @@ layout: post
 title: 我所知道的两种彩色标签云
 pid: 171
 tags: [Tag, WordPress]
-categories: [WordPress]
 ---
 第一种:网上流传的 一种使用最广泛的 非插件版彩色标签云 为下面这种
 

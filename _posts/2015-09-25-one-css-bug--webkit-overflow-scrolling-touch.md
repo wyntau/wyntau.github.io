@@ -4,7 +4,6 @@ title: "-webkit-overflow-scrolling设置为touch的一个bug"
 pid: 2015092501
 keywords: ""
 description: ""
-categories: [BUG]
 tags: [CSS]
 ---
 

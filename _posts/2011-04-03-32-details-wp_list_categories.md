@@ -3,7 +3,6 @@ layout: post
 title: 转-wp_list_categories详细介绍
 pid: 32
 tags: [WordPress]
-categories: [WordPress]
 ---
 今天网上闲逛,又看到了关于我说的那个[把PhilNa2分类添加到导航菜单](/2011/04/30-philna2-add-category-to-navigation-menu.html)里面的wp\_list_categories()函数的一些文章.里面的很多参数 我都还不知道是 干嘛的.
 

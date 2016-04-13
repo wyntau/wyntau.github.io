@@ -4,7 +4,6 @@ title: "为连接到WDS路由器的主机设置静态IP"
 pid: 2014081502
 keywords: "WDS"
 description: ""
-categories: [学习笔记]
 tags: [Router, WDS]
 ---
 

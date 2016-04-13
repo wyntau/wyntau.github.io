@@ -3,7 +3,6 @@ layout: post
 title: wget中文乱码
 pid: 195
 tags: [C, Linux, Wget]
-categories: [互联网络]
 ---
 wget 是一个命令行的下载工具。对于很多Linux 用户来说，几乎每天都在使用它.用处大大的,不仅可以平常 的下载,而且可以镜像整个网站.最关键的一点是,它不会像windows中的webZIP一样,因为你不交钱,就在下载回来的网页中嵌入广告.呵呵
 

@@ -3,7 +3,6 @@ layout: post
 title: debian6再安装小记
 pid: 197
 tags: [Debian, Linux]
-categories: [互联网络]
 ---
 曾经写过一篇debian6安装小记,感兴趣的可以点击[此处](/2011/05/debian6-install-note.html)
 

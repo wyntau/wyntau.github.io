@@ -3,7 +3,6 @@ layout: post
 title: 对主题适当精简
 pid: 214
 tags: [Themes, WordPress]
-categories: [WordPress]
 ---
 最近对自己用的主题有点不满意了,于是处理一下.将一些用不着的功能去掉,也算是对主题载入速度加快一点吧.
 

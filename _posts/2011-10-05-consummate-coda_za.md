@@ -3,7 +3,6 @@ layout: post
 title: 完善主题coda_za
 pid: 226
 tags: [WordPress, 点滴]
-categories: [WordPress]
 ---
 这几天一直没弄什么东西.主题是在看课外书,学习,做作业等等.想弄点东西,但是肚子里没有材料还是不行的.所以先学习补充要紧.
 这几天也在一直看关于javascript的书.虽然刚上来不是太懂,但是看多了,自然也就会点了.

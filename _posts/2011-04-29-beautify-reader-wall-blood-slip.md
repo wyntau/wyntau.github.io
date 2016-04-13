@@ -3,7 +3,6 @@ layout: post
 title: 读者墙血条显示
 pid: 106
 tags: [WordPress, 转载]
-categories: [WordPress]
 ---
 今天逛博客的时候到了冰剑博客,看到了他的一篇文章[水榜之血条](http://www.binjoo.net/2011/04/most-active-life) 具体的作用就是给读者墙添加一个美化吧.让每个人的头像下方增加一个"血条"显示,看起来很带感.但是冰剑博客上的代码是给typecho用的,wordpress的我不会修改.
 

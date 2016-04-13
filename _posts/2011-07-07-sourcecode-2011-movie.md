@@ -3,7 +3,6 @@ layout: post
 title: 源代码 Source Code (2011)
 pid: 184
 tags: [Movie]
-categories: [也来推荐]
 ---
 ![](http://img3.douban.com/mpic/s4614668.jpg)
 

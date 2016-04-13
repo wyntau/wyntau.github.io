@@ -3,7 +3,6 @@ layout: post
 title: 自己写的几个js函数
 pid: 232
 tags: [JavaScript, jQuery]
-categories: [学习笔记]
 ---
 前两天看的那个《犀利开发 jquery内核详解与实践》,里面有讲了一个domextend的函数.
 我试验了一下,感觉挺好的.所以就拿来用了.

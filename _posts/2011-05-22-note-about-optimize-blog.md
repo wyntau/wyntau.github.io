@@ -3,7 +3,6 @@ layout: post
 title: 博客优化小记
 pid: 142
 tags: [Blog, WordPress, 点滴]
-categories: [唠唠叨叨]
 ---
 昨天晚上班级在大海边吃烧烤,露营,,枕着海浪睡觉的感觉真不错. :lol: 哈哈,可惜睡袋有点薄,感觉有点冷..
 

@@ -3,7 +3,6 @@ layout: post
 title: TwiTalker bot搭建成功
 pid: 85
 tags: [Twitter]
-categories: [学习笔记]
 ---
 最近两天没干什么别的事.想要看看css书,但是看不下去,只好到网上逛逛. 一直使用的免费的SSH帐号这两天非常不给力,一直连接不上.搞的俺上个推特,上个youtube看看都不行.还好学校的IPV6挺给力,可以曲线番羽墙,上个youtube和facebook.同时经过多方搜索,找到了可以限时使用的SSH,速度还可以.所以抓紧时间看看墙外的世界啊.
 

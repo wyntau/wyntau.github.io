@@ -3,7 +3,6 @@ layout: post
 title: 一个扩展DOM的函数
 pid: 230
 tags: [DOM, JavaScript]
-categories: [学习笔记]
 ---
 这个函数是 《犀利开发 jquery内核详解与实践》这本书中的一段代码.
 作用是用来扩展DOM的.然后为DOM绑定自定义函数.不知道这个可不可以拿来用.

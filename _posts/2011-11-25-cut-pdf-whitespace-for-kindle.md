@@ -3,7 +3,6 @@ layout: post
 title: 为kindle上的pdf切白边
 pid: 237
 tags: [Kindle]
-categories: [学习笔记]
 ---
 前几天还一直找mobi格式的电子书,但是这两天我更喜欢找pdf格式的了.因为pdf格式的书排版更好,看着更舒服.
 

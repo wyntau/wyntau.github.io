@@ -3,7 +3,6 @@ layout: post
 title: 在Angular.js项目中使用异步加载(四)
 pid: 2016022702
 tags: [webpack, Angular, RequireJS]
-categories: [学习笔记]
 ---
 将构建系统从 gulp + require.js 切换到 webpack 是因为通过一些学习, 我知道, webpack 可以更好的完成代码合并压缩的工作.
 

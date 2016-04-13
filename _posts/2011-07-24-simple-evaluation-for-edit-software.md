@@ -3,7 +3,6 @@ layout: post
 title: Editplus notepad++ Gedit UltraEdit简单对比(评测)
 pid: 193
 tags: [Programmer, Software, 原创]
-categories: [互联网络]
 ---
 Editplus notepad++ Gedit UltraEdit
 由于本人使用次数不是很多.别的大部分功能都用不到.所以我就只找几个很小的方面对比一下吧.这个应该算是简单的不能再简单的评测了.让大家见笑了.

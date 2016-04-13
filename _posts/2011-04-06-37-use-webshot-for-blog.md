@@ -3,7 +3,6 @@ layout: post
 title: 使用网页缩略图种种..
 pid: 37
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 今天看到[IM路人](http://imluren.com/2010/12/webshot-for-blog.html)的博客上 说网页缩略图的功能没有停止.可是我前两天去willin大师的网站上去看的时候,明明说的是已经停止服务了. :han: 今天我又到那个服务网站上一看,确实没有停止.不知道willin大师是怎么搞的.
 既然能用.这么眩的功能咱也得加上啊.哈哈.所以注册了一个号,然后下载了luren博文上的 *stw-webshot-cache*插件,配置一下.OK.确实够眩的. :lol:

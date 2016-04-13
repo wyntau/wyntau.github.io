@@ -3,7 +3,6 @@ layout: post
 title: suckerfish下拉菜单
 pid: 206
 tags: [CSS]
-categories: [学习笔记]
 ---
 在《精通CSS 高能Web标准解决方案》(第二版)中的一个例子,我将demo做出来了.顺便学习一下.
 

@@ -3,7 +3,6 @@ layout: post
 title: IE浏览器中Image对象onload失效的解决办法
 pid: 256
 tags: [JavaScript]
-categories: [学习笔记]
 ---
 
 接昨天的上篇文章,设置图片的宽高到窗口的宽高.

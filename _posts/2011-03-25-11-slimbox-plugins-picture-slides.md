@@ -3,7 +3,6 @@ layout: post
 title: slimbox插件,实现图片的幻灯片效果
 pid: 11
 tags: [WordPress]
-categories: [WordPress]
 ---
 很早之前 [bentutu](http://bentutu.com) 童鞋就告诉我说可以实现图片的幻灯便效果.但是我一直都不知道是怎么回事.
 

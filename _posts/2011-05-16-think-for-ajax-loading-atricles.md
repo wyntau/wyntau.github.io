@@ -3,7 +3,6 @@ layout: post
 title: 关于Ajax加载首页文章的想法
 pid: 135
 tags: [Ajax, WordPress, 点滴]
-categories: [唠唠叨叨 ]
 ---
 刚用上这个主题没多少时间后,我就看到了木木的那篇关于ajax加载首页文章的博文[AJAX动态加载文章内容](http://immmmm.com/ajax-loading-post-content.html)当时我也尝试了,可以用那个ajax请求的网址输出文章内容.只是默认是输出全文发现效果不好,并且当时也不会修改木木的jquery函数.所以就放下了.
 后来看到了[自由的风](http://loosky.net) 博客上的ajax加载(后来我发现那个仍然是加载全文),感觉不错.

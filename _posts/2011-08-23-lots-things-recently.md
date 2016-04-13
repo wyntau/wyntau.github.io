@@ -3,7 +3,6 @@ layout: post
 title: 最近琐事多多
 pid: 208
 tags: [点滴]
-categories: [唠唠叨叨]
 ---
 这两天也没怎么闲着,光摆弄电脑了.
 

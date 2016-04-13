@@ -4,7 +4,6 @@ title: "部分安卓设备出现元素设置overflow为auto时, 无法滚动到�
 pid: 2015092502
 keywords: ""
 description: ""
-categories: [BUG]
 tags: [CSS]
 ---
 

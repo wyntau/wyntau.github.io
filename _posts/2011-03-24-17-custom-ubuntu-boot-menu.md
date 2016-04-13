@@ -3,7 +3,6 @@ layout: post
 title: 自定义Ubuntu系统引导菜单
 pid: 17
 tags: [Linux]
-categories: [系统相关]
 ---
 ![](/uploads/2011/03/24_32.png)
 

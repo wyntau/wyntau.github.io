@@ -4,7 +4,6 @@ title: "判断一个点是否在多边形内"
 pid: 2013100801
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [JavaScript, CoffeeScript]
 ---
 使用Canvas绘制图形时,为了使得在鼠标移动到某个多边形内部时,对整个多边形进行高亮显示,这里就需要用到判断某个点是否在多边形内部的算法.

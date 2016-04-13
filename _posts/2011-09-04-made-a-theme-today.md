@@ -3,7 +3,6 @@ layout: post
 title: 今天移植了一个主题
 pid: 215
 tags: [Themes, WordPress]
-categories: [WordPress]
 ---
 没有能力自己写一个,那就先移植一个学习吧.
 

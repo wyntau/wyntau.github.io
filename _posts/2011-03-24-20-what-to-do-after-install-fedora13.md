@@ -3,7 +3,6 @@ layout: post
 title: 安装完fedora13我要干的几件事
 pid: 20
 tags: [Linux, 原创]
-categories: [学习笔记]
 ---
 此文章系本人发在 红联Linux论坛上的文章,现在把它转过来.
 

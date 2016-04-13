@@ -3,7 +3,6 @@ layout: post
 title: 终于决定放弃windows
 pid: 194
 tags: [Linux, Windows]
-categories: [唠唠叨叨]
 ---
 昨天晚上和今天一天一直在思考一个问题,我对windows还有多少依赖.
 首先,我对游戏基本上已经没有了任何兴趣.平时上网,也就是看看几个网页,偶尔听几个歌 看看电影.

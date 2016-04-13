@@ -3,7 +3,6 @@ layout: post
 title: 镜像网站遇到的那些事儿
 pid: 175
 tags: [Linux, website, 原创]
-categories: [互联网络, 学习笔记]
 ---
 前两天想要镜像 两个网站 codex.wordpress.org和 w3school.
 但是在镜像的时候遇到了各种各样的问题.今天完整的总结一下

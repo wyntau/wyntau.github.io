@@ -3,7 +3,6 @@ layout: post
 title: 侧栏评论滑动显示的一点理解
 pid: 189
 tags: [JavaScript, Study, WordPress]
-categories: [WordPress]
 ---
 前两天,我弄上了 loosky的 那个评论滑动显示的效果,也稍微写了一点东西,很多朋友很喜欢.
 

@@ -4,7 +4,6 @@ title: Gentoo开启声卡支持
 pid: 2015011804
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [Linux, Gentoo]
 ---
 

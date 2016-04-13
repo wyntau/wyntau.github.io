@@ -3,7 +3,6 @@ layout: post
 title: 修改philna2主题之文章几处更新
 pid: 103
 tags: [PhilNa2, WordPress, 原创]
-categories: [WordPress]
 ---
 ## 第一个就是最重量级的更新
 关于给philna2主题添加自定义导航菜单.此前在[PhilNa2增加自定义导航菜单](/2011/04/philna2-add-nav-menu.html)中讲到了怎么添加.但是由于我在取经的时候没有认真看.把修复bug的语句忘记.导致出现了一个很大的Bug,自由的风 在他的博文中已经给出了解决方案.即修改app/template.php中的philnaCreateTitle函数，注释掉以下语句即可

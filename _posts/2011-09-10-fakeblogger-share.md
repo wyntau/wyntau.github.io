@@ -3,7 +3,6 @@ layout: post
 title: FakeBlogger主题分享
 pid: 219
 tags: [Themes]
-categories: [WordPress]
 ---
 暂时不想弄了,所以给大家分享一下,因为打算先好好修炼一阵,充实一下知识.搞这个主题认识到自己会的太少了,所以打算先学习,磨刀不误砍柴工.
 

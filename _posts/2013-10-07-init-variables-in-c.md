@@ -4,7 +4,6 @@ title: "在C中初始化变量"
 pid: 2013100701
 keywords: ""
 description: ""
-categories: [学习笔记]
 tags: [C]
 ---
 

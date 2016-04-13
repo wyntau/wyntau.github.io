@@ -3,7 +3,6 @@ layout: post
 title: 在Angular.js项目中使用异步加载(一)
 pid: 2016022601
 tags: [webpack, Angular, RequireJS]
-categories: [学习笔记]
 ---
 Angular.js 很好, 但是也很不好.
 

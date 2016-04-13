@@ -3,7 +3,6 @@ layout: post
 title: 解密ineo1.0.2
 pid: 137
 tags: [Linux, PHP, Themes, 点滴]
-categories: [唠唠叨叨]
 ---
 解密ineo1.0.2 问了好多人都不给我说 :mad:
  还是 自己动手 丰衣足食~~

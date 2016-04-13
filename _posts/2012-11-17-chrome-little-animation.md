@@ -3,7 +3,6 @@ layout: post
 title: Chrome下载页面小效果一个
 pid: 251
 tags: [Chrome, JavaScript]
-categories: [互联网络]
 ---
 起因:最近几次下载chrome的时候看到chrome的logo,鼠标放上去竟然有奇特效果,所以自己搞下来玩玩.
 
