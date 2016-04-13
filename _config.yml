@@ -106,7 +106,7 @@ iLotus:
   #菜单配置
   navs:
     - text: 首页
-      url: /index.html
+      url: /
       icon: fa fa-home
       class: home
     - text: 文章归档
