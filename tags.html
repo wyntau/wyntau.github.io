@@ -15,7 +15,7 @@ title: 文章标签
       <span id="{{ tag[0] }}">{{ tag[0] }}</span>
       <ul>
         {% for post in tag[1] %}
-        <li>{{ post.date | date: "%Y-%m-%d" }} : <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+        <li>{{ post.date | date: "%Y-%m-%d" }} : <a href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a></li>
         {% endfor %}
       </ul>
     </li>

@@ -15,7 +15,7 @@
 <div
   class="ds-thread"
   data-title="{{ page.title }}"
-  data-url="{{ site.url | append: site.baseurl }}{{ page.url }}"
+  data-url="{{ page.url | absolute_url}}"
   {% if page.pid %}
   data-thread-key="{{ page.pid }}"
   {% endif %}
