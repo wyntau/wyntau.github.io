@@ -30,11 +30,11 @@
     {% endif %}
     {% feed_meta %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="all" href="{{ site.url | append: site.baseurl }}/static/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ site.url | append: site.baseurl }}/static/style.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ site.url | append: site.baseurl }}/static/jekyll-github.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/css/font-awesome.css' | relative_url }}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/style.css' | relative_url }}" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/jekyll-github.css' | relative_url }}/static/jekyll-github.css" />
     <!--[if lt IE 9]>
-    <script src="{{ site.url | append: site.baseurl }}/static/js/html5.js" type="text/javascript"></script>
+    <script src="{{ '/static/js/html5.js' | relative_url }}" type="text/javascript"></script>
     <![endif]-->
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
@@ -55,7 +55,7 @@
                     <i class="{{ nav.icon }}"></i>
                 </a>
                 {% else %}
-                <a href="{{ site.url | append: site.baseurl }}{{ nav.url }}" rel="bookmark" title="{{ nav.text }}">
+                <a href="{{ nav.url | relative_url}}" rel="bookmark" title="{{ nav.text }}">
                     <i class="{{ nav.icon }}"></i>
                 </a>
                 {% endif %}
@@ -69,9 +69,9 @@
 <footer class="lotus-footer">
 	<p>Copyright © {{ site.iLotus.begin }}–{{ site.time | date: "%Y" }} {{ site.title }} All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
 </footer>
-<script src="{{ site.url | append: site.baseurl }}/static/js/jquery.js" type="text/javascript"></script>
-<script src="{{ site.url | append: site.baseurl }}/static/js/jquery.scrollTo.js" type="text/javascript"></script>
-<script src="{{ site.url | append: site.baseurl }}/static/js/jquery.cookie.js" type="text/javascript"></script>
-<script src="{{ site.url | append: site.baseurl }}/static/js/iLotus.js" type="text/javascript"></script>
+<script src="{{ '/static/js/jquery.js' | relative_url }}" type="text/javascript"></script>
+<script src="{{ '/static/js/jquery.scrollTo.js' | relative_url }}" type="text/javascript"></script>
+<script src="{{ '/static/js/jquery.cookie.js' | relative_url }}" type="text/javascript"></script>
+<script src="{{ '/static/js/iLotus.js' | relative_url }}" type="text/javascript"></script>
 </body>
 </html>
