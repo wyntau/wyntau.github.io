@@ -816,4 +816,7 @@ h6 {
   .lotus-nav {
     display: none;
   }
+  .lotus-backtop {
+    display: none;
+  }
 }
