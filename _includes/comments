@@ -4,7 +4,13 @@
 <div id="comments">
 {% case site.iLotus.comments.provider %}
 {% when "duoshuo" %}
-  {% include comments-providers/duoshuo %}
+  {% if site.iLotus.comments.duoshuo.short_name %}
+    {% include comments-providers/duoshuo %}
+  {% endif %}
+{% when "disqus" %}
+  {% if site.iLotus.comments.disqus.short_name %}
+    {% include comments-providers/disqus %}
+  {% endif %}
 {% endcase %}
 </div>
 

@@ -75,9 +75,11 @@ iLotus:
 
   # comments provider
   comments:
-    provider: duoshuo
+    provider: disqus
     duoshuo:
-      short_name: short_name
+      short_name:
+    disqus:
+      short_name:
 
   archives_path: /archives.html
   contact_path: /contact.html
