@@ -534,11 +534,11 @@ h6 {
   background: url(images/404.png) no-repeat center 0;
 }
 
-.lotus-post img {
+.lotus-post img, .lotus-article img {
   max-width: 100%;
 }
 
-.lotus-post img:hover {
+.lotus-post img:hover, .lotus-article img:hover {
   cursor: pointer;
 }
 
