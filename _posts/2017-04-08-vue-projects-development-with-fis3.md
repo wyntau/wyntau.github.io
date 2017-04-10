@@ -353,3 +353,7 @@ fis.match('/src/runtimes/**.{js,ts,vue}', {
     "components/Item"
 
 只是, combo 服务需要后端或者 CDN 去配合, 只是前端的话, 就可以只使用 packTo 的配置, 效果也是很明显的.
+
+### Edit
+
+经掘金上的[任侠](https://juejin.im/user/57c9687e67f3560057b2409c)提醒, 在使用文件名 hash 和 CDN 强缓存的情况下, 浏览器根本不会去远端请求，直接从本地读取, 所以就不需要使用 localStorage 了.
