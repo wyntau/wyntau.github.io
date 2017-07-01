@@ -43,7 +43,9 @@
             {% for nav in site.iLotus.navs %}
             {% assign active = nil %}
             {% assign homeClass = nil %}
-            {% if page.url == nav.url%}
+            {% assign pageUrl = page.url %}
+            {% assign pageUrlWithSuffix = page.url | append: '.html' %}
+            {% if pageUrl == nav.url or pageUrlWithSuffix == nav.url %}
               {% assign active = 'current' %}
             {% endif %}
             {% if nav.class == 'home' %}
