@@ -15,7 +15,7 @@ tags: [Disqus]
 
 网上找了一番, 发现迁移脚本都是时间比较长的了, 害怕会有些变化, 所以打算自己写一个.
 
-[duoshuo2disqus](https://github.com/Treri/duoshuo2disqus)
+[duoshuo2disqus](https://github.com/Wyntau/duoshuo2disqus)
 
 参考了 Disqus 导入时的格式 WXR, 然后使用 Node 处理一下多说导出的数据.
 

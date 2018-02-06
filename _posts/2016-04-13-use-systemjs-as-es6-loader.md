@@ -11,9 +11,9 @@ webpack 为大家提供了 webpack-dev-server 用于开发环境, webpack-dev-se
 
 但是我在使用 webpack 搭配 webpack-dev-server 的时候, 由于项目很大, 文件特别多, 所以遇到了一个很大的问题, rebuild 等待的时间太久了, 完全不如我原来没有使用 webpack 时保存代码后手动刷新浏览器来的快速. 但是因为我使用了 webpack 进行合并压缩, 我不得不等待整个项目编译完成才能进行调试.
 
-为了解决这个问题, 我写了 [webpack-source-code-loader](https://github.com/Treri/webpack-source-code-loader), 并且写了一篇文章 [在Angular.js项目中使用异步加载(五)]({% post_url 2016-03-11-angular-used-project-from-requirejs-to-webpack-5 %}).
+为了解决这个问题, 我写了 [webpack-source-code-loader](https://github.com/Wyntau/webpack-source-code-loader), 并且写了一篇文章 [在Angular.js项目中使用异步加载(五)]({% post_url 2016-03-11-angular-used-project-from-requirejs-to-webpack-5 %}).
 
-后来接触到了 [System.js](https://github.com/systemjs/systemjs), 发现其实我的需求完全可以使用 System.js 进行解决. 因为 System.js 可以通过 Babel.js 或者 TypeScript 在浏览器中完成 ES6 => ES5 的编译工作. 具体例子请看我写的 [demo](https://github.com/Treri/systemjs-example)
+后来接触到了 [System.js](https://github.com/systemjs/systemjs), 发现其实我的需求完全可以使用 System.js 进行解决. 因为 System.js 可以通过 Babel.js 或者 TypeScript 在浏览器中完成 ES6 => ES5 的编译工作. 具体例子请看我写的 [demo](https://github.com/Wyntau/systemjs-example)
 
 在使用的时候我发现, 使用 TypeScript 时会比使用 Babel.js 有更快的编译速度, 同时还可以使用 TypeScript 提供的类型系统, 真的很好. 并且, System.js 和 Babel.js@6.x 有兼容性问题, 目前还只能使用 Babel.js@5.x 才能进行正常工作.
 

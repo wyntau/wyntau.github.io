@@ -30,7 +30,7 @@ tags: [webpack, Angular, RequireJS]
 
 通过网上的搜索, 找到一些简单的模块加载器, 并在此基础上进行修改以满足要求.
 
-项目地址: <https://github.com/Treri/webpack-source-code-loader>
+项目地址: <https://github.com/Wyntau/webpack-source-code-loader>
 
 ##### 使用方法
 

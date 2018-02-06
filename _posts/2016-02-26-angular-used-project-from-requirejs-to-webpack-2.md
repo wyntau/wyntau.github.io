@@ -163,6 +163,6 @@ $stateProvider
 
 你可以将这些代码进行抽象, 封装成一个方法. 对于 css 文件的加载, 可以在开发模式, 使用 `RequireJS` 进行加载. 而在发布模式时, 不单独加载 css 文件, 而是配合下篇讲的方法, 将 css 的内容注入到对应的 controller 中.
 
-为了简化代码, 我写了一个 angular 的 模块, [angular-require](https://github.com/Treri/angular-require). 本篇写的代码, 就是这个小项目的原型.
+为了简化代码, 我写了一个 angular 的 模块, [angular-require](https://github.com/Wyntau/angular-require). 本篇写的代码, 就是这个小项目的原型.
 
 在以 Angular.js 为框架的项目中, 使用 `RequireJS` 进行代码的异步加载, 其实并不是很难, 下篇将写一下, 在这样的项目中, 怎么对代码进行构建发布.

@@ -15,6 +15,6 @@ animate.css经过很多css高手的贡献, 现在已经有很多的动画了. �
 
 而重复执行的动画, 则就可以作为angular中的普通动画, 重复执行.
 
-本人制作的一个demo如下 <http://Treri.github.io/me-animate.css>
+本人制作的一个demo如下 <http://wyntau.github.io/me-animate.css>
 
 欢迎大家感兴趣的一起来探讨.

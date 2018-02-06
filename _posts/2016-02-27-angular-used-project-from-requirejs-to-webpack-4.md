@@ -59,7 +59,7 @@ define([
 });
 ```
 
-如果有公共模块的话, 我还需要调用一次方法才行, 能不能默认就返回一个promise呢? 所以基于 promise-loader, 我修改了一个 [then-loader](https://github.com/Treri/then-loader), 其它功能和 promise-loader 相同, 但是返回的就是一个 promise, 不需要调用方法.
+如果有公共模块的话, 我还需要调用一次方法才行, 能不能默认就返回一个promise呢? 所以基于 promise-loader, 我修改了一个 [then-loader](https://github.com/Wyntau/then-loader), 其它功能和 promise-loader 相同, 但是返回的就是一个 promise, 不需要调用方法.
 
 现在定义模块时, 我的写法是这样的
 

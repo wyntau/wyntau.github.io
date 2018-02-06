@@ -8,7 +8,7 @@ tags: [Angular]
 
 最近看了Codrops的一篇文章, 里面讲到了一个页面切换的效果, 详情点击[此处](http://tympanus.net/codrops/2014/04/23/page-loading-effects/). 看了这个效果感觉很赞, 觉得这个效果可以用在angular的页面切换中, 所以将这个效果移植到angular中, 做成一个angular module, 方便以后添加类似效果时, 直接使用.
 
-Github: <https://github.com/Treri/me-pageloading>
+Github: <https://github.com/Wyntau/me-pageloading>
 
 做好的demo效果
 

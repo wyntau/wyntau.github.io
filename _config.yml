@@ -105,22 +105,22 @@ iLotus:
       icon: fa fa-user
       class: none
     - text: 博客源代码
-      url: https://github.com/Treri/treri.github.io
+      url: https://github.com/Wyntau/wyntau.github.io
       icon: fa fa-github-square
       class: none
 
 #站点基础配置
 title: 自说Me话
 subTitle: I Say Me | 我说我自己 | 我说世界
-description: Treri's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.
-keywords: Treri,Linux,Web,前端开发,自说Me话,ISayme,Internet
+description: Wyntau's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.
+keywords: Wyntau,Linux,Web,前端开发,自说Me话,ISayme,Internet
 url: http://isay.me
 
 author:
-  name : Treri
-  email: treri.liu@gmail.com
-  github: Treri
-  twitter: Treri_liu
+  name : Wyntau
+  email: wyntau@outlook.com
+  github: Wyntau
+  twitter: Wyntau
   douban: lwent
   QQ: 83692901
   weibo: leftupme

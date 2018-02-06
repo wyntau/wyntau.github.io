@@ -11,4 +11,4 @@ tags: [PhilNa2, JavaScript]
 把以下代码随便保存一个名字,比如 `PhilnaSay.php`在想展示PhilnaSay的地方输入以下内容,
 &lt;?php include 'PhilnaSay.php';?>
 
-<script src="https://gist.github.com/Treri/7098144.js"></script>
+<script src="https://gist.github.com/Wyntau/7098144.js"></script>

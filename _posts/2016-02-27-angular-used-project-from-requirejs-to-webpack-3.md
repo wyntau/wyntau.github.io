@@ -14,7 +14,7 @@ tags: [webpack, Angular, RequireJS]
 2. service, directive, factory, 因为像这样的, 一般都会是公共模块, 所以只是将这些文件进行压缩, 而不和其它一些文件合并. 如果在写 directive 时, 使用了一些 css 文件, 那么也可以像 controller 那样, 将 directive 的 js 文件和 css 文件合并起来.
 3. views, 使用 html-minifier 工具, 进行压缩, 去除多余的空格及空行.
 
-那如何将 css 文件和 js 文件进行合并呢, 答案是, 将 css 的内容通过 js 注入到 style 标签中. 为此我还写过 grunt 插件 [grunt-inline-css](https://github.com/Treri/grunt-inline-css) 和 gulp 插件 [gulp-scriptcss](https://github.com/Treri/gulp-scriptcss).
+那如何将 css 文件和 js 文件进行合并呢, 答案是, 将 css 的内容通过 js 注入到 style 标签中. 为此我还写过 grunt 插件 [grunt-inline-css](https://github.com/Wyntau/grunt-inline-css) 和 gulp 插件 [gulp-scriptcss](https://github.com/Wyntau/gulp-scriptcss).
 
 其实核心方法就是下面的这么简单
 

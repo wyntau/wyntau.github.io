@@ -286,7 +286,7 @@ FIS3 默认使用文件路径作为模块ID, 所以也就不存在模块ID不稳
 
     比如首次加载 a.js, 依赖模块有 b, c, d. 当再次加载时, 因为已经有缓存, 所以不需要发出 http 请求, 直接使用缓存即可. 当加载另一个模块 e.js 时, 分析出的依赖模块有 c, d, f, g. 此时, 先去 localStorage 中, 发现缓存中有 c, d 模块, 直接拿出使用. 然后再用一个请求, 将 f, g 模块使用 combo 服务下载下来
 
-最终的 demo 的链接 [fis3-typescript-vue-hackernews-2.0](https://github.com/Treri/fis3-typescript-vue-hackernews-2.0).
+最终的 demo 的链接 [fis3-typescript-vue-hackernews-2.0](https://github.com/Wyntau/fis3-typescript-vue-hackernews-2.0).
 
 dev 模式下的请求
 
