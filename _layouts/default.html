@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html id="J-html" class="">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!--
-     **
-     * Author:         掌心
-     * Contact:        zhanxin.info@gmail.com
-     * Theme Name:     iLotus
-     **
-    -->
-    {% seo %}
-    {% feed_meta %}
-    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/css/font-awesome.css' | relative_url }}" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/style.css' | relative_url }}" />
-    <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/rouge-github.css' | relative_url }}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% seo %}
+  {% feed_meta %}
+  <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/css/font-awesome.css' | relative_url }}" />
+  <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/style.css' | relative_url }}" />
+  <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/rouge-github.css' | relative_url }}" />
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
-    <nav class="lotus-nav">
-        <ul>
-            {% for nav in site.iLotus.navs %}
-            {% assign active = nil %}
-            {% assign homeClass = nil %}
-            {% assign pageUrl = page.url %}
-            {% assign pageUrlWithSuffix = page.url | append: '.html' %}
-            {% if pageUrl == nav.url or pageUrlWithSuffix == nav.url %}
-              {% assign active = 'current' %}
-            {% endif %}
-            {% if nav.class == 'home' %}
-                {% assign homeClass = 'home ' %}
-            {% endif %}
-            <li class="{{ homeClass }}{{ active }}">
-                {% if nav.url contains 'http://' or nav.url contains 'https://' %}
-                <a href="{{ nav.url }}" rel="bookmark" target="_blank" title="{{ nav.text }}">
-                    <i class="{{ nav.icon }}"></i>
-                </a>
-                {% else %}
-                <a href="{{ nav.url | relative_url}}" rel="bookmark" title="{{ nav.text }}">
-                    <i class="{{ nav.icon }}"></i>
-                </a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    </nav>
+  <nav class="lotus-nav">
+    <ul>
+      {% for nav in site.iLotus.navs %}
+      {% assign active = nil %}
+      {% assign homeClass = nil %}
+      {% assign pageUrl = page.url %}
+      {% assign pageUrlWithSuffix = page.url | append: '.html' %}
+      {% if pageUrl == nav.url or pageUrlWithSuffix == nav.url %}
+        {% assign active = 'current' %}
+      {% endif %}
+      {% if nav.class == 'home' %}
+        {% assign homeClass = 'home ' %}
+      {% endif %}
+      <li class="{{ homeClass }}{{ active }}">
+        {% if nav.url contains 'http://' or nav.url contains 'https://' %}
+        <a href="{{ nav.url }}" rel="bookmark" target="_blank" title="{{ nav.text }}">
+          <i class="{{ nav.icon }}"></i>
+        </a>
+        {% else %}
+        <a href="{{ nav.url | relative_url}}" rel="bookmark" title="{{ nav.text }}">
+          <i class="{{ nav.icon }}"></i>
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
 
-    {{ content }}
+  {{ content }}
 
 <footer class="lotus-footer">
-	<p>Copyright © {{ site.iLotus.begin }}–{{ site.time | date: "%Y" }} {{ site.title }} All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+  <p>Copyright © {{ site.iLotus.begin }}–{{ site.time | date: "%Y" }} {{ site.title }} All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
 </footer>
 <script src="{{ '/static/js/jquery.js' | relative_url }}" type="text/javascript"></script>
 <script src="{{ '/static/js/jquery.scrollTo.js' | relative_url }}" type="text/javascript"></script>

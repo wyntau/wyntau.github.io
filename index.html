@@ -2,36 +2,36 @@
 layout: default
 ---
 <section class="lotus-logo fn-clear">
-    <hgroup class="violet-site">
-        <h1><a href="{{ '/' | relative_url }}" >{{ site.title }}</a></h1>
-        <h2>{{ site.subTitle }}</h2>
-    </hgroup><!-- //violet-site -->
+  <hgroup class="violet-site">
+    <h1><a href="{{ '/' | relative_url }}" >{{ site.title }}</a></h1>
+    <h2>{{ site.subTitle }}</h2>
+  </hgroup><!-- //violet-site -->
 </section>
 {% for rpost in site.posts limit:4 %}
 <article class="lotus-article">
-    <h3><a href="{{ rpost.url | relative_url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
-    <p itemprop="description">{{ rpost.content }}</p>
+  <h3><a href="{{ rpost.url | relative_url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
+  <p itemprop="description">{{ rpost.content }}</p>
 </article>
 {% endfor %}
 <section class="lotus-double fn-clear">
-    <article class="article article-first">
-    <h3>近期文章</h3>
-        <ul>
-            {% for npost in site.posts limit:4 offset:4 %}
-            <li><a href="{{ npost.url | relative_url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
-            {% endfor %}
-        </ul>
-    </article>
-    <article class="article article-last">
-    <h3>相关页面</h3>
+  <article class="article article-first">
+  <h3>近期文章</h3>
     <ul>
-        {% for page in site.html_pages %}
-        {% if page.url != '/'%}
-        <li>
-            <a href="{{ page.url | relative_url }}" rel="bookmark" title="{{page.title}}">{{ page.title }}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
+      {% for npost in site.posts limit:4 offset:4 %}
+      <li><a href="{{ npost.url | relative_url }}" pubdate="{{ npost.date | date_to_utc | date: '%Y-%m-%d' }}" title="{{ npost.title }}" rel="bookmark">{{ npost.title }}</a></li>
+      {% endfor %}
     </ul>
-    </article>
+  </article>
+  <article class="article article-last">
+  <h3>相关页面</h3>
+  <ul>
+    {% for page in site.html_pages %}
+    {% if page.url != '/'%}
+    <li>
+      <a href="{{ page.url | relative_url }}" rel="bookmark" title="{{page.title}}">{{ page.title }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  </article>
 </section>

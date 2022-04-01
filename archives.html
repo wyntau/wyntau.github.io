@@ -8,27 +8,22 @@ title: 文章归档
   {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
 
   {% if forloop.first %}
-    <ul>
-        <li><span>{{this_year}} &nbsp;</span>
-            <ul>
+  <ul>
+    <li><span>{{this_year}} &nbsp;</span>
+      <ul>
   {% endif %}
-
-                <li>{{ post.date | date: "%m-%d" }} : <a href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-
+        <li>{{ post.date | date: "%m-%d" }} : <a href="{{ post.url | relative_url }}" title="{{ post.title }}">{{ post.title }}</a></li>
   {% if forloop.last %}
-            </ul>
-        </li>
-    </ul>
-  {% else %}
-    {% if this_year != next_year %}
-            </ul>
-        </li>
-    </ul>
-    <ul>
-          <li><span>{{next_year}} &nbsp;</span>
-            <ul>
-    {% endif %}
+      </ul>
+    </li>
+  </ul>
+  {% elsif this_year != next_year %}
+      </ul>
+    </li>
+  </ul>
+  <ul>
+      <li><span>{{next_year}} &nbsp;</span>
+      <ul>
   {% endif %}
-
 
 {% endfor %}
