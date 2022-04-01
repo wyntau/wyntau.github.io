@@ -12,18 +12,14 @@
 <body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
   <nav class="lotus-nav">
     <ul>
-      {% for nav in site.iLotus.navs %}
-      {% assign active = nil %}
-      {% assign homeClass = nil %}
+      {% for nav in site.data.iLotus.nav_items %}
+      {% assign activeClass = nil %}
       {% assign pageUrl = page.url %}
       {% assign pageUrlWithSuffix = page.url | append: '.html' %}
       {% if pageUrl == nav.url or pageUrlWithSuffix == nav.url %}
-        {% assign active = 'current' %}
+        {% assign activeClass = 'current' %}
       {% endif %}
-      {% if nav.class == 'home' %}
-        {% assign homeClass = 'home ' %}
-      {% endif %}
-      <li class="{{ homeClass }}{{ active }}">
+      <li class="{{ nav.class }} {{ activeClass }}">
         {% if nav.url contains 'http://' or nav.url contains 'https://' %}
         <a href="{{ nav.url }}" rel="bookmark" target="_blank" title="{{ nav.text }}">
           <i class="{{ nav.icon }}"></i>
@@ -35,13 +31,33 @@
         {% endif %}
       </li>
       {% endfor %}
+
+      {% for menu in site.data.iLotus.menu_items %}
+      {% assign activeClass = nil %}
+      {% assign pageUrl = page.url %}
+      {% assign pageUrlWithSuffix = page.url | append: '.html' %}
+      {% if pageUrl == menu.url or pageUrlWithSuffix == menu.url %}
+        {% assign activeClass = 'current' %}
+      {% endif %}
+      <li class="{{ menu.class }} {{ activeClass }}">
+        {% if menu.url contains 'http://' or menu.url contains 'https://' %}
+        <a href="{{ menu.url }}" rel="bookmark" target="_blank" title="{{ menu.text }}">
+          <i class="{{ menu.icon }}"></i>
+        </a>
+        {% else %}
+        <a href="{{ menu.url | relative_url}}" rel="bookmark" title="{{ menu.text }}">
+          <i class="{{ menu.icon }}"></i>
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
     </ul>
   </nav>
 
   {{ content }}
 
 <footer class="lotus-footer">
-  <p>Copyright © {{ site.iLotus.begin }}–{{ site.time | date: "%Y" }} {{ site.title }} All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+  <p>Copyright © {{ site.data.iLotus.copyright.begin_year }}–{{ site.time | date: "%Y" }} {{ site.title }} All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
 </footer>
 <script src="{{ '/static/js/jquery.js' | relative_url }}" type="text/javascript"></script>
 <script src="{{ '/static/js/jquery.scrollTo.js' | relative_url }}" type="text/javascript"></script>
