@@ -1,6 +1,8 @@
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-remote-theme
+  - jekyll-seo-tag
 
 # Outputting
 permalink: /:year/:month/:title.html
