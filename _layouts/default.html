@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html id="J-html" class="">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!--
      **
      * Author:         掌心
@@ -8,34 +10,11 @@
      * Theme Name:     iLotus
      **
     -->
-    <meta charset="UTF-8" />
-    <title>
-        {% if page.title %}
-            {{ page.title }}
-        {% else %}
-            {{ site.title }}
-        {% endif %}
-    </title>
-    <meta name="generator" content="Jekyll" />
-    <meta name="author" content="{{ site.author.name }}" />
-    {% if page.description %}
-    <meta name="description" content="{{ page.description }}" />
-    {% elsif site.description %}
-    <meta name="description" content="{{ site.description }}" />
-    {% endif %}
-    {% if page.kekeywords %}
-    <meta name="keywords" content="{{ page.keywords | join: ',' }}" />
-    {% elsif site.keywords %}
-    <meta name="keywords" content="{{ site.keywords | join: ',' }}" />
-    {% endif %}
+    {% seo %}
     {% feed_meta %}
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/css/font-awesome.css' | relative_url }}" />
     <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/style.css' | relative_url }}" />
     <link rel="stylesheet" type="text/css" media="all" href="{{ '/static/rouge-github.css' | relative_url }}" />
-    <!--[if lt IE 9]>
-    <script src="{{ '/static/js/html5.js' | relative_url }}" type="text/javascript"></script>
-    <![endif]-->
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
     <nav class="lotus-nav">
