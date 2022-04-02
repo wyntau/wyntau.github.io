@@ -10,7 +10,7 @@ layout: default
 {% for rpost in site.posts limit:4 %}
 <article class="lotus-article">
   <h3><a href="{{ rpost.url | relative_url }}" title="{{ rpost.title }}" rel="bookmark">{{ rpost.title }}</a></h3>
-  <p itemprop="description">{{ rpost.content }}</p>
+  <p itemprop="description">{{ rpost.excerpt }}</p>
 </article>
 {% endfor %}
 <section class="lotus-double fn-clear">
