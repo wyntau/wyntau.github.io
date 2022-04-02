@@ -4,6 +4,8 @@ plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
 
+remote_theme: wyntau/jekyll-theme-iLotus
+
 # Outputting
 permalink: /:year/:month/:title.html
 timezone: Asia/Shanghai
