@@ -2,21 +2,18 @@ copyright:
   begin_year: 2011
 
 nav_items:
-  - text: 首页
+  - title: 首页
     url: /
     icon: fa fa-home
     class: home
-  - text: 文章归档
+  - title: 文章归档
     url: /archives.html
     icon: fa fa-reorder
-  - text: 文章标签
+  - title: 文章标签
     url: /tags.html
     icon: fa fa-tags
 
 menu_items:
-  - text: 关于我
+  - title: 关于我
     url: /contact.html
     icon: fa fa-user
-  - text: 博客源代码
-    url: https://github.com/Wyntau/wyntau.github.io
-    icon: fa fa-github-square
