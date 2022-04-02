@@ -1,12 +1,5 @@
-columns: 1
-
 copyright:
   begin_year: 2011
-
-archives_path: /archives.html
-contact_path: /contact.html
-links_path: /links.html
-tags_path: /tags.html
 
 nav_items:
   - text: 首页
