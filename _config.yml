@@ -26,13 +26,10 @@ defaults:
 iLotus:
   columns: 1
 
-  # comments provider
-  comments:
-    provider: disqus
-    duoshuo:
-      short_name:
-    disqus:
-      short_name: isaymesite
+comments:
+  provider: disqus
+  disqus:
+    short_name: isaymesite
 
 #站点基础配置
 title: 自说Me话
