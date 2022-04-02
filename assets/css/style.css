@@ -13,22 +13,29 @@ Author: 展新(pizner@gmail.com)
 @font-face {
   font-family: 'PT Serif';
   font-style: normal;
+  font-weight: 400;
+  src: local('PT Serif'), local('PTSerif-Regular'), url("../fonts/PTSerif-Regular.ttf") format('ttf');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
   font-weight: 700;
-  src: local('PT Serif Bold'), local('PTSerif-Bold'), url(font/PTSerifBold.woff) format('woff');
+  src: local('PT Serif Bold'), local('PTSerif-Bold'), url("../fonts/PTSerif-Bold.ttf") format('ttf');
 }
 
 @font-face {
   font-family: 'PT Serif';
   font-style: italic;
   font-weight: 400;
-  src: local('PT Serif Italic'), local('PTSerif-Italic'), url(font/PTSerifItalic.woff) format('woff');
+  src: local('PT Serif Italic'), local('PTSerif-Italic'), url("../fonts/PTSerif-Italic.ttf") format('ttf');
 }
 
 @font-face {
   font-family: 'PT Serif';
-  font-style: normal;
-  font-weight: 400;
-  src: local('PT Serif'), local('PTSerif-Regular'), url(font/PTSerif.woff) format('woff');
+  font-style: italic;
+  font-weight: 700;
+  src: local('PT Serif BoldItalic'), local('PTSerif-BoldItalic'), url("../fonts/PTSerif-BoldItalic.ttf") format('ttf');
 }
 
 /*************************
@@ -797,3 +804,4 @@ h6 {
     display: none;
   }
 }
+
