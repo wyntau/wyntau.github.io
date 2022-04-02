@@ -516,20 +516,21 @@ h6 {
 
 .lotus-double {
   margin-bottom: 3em;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: stretch;
 }
 
 .lotus-double .article {
+  flex: 1;
   float: left;
+  margin-right: 1.5em;
+  border-right: 1px dotted #c8c8c8;
 }
-
-.lotus-double .article-first {
-  width: 54%;
-  border-right: 1px dotted #C8C8C8;
-}
-
-.lotus-double .article-last {
-  width: 42%;
-  margin-left: 1.5em;
+.lotus-double .article:last-child{
+  margin-right: 0;
+  border-right: none;
 }
 
 .lotus-breadcrub {
@@ -768,16 +769,23 @@ h6 {
   .lotus-nav ul .home {
     margin-bottom: 0;
   }
-  .lotus-double .article-first {
-    width: 100%;
+
+  .lotus-double {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .lotus-double .article {
+    margin-right: 0;
     border-right: none;
     border-bottom: 1px dotted #C8C8C8;
+    margin-bottom: 2em;
   }
-  .lotus-double .article-last {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 2em;
+  .lotus-double .article:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
   }
+
   .iLight .lotus-nav {
     background: #f1f1ed;
     background: -moz-linear-gradient( 90deg, #e3e3e3 0%, #f1f1ed 8%, #f1f1ed 14%, #f1f1ed 100%);
