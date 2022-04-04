@@ -17,7 +17,7 @@ Github, 一个神奇的网站.
 
 重装系统或者更换电脑后, 使用一个git命令, 所有熟悉的配置全部回来了, 这感觉!
 
-<https://github.com/Wyntau/dotfile>
+<https://github.com/wyntau/dotfiles>
 
     $ git summary
 
