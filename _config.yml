@@ -1,50 +1,113 @@
+# ==================== #
+# Default Configuration ovewrite
+# ==================== #
+
+# # Where things are
+# source              : .
+# destination         : ./_site
+# collections_dir     : .
+# plugins_dir         : _plugins # takes an array of strings and loads plugins in that order
+# layouts_dir         : _layouts
+# data_dir            : _data
+# includes_dir        : _includes
+sass:
+  # sass_dir: _sass
+  style: compressed
+# collections:
+#   posts:
+#     output          : true
+
+# # Handling Reading
+# safe                : false
+# include             : [".htaccess"]
+# exclude             : ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+# keep_files          : [".git", ".svn"]
+# encoding            : "utf-8"
+# markdown_ext        : "markdown,mkdown,mkdn,mkd,md"
+# strict_front_matter : false
+
+# # Filtering Content
+# show_drafts         : null
+# limit_posts         : 0
+# future              : false
+# unpublished         : false
+
+# # Plugins
+# whitelist           : []
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-remote-theme
-  - jekyll-seo-tag
 
-remote_theme: wyntau/jekyll-theme-iLotus
+# # Conversion
+# markdown            : kramdown
+# highlighter         : rouge
+# lsi                 : false
+# excerpt_separator   : "\n\n"
+# incremental         : false
 
-# Outputting
-permalink: /:year/:month/:title.html
+# # Serving
+# detach              : false
+# port                : 4000
+# host                : 127.0.0.1
+# baseurl             : "" # does not include hostname
+# show_dir_listing    : false
+
+# # Outputting
+permalink           : "/:year/:month/:title:output_ext"
+# paginate_path       : /page:num
 timezone: Asia/Shanghai
 
+# quiet               : false
+# verbose             : false
 defaults:
-  -
-    scope:
+  - scope:
       path: ""      # empty string for all files
       type: posts   # limit to posts
     values:
       comments: true
-  -
-    scope:
+  - scope:
       path: ""      # empty string for all files
       type: pages   # limit to posts
     values:
       comments: false
 
-#iLotus configs
-iLotus:
-  columns: 1
+# liquid:
+#   error_mode        : warn
+#   strict_filters    : false
+#   strict_variables  : false
 
+# # Markdown Processors
+# kramdown:
+#   auto_ids          : true
+#   entity_output     : as_char
+#   toc_levels        : [1, 2, 3, 4, 5, 6]
+#   smart_quotes      : lsquo,rsquo,ldquo,rdquo
+#   input             : GFM
+#   hard_wrap         : false
+#   footnote_nr       : 1
+#   show_warnings     : false
+
+# ==================== #
+# User Configuration
+# ==================== #
+
+#站点基础配置
+title: 自说Me话
+tagline: I Say Me | 我说我自己 | 我说世界
+description: Wyntau's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.
+keywords: Wyntau,Linux,Web,前端开发,自说Me话,ISayme,Internet
+url: http://isay.me
+
+# comments
 comments:
   provider: disqus
   disqus:
     short_name: isaymesite
 
-#站点基础配置
-title: 自说Me话
-subTitle: I Say Me | 我说我自己 | 我说世界
-description: Wyntau's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.
-keywords: Wyntau,Linux,Web,前端开发,自说Me话,ISayme,Internet
-url: http://isay.me
+remote_theme: wyntau/jekyll-theme-iLotus
 
-author:
-  name : Wyntau
-  email: wyntau@outlook.com
-  github: Wyntau
-  twitter: Wyntau
-  douban: lwent
-  QQ: 83692901
-  weibo: leftupme
+#iLotus configs
+iLotus:
+  columns: 1
