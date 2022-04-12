@@ -104,7 +104,7 @@ url: http://isay.me
 comments:
   provider: disqus
   disqus:
-    short_name: isaymesite
+    shortname: isaymesite
 
 remote_theme: wyntau/jekyll-theme-iLotus
 
