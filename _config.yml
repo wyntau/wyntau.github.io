@@ -67,11 +67,13 @@ defaults:
       type: posts   # limit to posts
     values:
       comments: true
+      layout: post
   - scope:
       path: ""      # empty string for all files
       type: pages   # limit to posts
     values:
       comments: false
+      layout: page
 
 # liquid:
 #   error_mode        : warn
