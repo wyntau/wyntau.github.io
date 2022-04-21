@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 使用 System.js 作为 ES6 的加载器
 pid: 2016041301
 tags: [ES6, System.js, webpack]

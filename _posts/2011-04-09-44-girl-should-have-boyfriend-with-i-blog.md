@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 转-女生应该找个有独立博客的男朋友
 pid: 44
 tags: [转载]

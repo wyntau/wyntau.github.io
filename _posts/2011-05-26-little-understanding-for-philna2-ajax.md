@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 对PhilNa2的Ajax的一丁点理解
 pid: 145
 tags: [Ajax, jQuery, PhilNa2, 原创]

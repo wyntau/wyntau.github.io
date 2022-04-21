@@ -1,5 +1,4 @@
 ---
-layout: post
 title: css3读者墙 源代码
 pid: 192
 tags: [CSS3, PHP, 原创, 读者墙]

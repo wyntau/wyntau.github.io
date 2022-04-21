@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "为连接到WDS路由器的主机设置静态IP"
 pid: 2014081502
 keywords: "WDS"

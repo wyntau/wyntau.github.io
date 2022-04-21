@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 我选择Fcitx 3.6.3
 pid: 196
 tags: [Fcitx, Linux]

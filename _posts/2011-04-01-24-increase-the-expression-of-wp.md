@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 给WP增加多套表情
 pid: 24
 tags: [WordPress, 原创]

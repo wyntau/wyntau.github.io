@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 几天没上,祝各位国庆快乐~~
 pid: 225
 tags: [点滴]

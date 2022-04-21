@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 使用 FIS3 构建 Vue 前端工程. webpack 用户也请看过来
 pid: 2017040801
 tags: [Vue, FIS3, webpack]

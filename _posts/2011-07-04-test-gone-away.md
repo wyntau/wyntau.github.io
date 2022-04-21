@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 考试结束,新生活开始
 pid: 181
 tags: [点滴]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2增加自定义导航菜单
 pid: 86
 tags: [PhilNa2, WordPress]

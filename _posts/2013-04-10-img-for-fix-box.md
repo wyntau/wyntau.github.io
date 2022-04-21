@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 固定大小的容器中图片宽高不一致处理办法
 pid: 255
 tags: [JavaScript, CSS]

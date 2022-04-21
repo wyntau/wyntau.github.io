@@ -1,5 +1,4 @@
 ---
-layout: post
 title: W1免费版无限翻页
 pid: 147
 tags: [Ajax, jQuery, w1s, WordPress]

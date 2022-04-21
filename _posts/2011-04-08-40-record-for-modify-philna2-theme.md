@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2主题修改优化细节记录
 pid: 40
 tags: [PhilNa2, WordPress, 原创]

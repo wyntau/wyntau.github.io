@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Editplus notepad++ Gedit UltraEdit简单对比(评测)
 pid: 193
 tags: [Programmer, Software, 原创]

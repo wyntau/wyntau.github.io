@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "[PhilNa2]some chinese please"
 pid: 120
 tags: [PhilNa2, WordPress, 原创]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 今日主题进展
 pid: 217
 tags: [Themes]

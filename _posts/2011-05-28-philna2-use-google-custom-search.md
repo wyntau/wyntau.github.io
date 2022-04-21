@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2使用google自定义搜索
 pid: 150
 tags: [Google, PhilNa2, WordPress, 原创]

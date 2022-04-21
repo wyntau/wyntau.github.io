@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 6月9日Google Doodle
 pid: 164
 tags: [Doodle, Google]

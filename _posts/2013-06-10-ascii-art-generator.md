@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "ASCII Art 生成器"
 pid: 2013061001
 keywords: "ASCII Art"

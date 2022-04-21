@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 终于决定放弃windows
 pid: 194
 tags: [Linux, Windows]

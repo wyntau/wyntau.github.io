@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 6月23日吐槽
 pid: 174
 tags: [点滴]

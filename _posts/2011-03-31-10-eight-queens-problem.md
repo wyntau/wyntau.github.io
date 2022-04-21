@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 初识 八皇后问题
 pid: 10
 tags: [数据结构]

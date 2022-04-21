@@ -1,5 +1,4 @@
 ---
-layout: post
 title: ubuntu安装dropbox失败 解决方法
 pid: 199
 tags: [Dropbox, Ubuntu]

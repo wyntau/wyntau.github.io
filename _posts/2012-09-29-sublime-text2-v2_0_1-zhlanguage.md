@@ -1,5 +1,4 @@
 ---
-layout: post
 title: sublime text2 v2.0.1汉化文件
 pid: 247
 tags: [SublimeText2]

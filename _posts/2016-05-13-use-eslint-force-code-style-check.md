@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 在使用 JS 的项目中使用 ESLint 强制进行 code style check
 pid: 2016051301
 tags: [ESLint]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 博客右侧欢迎信息
 pid: 163
 tags: [PhilNa2, WordPress]

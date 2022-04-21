@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 关于此主题 Coda_Za
 pid: 223
 tags: [Themes, WordPress]

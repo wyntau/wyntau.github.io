@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 还是决定恢复显示博主回复~~
 pid: 130
 tags: [点滴]

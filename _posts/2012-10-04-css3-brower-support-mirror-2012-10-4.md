@@ -1,5 +1,4 @@
 ---
-layout: post
 title: CSS3 Brower Support mirror(2012-10-4)
 pid: 248
 tags: [CSS3]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 解密ineo1.0.2
 pid: 137
 tags: [Linux, PHP, Themes, 点滴]

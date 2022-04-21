@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 开学真累啊
 pid: 220
 tags: [点滴]

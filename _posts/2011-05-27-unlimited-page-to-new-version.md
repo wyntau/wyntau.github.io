@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 停用无限翻页,准备换新版~
 pid: 146
 tags: [Ajax, WordPress, 点滴]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 临开学小记
 pid: 201
 tags: [点滴]

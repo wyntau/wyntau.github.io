@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 博客小记一篇
 pid: 102
 tags: [Blog, 点滴]

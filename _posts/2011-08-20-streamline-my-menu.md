@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 精简了导航部分
 pid: 207
 tags: [CSS, PhilNa2, WordPress]

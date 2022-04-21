@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 帅哥认证用到的两个函数
 pid: 176
 tags: [PHP, Study]

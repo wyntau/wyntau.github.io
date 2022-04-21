@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 纠结于WP主题
 pid: 46
 tags: [PhilNa2]

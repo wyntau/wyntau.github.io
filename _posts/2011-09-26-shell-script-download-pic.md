@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 一段shell程序下载图片
 pid: 224
 tags: [Bash, Linux]

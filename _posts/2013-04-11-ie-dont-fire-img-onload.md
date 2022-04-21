@@ -1,5 +1,4 @@
 ---
-layout: post
 title: IE浏览器中Image对象onload失效的解决办法
 pid: 256
 tags: [JavaScript]

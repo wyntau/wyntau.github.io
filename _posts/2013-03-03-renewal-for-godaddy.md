@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Godaddy域名续费小注意
 pid: 253
 tags: [GoDaddy]

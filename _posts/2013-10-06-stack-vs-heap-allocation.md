@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "C语言中的堆栈小议"
 pid: 2013100601
 keywords: "C"

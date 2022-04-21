@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Gentoo开启portage log
 pid: 2015013001
 tags: [Linux, Gentoo]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Gentoo安装Xorg server和nvidia官方闭源驱动
 pid: 2015011801
 tags: [Linux, Gentoo]

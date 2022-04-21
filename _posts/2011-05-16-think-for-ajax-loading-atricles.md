@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 关于Ajax加载首页文章的想法
 pid: 135
 tags: [Ajax, WordPress, 点滴]

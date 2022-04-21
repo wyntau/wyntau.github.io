@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "angular创建directive时, &与=在继承callback中的差异"
 pid: 2014060501
 tags: [Angular]

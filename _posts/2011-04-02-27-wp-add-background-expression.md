@@ -1,5 +1,4 @@
 ---
-layout: post
 title: wp后台回复添加表情
 pid: 27
 tags: [WordPress, 原创]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 新的主题, 博客继续
 pid: 2016022101
 tags: [Jekyll]

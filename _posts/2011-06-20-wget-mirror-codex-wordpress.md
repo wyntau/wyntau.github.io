@@ -1,5 +1,4 @@
 ---
-layout: post
 title: wget镜像codex.wordpress.org
 pid: 172
 tags: [Linux, Wget, WordPress]

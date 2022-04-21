@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 侧栏评论滑动显示的一点理解
 pid: 189
 tags: [JavaScript, Study, WordPress]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 我的wordpress文章版权折腾记
 pid: 26
 tags: [WordPress, 原创]

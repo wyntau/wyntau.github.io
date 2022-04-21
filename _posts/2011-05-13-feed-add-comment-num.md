@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 给feed输出 添加评论条数
 pid: 131
 tags: [PhilNa2, WordPress]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 单PHP文件原生js版PhilnaSay
 pid: 250
 tags: [PhilNa2, JavaScript]

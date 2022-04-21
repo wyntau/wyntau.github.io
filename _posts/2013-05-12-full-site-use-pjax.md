@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 全站启用pjax加载
 pid: 2013051201
 tags: [JavaScript, Ajax]

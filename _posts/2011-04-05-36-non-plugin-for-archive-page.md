@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 归档页面非插件化
 pid: 36
 tags: [PhilNa2, WordPress, 原创]

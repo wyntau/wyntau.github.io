@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 服务器恢复正常
 pid: 104
 tags: [点滴]

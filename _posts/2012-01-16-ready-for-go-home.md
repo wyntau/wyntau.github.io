@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 收拾行李,准备回家
 pid: 242
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 修改js获取主题地址函数
 pid: 200
 tags: [JavaScript, Themes, WordPress]

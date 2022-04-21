@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 使用主题的一点说明和计划
 pid: 158
 tags: [PhilNa2, Themes, 原创]

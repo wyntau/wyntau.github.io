@@ -1,5 +1,4 @@
 ---
-layout: post
 title: bash搭配php批量下载图片
 pid: 202
 tags: [Bash, Linux, PHP, Wget]

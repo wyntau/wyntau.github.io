@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "副路由器开启WDS功能连接主路由器上网"
 pid: 2014081501
 keywords: "WDS"

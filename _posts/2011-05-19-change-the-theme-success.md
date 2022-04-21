@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 换主题成功
 pid: 138
 tags: [Themes, 点滴]

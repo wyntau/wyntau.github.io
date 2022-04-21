@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Linux中使用history命令提升效率
 pid: 18
 tags: [Linux]

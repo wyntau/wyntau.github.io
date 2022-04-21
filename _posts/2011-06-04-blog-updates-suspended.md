@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 博客暂停更新
 pid: 161
 tags: [点滴]

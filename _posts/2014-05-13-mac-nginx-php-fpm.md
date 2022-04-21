@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "mac下nginx搭配php-fpm解析php文件"
 pid: 2014051301
 keywords: "nginx php-fpm"

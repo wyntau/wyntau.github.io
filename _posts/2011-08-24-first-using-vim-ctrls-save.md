@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 初用vim,让vim能CTRL+S保存
 pid: 209
 tags: [VIM]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 昨天无故被流量宝瞄上
 pid: 100
 tags: [点滴]

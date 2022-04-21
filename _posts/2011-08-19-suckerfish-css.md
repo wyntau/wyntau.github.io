@@ -1,5 +1,4 @@
 ---
-layout: post
 title: suckerfish下拉菜单
 pid: 206
 tags: [CSS]

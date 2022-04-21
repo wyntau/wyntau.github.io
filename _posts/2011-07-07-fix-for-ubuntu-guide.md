@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 重装windows后修复Ubuntu引导项
 pid: 183
 tags: [Linux, Ubuntu, Windows]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 本地wordpress后台需要FTP密码解决办法
 pid: 182
 tags: [Linux, Ubuntu, WordPress]

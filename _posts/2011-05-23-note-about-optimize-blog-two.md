@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 博客优化小记二
 pid: 143
 tags: [Blog, WordPress, 优化, 点滴]

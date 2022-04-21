@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 数数我对PhilNa2的Mod
 pid: 134
 tags: [PhilNa2, 原创, 点滴]

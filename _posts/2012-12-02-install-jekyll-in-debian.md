@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 在Debian中安装jekyll
 pid: 252
 tags: [GitHub, Jekyll]

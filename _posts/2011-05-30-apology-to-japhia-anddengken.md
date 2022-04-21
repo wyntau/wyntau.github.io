@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 嵌套评论的问题及向Japhia,邓肯致歉
 pid: 152
 tags: [Apology, PhilNa2, 点滴]

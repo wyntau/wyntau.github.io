@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2-自说Me话扩展版
 pid: 160
 tags: [PhilNa2, Themes, WordPress, 原创]

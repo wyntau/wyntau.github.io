@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 侧栏友链3栏显示
 pid: 33
 tags: [PhilNa2, WordPress, 原创]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 为kindle上的pdf切白边
 pid: 237
 tags: [Kindle]

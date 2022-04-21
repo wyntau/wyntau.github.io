@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 看书找到的一个ajax函数封装
 pid: 233
 tags: [Ajax, JavaScript]

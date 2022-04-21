@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 转-防止攻击 - WordPress登录邮件提醒
 pid: 109
 tags: [转载]

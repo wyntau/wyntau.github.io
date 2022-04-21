@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2主题feed输出版权最终版
 pid: 42
 tags: [PhilNa2, WordPress, 原创]

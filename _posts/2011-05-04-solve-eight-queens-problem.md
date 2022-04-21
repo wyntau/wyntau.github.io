@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 解决-数据结构八皇后问题
 pid: 113
 tags: [C, 原创, 数据结构]

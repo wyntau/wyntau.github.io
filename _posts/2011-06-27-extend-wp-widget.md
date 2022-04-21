@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 扩展后台侧栏小工具初记
 pid: 177
 tags: [Widget, WordPress]

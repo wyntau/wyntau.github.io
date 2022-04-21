@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 64位Debian安装感受
 pid: 2013052101
 keywords: "64bitLinux"

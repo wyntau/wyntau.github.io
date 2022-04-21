@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 为什么我认定是我的!!
 pid: 221
 tags: [PhilNa2, WordPress]

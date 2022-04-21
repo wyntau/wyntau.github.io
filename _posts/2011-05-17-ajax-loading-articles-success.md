@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 首页Ajax加载文章成功
 pid: 136
 tags: [Ajax, jQuery, 点滴]

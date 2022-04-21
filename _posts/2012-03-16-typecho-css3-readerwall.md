@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Typecho版 css3读者墙
 pid: 243
 tags: [CSS3, Typecho, 读者墙]

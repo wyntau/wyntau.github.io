@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "在C中初始化变量"
 pid: 2013100701
 tags: [C]

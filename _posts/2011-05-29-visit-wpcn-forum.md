@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 逛了下wp论坛
 pid: 151
 tags: [Blog, 点滴]

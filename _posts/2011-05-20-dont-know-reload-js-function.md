@@ -1,5 +1,4 @@
 ---
-layout: post
 title: js函数重新加载,不会~
 pid: 140
 tags: [Ajax, jQuery, PhilNa2]

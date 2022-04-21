@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Debian or Ubuntu?
 pid: 15
 tags: [Linux]

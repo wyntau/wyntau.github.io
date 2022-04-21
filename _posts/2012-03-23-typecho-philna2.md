@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Typecho移植版PhilNa2已经可用
 pid: 245
 tags: [PhilNa2, Typecho]

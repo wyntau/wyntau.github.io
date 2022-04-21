@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 这两天博客不能评论的说明
 pid: 231
 tags: [WordPress, 点滴]

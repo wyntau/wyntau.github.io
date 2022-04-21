@@ -1,5 +1,4 @@
 ---
-layout: post
 title: fedora13安装chrome以及经典扩展程序推荐
 pid: 21
 tags: [Chrome, Linux, 原创]

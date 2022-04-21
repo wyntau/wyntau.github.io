@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 移植主题FakeBlogger 0.1
 pid: 216
 tags: [MyWorks, Themes, WordPress]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2侧栏tab切换
 pid: 105
 tags: [PhilNa2, WordPress]

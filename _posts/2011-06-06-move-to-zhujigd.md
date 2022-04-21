@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 搬家到主机格调
 pid: 162
 tags: [WordPress, 主机格调, 点滴]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 将多说评论系统迁移到Disqus
 pid: 2017032601
 tags: [Disqus]

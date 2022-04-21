@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 代码访问随机日志
 pid: 118
 tags: [WordPress, 转载]

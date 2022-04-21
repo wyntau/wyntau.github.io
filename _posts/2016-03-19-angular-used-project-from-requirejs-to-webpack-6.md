@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 在Angular.js项目中使用异步加载(六) - 动态加载第三方模块
 pid: 2016031901
 tags: [webpack, Angular, RequireJS]

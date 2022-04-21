@@ -1,5 +1,4 @@
 ---
-layout: post
 title: TwiTalker bot搭建成功
 pid: 85
 tags: [Twitter]

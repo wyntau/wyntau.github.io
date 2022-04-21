@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 折腾之编译安装wget 1.13
 pid: 212
 tags: [Linux, Wget]

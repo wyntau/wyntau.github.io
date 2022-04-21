@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 对主题适当精简
 pid: 214
 tags: [Themes, WordPress]

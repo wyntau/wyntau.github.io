@@ -1,5 +1,4 @@
 ---
-layout: post
 title: debian6再安装小记
 pid: 197
 tags: [Debian, Linux]

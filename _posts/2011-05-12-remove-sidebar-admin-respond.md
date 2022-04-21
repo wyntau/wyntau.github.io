@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2-侧栏去掉博主回复
 pid: 129
 tags: [PhilNa2, WordPress, 原创]

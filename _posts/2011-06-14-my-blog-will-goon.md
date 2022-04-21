@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 我还在坚持
 pid: 168
 tags: [点滴]

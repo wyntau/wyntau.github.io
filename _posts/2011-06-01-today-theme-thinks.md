@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 今日整理主题感想
 pid: 159
 tags: [PhilNa2, 点滴]

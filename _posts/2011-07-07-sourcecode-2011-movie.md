@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 源代码 Source Code (2011)
 pid: 184
 tags: [Movie]

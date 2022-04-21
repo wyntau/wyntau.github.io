@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 又一次重装系统
 pid: 116
 tags: [Debian, Linux, 点滴]

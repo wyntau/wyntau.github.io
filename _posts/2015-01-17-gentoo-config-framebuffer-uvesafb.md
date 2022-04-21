@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Gentoo使用uvesafb配置Framebuffer
 pid: 2015011701
 tags: [Linux, Gentoo]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: jQuery上下浮动滚动[4-22更新]
 pid: 83
 tags: [PhilNa2, WordPress]

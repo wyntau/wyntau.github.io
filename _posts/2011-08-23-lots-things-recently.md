@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 最近琐事多多
 pid: 208
 tags: [点滴]

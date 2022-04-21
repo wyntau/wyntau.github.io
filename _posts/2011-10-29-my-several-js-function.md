@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 自己写的几个js函数
 pid: 232
 tags: [JavaScript, jQuery]

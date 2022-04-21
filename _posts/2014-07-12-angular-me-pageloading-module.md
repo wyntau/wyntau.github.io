@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Angular 全局页面切换动画 me-pageloading
 pid: 2014071201
 keywords: "Angular pageloading ui-router angular-route"

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "编译安装tig注意事项"
 pid: 2013071001
 tags: [Git]

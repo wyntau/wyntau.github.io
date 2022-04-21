@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 给wordpress添加图片渐显效果
 pid: 13
 tags: [WordPress]

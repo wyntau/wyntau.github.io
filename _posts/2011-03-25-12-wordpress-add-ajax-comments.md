@@ -1,5 +1,4 @@
 ---
-layout: post
 title: wordpress添加AJAX评论效果(非插件版)
 pid: 12
 tags: [WordPress]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 更换主题后想说说
 pid: 139
 tags: [Themes, 点滴]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 艹,牛逼的校园网认证
 pid: 213
 tags: [点滴]

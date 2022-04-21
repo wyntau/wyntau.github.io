@@ -1,5 +1,4 @@
 ---
-layout: post
 title: wordpress升级3.2成功
 pid: 187
 tags: [Upgrade, WordPress]

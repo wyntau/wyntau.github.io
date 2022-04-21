@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Centos6.3 LiveCD安装手记
 pid: 249
 tags: [CentOS, Linux]

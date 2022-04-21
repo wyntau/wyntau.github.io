@@ -1,5 +1,4 @@
 ---
-layout: post
 title: wget中文乱码
 pid: 195
 tags: [C, Linux, Wget]

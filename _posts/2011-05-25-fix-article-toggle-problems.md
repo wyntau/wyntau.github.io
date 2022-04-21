@@ -1,5 +1,4 @@
 ---
-layout: post
 title: PhilNa2首页文章收缩再修复
 pid: 144
 tags: [jQuery, PhilNa2, WordPress, 原创]

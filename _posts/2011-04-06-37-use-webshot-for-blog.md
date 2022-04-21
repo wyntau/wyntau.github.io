@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 使用网页缩略图种种..
 pid: 37
 tags: [PhilNa2, WordPress, 原创]

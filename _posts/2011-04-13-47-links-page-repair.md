@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 友情链接页面修复
 pid: 47
 tags: [WordPress, 原创]

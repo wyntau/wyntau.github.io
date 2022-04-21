@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 读者墙血条显示
 pid: 106
 tags: [WordPress, 转载]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Linux记录总结
 pid: 125
 tags: [Linux, Ubuntu]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 在Angular.js项目中使用异步加载(五)
 pid: 2016031101
 tags: [webpack, Angular, RequireJS]

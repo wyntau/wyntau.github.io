@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 侧栏最新评论滑动显示
 pid: 188
 tags: [JavaScript, WordPress]

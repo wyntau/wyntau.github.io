@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 让pidgin威力大增,添加QQ和Fetion
 pid: 205
 tags: [Linux, Pidgin]
