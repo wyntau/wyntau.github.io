@@ -1,6 +1,6 @@
 ---
 title: RouterOS 自动根据 IP 是否在线切换下发 DHCP options
-pid: 20230516
+pid: 2023051601
 tags: [RouterOS]
 ---
 
