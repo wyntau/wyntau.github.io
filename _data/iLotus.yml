@@ -12,6 +12,9 @@ nav_items:
   - title: 文章标签
     url: /tags.html
     icon: fa fa-tags
+  - title: 友情链接
+    url: /links.html
+    icon: fa fa-link
 
 menu_items:
   - title: 关于我
