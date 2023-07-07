@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>折腾之编译安装wget 1.13 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="折腾之编译安装wget 1.13" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="安装原因:" />
+<meta property="og:description" content="安装原因:" />
+<link rel="canonical" href="http://isay.me/2011/08/compile-and-install-wget113.html" />
+<meta property="og:url" content="http://isay.me/2011/08/compile-and-install-wget113.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-08-28T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="折腾之编译安装wget 1.13" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-08-28T00:00:00+08:00","datePublished":"2011-08-28T00:00:00+08:00","description":"安装原因:","headline":"折腾之编译安装wget 1.13","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/08/compile-and-install-wget113.html"},"url":"http://isay.me/2011/08/compile-and-install-wget113.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  折腾之编译安装wget 1.13
+</p>
+<h1 class="lotus-pagetit">折腾之编译安装wget 1.13</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="August 28, 2011">August 28, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p><strong>安装原因:</strong></p>
+
+<p>想要镜像Archlinux的wiki,但是用系统自带的wget的话,会出现中文乱码的情况.
+原来曾经弄过修改一次,是修改一个源代码中的函数,然后重新编译一个可执行文件.
+本想直接把原来编译的拿过来用,但是上次编译的个版本有点低了.不支持https,而Archlinux的wiki貌似只支持https,这样就没法了,重新编译一个吧.</p>
+
+<p>so,下载了源码,按照原来写过的方法,修改源码.
+然后<code class="language-plaintext highlighter-rouge">configure</code>,但是<code class="language-plaintext highlighter-rouge">configure</code>的时候出错了.提示说,编译选项中有ssl但是缺少一个对这个的编译支持.我想,既然缺少就不加这个支持呗.</p>
+
+<p>但是又不知道怎么去掉这个支持.看了INSTALL文档还有网上的一些东西,自以为是的用了个 <code class="language-plaintext highlighter-rouge">--disable-ssl</code>参数,结果不行.
+还是又到网上搜索了一番,才知道使用 <code class="language-plaintext highlighter-rouge">configure --help</code>这个参数.</p>
+
+<p>于是乎,help一下.出来帮助了.</p>
+
+<p>原来这个用的是 <code class="language-plaintext highlighter-rouge">--without-ssl</code>选项.OK,加上<code class="language-plaintext highlighter-rouge">--without-ssl</code>后,<code class="language-plaintext highlighter-rouge">configure</code>通过了.于是<code class="language-plaintext highlighter-rouge">make</code>,然后程序出来了.可是竟然还不支持https.</p>
+
+<p>于是又看了一下 <code class="language-plaintext highlighter-rouge">--version</code>输出.原来ssl和https是同时被编译的.要么就编译ssl而支持https,要么就不编译ssl不支持https.
+哎,只好老实的加上ssl选项吧,看看configure错误吧.</p>
+
+<p>结果是缺少一个叫做GNUTLS的可以说是组件吧.就是编译的时候需要这个东西的头文件什么的.
+使用超级牛力(apt系列)搜一下,哈哈.</p>
+
+<p>使用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude search GNUTLS
+</code></pre></div></div>
+
+<p>可以发现有好多包</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p   dsyslog-module-gnutls - advanced modular syslog daemon - GnuTLS support
+p   gnutls-bin            - GNU TLS library - commandline utilities
+v   gnutls-dev            -
+p   gnutls-doc            - GNU TLS library - documentation and examples
+p   guile-gnutls          - GNU TLS library - GNU Guile bindings
+p   libapache2-mod-gnutls - Apache module for SSL and TLS encryption with GnuTLS
+i A libcurl3-gnutls       - Multi-protocol file transfer library (GnuTLS)
+v   libcurl3-gnutls-dev   -
+p   libcurl4-gnutls-dev   - Development files and documentation for libcurl (Gn
+p   libgnutls-dev         - GNU TLS library - development files
+c   libgnutls-openssl27   - GNU TLS library - OpenSSL wrapper
+i   libgnutls26           - GNU TLS library - runtime library
+p   libgnutls26-dbg       - GNU TLS library - debugger symbols
+c   libgnutlsxx27         - GNU TLS library - C++ runtime library
+c   libneon27-gnutls      - HTTP and WebDAV client library (GnuTLS enabled)
+p   libneon27-gnutls-dbg  - Detached symbols for libneon27 (GnuTLS enabled)
+p   libneon27-gnutls-dev  - Header and static library files for libneon27 (GnuTL
+p   libxmlsec1-gnutls     - Gnutls engine for the XML security library
+p   python-gnutls         - Python wrapper for the GNUTLS library
+v   python2.6-gnutls      -
+v   python2.7-gnutls      -
+p   rsyslog-gnutls        - TLS protocol support for rsyslog 然后又到debian官网上搜了一下,我看中了这个叫`gnutls-bin`的包, 使用如下命令安装.
+
+aptitude install gnutls-bin 结果configure还是提示缺少GNULTS. 然后我看到下面的东西了.
+
+p libneon27-gnutls-dev - Header and static library files for libneon27 (GnuTLS enabled)
+</code></pre></div></div>
+
+<p>这句话,就是重点.<code class="language-plaintext highlighter-rouge">Header and static library files</code>就是说的是头文件嘛,还有前面的dev,这样的东西一般都是给开发者用的才对.就是它了.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install ibneon27-gnutls-dev
+</code></pre></div></div>
+
+<p>然后configure一下,通过了.Oh Yeah~~
+make一下,就看到了生成的wget了.</p>
+
+<p>然后就去镜像Archlinux的网站了.可是刚开始镜像,我又后悔了.我就看几个网页,没必要全部镜像啊.所以果断停止,把想看的那几个网页保存下来吧.</p>
+
+<p><strong>总结:</strong></p>
+
+<ol>
+  <li>我很蛋疼,</li>
+  <li>不要想当然,要多看软件自带的INSTALL文档还有README文档.</li>
+  <li>基本每个软件或命令都有 –help选项,没事多看看有好处.</li>
+</ol>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/08/compile-and-install-wget113.html" title="" rel="nofollow">折腾之编译安装wget 1.13 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/08/get-doubanfm-songlist.html" rel="prev">&laquo;&nbsp;获取豆瓣FM加红心列表</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/08/upgrade-debian6-stable-to-testing.html" rel="next">debian 6 stable蛋疼升级记&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/08/compile-and-install-wget113.html";
+      this.page.identifier = "212";
+      this.page.title = "折腾之编译安装wget 1.13";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

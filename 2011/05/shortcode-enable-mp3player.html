@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>短代码 mp3player | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="短代码 mp3player" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="代码来源" />
+<meta property="og:description" content="代码来源" />
+<link rel="canonical" href="http://isay.me/2011/05/shortcode-enable-mp3player.html" />
+<meta property="og:url" content="http://isay.me/2011/05/shortcode-enable-mp3player.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-05-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="短代码 mp3player" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-05-11T00:00:00+08:00","datePublished":"2011-05-11T00:00:00+08:00","description":"代码来源","headline":"短代码 mp3player","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/05/shortcode-enable-mp3player.html"},"url":"http://isay.me/2011/05/shortcode-enable-mp3player.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  短代码 mp3player
+</p>
+<h1 class="lotus-pagetit">短代码 mp3player</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May 11, 2011">May 11, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>代码来源</p>
+
+<p>感谢 良心发现的<a href="http://ongakuer.com/archives/shortcode-music/">WP短代码集成音乐播放器</a>以及荒野无灯weblog 的<a href="http://www.ihacklog.com/wordpress/plugins/add-wp-shortcode-to-enable-media-playing.html">不用audio-player插件也播放mp3</a></p>
+
+<p>在荒野无灯的那个代码中,功能非常强大,可以播放各种格式的媒体文件,但是我好像用不到这么强大的播放器,只是有时候想要添加一个mp3文件就行了,而且不想为了N久才播放一次文件再去每次加载一个比较大的js文件.所以我把 荒野无灯的那些代码里面的关于播放mp3文件的代码放到了良心发现的代码里面,(为什么放到那里面呢,因为良心的那个函数比较简短)这样就可以方便的用短代码添加mp3文件了.</p>
+
+<p>我修改良心发现的添加短代码的函数如下.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function mp3player($atts, $content=null){
+      extract(shortcode_atts(array("auto"=&gt;'0'),$atts));
+      $autostart=$auto?'yes':'no';
+    return '&lt;embed src="'.get_bloginfo('template_directory').'/swf/player.swf?soundFile='.$content.'&amp;autostart='.$autostart.'&amp;animation=yes&amp;encode=no&amp;initialvolume=80&amp;remaining=yes&amp;noinfo=no&amp;buffer=5&amp;checkpolicy=no&amp;rtl=no&amp;bg=E5E5E5&amp;text=333333&amp;leftbg=CCCCCC&amp;lefticon=333333&amp;volslider=666666&amp;voltrack=FFFFFF&amp;rightbg=B4B4B4&amp;rightbghover=999999&amp;righticon=333333&amp;righticonhover=FFFFFF&amp;track=FFFFFF&amp;loader=009900&amp;border=CCCCCC&amp;tracker=DDDDDD&amp;skip=666666" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="always" width="290" height="30"&gt;';
+    }
+    add_shortcode('mp3','mp3player');
+</code></pre></div></div>
+
+<p>需要的文件就是一个swf文件,感觉效果很好.可以显示播放音乐的文件名,还可以调声音大小.
+修改后的函数以及swf文件,下载地址 点击<a href="http://u.115.com/file/e6yixs7o">此处</a>,下载后放到主题目录的swf文件夹就可以了.没有swf的话,新建一个也行.</p>
+
+<p>后台添加文件的时候,在html编辑器模式,使用<a href="将空格去掉">mp3][/mp3</a>将mp3文件的地址括起来就可以了.
+默认不自动播放,如果要自动播放的话,使用[mp3 auto=1][/mp3]
+效果见下面(我没有放mp3文件)
+[mp3]</p>
+
+<hr />
+
+<p>update(5-11-23:21)刚刚看到木木的<a href="http://immmmm.com/add-shortcodes-wordpress-theme.html">给WordPress主题添加短代码功能</a>里面的那个mp3函数和我现在用的这个只是return的内容不一样,这个应该就是添加短代码的格式.这样我们就可以按照这个格式添加更多的短代码了.聪明的你快去试试吧 :lol:</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/05/shortcode-enable-mp3player.html" title="" rel="nofollow">短代码 mp3player - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/05/backeditor-add-audio-button.html" rel="prev">&laquo;&nbsp;后台快速添加mp3按钮</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/05/remove-sidebar-admin-respond.html" rel="next">PhilNa2-侧栏去掉博主回复&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/05/shortcode-enable-mp3player.html";
+      this.page.identifier = "127";
+      this.page.title = "短代码 mp3player";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>debian6再安装小记 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="debian6再安装小记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="曾经写过一篇debian6安装小记,感兴趣的可以点击此处" />
+<meta property="og:description" content="曾经写过一篇debian6安装小记,感兴趣的可以点击此处" />
+<link rel="canonical" href="http://isay.me/2011/07/debian6-reinstall-note.html" />
+<meta property="og:url" content="http://isay.me/2011/07/debian6-reinstall-note.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-07-30T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="debian6再安装小记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-07-30T00:00:00+08:00","datePublished":"2011-07-30T00:00:00+08:00","description":"曾经写过一篇debian6安装小记,感兴趣的可以点击此处","headline":"debian6再安装小记","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/07/debian6-reinstall-note.html"},"url":"http://isay.me/2011/07/debian6-reinstall-note.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  debian6再安装小记
+</p>
+<h1 class="lotus-pagetit">debian6再安装小记</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July 30, 2011">July 30, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>曾经写过一篇debian6安装小记,感兴趣的可以点击<a href="/2011/05/debian6-install-note.html">此处</a></p>
+
+<p>昨天蛋疼得又将debian6安装上了,但是这次安装的和上次安装的不一样.这次是又从debian官网上下载的更新之后的debian.并且此次,将lamp安装成功了.</p>
+
+<p>还有一个我发现的是,新的debian自带了两个浏览器.一个是原先就有的iceweasel浏览器.另外这次又带了一个webkit内核的Epiphany 网络浏览器.感觉很好用,而且轻量级
+因此才想再写一写.
+在安装的时候仍然是遇到了不少的问题.再记录一下吧(命令前有# 则需要root或者是sudo)</p>
+
+<p><strong>1,采取何种方式安装.</strong></p>
+
+<p>一直我都是用光盘刻录安装的,因为我直接用ultroISO之类的软件将光盘刻录到U盘后总是会启动失败.
+网上找了一番原因.但是昨天,成功的用U盘安装了debian6
+方法 在我原先使用的ubuntu环境中,插入U盘,此时U盘对应的是<code class="language-plaintext highlighter-rouge">/dev/sdb</code> 因此,在终端输入</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo -sH(先获得root权限,必要不必要,我不知道)
+cat debian.iso &gt; /dev/sdb 等待写入完毕,重启机器从U盘启动即可.非常非常简单.(为什么这么简单,我也不知道) 但是要注意的是,要确保/dev/sdb是对应的你的U盘,要不然有你哭的
+</code></pre></div></div>
+
+<p><strong>2,网络配置(这个是我第一次遇到,算是真正的学习到东西了)</strong></p>
+
+<p>为了使用最快的速度安装,我将网线拔了下来.因为在插着网线的情况下,即使我选择不使用网络镜像,仍然会从网上下载一些更新包.所以我索性将网线拔掉.</p>
+
+<p>但是这样的话,再配置网络的时候就会配置DHCP失败.但是我选择的是 暂时不配置网络.
+安装完成后,死活上不去网.这时我才知道,是因为网络配置文件不对的原因.经过一番搜索.顺利解决.</p>
+
+<p>配置文件位置 <code class="language-plaintext highlighter-rouge">/etc/network/interfaces</code></p>
+
+<p>打开此文件后,只有如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback 按照网上说法,使用dhcp的话,只需再最后添加
+
+auto eth0
+iface eth0 inet dhcp 因此 最后interfaces文件内容如下
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp 然后重启network即可
+
+#/etc/init.d/networking restart **3,乱码问题**
+</code></pre></div></div>
+
+<p>可以参见 我 的那一篇安装笔记<a href="/2011/05/debian6-install-note.html">此处</a></p>
+
+<p><strong>4,安装fcitx输入法</strong></p>
+
+<p>3.6X版本,可以看我的文章<a href="/2011/07/i-prefer-fcitx-363.html">我选择Fcitx 3.6.3</a></p>
+
+<p><strong>5,</strong>debian中的新立得软件管理软件</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install synaptic **6,**可以编辑主菜单的小软件
+
+sudo apt-get install alacarte **7,**另外,还可以将ubuntu中的ailurus安装到debian中进行一些快速的配置等等.虽然不是完全可用.但是可以指导你安装一些软件.
+</code></pre></div></div>
+
+<p><strong>8,</strong>最后一个就是我这个安装debian收获最大的地方.终于将LAMP环境搭建成功了.(现在,没有新立得的分组软件包标记,我也可以安装lamp了.呵呵)</p>
+
+<p><strong>首先</strong>安装MySQL(上次安装lamp的时候就是在配置mysql的时候出现各种问题 还好这次没有了,我猜应该是debian更新的原因.)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#apt-get install mysql-server-5.1 然后安装apache2
+
+# apt-get install apache2 最后再安装php5,网上有人说,按照这个顺序,可以让软件自动安装好所需的组件包,不需要我们再手动指定了.我也确实是按照这个顺序安装的,而且成功了.
+
+# apt-get install php5 安装完成后,可以再安装一个mysql的图形管理界面 phpmyadmin
+
+# apt-get install phpmyadmin 至此,debian中的LAMP搭建完成
+</code></pre></div></div>
+
+<p>还有一个不能写入windows的ntfs分区的问题.挂载ntfs分区后,总是说我没有权限往分区中写入文件.我尝试将ubuntu中的ntfs-config文件安装一下.然后打开ntfs-config
+虽然没有让我配置任何东西.但是重启机器后,就可以写入了.
+令我很费解.没安装之前,重启多少遍机器都不行.
+看来就是ntfs-config帮我解决了这个问题.因为在安装的时候,解决依赖关系,自动安装了ntfs-3g</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/07/debian6-reinstall-note.html" title="" rel="nofollow">debian6再安装小记 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/07/i-prefer-fcitx-363.html" rel="prev">&laquo;&nbsp;我选择Fcitx 3.6.3</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/07/an-amazing-python-code.html" rel="next">一段python代码显神通&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/07/debian6-reinstall-note.html";
+      this.page.identifier = "197";
+      this.page.title = "debian6再安装小记";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

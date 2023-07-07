@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>wget镜像codex.wordpress.org | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="wget镜像codex.wordpress.org" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="wget 使用实例一则" />
+<meta property="og:description" content="wget 使用实例一则" />
+<link rel="canonical" href="http://isay.me/2011/06/wget-mirror-codex-wordpress.html" />
+<meta property="og:url" content="http://isay.me/2011/06/wget-mirror-codex-wordpress.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-06-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="wget镜像codex.wordpress.org" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-06-20T00:00:00+08:00","datePublished":"2011-06-20T00:00:00+08:00","description":"wget 使用实例一则","headline":"wget镜像codex.wordpress.org","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/06/wget-mirror-codex-wordpress.html"},"url":"http://isay.me/2011/06/wget-mirror-codex-wordpress.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  wget镜像codex.wordpress.org
+</p>
+<h1 class="lotus-pagetit">wget镜像codex.wordpress.org</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="June 20, 2011">June 20, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p><strong>wget 使用实例一则</strong></p>
+
+<p>简单说一下,wget是Linux中的一个开源下载工具.貌似没有图像界面.命令行运行.但是功能很强大. 想要详细知道的请自己问google</p>
+
+<p>今天只是记录一下使用wget的一个例子—<strong>镜像 codex.wordpress.org</strong></p>
+
+<p>过几天就考试了,等到考试的时候就要静下心来迎接考试了.考试后放假.回到家估计就没有网络了.所以这两天看看把一些重要的东西弄到电脑上带回家看.</p>
+
+<p>wordpress我一直都想学习.但是没有什么好的资料.只好先去看看官方文档了. 没有网络的情况下,看这些文档很不方便.所以我就想把文档镜像到本地.这样回到家后也可以学习了.再搭建个本地php环境.说不定咱还写点东西呢.呵呵</p>
+
+<p>本来在网上搜索了一番,找了windows中一个叫做webzip的软件,试验了一下,感觉不好用.会下载好多文件夹.弄的很乱.好像下载下来的文件名称还会有乱码.所以果断放弃了.然后我又看到了linux中的一个关于wget文章.我记得我原来的时候是用过这个小东西的. 既然我有用linux系统,为什么不尝试一下呢?</p>
+
+<p>又浏览了几个网站,决定使用这个小东西完成我的任务.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir codex
+cd codex
+wget -r -p -k -np codex.wordpress.org
+</code></pre></div></div>
+
+<p>OK,下载开始了,我要做的就是等待了. 简要说一下几个参数的意思.</p>
+
+<ul>
+  <li><strong>-r</strong>就是递归下载.也就是将整个网站全部下载下来</li>
+  <li><strong>-p</strong>就是下载网站所需要的一些图片什么的. 我可不想下载下来的网页里面只有文字</li>
+  <li><strong>-k</strong>就是下载完成后转换那些绝对链接为相对链接,适合本地浏览.</li>
+  <li><strong>-np</strong>貌似是不下载父目录,只下载指定网址下的所有网页.</li>
+</ul>
+
+<p>我也搞不懂哪个是 只下载指定网站内链的网页的参数了.但是加上前面几个参数,就行.只下载codex.wordpress.org这个域名后面的网页,对于其他的一些外链,则跳过.要不然,我估计得把整个互联网给下载下来了~~</p>
+
+<p>等了好长好长时间,终于下载完成了.我看了一下,大约体积是150M左右.</p>
+
+<p>然后我就点击一个网页看看.英文网页浏览没问题.中文的出了点问题.在每个中文网页的前面,都会有一个<strong>zh-cn:</strong>的前缀,这个大概就是标注是中文网页的.但是浏览器就不认了.看到那个冒号了没? 浏览器会认为这个zh-cn:是一种新的网络协议,但是浏览器又不知道这个是哪种协议,所以就会找不到网页.</p>
+
+<p>咋办? 改名呗,把每个文件中的这样的链接前面加上一个 <strong>./</strong>就好了. 这个<strong>./</strong>大家应该都知道代表是本目录的意思.这样浏览器就会乖乖的显示网页了.可是文件足足有2000+个,我也不知道哪些文件里面有这样的链接,哪些文件里面没有啊.网上google一番,用正则表达式批量替换.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i "s/href="zh-cn:/href="./zh-cn:/g" `grep href="zh-cn: -rl /var/www/codex`
+</code></pre></div></div>
+
+<p>将所有的<strong>href=”zh-cn:</strong>替换成 <strong>href=”./zh-cn:</strong> 即可.</p>
+
+<p>sed加grep 正则表达式轻松搞定.中间加了号来转义”和/.这样点击网页内的带有zh-cn: 这样的链接浏览器就能够正常浏览了.</p>
+
+<p>HOHO~~,完毕,有童鞋想要的没? 看看要的人多的话,俺看看上传到网盘上去</p>
+
+<p><img src="/uploads/2011/06/20_01.png" alt="" /></p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/06/wget-mirror-codex-wordpress.html" title="" rel="nofollow">wget镜像codex.wordpress.org - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/06/two-colorful-tag-cloud-methods.html" rel="prev">&laquo;&nbsp;我所知道的两种彩色标签云</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/06/leifeng-tshirt-2011.html" rel="next">独立博客文化衫定制活动&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/06/wget-mirror-codex-wordpress.html";
+      this.page.identifier = "172";
+      this.page.title = "wget镜像codex.wordpress.org";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

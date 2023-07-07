@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>读者墙血条显示 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="读者墙血条显示" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="今天逛博客的时候到了冰剑博客,看到了他的一篇文章水榜之血条 具体的作用就是给读者墙添加一个美化吧.让每个人的头像下方增加一个”血条”显示,看起来很带感.但是冰剑博客上的代码是给typecho用的,wordpress的我不会修改." />
+<meta property="og:description" content="今天逛博客的时候到了冰剑博客,看到了他的一篇文章水榜之血条 具体的作用就是给读者墙添加一个美化吧.让每个人的头像下方增加一个”血条”显示,看起来很带感.但是冰剑博客上的代码是给typecho用的,wordpress的我不会修改." />
+<link rel="canonical" href="http://isay.me/2011/04/beautify-reader-wall-blood-slip.html" />
+<meta property="og:url" content="http://isay.me/2011/04/beautify-reader-wall-blood-slip.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-29T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="读者墙血条显示" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-29T00:00:00+08:00","datePublished":"2011-04-29T00:00:00+08:00","description":"今天逛博客的时候到了冰剑博客,看到了他的一篇文章水榜之血条 具体的作用就是给读者墙添加一个美化吧.让每个人的头像下方增加一个”血条”显示,看起来很带感.但是冰剑博客上的代码是给typecho用的,wordpress的我不会修改.","headline":"读者墙血条显示","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/beautify-reader-wall-blood-slip.html"},"url":"http://isay.me/2011/04/beautify-reader-wall-blood-slip.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  读者墙血条显示
+</p>
+<h1 class="lotus-pagetit">读者墙血条显示</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April 29, 2011">April 29, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>今天逛博客的时候到了冰剑博客,看到了他的一篇文章<a href="http://www.binjoo.net/2011/04/most-active-life">水榜之血条</a> 具体的作用就是给读者墙添加一个美化吧.让每个人的头像下方增加一个”血条”显示,看起来很带感.但是冰剑博客上的代码是给typecho用的,wordpress的我不会修改.</p>
+
+<p>还好在评论部分找到了 有人修改了适合于wordpress用的代码,就是<a href="http://www.happyet.org/">不亦乐乎</a>的[<a target="_blank" href="http://www.happyet.org/621.html"><a href="http://www.happyet.org/621.html">读者墙血条之jq版本和php版本</a>
+我在本地试验了一下,完全可以使用.就直接copy过来了.具体效果点击<a href="http://isayme.com/message/">留言|读者墙</a></a></p>
+
+<p>在这里记录一下,以后可能还会弄别的,但是别让这么优秀的代码与我错过了,顺便给大家点好玩的东西.如果大家感觉好的话,同样可以给自己的博客用上.
+直接在需要显示读者墙的地方放上如下代码即可.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php
+    $query="SELECT COUNT(comment_ID) AS cnt, comment_author, comment_author_url, comment_author_email FROM (SELECT * FROM $wpdb-&gt;comments LEFT OUTER JOIN $wpdb-&gt;posts ON ($wpdb-&gt;posts.ID=$wpdb-&gt;comments.comment_post_ID) WHERE comment_date &gt; date_sub( NOW(), INTERVAL 24 MONTH ) AND user_id='0' AND comment_author_email != 'a@b.com' AND post_password='' AND comment_approved='1' AND comment_type='') AS tempcmt GROUP BY comment_author_email ORDER BY cnt DESC LIMIT 48";//最后的这个40是选取多少个头像，我一次让它显示40个。
+    $wall = $wpdb-&gt;get_results($query);
+    $maxNum = $wall[0]-&gt;cnt;
+    foreach ($wall as $comment)
+    {
+        $width = round(40 / ($maxNum / $comment-&gt;cnt),2);//这个40是我设置头像的宽度，和下面&amp;size=40里的40一个概念，如果你头像宽度32，这里就是32了。
+        if( $comment-&gt;comment_author_url )
+        $url = $comment-&gt;comment_author_url;
+        else $url="#";
+        $tmp = "&lt;li title='".$comment-&gt;comment_author." (".$comment-&gt;cnt."次重要讲话)'&gt;&lt;a href='".$comment-&gt;comment_author_url."' target='_blank'&gt;&lt;img src='http://www.gravatar.com/avatar.php?gravatar_id=".md5($comment-&gt;comment_author_email)."&amp;size=60&amp;d=identicon&amp;r=G' /&gt;&lt;/a&gt;&lt;div class='active-bg'&gt;&lt;div class='active-degree' style='width:".$width."px'&gt;&lt;/div&gt;&lt;/li&gt;";
+        $output .= $tmp;
+     }
+    $output = "&lt;div id='readerswall'&gt;&lt;ul class='gavaimg'&gt;".$output."&lt;/ul&gt;&lt;/div&gt;";
+    echo $output ;
+?&gt;
+</code></pre></div></div>
+
+<p><strong>你需要做的</strong>就是把那个邮箱换成你自己的邮箱,这样就不会显示你自己滴头像啦.
+说明一下血条,评论最多的人为满血,然后根据第一名计算其他的人的血量.</p>
+
+<p>然后是css美化代码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#readerswall li{width:40px;height:46px;margin:0 10px 10px 0;padding:5px;
+float:left;list-style:none;border: 1px solid #DFDFDF;
+-moz-border-radius:2px;-khtml-border-radius: 2px;
+-webkit-border-radius: 2px;border-radius: 2px;}
+#readerswall img{width:40px;height:40px;display:block;}
+#readerswall .active-bg{width:40px;height:2px;_font-size:0;margin-top:5px;background:#DFDFDF; }
+#readerswall .active-degree{background:red;width:40px;height:2px;_font-size:0;}
+</code></pre></div></div>
+
+<p>如果你需要更改两个图片之间以及两行之间的间距的话,只需要更改一下<strong>#readerswall li</strong>的margin就可以了.我是把他们都改成了0,因为我觉得还是紧凑一点比较好.</p>
+
+<p>哦 忘记说了,不亦乐乎那里还有一个是jq代码的版本,但是我比较喜欢用这个php版本的,感觉服务器处理速度会更快一点.jq版本的需要用户的浏览器进行处理,感觉速度有点慢.</p>
+
+<p>唉,刚刚和宿舍的人出去吃烧烤了,喝了点酒就晕晕的….看来还要多多努力.哈哈. 没什么好东西要鼓捣,就直接弄一篇现成的吧.
+各位看着也美化一下自己的读者墙?</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/beautify-reader-wall-blood-slip.html" title="" rel="nofollow">读者墙血条显示 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/philna2-sidebar-tab-switch.html" rel="prev">&laquo;&nbsp;PhilNa2侧栏tab切换</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/a-diary-note.html" rel="next">流水帐一篇[4.30]&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/beautify-reader-wall-blood-slip.html";
+      this.page.identifier = "106";
+      this.page.title = "读者墙血条显示";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

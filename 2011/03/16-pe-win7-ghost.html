@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PE安装win7(安装版)图解,附带GHOST版安装思路 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="PE安装win7(安装版)图解,附带GHOST版安装思路" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="以下为本人发在 深度论坛 上的文章,看到有很多人对这个感兴趣,所以在这里再发一遍." />
+<meta property="og:description" content="以下为本人发在 深度论坛 上的文章,看到有很多人对这个感兴趣,所以在这里再发一遍." />
+<link rel="canonical" href="http://isay.me/2011/03/16-pe-win7-ghost.html" />
+<meta property="og:url" content="http://isay.me/2011/03/16-pe-win7-ghost.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-03-24T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PE安装win7(安装版)图解,附带GHOST版安装思路" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-03-24T00:00:00+08:00","datePublished":"2011-03-24T00:00:00+08:00","description":"以下为本人发在 深度论坛 上的文章,看到有很多人对这个感兴趣,所以在这里再发一遍.","headline":"PE安装win7(安装版)图解,附带GHOST版安装思路","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/03/16-pe-win7-ghost.html"},"url":"http://isay.me/2011/03/16-pe-win7-ghost.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  PE安装win7(安装版)图解,附带GHOST版安装思路
+</p>
+<h1 class="lotus-pagetit">PE安装win7(安装版)图解,附带GHOST版安装思路</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 24, 2011">March 24, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>以下为本人发在 深度论坛 上的文章,看到有很多人对这个感兴趣,所以在这里再发一遍.</p>
+
+<p>2月15日补充: 最近有人回帖说 我提到的这个PE对硬盘的识别不是很好.我承认,这个PE比较老了,有些同学的硬盘可能识别不出来,但是由于这个PE对我的电脑支持很好 况且我也 不是那种 特别无私 特别乐于助人的人,所以嘛 我就没有再找新版的</p>
+
+<p>要是大家用这个PE 看不到硬盘 可以试试用下面的方法,要是用下面的方法解决的话,那就是皆大欢喜,要是不能解决的话,还请您另请高明,换个别人的PE,但是安装方法都是大同小异的,我这个方法也是提个思路罢了</p>
+
+<p>解决方法就是开机进入BIOS 然后把硬盘模式从ACHI改为IDE,进入PE后 看看有没有硬盘 要是没有的话,点击开始&gt;程序,有显示所有硬盘,看看有没有.如果已经识别出硬盘的话,按正常 步骤安装, 展开文件之后 ,在重启的时候,先进入BIOS 再把 硬盘模式改回来,然后正常重启</p>
+
+<p>2月12日补充:由于我的考虑不周,致使有些同学 安装ghost版的win7时也使用我的方法,导致找不到wim文件,对此我很抱歉,在先前没有说明白,
+如果你安装的是ghostwin7,那么就用PE里面的 gho文件浏览器,把镜像里面的最大的那个gho文件里面的内容全部提取到C盘就可以了,gho文件浏览器 位于桌面上,或者是开始菜单里,好长时间没有看了,不记得了</p>
+
+<p>我就随便提点思路吧,</p>
+
+<p>第一种方法,桌面上有一个 一键备份还原,双击后点击 普通模式,然后指定gho文件位置是你ghost版win7镜像里面的 那个最大的gho文件,直接选中C盘还原就可以了,</p>
+
+<p>第二种方法也可以用开始菜单里面的gho文件浏览器,然后选中iso镜像里面的gho文件,把所有文件提取到C盘然后重启就可以了,用一键备份还原把gho文件还原到C盘和手动提取其实是一个原理罢了,不要把一键备份还原想的这么神秘</p>
+
+<p>第三种方法,或者直接加载iso镜像之后 ,找到加载后的光驱,然后双击里面的setup.exe之类的文件,直接安装就可以.</p>
+
+<p><em>注意</em>,如果使用此方法,请确保,在双击exe文件之后,拔下U盘,然后再点击 安装win7到C盘之类的操作,否则,会往U盘中写入系统引导文件,致使你重启后不能进入正常的ghost安装win7步骤</p>
+
+<p>以下为原帖:</p>
+
+<p>看到有人发了个用U盘安装win7的教程,但是看后感觉 win7的镜像这么大,光是刻录U盘就要用好多时间,所以才发了这个帖子,只用把一个不到40M的 PE刻录到U盘就可以,这样就没有了刻录win7镜像的麻烦了</p>
+
+<p>关键是 可以用旗舰版的 镜像文件 安装所有的win7版本 ,什么专业版 家庭高级版都可以,具体选择就是下面第三步图中的那个 wim 子映像号,
+1是上网本的版本好像,2是家庭普通版,3是家庭高级版,4是专业版,5是旗舰版</p>
+
+<p>第一次发这种帖子，疏漏之处在所难免，新手凑活着看，老手就当看笑话，错误地方请指出，该详细的地方也请指出。</p>
+
+<p>首先准备PE工具箱，我用的这个版本不知道是哪个版本了。但是总体很好用，只有40M左右，内含GHOST 一键备份还原，磁盘管理工具和win7和vista安装器，还有XP正版密钥什么的，好东西多多。</p>
+
+<p>下载地址：<a href="http://u.115.com/file/f01e5c73f0">115网盘</a></p>
+
+<p>第零步，先将PE安装镜像(iso格式的,和刻录光盘镜像一样)用虚拟光驱工具写入U盘，然后重启计算机从U盘启动。
+这里虚拟光驱推荐UltraISO，给大家一个免注册的，安装完之后就是已注册版。</p>
+
+<p>地址：<a href="http://u.115.com/file/f06c06fd9c" target="_blank">http://u.115.com/file/f06c06fd9c</a></p>
+
+<p>第一步，从PE启动计算机，进入后格式化C盘,然后选择VDM虚拟光驱</p>
+
+<p><img src="/uploads/2011/03/24_01.jpg" alt="" /></p>
+
+<p>第二步，装载win7安装镜像文件，然后将虚拟光驱最小化（不能点×号，点了就没有加载的镜像了）。</p>
+
+<p><img src="/uploads/2011/03/24_02.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_03.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_04.jpg" alt="" /></p>
+
+<p>第三步，打开win7安装器，按提示操作，选择WIM文件路径</p>
+
+<p><img src="/uploads/2011/03/24_05.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_06.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_07.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_08.jpg" alt="" /></p>
+
+<p>然后选择旗舰版序号5，选择安装位置，选择活动磁盘位置，</p>
+
+<p><img src="/uploads/2011/03/24_09.jpg" alt="" /></p>
+
+<p>确认，释放展开文件，再是漫长的等待……</p>
+
+<p><img src="/uploads/2011/03/24_10.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_11.jpg" alt="" /></p>
+
+<p><img src="/uploads/2011/03/24_12.jpg" alt="" /></p>
+
+<p>第四步，重新启动计算机吧，按照提示就可以了。要激活工具的说声。呵呵</p>
+
+<p>我用的激活工具是 小马的 oem7Y 3.0 要的可以说声</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/03/16-pe-win7-ghost.html" title="" rel="nofollow">PE安装win7(安装版)图解,附带GHOST版安装思路 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/03/13-jquery-lazyload-for-wordpress.html" rel="prev">&laquo;&nbsp;给wordpress添加图片渐显效果</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/03/17-custom-ubuntu-boot-menu.html" rel="next">自定义Ubuntu系统引导菜单&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/03/16-pe-win7-ghost.html";
+      this.page.identifier = "16";
+      this.page.title = "PE安装win7(安装版)图解,附带GHOST版安装思路";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

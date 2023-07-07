@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Centos6.3 LiveCD安装手记 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Centos6.3 LiveCD安装手记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="原因 一直用的是debian系统,时间长了就想换点新鲜的.曾经用过fedora一段时间,但是感觉不习惯rpm系的使用习惯,所以又换回了debian,这次决定使用centos系统试试.经过一番权衡,选用centos LiveCD版.因为这个感觉最清爽,没有多余的软件,想用什么可以自己安装" />
+<meta property="og:description" content="原因 一直用的是debian系统,时间长了就想换点新鲜的.曾经用过fedora一段时间,但是感觉不习惯rpm系的使用习惯,所以又换回了debian,这次决定使用centos系统试试.经过一番权衡,选用centos LiveCD版.因为这个感觉最清爽,没有多余的软件,想用什么可以自己安装" />
+<link rel="canonical" href="http://isay.me/2012/10/install-centos6-3-livecd.html" />
+<meta property="og:url" content="http://isay.me/2012/10/install-centos6-3-livecd.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-10-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Centos6.3 LiveCD安装手记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-10-20T00:00:00+08:00","datePublished":"2012-10-20T00:00:00+08:00","description":"原因 一直用的是debian系统,时间长了就想换点新鲜的.曾经用过fedora一段时间,但是感觉不习惯rpm系的使用习惯,所以又换回了debian,这次决定使用centos系统试试.经过一番权衡,选用centos LiveCD版.因为这个感觉最清爽,没有多余的软件,想用什么可以自己安装","headline":"Centos6.3 LiveCD安装手记","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2012/10/install-centos6-3-livecd.html"},"url":"http://isay.me/2012/10/install-centos6-3-livecd.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  Centos6.3 LiveCD安装手记
+</p>
+<h1 class="lotus-pagetit">Centos6.3 LiveCD安装手记</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="October 20, 2012">October 20, 2012</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<h4 id="原因">原因</h4>
+<p>一直用的是debian系统,时间长了就想换点新鲜的.曾经用过fedora一段时间,但是感觉不习惯rpm系的使用习惯,所以又换回了debian,这次决定使用centos系统试试.经过一番权衡,选用centos LiveCD版.因为这个感觉最清爽,没有多余的软件,想用什么可以自己安装</p>
+
+<h4 id="安装系统">安装系统</h4>
+<p>在windows里面用UltraISO刻录的光盘总是不能启动成功,所以进入原来的Debian系统用dd命令刻录.但是这个方法有个不好的地方就是整个U盘只用了一点,我4G的U盘,只用了700MB,在windows里面还识别不出来,不管了,反正我平时不用U盘.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd if=`/CentOSLiveCD ISO file Path` of=/dev/sdb bs=1M
+</code></pre></div></div>
+
+<p>如果用dev/sdb4的话,很可能会启动失败,所以要用整个sdb进行刻录</p>
+
+<h4 id="配置更新源">配置更新源</h4>
+<p>重启进行安装,安装完成后,首先配置一下网络.然后更新源,我使用的是中国科技大学的源,这个因人而异.
+首先备份CentOS-Base.repo</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+</code></pre></div></div>
+
+<p>然后新建CentOS-Base.repo文件,将如下内容放到文件中</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+#
+[base]
+name=CentOS-$releasever - Base - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os
+gpgcheck=1
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates
+gpgcheck=1
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras
+gpgcheck=1
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus
+gpgcheck=1
+enabled=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+
+#contrib - packages by Centos Users
+[contrib]
+name=CentOS-$releasever - Contrib - mirrors.ustc.edu.cn
+baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/contrib/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=contrib
+gpgcheck=1
+enabled=0
+gpgkey=http://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6
+</code></pre></div></div>
+
+<p>然后用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su -c 'yum makecache'
+</code></pre></div></div>
+
+<p>更新缓存</p>
+
+<h4 id="安装rpmforge源">安装rpmforge源</h4>
+<p>安装完这个源才能安装ntfs-3g来支持win的NTFS分区读写.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.i686.rpm
+</code></pre></div></div>
+
+<p>然后</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su -c 'rpm -ivh rpmforge*.rpm'
+</code></pre></div></div>
+
+<p>这样就行了</p>
+
+<h4 id="安装配置sudo">安装配置sudo</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su -c 'yum install sudo'
+</code></pre></div></div>
+
+<p>安装完成后 将/etc/sudoers 文件更改权限</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su -c 'chmod 744 /etc/sudoers'
+</code></pre></div></div>
+
+<p>编辑sudoers文件,将你的用户名添加到root用户组,这样以后就可以使用sudo命令了
+找到</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root ALL=(ALL) ALL
+</code></pre></div></div>
+
+<p>一行,在下面添加(username改为你的用户名)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username ALL=(ALL) ALL
+</code></pre></div></div>
+
+<p>编辑后退出,再次更改sudoers文件权限</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su -c 'chmod 0440 /etc/sudoers'
+</code></pre></div></div>
+
+<p>然后用<code class="language-plaintext highlighter-rouge">exit</code>退出root权限再试试吧</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo whoami
+</code></pre></div></div>
+
+<p>如果正常的话,应该会返回</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root
+</code></pre></div></div>
+
+<h4 id="安装ntfs-3g">安装ntfs-3g</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install ntfs-3g
+</code></pre></div></div>
+
+<p>然后就可以挂载NTFS分区了.如果你愿意的话,可以更改<code class="language-plaintext highlighter-rouge">/etc/fstab</code>文件,将NTFS分区写到这里达到开机自动挂载.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UUID=000C28CA000A356A      /media/Sys     ntfs-3g    defaults,utf8,uid=500  0	0
+</code></pre></div></div>
+
+<p>前面的是NTFS的uuid,怎么看NTFS分区的uuid</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /dev/disk/by-uuid
+ls -al
+</code></pre></div></div>
+
+<p>然后就可以看到不同的分区的uuid了,按照上面的例子,首先在/media目录新建你想要的文件夹,然后将各个分区写入fstab文件对应的文件夹即可
+然后执行</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mount -a
+</code></pre></div></div>
+
+<p>即可.上面有个小地方要注意,centos默认的用户uid和Debian的不同,这里是uid=500,如果你是用的debian的话,应该改成1000,否则会造成自动挂载NTFS分区后无法将文件删除到回收站而是直接永久删除的情况</p>
+
+<h4 id="安装google-chrome浏览器">安装google-chrome浏览器</h4>
+<p>在/etc/yum.repo.d文件夹中,新建一个google-chrome.repo或者在CentOS-Base.repo中加入如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[google]
+name=Google – i386
+baseurl=http://dl.google.com/linux/rpm/stable/i386
+enabled=1
+gpgcheck=1
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+</code></pre></div></div>
+
+<p>然后</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum makecache
+sudo yum install google-chrome-stable
+</code></pre></div></div>
+
+<p>即可</p>
+
+<h4 id="安装file-roller">安装file-roller</h4>
+<p>安装完centos后发现一个问题,像zip包这种东西,竟然不是双击打开,而是用archive mounter先挂载到/media目录后再打开.具体原因是centos LiveCD没有安装常用的归档管理器,那我们就安装一下吧,顺带安装一下unrar</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install file-roller unrar
+</code></pre></div></div>
+
+<h4 id="修复bash自动补全">修复bash自动补全</h4>
+<p>安装LiveCD版后bash没有自动补全功能,所以进行一下修复
+首先到</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://www.caliban.org/files/redhat/RPMS/noarch/
+</code></pre></div></div>
+
+<p>下载最新的<code class="language-plaintext highlighter-rouge">bash-completion-20060301-1.noarch.rpm</code>,
+然后安装一下,然后在~/.bashrc找个地方添加</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ -f /etc/bash_completion ] &amp;&amp; . /etc/bash_completion
+</code></pre></div></div>
+
+<p>重启bash就可以了</p>
+
+<h4 id="安装配置编辑器">安装配置编辑器</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install gconf-editor
+</code></pre></div></div>
+
+<p>安装完成后可以进行简单的配置.
+因为我喜欢桌面干净一点.另外不希望挂载的卷 home目录 还有我的电脑出现在桌面,所以进行更改</p>
+
+<p>具体的更改选项如下,可按个人喜好进行更改</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>窗口标题的按钮的布局
+Gconf键 /app/metacity/general/button_layout
+当计算机一定时间后激活屏幕保护程序
+/apps/gnome-screensaver/idle_acivation_enable
+当屏幕保护程序激活时锁定屏幕
+/apps/gnome-screensaver/lock_enabled
+在休眠后锁定屏幕
+/apps/gnome-power-manager/lock/hibernate
+在挂起后锁定屏幕
+/apps/gnome-power-manager/lock/suspend
+图标
+显示桌面内容
+/apps/nautilus/preferences/show_desktop
+显示挂载的卷的图标
+/apps/nautilus/desktop/volumes_visible
+显示我的计算机图标
+/apps/nautilus/desktop/computer_icon_visible
+显示主目录图标
+/apps/nautilus/desktop/home_icon_visible
+显示网络服务器图标
+/apps/nautilus/desktop/network_icon_visible
+显示垃圾桶图标
+/apps/nautilus/desktop/trash_icon_visible
+</code></pre></div></div>
+
+<h4 id="安装输入法">安装输入法</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install ibus ibus-table-wubi
+</code></pre></div></div>
+
+<h4 id="安装audacious播放器">安装audacious播放器</h4>
+<p>新建一个repo文件,内容为</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[linuxtech]
+#audacious install
+name=LinuxTECH
+baseurl=http://pkgrepo.linuxtech.net/el6/release/
+enabled=1
+gpgcheck=1
+gpgkey=http://pkgrepo.linuxtech.net/el6/release/RPM-GPG-KEY-LinuxTECH.NET
+</code></pre></div></div>
+
+<p>然后安装即可</p>
+
+<p>播放列表乱码 首选项-在”播放列表”中，把标题格式改为”Custom”,再把自定格式改为”%f”（不要引号）.</p>
+
+<p>皮肤位置皮肤位置 ~/.local/share/audacious/Skins</p>
+
+<p>状态栏图标 选项 插件 里面的 一般 status icon 勾选即可</p>
+
+<p>其它的就没有什么了,想要什么自己安装即可</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2012/10/install-centos6-3-livecd.html" title="" rel="nofollow">Centos6.3 LiveCD安装手记 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2012/10/css3-brower-support-mirror-2012-10-4.html" rel="prev">&laquo;&nbsp;CSS3 Brower Support mirror(2012-10-4)</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2012/11/original-js-philnasay.html" rel="next">单PHP文件原生js版PhilnaSay&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2012/10/install-centos6-3-livecd.html";
+      this.page.identifier = "249";
+      this.page.title = "Centos6.3 LiveCD安装手记";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

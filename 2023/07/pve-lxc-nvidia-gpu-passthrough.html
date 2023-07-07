@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PVE LXC 容器直通 Nvidia 显卡 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="PVE LXC 容器直通 Nvidia 显卡" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个." />
+<meta property="og:description" content="一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个." />
+<link rel="canonical" href="http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html" />
+<meta property="og:url" content="http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-01T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PVE LXC 容器直通 Nvidia 显卡" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-07-01T00:00:00+08:00","datePublished":"2023-07-01T00:00:00+08:00","description":"一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个.","headline":"PVE LXC 容器直通 Nvidia 显卡","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html"},"url":"http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  PVE LXC 容器直通 Nvidia 显卡
+</p>
+<h1 class="lotus-pagetit">PVE LXC 容器直通 Nvidia 显卡</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July  1, 2023">July  1, 2023</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个.</p>
+
+<p>在 v2ex 上看到讨论, 大家推荐使用 nvidia T400 显卡, 因为这个显卡支持编解码的格式多, 而且不需要单独供电, 功耗只有30W, 所以在闲鱼上购入一张 T400 4GB 显卡.</p>
+
+<p>显卡有了, 接下来就是看怎么在 PVE 中直通了. 搜索了一圈, 发现了一个博主写的文章比较详细, <a href="https://www.insilen.com/post/263.html">https://www.insilen.com/post/263.html</a> 这篇文章中介绍了虚拟机直通以及 lxc 容器直通的区别. 通过这篇文章, 觉得使用 lxc 容器直通显然更经济一些, 非独占式, 可以多个容器共用一张显卡, 做到资源利用最大化. 所以按照博客文章的步骤, 在自己的 PVE 机器上安装, 经过一些修改和测试, 最终安装并直通成功.</p>
+
+<p>下面主要记录下安装中的一些步骤，方便后面再次安装时用到.</p>
+
+<h2 id="宿主机配置">宿主机配置</h2>
+<p><strong>首先</strong>是安装驱动</p>
+
+<p>由于 debian 源中已经有了 nvidia-driver, 所以我选择直接使用源安装, 方便进行升级。唯一的缺点是源中的版本旧一些. 目前 PVE 7.4 是基于 debian 11 bullseye, 在我安装时源中最新的 nvidia-driver 驱动版本为 470.182.03.</p>
+
+<p>更新 <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code> 文件, 开启 nvidia-driver 所在的库 <code class="language-plaintext highlighter-rouge">non-free</code>，为了保险起见，把 <code class="language-plaintext highlighter-rouge">contrib</code> 也加上</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deb https://mirrors.ustc.edu.cn/debian bullseye main contrib non-free
+deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib non-free
+# security updates
+deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free
+</code></pre></div></div>
+
+<p>然后执行更新并安装 pve-headers 和 nvidia-driver.</p>
+
+<p>这里要注意一下，不能只安装 <code class="language-plaintext highlighter-rouge">nvidia-driver</code>。由于在安装过程中需要编译，依赖 <code class="language-plaintext highlighter-rouge">pve-headers</code> 模块，但是 <code class="language-plaintext highlighter-rouge">nvidia-driver</code> 并没有标识 <code class="language-plaintext highlighter-rouge">pve-headers</code> 作为依赖，所以需要手动安装。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update &amp;&amp; apt install pve-headers nvidia-driver
+</code></pre></div></div>
+
+<p><strong>然后</strong>是确认驱动及对应模块配置正确，并屏蔽掉开源的显卡驱动 nouveau</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">/etc/modules-load.d/nvidia.conf</code> 文件中，确认以下内容存在，如果有缺少的需要补全。在我的机器上安装完 nvidia-driver 后，这个文件里只有一个 nvidia-drm, 导致后面在直通时缺少对应的设备，需要把 <code class="language-plaintext highlighter-rouge">nvidia</code> 和 <code class="language-plaintext highlighter-rouge">nvidia_uvm</code> 补全。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvidia-drm
+nvidia
+nvidia_uvm
+</code></pre></div></div>
+
+<p>安装完 nvidia-driver 后，在 <code class="language-plaintext highlighter-rouge">/etc/modprobe.d/</code> 目录下，可以看到如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/modprobe.d/dkms.conf
+/etc/modprobe.d/nvidia-kernel-common.conf
+/etc/modprobe.d/nvidia-blacklists-nouveau.conf
+/etc/modprobe.d/pve-blacklist.conf
+/etc/modprobe.d/nvidia.conf
+</code></pre></div></div>
+
+<p>在 <code class="language-plaintext highlighter-rouge">nvidia-blacklists-nouveau.conf</code> 文件中，有如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blacklist nouveau
+</code></pre></div></div>
+
+<p>在 <code class="language-plaintext highlighter-rouge">pve-blacklist.conf</code> 文件中，有如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blacklist nvidiafb
+</code></pre></div></div>
+
+<p>保证这两个 blacklist 存在，并且没有重复。如果没有的话，需要进行补全。</p>
+
+<p><strong>然后</strong>是更新内核模块</p>
+
+<p>由于在 <code class="language-plaintext highlighter-rouge">/etc/modules-load.d/nvidia.conf</code> 中添加了 <code class="language-plaintext highlighter-rouge">nvidia</code> 以及 <code class="language-plaintext highlighter-rouge">nvidia_uvm</code> 模块，所以需要对内核模块进行更新。使用如下命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-initramfs -u
+</code></pre></div></div>
+
+<p>在上面我贴的博客文章中使用的命令是 <code class="language-plaintext highlighter-rouge">update-initramfs -u -k all</code> 对本地的所有内核模块进行更新，但是按照我的理解 nvidia module 是和内核模块版本绑定的, 所以把 nvidia module 更新到旧的内核中会有风险导致旧的内核模块在加载 nvidia 模块时版本不匹配出现问题. 我觉得只使用一个 <code class="language-plaintext highlighter-rouge">-u</code> 选项可能更合理一些。</p>
+
+<p><strong>然后</strong>是创建对应的脚本文件</p>
+
+<p>创建文件路径 <code class="language-plaintext highlighter-rouge">/etc/udev/rules.d/70-nvidia.rules</code>, 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create /nvidia0, /dev/nvidia1 … and /nvidiactl when nvidia module is loaded
+KERNEL=="nvidia", RUN+="/bin/bash -c '/usr/bin/nvidia-smi -L &amp;&amp; /bin/chmod 666 /dev/nvidia*'"
+# Create the CUDA node when nvidia_uvm CUDA module is loaded
+KERNEL=="nvidia_uvm", RUN+="/bin/bash -c '/usr/bin/nvidia-modprobe -c0 -u &amp;&amp; /bin/chmod 0666 /dev/nvidia-uvm*'"
+</code></pre></div></div>
+
+<p>这些规则作用：</p>
+<ul>
+  <li>设置更宽松的权限</li>
+  <li>启用默认情况下未启动的 nvidia_uvm（至少对于我的卡而言）</li>
+</ul>
+
+<p><strong>然后</strong>就是重启，并检查对应的设备及显卡运行情况</p>
+
+<p>重启后，正常情况下显卡驱动应该正常加载，查看对应位置内容进行验证。</p>
+
+<p><code class="language-plaintext highlighter-rouge">ls -al /dev/nvidia*</code> 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crw-rw-rw- 1 root root 195,   0 Jun 30 23:08 /dev/nvidia0
+crw-rw-rw- 1 root root 195, 255 Jun 30 23:08 /dev/nvidiactl
+crw-rw-rw- 1 root root 195, 254 Jun 30 23:08 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 506,   0 Jun 30 23:08 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 506,   1 Jun 30 23:08 /dev/nvidia-uvm-tools
+
+/dev/nvidia-caps:
+total 0
+drw-rw-rw-  2 root root     80 Jun 30 23:08 .
+drwxr-xr-x 20 root root   4560 Jun 30 23:08 ..
+cr--------  1 root root 509, 1 Jun 30 23:08 nvidia-cap1
+cr--r--r--  1 root root 509, 2 Jun 30 23:08 nvidia-cap2
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls -al /dev/dri</code> 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drwxr-xr-x  3 root root        120 Jun 30 23:08 .
+drwxr-xr-x 20 root root       4560 Jun 30 23:08 ..
+drwxr-xr-x  2 root root        100 Jun 30 23:08 by-path
+crw-rw----  1 root video  226,   0 Jun 30 23:08 card0
+crw-rw----  1 root video  226,   1 Jun 30 23:08 card1
+crw-rw----  1 root render 226, 128 Jun 30 23:08 renderD128
+</code></pre></div></div>
+
+<p>注意上面出现的数字（195、506、226），这些是之后LXC中需要的，所以先记录下来。</p>
+
+<p><strong>注意</strong>： 上述设备缺一不可至少包含：nvidia0、nvidiactl、nvidia-modeset、vidia-uvm、nvidia-uvm-tools； 少了说明驱动有组件没有安装成功，需要详细检查.</p>
+
+<p>另外，使用 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 命令会输出当前显卡的信息</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA T400 4GB     On   | 00000000:01:00.0 Off |                  N/A |
+| 38%   38C    P8    N/A /  31W |      3MiB /  3911MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>这些的设备以及 nvidia-smi 输出正确的内容后，表示显卡驱动已正确安装并加载。</p>
+
+<p><strong>最后</strong>是对 LXC 容器进行配置</p>
+
+<p>宿主机进入 <code class="language-plaintext highlighter-rouge">/etc/pve/lxc/</code> 找到对应LXC的ID配置文件，打开后在最后一行加入以下内容：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lxc.cgroup2.devices.allow: c 195:* rwm
+lxc.cgroup2.devices.allow: c 506:* rwm
+lxc.cgroup2.devices.allow: c 226:* rwm
+lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+</code></pre></div></div>
+
+<p>这里的 195、506和226就是上面记录下的数值。
+注意这里使用的是 <code class="language-plaintext highlighter-rouge">lxc.cgroup2.devices.allow</code>, 和我上面博客文章中写的 <code class="language-plaintext highlighter-rouge">lxc.cgroup.devices.allow</code> 不一致，是因为 PVE 6 升级 7 时，升级说明已经提到了这个写法的变化，应该是博客文章的作者没有更新。</p>
+
+<p>到这里宿主机配置应该就全部结束了。下面是 lxc 容器中的配置。</p>
+
+<h2 id="lxc-容器配置">LXC 容器配置</h2>
+
+<p><strong>首先</strong>是确认宿主机的相关设备映射成功。使用 <code class="language-plaintext highlighter-rouge">ls -al /dev/nvidia*</code> 以及 <code class="language-plaintext highlighter-rouge">ls -al /dev/dri</code> 命令应该会得到和宿主机一样的输出。</p>
+
+<p><strong>然后</strong>是安装驱动。</p>
+
+<p>注意 LXC 容器安装的驱动版本需要和宿主机完全一致。并且不能使用内核模块。所以在容器中安装驱动，我没有再使用源来安装，因为源中的驱动不支持指定 <code class="language-plaintext highlighter-rouge">--no-kernel-module</code> 选项，但是这个选项在 LXC 容器直通显卡时是必须的。</p>
+
+<p>所以在容器中通过下载 nvidia 驱动安装文件的方式进行安装。对应的官网地址为 https://www.nvidia.com/en-us/drivers/unix/ ，找到和宿主版本相同的驱动下载即可。我使用的 470.182.03 版本驱动文件下载命令如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://us.download.nvidia.com/XFree86/Linux-x86_64/470.182.03/NVIDIA-Linux-x86_64-470.182.03.run
+</code></pre></div></div>
+
+<p>下载后，添加可执行权限并进行安装。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x NVIDIA-Linux-x86_64-470.182.03.run
+./NVIDIA-Linux-x86_64-470.182.03.run --no-kernel-module
+</code></pre></div></div>
+
+<p>安装驱动后，执行命令 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 可以看到输出内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA T400 4GB     Off  | 00000000:01:00.0 Off |                  N/A |
+| 38%   38C    P8    N/A /  31W |      3MiB /  3911MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>证明 LXC 容器中的显卡驱动也正常. 如果 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 没有输出，可以尝试下重启 LXC 容器。</p>
+
+<p>至此，PVE LXC 容器直通显卡工作就结束了。</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html" title="" rel="nofollow">PVE LXC 容器直通 Nvidia 显卡 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2023/06/multi-plex-server-instance-and-traefik.html" rel="prev">&laquo;&nbsp;通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问...</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2023/07/pve-lxc-install-jellyfin.html" rel="next">PVE LXC 安装 Jellyfin&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html";
+      this.page.identifier = "2023070101";
+      this.page.title = "PVE LXC 容器直通 Nvidia 显卡";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>转-如何让wordpress评论者收到回复通知邮件？ | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="转-如何让wordpress评论者收到回复通知邮件？" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="注:本文转自dboy~小真の365天博客.原文地址请点击.感谢dboy精简了这个插件.我按照他的说明设置之后,邮件回复功能正常.因此才转载这篇文章.希望更多的同学能够使用上邮件回复的功能." />
+<meta property="og:description" content="注:本文转自dboy~小真の365天博客.原文地址请点击.感谢dboy精简了这个插件.我按照他的说明设置之后,邮件回复功能正常.因此才转载这篇文章.希望更多的同学能够使用上邮件回复的功能." />
+<link rel="canonical" href="http://isay.me/2011/03/6-how-a-reply-notification-email.html" />
+<meta property="og:url" content="http://isay.me/2011/03/6-how-a-reply-notification-email.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-03-30T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="转-如何让wordpress评论者收到回复通知邮件？" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-03-30T00:00:00+08:00","datePublished":"2011-03-30T00:00:00+08:00","description":"注:本文转自dboy~小真の365天博客.原文地址请点击.感谢dboy精简了这个插件.我按照他的说明设置之后,邮件回复功能正常.因此才转载这篇文章.希望更多的同学能够使用上邮件回复的功能.","headline":"转-如何让wordpress评论者收到回复通知邮件？","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/03/6-how-a-reply-notification-email.html"},"url":"http://isay.me/2011/03/6-how-a-reply-notification-email.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  转-如何让wordpress评论者收到回复通知邮件？
+</p>
+<h1 class="lotus-pagetit">转-如何让wordpress评论者收到回复通知邮件？</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 30, 2011">March 30, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>注:本文转自<a href="http://www.dboy365.com/">dboy~小真の365天</a>博客.原文地址请<a href="http://www.dboy365.com/archives/611">点击</a>.感谢dboy精简了这个插件.我按照他的说明设置之后,邮件回复功能正常.因此才转载这篇文章.希望更多的同学能够使用上邮件回复的功能.</p>
+
+<p>以下为原文.(原文的下载地址好像已经失效了.我把下载的文件上传到了115网盘,大家可以下载.如果过期的话,请告诉我.我会续期)</p>
+
+<p>最近常常要给一些朋友回复评论，但刚接触wordpress不久，不清楚直接回复对方能否收到通知邮件，我想应该是可以的，因为对方在评论的时候已经留下了邮箱地址，但今天才和JOE测试并确认了：回复对方是不会发送通知邮件的，那对方岂不是不知道我们的回复，互动性大打折扣… … 已是开始寻找解决方案，经过强大的Google，历经艰辛学到了解决方法，下面就分享给大家，避免大家遇到同样的问题时走弯路。</p>
+
+<p>1、安装<strong>Mail To Commenter</strong>插件</p>
+
+<p>该插件口碑不错，我本来是安装了Comment Reply Notification插件，都配置好了，但发现其不能正常发送邮件而不得不卸载；最后安装了<strong>Mail To Commenter</strong> 并经过自己的修改，将一些没有必要的功能都去掉了，感觉非常棒；</p>
+
+<p>大家如果想使用原版，可以进入WP后台》插件》添加新插件 页面搜索：<strong>Mail To Commenter</strong>进行安装并激活，激活后需要进入：设置》Mail To Commenter options 设置开启才能使用；</p>
+
+<p><strong>小D推荐使用以下修改版的：</strong></p>
+
+<p>我将很多使用不到的后台设置去掉了，设置界面简化了很多，您完全用不着在页面中添加任何代码，安装后，前台界面也不会发生任何变化，但邮件通知确能完美的运行；<a href="http://u.115.com/file/f088944be8">点此下载修改版文件↓</a>下载后，通过WP后台》插件》添加新插件》上传，选择下载的ZIP包<strong>安装并激活</strong>，然后进入：设置》Mail To Commenter <strong>勾选激活邮件通知</strong>，再点击右上角的“<strong>更新设置</strong>”按钮即可。</p>
+
+<p>修改版后台设置如下图：</p>
+
+<p><img src="/uploads/2011/03/30_01.png" alt="" /></p>
+
+<p>2、根据自己的需要<strong>修改发件人姓名及邮箱地址</strong></p>
+
+<p>编辑该插件文件夹下的 mailtocommenter_functions.php 文件，搜索 From: 定位到这个位置并操作如下：</p>
+
+<p>(你也可以进入已安装的插件列表，找到Mail To Commenter，点编辑，然后在右侧选择上述文件即可编辑)</p>
+
+<p>a、如果你使用官方版本，请将 From: 所在的这一行替换为如下代码再进入b操作</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$headers = 'From: replay &lt;replay@yourmail.com&gt;' . "rn\";
+</code></pre></div></div>
+
+<p>b、如果你使用小D提供的版本，请将直接将 replay 修改为发件人姓名，将 &lt;&gt; 中的邮箱更换为你希望使用的；</p>
+
+<p>修改文件并确认无误后记得点击最下方的“更新文件”以保存；</p>
+
+<p>测试一下吧(退出管理员账号，发一个评论，然后登陆管理员账户，进入日志页面点回复)，是不是很好用，你可以根据自己的需要修改邮件主题、正文的内容及排版（需要进行第3不修改），自由度非常高。</p>
+
+<p>如果没有收到邮件，可能是发送迟缓，一般情况能实时送达，特殊情况可能要等好几个小时；</p>
+
+<p>3、根据自己的喜好修改邮件内容及排版（可选设置）</p>
+
+<p>进入设置》Mail To Commenter，根据右侧的提示，修改邮件模板即可；</p>
+
+<p>小D将设置的内容也分享给大家使用：</p>
+
+<p>邮件主题：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>您对《%post_title%》的评论有了新回复
+</code></pre></div></div>
+
+<p>邮件内容：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%user%，您好：&lt;br/&gt;
+您对 《&lt;a href="%post_link%"&gt;%post_title%&lt;/a&gt;》的评论被%comment_author%回复了，快去看看吧^_^&lt;br/&gt;
+&lt;div style="padding:5px;border:1px solid #888;"&gt;您的评论：&lt;br /&gt;%your_comment%&lt;div style="margin-left:5px;margin-right:5px;padding:5px;border:1px solid #ccc;"&gt;
+%reply_comment%&lt;br /&gt;&lt;/div&gt;
+&lt;div style="margin-top:10px;margin-left:10px;padding-bottom:10px;border-bottom:1px solid #ccc;"&gt;
+&lt;a href='%comment_link%' target='_blank'&gt;查看回复&lt;/a&gt;或点&lt;a href="mailto:%admin_email%"&gt;这里&lt;/a&gt;给作者回Email&lt;/div&gt;
+欢迎再次访问：&lt;a href="%blog_link%"&gt;%blog_name%&lt;/a&gt;    &lt;a href="%rss_link%"&gt;%rss_name%&lt;/a&gt;&lt;br/&gt;
+</code></pre></div></div>
+
+<p>OK，需要做的就是这些了，使用的时候，你只需要登录管理员账号(如果设置成仅管理员可以通知)，进入日志页面，点对方评论的“回复”，回复的内容对方就能通过邮件收到了。</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/03/6-how-a-reply-notification-email.html" title="" rel="nofollow">转-如何让wordpress评论者收到回复通知邮件？ - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/03/8-non-plug-in-to-achieve-pagenavi-page.html" rel="prev">&laquo;&nbsp;非插件实现Pagenavi 翻页</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/03/10-eight-queens-problem.html" rel="next">初识 八皇后问题&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/03/6-how-a-reply-notification-email.html";
+      this.page.identifier = "6";
+      this.page.title = "转-如何让wordpress评论者收到回复通知邮件？";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

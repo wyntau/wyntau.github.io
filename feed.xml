@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://isay.me/feed.xml" rel="self" type="application/atom+xml" /><link href="http://isay.me/" rel="alternate" type="text/html" /><updated>2023-07-07T09:45:09+08:00</updated><id>http://isay.me/feed.xml</id><title type="html">自说Me话</title><subtitle>Wyntau's Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.</subtitle><entry><title type="html">PVE LXC 安装 Tailscale 并开启 site-to-site networking</title><link href="http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html" rel="alternate" type="text/html" title="PVE LXC 安装 Tailscale 并开启 site-to-site networking" /><published>2023-07-07T00:00:00+08:00</published><updated>2023-07-07T00:00:00+08:00</updated><id>http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking</id><content type="html" xml:base="http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html"><![CDATA[<p>Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 <a href="https://tailscale.com/blog/how-tailscale-works/">How Tailscale works</a>.</p>
+
+<p>本篇文章介绍如何在 PVE LXC 容器下安装 tailscale, 并在多个网络之间通过 tailscale 建立 <code class="language-plaintext highlighter-rouge">site-to-site networking</code> 连接.</p>
+
+<p>安装 tailscale 时选择的是在 pve 的 lxc 容器而不是通过 docker 安装, 因为我在测试过程中发现使用 docker 安装后, 无法开启 <code class="language-plaintext highlighter-rouge">site-to-site networking</code>, 具体原因还没搞清楚.</p>
+
+<p><strong>首先</strong> 建立 lxc 容器, 并做好相应的配置
+选择新建一个非特权CT容器, 模板我选择的是 <code class="language-plaintext highlighter-rouge">Debian 11(bullseye)</code>, 建立容器时, 网卡名称最好是叫 <code class="language-plaintext highlighter-rouge">eth0</code>, 因为后面配置 <code class="language-plaintext highlighter-rouge">site-to-site networking</code> 时会用到.</p>
+
+<p>由于是非特权容器, 容器启动后会缺少 tailscale 运行需要的东西, 所以先不启动而是对容器作一些配置修改.</p>
+
+<p>在 pve 宿主中, 确认 <code class="language-plaintext highlighter-rouge">/dev/net/tun</code> 存在并获取对应的信息, 具体命令和返回如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@pve:~# ls -al /dev/net/tun
+crw-rw-rw- 1 root root 10, 200 Jun 30 23:08 /dev/net/tun
+</code></pre></div></div>
+
+<p>记录其中的 <code class="language-plaintext highlighter-rouge">10, 200</code> 这两个数字, 后面需要用到.</p>
+
+<p>然后修改 <code class="language-plaintext highlighter-rouge">/etc/pve/lxc/CTID.conf</code> 文件, 新增如下两行</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+</code></pre></div></div>
+
+<p>上面的 <code class="language-plaintext highlighter-rouge">10:200</code> 需要和前面使用 <code class="language-plaintext highlighter-rouge">ls -al /dev/net/tun</code> 获取的结果对应起来.</p>
+
+<p>配置完成后启动容器, 然后按照 tailscale 官方的文档安装 tailscale. 具体文档可查看 <a href="https://tailscale.com/kb/1038/install-debian-bullseye/">Setting up Tailscale on Debian Bullseye</a></p>
+
+<p><strong>然后</strong> 是启动 tailscale
+由于是两个网络之间建立 <code class="language-plaintext highlighter-rouge">site-to-site networking</code>, 所以我这边会以两个网络举例.</p>
+
+<p>网络 A 为 <code class="language-plaintext highlighter-rouge">192.168.100.0/24</code>, 安装 tailscale 的机器 A IP 为 <code class="language-plaintext highlighter-rouge">192.168.100.16</code>, 网络 B 为 <code class="language-plaintext highlighter-rouge">192.168.88.0/24</code>, 安装 tailscale 的机器 B IP 为 <code class="language-plaintext highlighter-rouge">192.168.88.16</code>.</p>
+
+<p>机器 A 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tailscale up --authkey=xxxxx --accept-routes --advertise-routes=192.168.100.0/24  --hostname=tailscale-A
+</code></pre></div></div>
+
+<p>机器 B 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tailscale up --authkey=xxxxx --accept-routes --advertise-routes=192.168.88.0/24  --hostname=tailscale-B
+</code></pre></div></div>
+
+<p>上面 <code class="language-plaintext highlighter-rouge">--autkey=xxx</code> 中的 <code class="language-plaintext highlighter-rouge">xxxxx</code> 需要替换为 tailscale 后台生成的 authkey. 如果 authkey 没有配置 <code class="language-plaintext highlighter-rouge">autoApprovers</code> 的话, 需要到 tailscale 后台开启<code class="language-plaintext highlighter-rouge">子网路由(subnet router)</code> 功能, 将各自所在的子网暴露给 tailscale 虚拟局域网. autoApprovers 可以查看文档 <a href="https://tailscale.com/kb/1018/acls/#auto-approvers-for-routes-and-exit-nodes">Auto Approvers for routes and exit nodes</a>.</p>
+
+<p>此时机器 A 和 B 都已经处于 tailscale 虚拟局域网中, 机器 A 可以访问网络 B 中的所有设备, 机器 B 也可以访问网络 A 中的所有设备.</p>
+
+<p><strong>然后</strong> 是开启 <code class="language-plaintext highlighter-rouge">site-to-site networking</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">site-to-site networking</code> 能实现的效果是: 机器 A 和 B 安装了 tailscale, 他们就可以做为两个网络的桥梁, 允许两个网络中未安装 tailscale 的设备通过两个安装了 tailscale 设备的桥接, 实现互访. 官方文档 <a href="https://tailscale.com/kb/1214/site-to-site/">Site-to-site networking</a>.</p>
+
+<p>机器 A 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t mangle -A FORWARD -i tailscale0 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+</code></pre></div></div>
+
+<p>机器 B 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t mangle -A FORWARD -i tailscale0 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+</code></pre></div></div>
+
+<p>然后需要做的就是在每个网络的网关配置到另一个网络的静态路由. 以我使用的 RouterOS 路由器为例</p>
+
+<p>网络 A 网关执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ip route add dst-address=192.168.88.0/24 gateway=192.168.100.16
+</code></pre></div></div>
+
+<p>网络 B 网关执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ip route add dst-address=192.168.100.0/24 gateway=192.168.88.16
+</code></pre></div></div>
+
+<p>此时正常情况下, 网络 A 和 B 中未安装 tailscale 的设备就可以访问对方网络中的服务了.</p>
+
+<p><strong>最后</strong> 是一些说明</p>
+
+<p>在官方的 <a href="https://tailscale.com/kb/1214/site-to-site/">Site-to-site networking</a> 文档中, 有一个 <code class="language-plaintext highlighter-rouge">--snat-subnet-routes=false</code> 的选项, 我实践之后发现, 如果加了这个选项, 会导致所有请求都不通. 但是不加这个选项, 互访是正常的, 只是有一些小瑕疵. 网络 A 请求网络 B 中的服务时, 服务看到的来源 IP 会是网络 B 中安装了 tailscale 那台机器的 IP, 网络 B 请求网络 A 中的服务时, 服务看到的来源 IP 会是网络 A 中安装了 tailscale 那台机器的 IP. 如果对这个小的细节没有要求的话, 则不需要深究了.</p>]]></content><author><name></name></author><category term="PVE" /><category term="Tailscale" /><summary type="html"><![CDATA[Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 How Tailscale works.]]></summary></entry><entry><title type="html">PVE LXC 安装 Jellyfin</title><link href="http://isay.me/2023/07/pve-lxc-install-jellyfin.html" rel="alternate" type="text/html" title="PVE LXC 安装 Jellyfin" /><published>2023-07-02T00:00:00+08:00</published><updated>2023-07-02T00:00:00+08:00</updated><id>http://isay.me/2023/07/pve-lxc-install-jellyfin</id><content type="html" xml:base="http://isay.me/2023/07/pve-lxc-install-jellyfin.html"><![CDATA[<p>LXC 容器首先按照昨天讲的 nvidia 显卡直通步骤, 开启显卡直通功能. 下面是安装 Jellyfin 的步骤</p>
+
+<p><strong>首先</strong>是启用 repo</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt install curl gnupg
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg
+
+cat &lt;&lt;EOF | tee /etc/apt/sources.list.d/jellyfin.sources
+Types: deb
+URIs: https://repo.jellyfin.org/$( awk -F'=' '/^ID=/{ print $NF }' /etc/os-release )
+Suites: $( awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release )
+Components: main
+Architectures: $( dpkg --print-architecture )
+Signed-By: /etc/apt/keyrings/jellyfin.gpg
+EOF
+</code></pre></div></div>
+
+<p><strong>然后</strong>是安装 jellyfin</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update &amp;&amp; apt install jellyfin
+</code></pre></div></div>
+
+<p><strong>最后</strong>想要开启硬件转码功能, 还需要安装 <code class="language-plaintext highlighter-rouge">jellyfin-ffmpeg5</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt install jellyfin-ffmpeg5
+</code></pre></div></div>
+
+<p>注意这里可能会出错, 源里面有一个 <code class="language-plaintext highlighter-rouge">jellyfin-ffmpeg</code>, 还有一个 <code class="language-plaintext highlighter-rouge">jellyfin-ffmpeg5</code>, 按照 jellyfin 官方的说明, 这里应该安装的是 <code class="language-plaintext highlighter-rouge">jellyfin-ffmpeg5</code>, 如果安装了 <code class="language-plaintext highlighter-rouge">jellyfin-ffmpeg</code> 会把 <code class="language-plaintext highlighter-rouge">jellyfin</code> 这个包替换掉</p>
+
+<p>安装完毕后, 去 jellyfin 后台开启硬件转码功能即可. jellyfin 的端口号是 8096.</p>]]></content><author><name></name></author><category term="Jellyfin" /><category term="PVE" /><summary type="html"><![CDATA[LXC 容器首先按照昨天讲的 nvidia 显卡直通步骤, 开启显卡直通功能. 下面是安装 Jellyfin 的步骤]]></summary></entry><entry><title type="html">PVE LXC 容器直通 Nvidia 显卡</title><link href="http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html" rel="alternate" type="text/html" title="PVE LXC 容器直通 Nvidia 显卡" /><published>2023-07-01T00:00:00+08:00</published><updated>2023-07-01T00:00:00+08:00</updated><id>http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough</id><content type="html" xml:base="http://isay.me/2023/07/pve-lxc-nvidia-gpu-passthrough.html"><![CDATA[<p>一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个.</p>
+
+<p>在 v2ex 上看到讨论, 大家推荐使用 nvidia T400 显卡, 因为这个显卡支持编解码的格式多, 而且不需要单独供电, 功耗只有30W, 所以在闲鱼上购入一张 T400 4GB 显卡.</p>
+
+<p>显卡有了, 接下来就是看怎么在 PVE 中直通了. 搜索了一圈, 发现了一个博主写的文章比较详细, <a href="https://www.insilen.com/post/263.html">https://www.insilen.com/post/263.html</a> 这篇文章中介绍了虚拟机直通以及 lxc 容器直通的区别. 通过这篇文章, 觉得使用 lxc 容器直通显然更经济一些, 非独占式, 可以多个容器共用一张显卡, 做到资源利用最大化. 所以按照博客文章的步骤, 在自己的 PVE 机器上安装, 经过一些修改和测试, 最终安装并直通成功.</p>
+
+<p>下面主要记录下安装中的一些步骤，方便后面再次安装时用到.</p>
+
+<h2 id="宿主机配置">宿主机配置</h2>
+<p><strong>首先</strong>是安装驱动</p>
+
+<p>由于 debian 源中已经有了 nvidia-driver, 所以我选择直接使用源安装, 方便进行升级。唯一的缺点是源中的版本旧一些. 目前 PVE 7.4 是基于 debian 11 bullseye, 在我安装时源中最新的 nvidia-driver 驱动版本为 470.182.03.</p>
+
+<p>更新 <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code> 文件, 开启 nvidia-driver 所在的库 <code class="language-plaintext highlighter-rouge">non-free</code>，为了保险起见，把 <code class="language-plaintext highlighter-rouge">contrib</code> 也加上</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deb https://mirrors.ustc.edu.cn/debian bullseye main contrib non-free
+deb https://mirrors.ustc.edu.cn/debian bullseye-updates main contrib non-free
+# security updates
+deb https://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib non-free
+</code></pre></div></div>
+
+<p>然后执行更新并安装 pve-headers 和 nvidia-driver.</p>
+
+<p>这里要注意一下，不能只安装 <code class="language-plaintext highlighter-rouge">nvidia-driver</code>。由于在安装过程中需要编译，依赖 <code class="language-plaintext highlighter-rouge">pve-headers</code> 模块，但是 <code class="language-plaintext highlighter-rouge">nvidia-driver</code> 并没有标识 <code class="language-plaintext highlighter-rouge">pve-headers</code> 作为依赖，所以需要手动安装。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update &amp;&amp; apt install pve-headers nvidia-driver
+</code></pre></div></div>
+
+<p><strong>然后</strong>是确认驱动及对应模块配置正确，并屏蔽掉开源的显卡驱动 nouveau</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">/etc/modules-load.d/nvidia.conf</code> 文件中，确认以下内容存在，如果有缺少的需要补全。在我的机器上安装完 nvidia-driver 后，这个文件里只有一个 nvidia-drm, 导致后面在直通时缺少对应的设备，需要把 <code class="language-plaintext highlighter-rouge">nvidia</code> 和 <code class="language-plaintext highlighter-rouge">nvidia_uvm</code> 补全。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvidia-drm
+nvidia
+nvidia_uvm
+</code></pre></div></div>
+
+<p>安装完 nvidia-driver 后，在 <code class="language-plaintext highlighter-rouge">/etc/modprobe.d/</code> 目录下，可以看到如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/modprobe.d/dkms.conf
+/etc/modprobe.d/nvidia-kernel-common.conf
+/etc/modprobe.d/nvidia-blacklists-nouveau.conf
+/etc/modprobe.d/pve-blacklist.conf
+/etc/modprobe.d/nvidia.conf
+</code></pre></div></div>
+
+<p>在 <code class="language-plaintext highlighter-rouge">nvidia-blacklists-nouveau.conf</code> 文件中，有如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blacklist nouveau
+</code></pre></div></div>
+
+<p>在 <code class="language-plaintext highlighter-rouge">pve-blacklist.conf</code> 文件中，有如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blacklist nvidiafb
+</code></pre></div></div>
+
+<p>保证这两个 blacklist 存在，并且没有重复。如果没有的话，需要进行补全。</p>
+
+<p><strong>然后</strong>是更新内核模块</p>
+
+<p>由于在 <code class="language-plaintext highlighter-rouge">/etc/modules-load.d/nvidia.conf</code> 中添加了 <code class="language-plaintext highlighter-rouge">nvidia</code> 以及 <code class="language-plaintext highlighter-rouge">nvidia_uvm</code> 模块，所以需要对内核模块进行更新。使用如下命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-initramfs -u
+</code></pre></div></div>
+
+<p>在上面我贴的博客文章中使用的命令是 <code class="language-plaintext highlighter-rouge">update-initramfs -u -k all</code> 对本地的所有内核模块进行更新，但是按照我的理解 nvidia module 是和内核模块版本绑定的, 所以把 nvidia module 更新到旧的内核中会有风险导致旧的内核模块在加载 nvidia 模块时版本不匹配出现问题. 我觉得只使用一个 <code class="language-plaintext highlighter-rouge">-u</code> 选项可能更合理一些。</p>
+
+<p><strong>然后</strong>是创建对应的脚本文件</p>
+
+<p>创建文件路径 <code class="language-plaintext highlighter-rouge">/etc/udev/rules.d/70-nvidia.rules</code>, 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Create /nvidia0, /dev/nvidia1 … and /nvidiactl when nvidia module is loaded
+KERNEL=="nvidia", RUN+="/bin/bash -c '/usr/bin/nvidia-smi -L &amp;&amp; /bin/chmod 666 /dev/nvidia*'"
+# Create the CUDA node when nvidia_uvm CUDA module is loaded
+KERNEL=="nvidia_uvm", RUN+="/bin/bash -c '/usr/bin/nvidia-modprobe -c0 -u &amp;&amp; /bin/chmod 0666 /dev/nvidia-uvm*'"
+</code></pre></div></div>
+
+<p>这些规则作用：</p>
+<ul>
+  <li>设置更宽松的权限</li>
+  <li>启用默认情况下未启动的 nvidia_uvm（至少对于我的卡而言）</li>
+</ul>
+
+<p><strong>然后</strong>就是重启，并检查对应的设备及显卡运行情况</p>
+
+<p>重启后，正常情况下显卡驱动应该正常加载，查看对应位置内容进行验证。</p>
+
+<p><code class="language-plaintext highlighter-rouge">ls -al /dev/nvidia*</code> 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crw-rw-rw- 1 root root 195,   0 Jun 30 23:08 /dev/nvidia0
+crw-rw-rw- 1 root root 195, 255 Jun 30 23:08 /dev/nvidiactl
+crw-rw-rw- 1 root root 195, 254 Jun 30 23:08 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 506,   0 Jun 30 23:08 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 506,   1 Jun 30 23:08 /dev/nvidia-uvm-tools
+
+/dev/nvidia-caps:
+total 0
+drw-rw-rw-  2 root root     80 Jun 30 23:08 .
+drwxr-xr-x 20 root root   4560 Jun 30 23:08 ..
+cr--------  1 root root 509, 1 Jun 30 23:08 nvidia-cap1
+cr--r--r--  1 root root 509, 2 Jun 30 23:08 nvidia-cap2
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls -al /dev/dri</code> 内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drwxr-xr-x  3 root root        120 Jun 30 23:08 .
+drwxr-xr-x 20 root root       4560 Jun 30 23:08 ..
+drwxr-xr-x  2 root root        100 Jun 30 23:08 by-path
+crw-rw----  1 root video  226,   0 Jun 30 23:08 card0
+crw-rw----  1 root video  226,   1 Jun 30 23:08 card1
+crw-rw----  1 root render 226, 128 Jun 30 23:08 renderD128
+</code></pre></div></div>
+
+<p>注意上面出现的数字（195、506、226），这些是之后LXC中需要的，所以先记录下来。</p>
+
+<p><strong>注意</strong>： 上述设备缺一不可至少包含：nvidia0、nvidiactl、nvidia-modeset、vidia-uvm、nvidia-uvm-tools； 少了说明驱动有组件没有安装成功，需要详细检查.</p>
+
+<p>另外，使用 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 命令会输出当前显卡的信息</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA T400 4GB     On   | 00000000:01:00.0 Off |                  N/A |
+| 38%   38C    P8    N/A /  31W |      3MiB /  3911MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>这些的设备以及 nvidia-smi 输出正确的内容后，表示显卡驱动已正确安装并加载。</p>
+
+<p><strong>最后</strong>是对 LXC 容器进行配置</p>
+
+<p>宿主机进入 <code class="language-plaintext highlighter-rouge">/etc/pve/lxc/</code> 找到对应LXC的ID配置文件，打开后在最后一行加入以下内容：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lxc.cgroup2.devices.allow: c 195:* rwm
+lxc.cgroup2.devices.allow: c 506:* rwm
+lxc.cgroup2.devices.allow: c 226:* rwm
+lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file
+lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
+</code></pre></div></div>
+
+<p>这里的 195、506和226就是上面记录下的数值。
+注意这里使用的是 <code class="language-plaintext highlighter-rouge">lxc.cgroup2.devices.allow</code>, 和我上面博客文章中写的 <code class="language-plaintext highlighter-rouge">lxc.cgroup.devices.allow</code> 不一致，是因为 PVE 6 升级 7 时，升级说明已经提到了这个写法的变化，应该是博客文章的作者没有更新。</p>
+
+<p>到这里宿主机配置应该就全部结束了。下面是 lxc 容器中的配置。</p>
+
+<h2 id="lxc-容器配置">LXC 容器配置</h2>
+
+<p><strong>首先</strong>是确认宿主机的相关设备映射成功。使用 <code class="language-plaintext highlighter-rouge">ls -al /dev/nvidia*</code> 以及 <code class="language-plaintext highlighter-rouge">ls -al /dev/dri</code> 命令应该会得到和宿主机一样的输出。</p>
+
+<p><strong>然后</strong>是安装驱动。</p>
+
+<p>注意 LXC 容器安装的驱动版本需要和宿主机完全一致。并且不能使用内核模块。所以在容器中安装驱动，我没有再使用源来安装，因为源中的驱动不支持指定 <code class="language-plaintext highlighter-rouge">--no-kernel-module</code> 选项，但是这个选项在 LXC 容器直通显卡时是必须的。</p>
+
+<p>所以在容器中通过下载 nvidia 驱动安装文件的方式进行安装。对应的官网地址为 https://www.nvidia.com/en-us/drivers/unix/ ，找到和宿主版本相同的驱动下载即可。我使用的 470.182.03 版本驱动文件下载命令如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://us.download.nvidia.com/XFree86/Linux-x86_64/470.182.03/NVIDIA-Linux-x86_64-470.182.03.run
+</code></pre></div></div>
+
+<p>下载后，添加可执行权限并进行安装。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x NVIDIA-Linux-x86_64-470.182.03.run
+./NVIDIA-Linux-x86_64-470.182.03.run --no-kernel-module
+</code></pre></div></div>
+
+<p>安装驱动后，执行命令 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 可以看到输出内容如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA T400 4GB     Off  | 00000000:01:00.0 Off |                  N/A |
+| 38%   38C    P8    N/A /  31W |      3MiB /  3911MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>证明 LXC 容器中的显卡驱动也正常. 如果 <code class="language-plaintext highlighter-rouge">nvidia-smi</code> 没有输出，可以尝试下重启 LXC 容器。</p>
+
+<p>至此，PVE LXC 容器直通显卡工作就结束了。</p>]]></content><author><name></name></author><category term="PVE" /><category term="Nvidia" /><summary type="html"><![CDATA[一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个.]]></summary></entry><entry><title type="html">通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问</title><link href="http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html" rel="alternate" type="text/html" title="通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问" /><published>2023-06-29T00:00:00+08:00</published><updated>2023-06-29T00:00:00+08:00</updated><id>http://isay.me/2023/06/multi-plex-server-instance-and-traefik</id><content type="html" xml:base="http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html"><![CDATA[<p>安装Plex Media Server 后, 有几种方式可以访问到 plex</p>
+<ol>
+  <li>可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问</li>
+  <li>在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问</li>
+  <li>在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问</li>
+</ol>
+
+<p>上面 2 和 3 的区别就是, 在开启了 plex 远程访问功能后, plex 会获取当前 plex 服务器的内网IP以及公网IP. 然后在使用 https://app.plex.tv 访问时, 会尝试使用公网IP及对应的端口号访问, 转发到内网的 plex 服务器.</p>
+
+<p>但是在不开启 plex 的远程访问功能的情况下, 如果我们已经知道了公网IP, 也可以直接访问公网IP加端口号. 只是在通过 https://app.plex.tv 访问时, 由于 plex 并不知道这个公网IP, 所以会无法请求数据.</p>
+
+<p>支持的访问方式多, 但是各自都有一些不方便及不完美的地方</p>
+<ol>
+  <li>上面方式1只能在内网访问, 如果在外网就需要用方式2和方式3</li>
+  <li>上面方式2, 需要记住公网IP, 如果有域名以及 ddns 配合的话就方便一些, 这是在只有一个 plex server 的情况下. 但是假如有多个 plex server 的话, 就需要频繁切换域名访问, 此时可能就需要使用方式3</li>
+  <li>方式3的话, 则需要在路由器中为 plex 单独映射一个端口, 并且为了安全起见, 还需要单独配置 SSL 证书, 比较麻烦. 如果已经有了统一的 traefik 或者 nginx 等反向代理工具的话, 则显的有些多余.</li>
+</ol>
+
+<p>那么有没有什么更好的方式能解决上面3点呢, 通过查看 plex 设置后台, 发现了 自定义服务器访问 URL 这个功能, 经过测试, 搭配本地的反向代理工具可以完美解决. 并且可以实现如下效果.</p>
+<ol>
+  <li>不需要开启 plex 后台设置中的远程访问功能</li>
+  <li>所有 plex 服务器都可以统一通过 https://app.plex.tv 访问</li>
+  <li>当在内网时, 直接请求的是 plex 服务器的内网IP</li>
+  <li>当在公网时, 请求的是路由器的公网IP, 并通过路由器及反向代理工具, 转发到内网对应的 plex 服务器</li>
+  <li>统一由 traefik 或 nginx 等反向代理工具配置 SSL 证书</li>
+  <li>除 app.plex.tv 外, 还可以使用自定义域名的方式访问, 并且由于统一配置了 SSL 证书, 请求类型也是 https 的, 更安全.</li>
+</ol>
+
+<p>下面会以两个 plex 服务器实现来讲具体实现. 假设两个 plex 服务器分别为</p>
+<ol>
+  <li>Plex 服务器a, 对应内网IP 为 192.168.88.10, 路由器已配置了泛解析 ddns 域名 *.foo.example.com, 端口号 3456, 路由器转发所有请求到内网的 traefik 实例上</li>
+  <li>Plex 服务器b, 对应内网IP 为 192.168.100.47, 路由器已配置了泛解析 ddns 域名 *.bar.example.com, 端口号 5678, 路由器转发所有请求到内网的 traefik 实例上.</li>
+</ol>
+
+<p>首先配置 traefik, 针对 plex-a 以及 plex-b 分别添加内网转发配置.</p>
+
+<p>Plex-a 配置</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[http.routers.plex]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["websecure"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`plex.foo.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"plex@file"</span>
+
+<span class="nn">[[http.services.plex.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.88.10:32400"</span>
+</code></pre></div></div>
+
+<p>Plex-b 配置</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[http.routers.plex]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["websecure"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`plex.bar.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"plex@file"</span>
+
+<span class="nn">[[http.services.plex.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.100.47:32400"</span>
+</code></pre></div></div>
+
+<p>然后, plex 后台配置自定义服务器访问 URL, 具体设置位置为 设置=&gt;网络=&gt;自定义服务器访问URL</p>
+
+<p>Plex-a 后台配置</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://192.168.88.10:32400,https://plex.foo.example.com:3456
+</code></pre></div></div>
+
+<p>Plex-b 后台配置</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://192.168.100.47:32400,https://plex.bar.example.com:5678
+</code></pre></div></div>
+
+<p>注意上面的自定义服务器访问 URL 分别设置了两个值, 一个内网, 一个外网.</p>
+
+<p>当这样设置后, plex 会为当前 plex 服务器分配一个 https://192-168-100-47.xxxxxxx.plex.direct 这样的域名, 实际解析到的地址就是内网的 192.168.100.47.</p>
+
+<p>具体这样做的原因是因为, https://app.plex.tv 是使用 https 方式访问, 浏览器安全策略会禁止在 https 页面访问 http 资源的行为. 所以 plex 为了解决这个问题, 为每个 plex 服务器的内网IP分配了一个单独 https 的地址并在 plex 服务器上为  https://192-168-100-47.xxxxxxx.plex.direct 这样的单独域名安装上对应的SSL证书.</p>
+
+<p>此时, 当你的路由器端口转发正常, 并且 traefik 正确配置了 SSL 泛解析证书的情况下, 访问 app.plex.tv 页面可以同时看到你的 plex-a 以及 plex-b 两个服务器的数据.</p>
+
+<ul>
+  <li>当在 plex-a 所在的内网访问 app.plex.tv 时, 请求的是 plex-a 的内网IP, plex-b 的公网IP</li>
+  <li>当在 plex-b 所在的内网访问 app.plex.tv 时, 请求的是 plex-a 的公网IP, plex-b 的内网IP</li>
+  <li>当在公网访问 app.plex.tv 时, 请求的是 plex-a 的公网IP, plex-b 的公网IP</li>
+</ul>
+
+<p><strong>注意</strong>
+如果你内网使用了 OpenWrt DNS 的话, 还需要多设置一步.</p>
+
+<p>由于 https://192-168-100-47.xxx.plex.direct  这样的域名解析出的 IP 实际是内网IP, 会被 OpenWrt 的 DNS 策略拦截, 此时 app.plex.tv 页面在浏览器请求 https://192-168-100-47.xxx.plex.direct 这个地址会被报告 DNS 解析错误, 所以 app.plex.tv 会 fallback 到公网地址.</p>
+
+<p>具体配置位置为 网络=&gt; DHCP/DNS=&gt;重绑定保护, 取消打勾后就可以了.</p>]]></content><author><name></name></author><category term="traefik" /><category term="plex" /><summary type="html"><![CDATA[安装Plex Media Server 后, 有几种方式可以访问到 plex 可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问 在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问 在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问]]></summary></entry><entry><title type="html">使用 traefik 代理 aria2</title><link href="http://isay.me/2023/05/aria2-traefik.html" rel="alternate" type="text/html" title="使用 traefik 代理 aria2" /><published>2023-05-24T00:00:00+08:00</published><updated>2023-05-24T00:00:00+08:00</updated><id>http://isay.me/2023/05/aria2-traefik</id><content type="html" xml:base="http://isay.me/2023/05/aria2-traefik.html"><![CDATA[<p>aria2-pro 搭配 traefik 使用, 主要是利用 traefik 对 aria2 的 jsonrpc 请求, 以及 tcp/udp 端口进行代理.
+网上很多教程都是直接启动 docker, 很少有涉及到 traefik 的使用.</p>
+
+<p>在 traefik 配置中, udp 配置中没有 rule 相关配置, 所以只能 aria2 独自占用一个端口.
+tpc 配置中, 如果未启用 tls 配置, rule 只能配置为 “HostSNI(`*`)”, 如果启用了 https, 就可以和其它需要使用 tcp 的服务共用一个端口.</p>
+
+<p>完整的 docker-compose 内容如下, 环境变量通过 <code class="language-plaintext highlighter-rouge">docker-compose --env-file [file]</code> 进行指定</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">aria2-pro</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">p3terx/aria2-pro</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">aria2-pro</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">${ARIA2_CONFIG_DIR}:/config</span>
+      <span class="pi">-</span> <span class="s">${ARIA2_DOWNLOADS_DIR}:/downloads</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">RPC_SECRET=${ARIA2_RPC_SECRET}</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik.enable=true</span>
+
+      <span class="pi">-</span> <span class="s">traefik.http.routers.aria2-pro.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.aria2-pro.rule=Host(`${ARIA2_DOMAIN}`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.services.aria2-pro.loadbalancer.server.port=6800</span>
+
+      <span class="pi">-</span> <span class="s">traefik.tcp.routers.aria2-pro.entrypoints=aria2tcp</span>
+      <span class="pi">-</span> <span class="s">traefik.tcp.routers.aria2-pro.rule=HostSNI(`*`)</span>
+      <span class="pi">-</span> <span class="s">traefik.tcp.services.aria2-pro.loadbalancer.server.port=6888</span>
+
+      <span class="pi">-</span> <span class="s">traefik.udp.routers.aria2-pro.entrypoints=aria2udp</span>
+      <span class="pi">-</span> <span class="s">traefik.udp.services.aria2-pro.loadbalancer.server.port=6888</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">traefik</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div></div>
+
+<p>traefik 除正常的 http 配置外, 还需要新增 tcp 以及 udp 的配置</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[entryPoints.aria2tcp]</span>
+  <span class="py">address</span> <span class="p">=</span> <span class="s">":6888/tcp"</span>
+<span class="nn">[entryPoints.aria2udp]</span>
+  <span class="py">address</span> <span class="p">=</span> <span class="s">":6888/udp"</span>
+</code></pre></div></div>]]></content><author><name></name></author><category term="traefik" /><category term="aria2" /><summary type="html"><![CDATA[aria2-pro 搭配 traefik 使用, 主要是利用 traefik 对 aria2 的 jsonrpc 请求, 以及 tcp/udp 端口进行代理. 网上很多教程都是直接启动 docker, 很少有涉及到 traefik 的使用.]]></summary></entry><entry><title type="html">RouterOS 自动根据 IP 是否在线切换下发 DHCP options</title><link href="http://isay.me/2023/05/routeros-auto-switch-dhcp-options.html" rel="alternate" type="text/html" title="RouterOS 自动根据 IP 是否在线切换下发 DHCP options" /><published>2023-05-16T00:00:00+08:00</published><updated>2023-05-16T00:00:00+08:00</updated><id>http://isay.me/2023/05/routeros-auto-switch-dhcp-options</id><content type="html" xml:base="http://isay.me/2023/05/routeros-auto-switch-dhcp-options.html"><![CDATA[<p>今天通过问 chatGPT, 解决了我一个使用 RouterOS 时的问题.</p>
+
+<p>目前在我的网络中, 存在两个网关和两个DNS, 分别是 RouterOS 路由器本身, 以及另外的一个 openwrt.
+在 RouterOS 的 DHCP 配置中, 会下发 openwrt 的 IP 作为网络中的设备使用的网关及 DNS 服务器.
+但是如果 openwrt 由于我折腾挂掉后, 就导致设备就无法上网了. 所以如果 RouterOS 能在 openwrt 设备离线后自动将下发的网关及 DNS 服务器切换加 RouterOS 路由器就可以保持网络不中断.</p>
+
+<p>chatGPT 给出了答案, 根据自己的实际情况稍微改了一下就利用起来了. 下面是 chatGPT 给出的原脚本代码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:local ipToCheck "192.168.1.100"  # 要检查的 IP
+:local onlineGateway "192.168.1.1"  # 在线时的网关
+:local onlineDNS "8.8.8.8"  # 在线时的 DNS
+:local offlineGateway "192.168.1.2"  # 不在线时的备用网关
+:local offlineDNS "8.8.4.4"  # 不在线时的备用 DNS
+
+:if ([ping $ipToCheck count=2] = 0) do={
+  # IP 不在线
+  :log info "IP $ipToCheck 不在线，设置备用网关和 DNS"
+  /ip dhcp-server option set [find name=gateway] value=$offlineGateway
+  /ip dhcp-server option set [find name=dns] value=$offlineDNS
+} else={
+  # IP 在线
+  :log info "IP $ipToCheck 在线，设置网关和 DNS"
+  /ip dhcp-server option set [find name=gateway] value=$onlineGateway
+  /ip dhcp-server option set [find name=dns] value=$onlineDNS
+}
+</code></pre></div></div>]]></content><author><name></name></author><category term="RouterOS" /><summary type="html"><![CDATA[今天通过问 chatGPT, 解决了我一个使用 RouterOS 时的问题.]]></summary></entry><entry><title type="html">PVE 启用 IOMMU 功能为虚拟机开启 sata 控制器直通</title><link href="http://isay.me/2023/05/pve-enable-iommu.html" rel="alternate" type="text/html" title="PVE 启用 IOMMU 功能为虚拟机开启 sata 控制器直通" /><published>2023-05-16T00:00:00+08:00</published><updated>2023-05-16T00:00:00+08:00</updated><id>http://isay.me/2023/05/pve-enable-iommu</id><content type="html" xml:base="http://isay.me/2023/05/pve-enable-iommu.html"><![CDATA[<p>PVE 安装了个黑群晖, PVE 系统安装在 U 盘上, 所以想把 sata 控制器整个直通给群晖, 方便进行硬盘管理. 在网上搜索了一番, 最终直通成功.</p>
+
+<h3 id="启用-iommu-功能">启用 IOMMU 功能</h3>
+<p>由于我的 CPU 是 intel 的, 所以按照下面步骤开启</p>
+
+<ol>
+  <li>编辑 grub 文件 <code class="language-plaintext highlighter-rouge">/etc/default/grub</code></li>
+  <li>找到 <code class="language-plaintext highlighter-rouge">GRUB_CMDLINE_LINUX_DEFAULT="quiet"</code> 修改为 <code class="language-plaintext highlighter-rouge">GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"</code></li>
+  <li>使用 <code class="language-plaintext highlighter-rouge">update-grub</code> 更新 grub</li>
+</ol>
+
+<h3 id="增加虚拟化驱动加载vifo系统模块">增加虚拟化驱动，加载vifo系统模块</h3>
+<p>修改 <code class="language-plaintext highlighter-rouge">/etc/modules</code> 文件, 添加如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+</code></pre></div></div>
+
+<h3 id="重启验证">重启验证</h3>
+
+<p>重启系统, 然后运行命令 <code class="language-plaintext highlighter-rouge">dmesg | grep -e DMAR -e IOMMU</code>. 如果有输出, 表示成功.</p>
+
+<h3 id="虚拟机添加-pci-设备">虚拟机添加 pci 设备</h3>
+<p>接下来就可以为虚拟机添加设备了.</p>]]></content><author><name></name></author><category term="PVE" /><summary type="html"><![CDATA[PVE 安装了个黑群晖, PVE 系统安装在 U 盘上, 所以想把 sata 控制器整个直通给群晖, 方便进行硬盘管理. 在网上搜索了一番, 最终直通成功.]]></summary></entry><entry><title type="html">traefik 作为反向代理</title><link href="http://isay.me/2023/05/traefik-as-reverse-proxy.html" rel="alternate" type="text/html" title="traefik 作为反向代理" /><published>2023-05-15T00:00:00+08:00</published><updated>2023-05-15T00:00:00+08:00</updated><id>http://isay.me/2023/05/traefik-as-reverse-proxy</id><content type="html" xml:base="http://isay.me/2023/05/traefik-as-reverse-proxy.html"><![CDATA[<h3 id="优点">优点</h3>
+<ul>
+  <li>不需要集中维护代理配置文件</li>
+  <li>和 docker 完美配合</li>
+  <li>docker label 自动更新时, 服务自动发现</li>
+  <li>docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务
+    <h3 id="缺点">缺点</h3>
+  </li>
+  <li>docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理</li>
+</ul>
+
+<h1 id="traefik-配置">traefik 配置</h1>
+<p>traefik 配置分为两类, 静态配置和动态配置</p>
+<h2 id="静态配置">静态配置</h2>
+<p>静态配置一般在两个地方配置, ① traefik 启动时的命令行参数, ②静态配置文件.
+静态配置一般是用来定义 provider 和 entrypoint 用的. 另外, 在 entrypoint 的配置中, 还可以配置全局的 middleware 以及 tls 选项.
+动态配置的配置项就比较多, 除了静态配置之外的都可以配置.</p>
+
+<h1 id="群晖docker中使用-traefik">群晖docker中使用 traefik</h1>
+<p>traefik 启动配置就不再啰嗦, 但是有个地方需要重点注意.</p>
+
+<p>docker 中的 traefik 无法方便的访问宿主机(也就是群晖)所在的局域网, 最多只能从容器中访问宿主机, 此时需要在 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 中添加如下配置, 使容器内部可以请求到宿主机</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+</code></pre></div></div>
+<p>此时 traefik 可以将请求转发给宿主机, 但是仍然无法转发给局域网中的其它机器. 解决这个问题有两个方案.</p>
+
+<h3 id="方案一-搭配使用-traefik">方案一: 搭配使用 traefik</h3>
+<p>对, 就是再搭配使用一个 traefik 实例(以下就叫实例 2, 前面说的 traefik 服务叫做实例 1), 但是启动时选择的网络模式是 host 模式, 实例 2 就可以自由访问到局域网中的其它IP.</p>
+
+<p>此时实例 1 中通过动态配置新增一个服务, 服务IP为 <code class="language-plaintext highlighter-rouge">host.docker.internal</code>, 将请求转发给宿主机. 实例 2 在宿主机中监听所有请求, 然后再通过路由规则代理到对应的局域网IP.</p>
+
+<p>但是这里有个问题是</p>
+<ol>
+  <li>如果实例2启动时使用了 providers.docker, 那么两个实例都会尝试读取 docker label 中的信息, 并且由于两个 traefik 实例的dashboard 服务名字都叫 <code class="language-plaintext highlighter-rouge">api@internal</code>, 势必会造成冲突.</li>
+  <li>如果实例2未启用 providers.docker, 那么就需要在实例2的动态配置中定义好 dashboard 服务.</li>
+</ol>
+
+<p>但是我倾向于 dashboard 这种内建服务还是使用 docker label 动态化配置比较好. 而且实例 1 也无法在 docker label 中定义到宿主机的代理配置, 需要一个专门的动态配置才行(试验了一下, <code class="language-plaintext highlighter-rouge">loadbalancer.servers.url</code> 只能在动态配置文件中定义, 如果放在 docker label 中会提示 <code class="language-plaintext highlighter-rouge">servers</code> 字段不存在)</p>
+
+<p>所以如果使用两个 traefik 实例的话, 配置文件会变多, 并且容易造成冲突.  而我的倾向是能放在 docker label 中的配置尽量不使用动态配置文件来实现.</p>
+
+<p>所以我尝试了使用其它的方案.</p>
+
+<h3 id="方案二-搭配使用-nginx--群晖反向代理">方案二: 搭配使用 nginx + 群晖反向代理</h3>
+<p>我尝试的另一个方案是再加一个 nginx 实例, 但是需要和群晖的反向代理功能配合.</p>
+
+<p>nginx 实例的唯一作用是将 traefik 的请求转发给宿主机, 然后由宿主机也就是群晖的反向代理将请求转发给对应的服务上去.</p>
+
+<p>和方案一对比起来不一样的就是, 方案一是把到局域网的转发配置维护在 traefik 中, 方案二是把到局域网的转发配置维护在群晖中.(相对来说, 其实上面的方案更优, 但是在实践的过程中, 上面的方案总是会报错)</p>
+
+<p>相比方案一是在 traefik 实例中访问宿主机, 在方案二里是由 nginx 实例访问宿主机, nginx 作为 traefik 的一个承接服务, 这样就可以把 nginx 相关配置放在 docker label 中. nginx 实例的 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 配置如下</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">traefik-proxy</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:stable-alpine</span>
+  <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-proxy</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/volume2/docker/traefik/nginx-templates:/etc/nginx/templates:ro</span>
+  <span class="na">networks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">traefik</span>
+  <span class="na">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">NGINX_HOST_PORT=51080</span>
+  <span class="na">extra_hosts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">traefik.enable=true</span>
+
+    <span class="c1"># routers</span>
+    <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.entrypoints=websecure</span>
+    <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.rule=Host(`domain.com`)</span>
+</code></pre></div></div>
+
+<p>nginx 反向代理配置如下</p>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+  <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+
+  <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://host.docker.internal:</span>$<span class="p">{</span><span class="kn">NGINX_HOST_PORT</span><span class="err">}</span><span class="p">;</span>
+
+    <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+
+    <span class="c1"># proxy_http_version 1.1定义用于代理的HTTP协议版本，默认情况下将其设置为1.0。对于Websocket和keepalive连接，您需要使用1.1版。</span>
+    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+
+    <span class="c1"># proxy_cache_bypass $http_upgrade设置websocket不从缓存中获取响应，而是直接通过应用。</span>
+    <span class="kn">proxy_cache_bypass</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+
+    <span class="c1"># Upgrade $http_upgrade和Connection "upgrade"如果您的应用程序使用Websockets，则这些字段是必填字段。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">"upgrade"</span><span class="p">;</span>
+
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+    <span class="c1"># X-Real-IP $remote_addr 将真实的客户端地址转发到应用，如果没有设置，你应用获取到将会是Nginx服务器IP地址。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-For $proxy_add_x_forwarded_for转发客户端请求头的X-Forwarded-For字段到应用。</span>
+    <span class="c1"># 如果客户端请求头中不存在X-Forwarded-For字段，则$proxy_add_x_forwarded_for变量等同于$remote_addr变量</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-Proto $scheme这将会转发客户端所使用的HTTP协议或者是HTTPS协议。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-Host $host转发客户端请求的原始主机到应用。X-Forwarded-Port $server_port定义客户端请求的原始端口。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Host</span> <span class="nv">$server_name</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Port</span> <span class="nv">$server_port</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="重回方案一">重回方案一</h3>
+<p>当我在写这篇总结的时候, 突然我意识到方案一我错在哪里了.</p>
+
+<p>实例2的docker labels 是给实例1看的, 但是我误认为实例2可以看到. 并且我在实例2的labels中定义的 dashboard router 名字和在实例 1 中的一样导致冲突, 结果实例 1 的 dashboard 也进入不了了, 所以我误认为是两个 traefik 一起使用的话会出现问题.</p>
+
+<p>仔细思考可以得出, 正确的做法应该是</p>
+<ol>
+  <li>实例1开启 <code class="language-plaintext highlighter-rouge">providers.docker</code> 以及 <code class="language-plaintext highlighter-rouge">providers.file</code>. 前者是用来自动发现其它的 docker 服务, 并提供反向代理服务. 后者是用来定义 https 以及从实例 1 到实例 2 的转发配置.</li>
+  <li>实例2只开启 <code class="language-plaintext highlighter-rouge">providers.file</code>, 所以它的 dashboard 以及其它各种配置只能在动态配置文件中定义.</li>
+  <li>由于实例 2 和实例 1 根本不在一个网络中, 并且实例 2 也没有开启 <code class="language-plaintext highlighter-rouge">providers.docker</code>, 所以实例2中的 docker label 没有意义, 所以不需要任何 docker label.</li>
+</ol>
+
+<p>通过前面的总结, 按照最新的方案一, 使用两个 traefik 终于完成了群晖中的 traefik 配置, 并且所有的配置都维护在 traefik 内部, 这样的话也方便迁移到非群晖的系统中去.</p>
+
+<p>完整的 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 配置如下</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">traefik-docker</span><span class="pi">:</span>
+    <span class="c1"># The official v2 Traefik docker image</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">traefik:v2.9</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-docker</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="c1"># The HTTP port</span>
+      <span class="c1"># - 52080:52080</span>
+      <span class="pi">-</span> <span class="s">52443:52443</span>
+      <span class="c1"># The Web UI (enabled by --api.insecure=true)</span>
+      <span class="c1"># - "58080:8080"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="c1"># So that Traefik can listen to the Docker events</span>
+      <span class="pi">-</span> <span class="s">/var/run/docker.sock:/var/run/docker.sock:ro</span>
+      <span class="c1"># dynamic conf</span>
+      <span class="pi">-</span> <span class="s">/volume2/docker/traefik/traefik-docker:/etc/traefik/config:ro</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik</span>
+    <span class="na">extra_hosts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="c1"># - --entrypoints.web.address=:52080</span>
+      <span class="c1"># - --entrypoints.web.http.middlewares=shared-compress@docker</span>
+
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.address=:52443</span>
+      <span class="c1"># global config for response compress</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.http.middlewares=shared-compress@docker</span>
+      <span class="c1"># global config for https</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.http.tls=true</span>
+
+      <span class="pi">-</span> <span class="s">--api=true</span>
+
+      <span class="c1"># - --providers.docker=true</span>
+      <span class="pi">-</span> <span class="s">--providers.docker.exposedbydefault=false</span>
+      <span class="pi">-</span> <span class="s">--providers.file.directory=/etc/traefik/config</span>
+      <span class="pi">-</span> <span class="s">--providers.file.watch=true</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik.enable=true</span>
+
+      <span class="c1"># global shared middlewares</span>
+      <span class="c1">## response compress</span>
+      <span class="pi">-</span> <span class="s">traefik.http.middlewares.shared-compress.compress=true</span>
+
+      <span class="c1"># service specific middlewares</span>
+      <span class="c1">## dashboard-auth</span>
+      <span class="c1"># 在 labels 中配置密码时, 需要将 $ 进行转义变成 2 个</span>
+      <span class="pi">-</span> <span class="s">traefik.http.middlewares.dashboard-auth.basicauth.users=user:passwd</span>
+
+      <span class="c1"># routers</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.rule=Host(`traefik.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.service=api@internal</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.middlewares=dashboard-auth@docker</span>
+
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.rule=Host(`traefik-host.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.service=traefik-host@file</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.middlewares=dashboard-auth@docker</span>
+
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.rule=Host(`op.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.service=traefik-host@file</span>
+
+  <span class="na">traefik-host</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">traefik:v2.9</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-host</span>
+    <span class="c1"># ports:</span>
+      <span class="c1"># - 52081:52081</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/volume2/docker/traefik/traefik-host:/etc/traefik/config:ro</span>
+    <span class="na">network_mode</span><span class="pi">:</span> <span class="s">host</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.web.address=:52081</span>
+      <span class="c1"># - --entrypoints.web.http.middlewares=shared-compress@docker</span>
+
+      <span class="c1"># - --entrypoints.websecure.address=:52443</span>
+      <span class="c1"># global config for response compress</span>
+      <span class="c1"># - --entrypoints.websecure.http.middlewares=shared-compress@docker</span>
+      <span class="c1"># global config for https</span>
+      <span class="c1"># - --entrypoints.websecure.http.tls=true</span>
+
+      <span class="pi">-</span> <span class="s">--api=true</span>
+
+      <span class="c1"># - --providers.docker=true</span>
+      <span class="c1"># - --providers.docker.exposedbydefault=false</span>
+      <span class="pi">-</span> <span class="s">--providers.file.directory=/etc/traefik/config</span>
+      <span class="pi">-</span> <span class="s">--providers.file.watch=true</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">traefik</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>实例1 的动态配置文件如下所示
+动态配置的作用有两个</p>
+<ol>
+  <li>定义 https 证书</li>
+  <li>定义从 docker 转发请求到 host 的服务, 通过 host.docker.internal 指向宿主机.</li>
+</ol>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[[tls.certificates]]</span>
+  <span class="py">certFile</span> <span class="p">=</span> <span class="s">"/path/to/tls.cer"</span>
+  <span class="py">keyFile</span> <span class="p">=</span> <span class="s">"/path/do/tls.key"</span>
+
+<span class="nn">[[http.services.traefik-host.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://host.docker.internal:52081"</span>
+</code></pre></div></div>
+
+<p>实例2 的动态配置文件如下所示, 动态配置的作用就是定义 dashboard 和转发请求到局域网中的其它IP.</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># dashboard</span>
+<span class="nn">[http.routers.dashboard]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["web"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`traefik-host.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"api@internal"</span>
+
+<span class="c"># openwrt</span>
+<span class="nn">[http.routers.openwrt]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["web"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`op.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"openwrt@file"</span>
+<span class="nn">[[http.services.openwrt.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.88.4:80"</span>
+</code></pre></div></div>
+
+<h1 id="思考">思考</h1>
+<p>后续再思考一下</p>
+<ol>
+  <li>如果使用方案一, 实例2使用 traefik 或者 nginx 都可以, 唯一的区别可能是 traefik 支持在不重启的情况下修改路由规则就可以生效, 而 nginx 必须要重启才可以生效.</li>
+  <li>如果使用方案二, 局域网的转发配置也可以维护在 nginx 实例中, 此时就需要将 nginx 实例使用 <code class="language-plaintext highlighter-rouge">host</code> 网络模式启动, 和方案一中的 traefik 实例2 一样.</li>
+</ol>]]></content><author><name></name></author><category term="traefik" /><category term="Synology" /><summary type="html"><![CDATA[优点 不需要集中维护代理配置文件 和 docker 完美配合 docker label 自动更新时, 服务自动发现 docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务 缺点 docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理]]></summary></entry><entry><title type="html">使用 FIS3 构建 Vue 前端工程. webpack 用户也请看过来</title><link href="http://isay.me/2017/04/vue-projects-development-with-fis3.html" rel="alternate" type="text/html" title="使用 FIS3 构建 Vue 前端工程. webpack 用户也请看过来" /><published>2017-04-08T00:00:00+08:00</published><updated>2017-04-08T00:00:00+08:00</updated><id>http://isay.me/2017/04/vue-projects-development-with-fis3</id><content type="html" xml:base="http://isay.me/2017/04/vue-projects-development-with-fis3.html"><![CDATA[<p>本文的目标是通过一个例子向大家展示如何使用 FIS3 作为构建工具, 来对使用 Vue 的前端工程进行构建.
+当然, Vue 只是一个例子, 完全可以推广到其它的项目中.</p>
+
+<p>前端构建工具, 我从 Grunt, Gulp, webpack 一路用过来. 虽然 webpack 非常火, 但是最终我在项目中使用的是 FIS3. 为什么用 webpack 的那么多, 我却没有使用呢.</p>
+
+<p>我在使用 wepback 的过程中, 遇到了比较大的问题, 所以最终没用 webpack. 这也是文章标题中请 webpack 用户也看过来的原因.</p>
+
+<h3 id="1-webpack-基于数字的模块id方案-会很大程序上导致浏览器的缓存大面积失效">1. webpack 基于数字的模块ID方案, 会很大程序上导致浏览器的缓存大面积失效</h3>
+
+<p>在 webpack 的配置中, 大家一般都会使用文件 hash 作为文件名, 然后在静态服务器中设置强制缓存, 可以保证用户在使用缓存的同时, 方便我们进行文件的更新. 只要 hash 一变, 用户自然就会去下载新的文件了.</p>
+
+<p>但是, 文件内容没有变化, 仅仅因为我们组织、引用文件的顺序变化, 或者新添加了一个模块, 就有可能导致缓存大面积失效.</p>
+
+<p>假设我们有这样一个场景, 有一个路由文件 route.js, 会在此文件中使用 webpack 的 <code class="language-plaintext highlighter-rouge">code spliting</code> 写法, 按需加载文件.</p>
+
+<p>在 route.js 中分别对应三个页面(foo, bar, baz), 按需加载对应的入口文件. 在入口文件中, 会再分别加载各个子页面依赖的文件.</p>
+
+<ul>
+  <li>foo.js
+    <ul>
+      <li>dep1.js</li>
+      <li>dep2.js</li>
+    </ul>
+  </li>
+  <li>bar.js
+    <ul>
+      <li>dep2.js</li>
+      <li>dep3.js</li>
+    </ul>
+  </li>
+  <li>baz.js
+    <ul>
+      <li>dep1.js</li>
+      <li>dep3.js</li>
+    </ul>
+  </li>
+</ul>
+
+<p>当我们使用 webpack 进行 build 后, webpack 会给每个文件分配一个 <code class="language-plaintext highlighter-rouge">moduleId</code>, 这个 moduleId 是随着 webpack 扫描到的文件的数目而进行递增的. 一种结果是类似于下面的示例, 文件后面的括号中是生成的 moduleId 号</p>
+
+<ul>
+  <li>foo.js (1)
+    <ul>
+      <li>dep1.js (4)</li>
+      <li>dep2.js (5)</li>
+    </ul>
+  </li>
+  <li>bar.js (2)
+    <ul>
+      <li>dep2.js (5)</li>
+      <li>dep3.js (6)</li>
+    </ul>
+  </li>
+  <li>baz.js (3)
+    <ul>
+      <li>dep1.js (4)</li>
+      <li>dep3.js (6)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>如果我们调整了文件的依赖顺序, 把 dep2 放在 dep1 之前, 那么相应的moduleId 会变成类似下面这样</p>
+
+<ul>
+  <li>foo.js (1)
+    <ul>
+      <li>dep2.js (4)</li>
+      <li>dep1.js (5)</li>
+    </ul>
+  </li>
+  <li>bar.js (2)
+    <ul>
+      <li>dep2.js (4)</li>
+      <li>dep3.js (6)</li>
+    </ul>
+  </li>
+  <li>baz.js (3)
+    <ul>
+      <li>dep1.js (5)</li>
+      <li>dep3.js (6)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>而如果我们需要在foo.js中增加一个依赖 <code class="language-plaintext highlighter-rouge">dep4.js</code>, 那么相应的 moduleId 会变成类似于下面这样</p>
+
+<ul>
+  <li>foo.js (1)
+    <ul>
+      <li>dep1.js (4)</li>
+      <li>dep2.js (5)</li>
+      <li>dep4.js (6)</li>
+    </ul>
+  </li>
+  <li>bar.js (2)
+    <ul>
+      <li>dep2.js (5)</li>
+      <li>dep3.js (7)</li>
+    </ul>
+  </li>
+  <li>baz.js (3)
+    <ul>
+      <li>dep1.js (4)</li>
+      <li>dep3.js (7)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>我们只增加(或删除)了一个文件, 或者只调整了文件的引用顺序, 却导致了多个文件的 moduleId 变化, 这样就导致多个文件的内容发生了变化.
+那么当重新发布后, 其实有的页面的内容根本没有变化, 但是仅仅因为 moduleId 变化, 而导致需要重新下载这些文件, 使得没法使用浏览器已经缓存的文件.</p>
+
+<p>听说现在已经有了 namedModulePlugin 这个插件, 可以保证文件的模块ID是稳定的, 但是请看下面的一个问题.</p>
+
+<h3 id="2-多页面中-webpack-的-commonchunksplugin-插件-导致的冗余加载问题">2. 多页面中 webpack 的 commonChunksPlugin 插件, 导致的冗余加载问题</h3>
+
+<p>在项目中, 肯定会有很多公共模块, 所以大家都会使用 commonChunksPlugin 来提取公共模块.</p>
+
+<p>像一些第三方库的话, 我们可以通过 commonChunksPlugin, 将第三方类库放到 vendor 中.
+我们自己写的公共模块, 一般也是通过 commonChunksPlugin, 并传入 minChunks 选项来进行抽取. 如果一个模块被依赖次数达到了 minChunks 的大小, 就会被抽取到一个类似 common.js 中.</p>
+
+<p>只是模块抽取的逻辑, 以及导致的冗余加载的问题, 大家有没有关注过呢.</p>
+
+<p>比如在多页面项目中, 设置了多个 entry, 并通过 commonChunksPlugin 抽取公共模块, 假设我们配置的公共模块抽取的目标文件为 common.js.</p>
+
+<p>当 minChunks 为最小值 2 时, 即只要一个模块被依赖次数大于等于 2, 就会被抽取到 common.js 中. 所以构建完成后, common.js 会包含所有的公共模块. 那么当我们在加载的时候, 可能只需要其中的一个模块, 却要把整个文件下载下来. 这样造成的冗余性非常大.</p>
+
+<p>那么如果我们把 minChunks 设置的大一些会怎么样呢? 如果一个公共模块被依赖的次数没有达到 minChunks, 那么此模块就会在所有依赖它的文件中都会被打包一份. 同样也造成了资源的冗余加载.</p>
+
+<p>所以, 不管 minChunks 被设置为多少, 总是会有冗余加载的问题. 使用 webpack 的用户, 请看一下你们的 commonChunksPlugin 配置, 然后再看一下你们 build 之后的文件, 是不是会出现我上面所说的问题.</p>
+
+<h3 id="3-spa-中-code-split-导致的冗余加载问题">3. SPA 中, code split 导致的冗余加载问题</h3>
+
+<p>多页面的项目, 冗余加载的问题其实并没有那么严重, 即使有冗余加载, 但是因为用户刷新了页面, 也不会占用过多资源.
+但是在 SPA 项目中, 影响就会变得大了, 同时还会有一些潜在的问题.</p>
+
+<p>在 SPA 中, 一般我们都是通过在 route 中使用 require.ensure 实现动态加载. 但是 webpack 在切分文件时, 也会造成冗余加载的问题.</p>
+
+<p>比如</p>
+
+<p>a.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./c</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">a.js</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>b.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./b</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">a.js</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>c.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">c.js</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>main.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">a</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./a</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">})</span>
+  <span class="p">},</span>
+  <span class="na">b</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./b</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>webpack.config.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">webpack</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">main.js</span><span class="dl">'</span><span class="p">),</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">[name].js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>最终通过 webpack, 生成了三个文件. 0.js, 1.js, main.js, 内容分别如下</p>
+
+<p>0.js 对应 main.js 中的 a</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">webpackJsonp</span><span class="p">([</span><span class="mi">0</span><span class="p">],[</span>
+<span class="cm">/* 0 */</span><span class="p">,</span>
+<span class="cm">/* 1 */</span>
+<span class="cm">/***/</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">__webpack_require__</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">__webpack_require__</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">b.js</span><span class="dl">'</span><span class="p">)</span>
+<span class="cm">/***/</span> <span class="p">}),</span>
+<span class="cm">/* 2 */</span><span class="p">,</span>
+<span class="cm">/* 3 */</span>
+<span class="cm">/***/</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">c.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="cm">/***/</span> <span class="p">})</span>
+<span class="p">]);</span>
+</code></pre></div></div>
+
+<p>1.js 对应 main.js 中的 b</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">webpackJsonp</span><span class="p">([</span><span class="mi">1</span><span class="p">],[</span>
+<span class="cm">/* 0 */</span>
+<span class="cm">/***/</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">__webpack_require__</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">__webpack_require__</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">a.js</span><span class="dl">'</span><span class="p">)</span>
+<span class="cm">/***/</span> <span class="p">}),</span>
+<span class="cm">/* 1 */</span><span class="p">,</span>
+<span class="cm">/* 2 */</span><span class="p">,</span>
+<span class="cm">/* 3 */</span>
+<span class="cm">/***/</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">module</span><span class="p">,</span> <span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">c.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="cm">/***/</span> <span class="p">})</span>
+<span class="p">]);</span>
+</code></pre></div></div>
+
+<p>可以看到, 相同的 c.js 被分别打包进了 a.js 和 b.js</p>
+
+<p>所以当我们加载的时候, A 模块依赖 C 模块, 下载下来的文件中, 既有 A, 也会有 C. 但是 B 模块也依赖 C 模块, 下载下来的文件中, 既有 B, 也会有 C. 相同的 C 模块被下载了2次.</p>
+
+<p>设想一下, 如果这个 C 模块是一个 EventBus 模块, A 使用它来发布消息, B 使用它来订阅消息. 那么 A B 之间的通讯就会出现问题. 因为 A 使用的 C 和 B 使用的 C 是两个完全不同的模块, 它们的数据并不会共享, 也并不知道彼此的存在</p>
+
+<p>这几个问题, 是我在使用 webpack 的时候, 一直在思考的问题, 也在网上搜索过相关的知识. 但是好像使用 webpack 的用户, 都不认为这是问题?</p>
+
+<hr />
+
+<p>在构建项目的时候, 我想让模块ID能够稳定, 那么使用文件的路径作为模块ID就是一个不错的方案.
+我需要按需加载, 但是却不希望有冗余加载. 一个办法是, 在构建的时候, 其它流程都正常进行, 但是却不合并, 或者是通过配置有限合并. 加载的时候采取其它的办法. 这个办法后面会讲到.</p>
+
+<p>但是对 webpack 来说, 它作为一个打包器, 却要让它不进行打包合并, 真的是困难.</p>
+
+<h2 id="使用-fis3">使用 FIS3</h2>
+
+<p>因为上面的问题, 在了解了 FIS3 之后, 我就选择了 FIS3.
+我选择 FIS3, 首先是因为它能很好的解决上面的问题, 其次在它的基础上, 我们还能有更加优化的办法.</p>
+
+<p>FIS3 默认使用文件路径作为模块ID, 所以也就不存在模块ID不稳定的问题. 其次, 如果在没有进一步配置的情况下, FIS3 产出的文件是没有任何合并的, 只是把 commonjs 模块包装成 amd 模块, 添加了模块ID, 并且会产出一份静态文件资源表, 标识出文件之间的互相依赖关系.</p>
+
+<p>虽然没有自动合并, 但是 FIS3 提供了打包合并的配置, 我们可以通过配置选择将哪些文件合并打包在一起. 由于是我们自己控制的, 所以肯定会比 webpack 的自动化打包方案更灵活.</p>
+
+<p>可能使用 webpack 的人会有疑问, 通过手动配置的方式? 这不是更麻烦吗. 其实后面通过例子会看到, 真的很简单.</p>
+
+<p>下面是一个使用 FIS3 的实现的一个 demo. 此 demo 是 vue 官方出的 <a href="https://github.com/vuejs/vue-hackernews-2.0">vue-hackernews-2.0</a>, 我把它改成使用 FIS3 进行构建.</p>
+
+<p>这是整个项目的结构及依赖关系.</p>
+
+<p><img src="/uploads/2017/04/080101.png" alt="" /></p>
+
+<ol>
+  <li>最下层的是作为全局的第三方类库, 整个项目初始化时就需要加载. 所以我通过 FIS3 的 packTo 配置, 将他们打包为 <code class="language-plaintext highlighter-rouge">runtimes/packages.js</code> 文件. fis 的配置只需要下面这样
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// node_modules 库, 只 packTo 部分文件, 有的文件不是全局依赖还是按需加载</span>
+ <span class="nx">fis</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="dl">'</span><span class="s1">/(node_modules/{</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./src/runtimes/packages.json</span><span class="dl">'</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">}/**.{js,ts})</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+   <span class="na">packTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/src/runtimes/packages.js</span><span class="dl">'</span>
+ <span class="p">})</span>
+</code></pre></div>    </div>
+
+    <p><code class="language-plaintext highlighter-rouge">runtimes/package.json</code> 中的内容如下</p>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="p">[</span>
+   <span class="dl">"</span><span class="s2">es6-promise</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">vuex</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">vue-router</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">vuex-router-sync</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">process</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">tslib</span><span class="dl">"</span><span class="p">,</span>
+   <span class="dl">"</span><span class="s2">firebase</span><span class="dl">"</span>
+ <span class="p">]</span>
+</code></pre></div>    </div>
+
+    <p>我在 <code class="language-plaintext highlighter-rouge">runtimes/packages.json</code> 中定义哪些 node_modules 模块作为初始化加载的依赖. 如果没有在这里列出, 就会走异步加载的流程.</p>
+  </li>
+  <li>往上一层是项目的全局依赖模块, 包括 route, filters, app.vue 等等, 我把他们全都放到 runtimes 文件夹下, 表示它们都是作为运行时依赖. 我把它们合并为 <code class="language-plaintext highlighter-rouge">runtimes/runtimes.js</code>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 全局 runtimes 文件</span>
+ <span class="nx">fis</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="dl">'</span><span class="s1">/src/runtimes/**.{js,ts,vue}</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+   <span class="na">packTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/src/runtimes/runtimes.js</span><span class="dl">'</span>
+ <span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>再往上一层就是我们的 view, 业务逻辑. 每个 view 占据 views 下面的一个文件夹, 做到高度自制. 即, 此 view 需要的所有私有依赖, 都放到此文件夹下, 包括但不限于 自用组件, 图片, 字体, 工具函数等等. 上面图中 vuex 中的 store 我也把它放在这里, 因为 vuex 中有 registerModule 方法, 可以在 view 被加载时, 动态注册 vuex module. 最后通过 FIS3, 把每个view的文件夹合并为一个文件. fis 的配置中, 通过 FIS3 提供的类似于 glob 的语法, 可以很方便的进行配置
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// 各个页面自用的文件, 打包成一个文件, 减少http请求</span>
+ <span class="nx">fis</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="dl">'</span><span class="s1">/src/views/(*)/**.{js,ts,vue}</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+   <span class="na">packTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/src/views/$1-pack.js</span><span class="dl">'</span>
+ <span class="p">})</span>
+</code></pre></div>    </div>
+
+    <p>但是这里, 有个需要注意的地方. 如果是其中的某个模块, 也被其它模块依赖时, 可以把此依赖从此 view 文件夹中提出来, 上移到公共模块文件夹中. 但是如果是一些 icon 图片, 我更倾向于复制一份到view中, 而不是把它上移到公共图片目录中. 这样当某个view不需要了, 可以安全的将此目录直接删除</p>
+  </li>
+  <li>右边就是一些公共模块, 公共组件了, 它们依赖 node_modules, 同时被各个 view 所依赖. 但是它们不会被合并到任何文件中, 每个模块在构建完毕后, 都是一个单独的文件, 所以也就不会出现冗余加载的情况发生.</li>
+</ol>
+
+<p>其实通过上面的一些结构或者做法, 我们做了下面这些事情</p>
+
+<ol>
+  <li>我们把初始化需要的 node_modules 模块放到一个文件中, 这和 webpack 中通过定义 vendor, 然后使用 commonChunksPlugin 将 vendor 抽取到 vendor.js 中效果一样</li>
+  <li>我们把项目中的运行时依赖, 合并为 <code class="language-plaintext highlighter-rouge">runtimes/runtimes.js</code> 中, 这和 webpack 中, 通过 commonChunksPlugin 抽取项目公共模块的做法类似, 但是更精准. 只合并了项目初始化需要的依赖, 并不包括各个 view 展示时需要的依赖.</li>
+  <li>各个 view 中的模块都被合并成一个文件, 加载一个 view, 最小的 http 请求变为一个</li>
+</ol>
+
+<p>那么, 如果一个 view 依赖了很多公共模块, 不就会出现很多的请求吗?</p>
+
+<h2 id="请求数优化方法">请求数优化方法</h2>
+
+<p>因为 FIS3 在构建时, 会产出一份静态资源表, 所以我们根据此资源表, 可以有两种解决办法.</p>
+
+<ol>
+  <li>
+    <p>本地 localStorage 缓存, 这是只需要前端, 不需要后端配合就可以完成的一种方案, 但并不是最好的办法.</p>
+
+    <ol>
+      <li>初次加载时, 将模块缓存到 localStorage 中, 并以文件 url 或者文件 hash 作为标识</li>
+      <li>再次加载时, 首先检查 localStorage 中是否有缓存的模块, 以及模块 hash 是否匹配. 如果匹配的话, 直接拿出使用, 否则去远程加载</li>
+    </ol>
+
+    <p>所以当第一次到达某个页面时, http 请求可能会很多. 但是当用户以后再次到达此页面时, 因为localStorage 中有缓存, 所以完全可以做到 0 个请求.</p>
+  </li>
+  <li>
+    <p>上面的办法不是最好的办法, 是因为它没法解决第一次加载时, http 请求数目过多的问题. 那么解决此问题最好的办法就是, 后端 combo 服务.</p>
+
+    <p>由于我们有静态资源表, 所以当加载某个模块时, 在发出请求之前, 我们就可以通过静态资源表递归的找到所有依赖, 然后拼装成 combo 服务接收的参数, 一次请求, 把所有的依赖全部下载下来.</p>
+  </li>
+</ol>
+
+<p>如果把上面的 1, 2 结合起来, 我认为才是真正最好的解决方案.</p>
+
+<ol>
+  <li>首次加载时, 通过 combo 服务, 一个请求, 即可把模块的递归依赖全部下载下来, 然后缓存到 localStorage 中, http 请求数最小</li>
+  <li>再次加载时, 由于 localStorage 中有缓存, 所以不需要发出 http 请求即可完成.</li>
+  <li>
+    <p>如果是在其它view中加载某个模块, 首先通过静态资源表, 递归的把所有的依赖找到, 然后先去 localStorage 缓存中过滤一遍, 将 localStorage 中已经存在并可以使用的模块缓存直接拿出来使用, 然后再将 localStorage 中没有或者已经失效的模块, 使用 combo 服务进行加载. 这样就可以实现以最小的请求量以及最少的请求数, 即可完成模块加载.</p>
+
+    <p>比如首次加载 a.js, 依赖模块有 b, c, d. 当再次加载时, 因为已经有缓存, 所以不需要发出 http 请求, 直接使用缓存即可. 当加载另一个模块 e.js 时, 分析出的依赖模块有 c, d, f, g. 此时, 先去 localStorage 中, 发现缓存中有 c, d 模块, 直接拿出使用. 然后再用一个请求, 将 f, g 模块使用 combo 服务下载下来</p>
+  </li>
+</ol>
+
+<p>最终的 demo 的链接 <a href="https://github.com/Wyntau/fis3-typescript-vue-hackernews-2.0">fis3-typescript-vue-hackernews-2.0</a>.</p>
+
+<p>dev 模式下的请求</p>
+
+<p><img src="/uploads/2017/04/080102.png" alt="" /></p>
+
+<p>在 dev 模式下, 我没有配置任何的合并, 所以进入首页后, 请求数很多. 除去 livereload, 以及 vconsole 这两个 dev 模式下才有的模块外, 还有 21 个文件请求.</p>
+
+<p>production 模式下的请求</p>
+
+<p><img src="/uploads/2017/04/080103.png" alt="" /></p>
+
+<p>在 production 模式下, 我通过上面说到的使用 FIS3 的 packTo 配置, 将请求数降到 7 个. 其实还可以更进下一步, 将 <code class="language-plaintext highlighter-rouge">init.js</code> 和 <code class="language-plaintext highlighter-rouge">runtimes/runtimes.js</code> 再合并一下, 将运行时依赖以及项目启动文件, 同时合并到 <code class="language-plaintext highlighter-rouge">runtimes/init.js</code> 中</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// init 初始化文件</span>
+<span class="nx">fis</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="dl">'</span><span class="s1">/src/{boot,app}.{js,ts,vue}</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">packTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/src/runtimes/init.js</span><span class="dl">'</span>
+<span class="p">})</span>
+
+<span class="c1">// 全局 runtimes 文件</span>
+<span class="nx">fis</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="dl">'</span><span class="s1">/src/runtimes/**.{js,ts,vue}</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">packTo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/src/runtimes/init.js</span><span class="dl">'</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>那么这时候只剩下了 6 个请求, 还剩下的没有被合并的就是首页 view 依赖的一些公共组件模块了. 这里可以看一下, FIS3 提供的模块加载框架 mod.js 根据静态资源表分析到的文件依赖关系.</p>
+
+<p><img src="/uploads/2017/04/080104.png" alt="" /></p>
+
+<p>最后一个分组中的文件, 就是前面一个图中最后加载的 4 个文件. 我们已经可以在请求发出前, 就知道这4个文件有关联, 所以使用 combo 服务, 就可以一次请求这4个文件.</p>
+
+<p>那么最后, 通过使用 FIS3 的 packTo 配置, 再配合使用 combo 服务的话, 我就可以将 21 个文件请求, 优化到 3 个文件请求. 如果进行页面切换的话, 因为有 combo, 发出的请求数也会很少.</p>
+
+<p>再进下一步, 假如我们不使用 FIS3 的 packTo 配置, 而只使用 combo 服务的话, 通过上面的图, 可以看出, 也是可以将首次请求数量优化到3个.</p>
+
+<p>第一个请求</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"boot"
+"node_modules/es6-promise/dist/es6-promise"
+"node_modules/process/browser"
+</code></pre></div></div>
+
+<p>第二个请求</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"app"
+"node_modules/tslib/tslib"
+"node_modules/vue/dist/vue"
+"node_modules/vuex-router-sync/index"
+"runtimes/filters/filters"
+"runtimes/router/router"
+"node_modules/vue-router/dist/vue-router.common"
+"runtimes/store/store"
+"node_modules/vuex/dist/vuex"
+"runtimes/store/api"
+"runtimes/store/create-api"
+"node_modules/firebase/app"
+"node_modules/firebase/database"
+"runtimes/views/app"
+</code></pre></div></div>
+
+<p>第三个请求</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"views/createListView"
+"components/ItemList"
+"components/Spinner"
+"components/Item"
+</code></pre></div></div>
+
+<p>只是, combo 服务需要后端或者 CDN 去配合, 只是前端的话, 就可以只使用 packTo 的配置, 效果也是很明显的.</p>
+
+<h3 id="edit">Edit</h3>
+
+<p>经掘金上的<a href="https://juejin.im/user/57c9687e67f3560057b2409c">任侠</a>提醒, 在使用文件名 hash 和 CDN 强缓存的情况下, 浏览器根本不会去远端请求，直接从本地读取, 所以就不需要使用 localStorage 了.</p>]]></content><author><name></name></author><category term="Vue" /><category term="FIS3" /><category term="webpack" /><summary type="html"><![CDATA[本文的目标是通过一个例子向大家展示如何使用 FIS3 作为构建工具, 来对使用 Vue 的前端工程进行构建. 当然, Vue 只是一个例子, 完全可以推广到其它的项目中.]]></summary></entry><entry><title type="html">将多说评论系统迁移到Disqus</title><link href="http://isay.me/2017/03/migrate-duoshuo-to-disqus.html" rel="alternate" type="text/html" title="将多说评论系统迁移到Disqus" /><published>2017-03-26T00:00:00+08:00</published><updated>2017-03-26T00:00:00+08:00</updated><id>http://isay.me/2017/03/migrate-duoshuo-to-disqus</id><content type="html" xml:base="http://isay.me/2017/03/migrate-duoshuo-to-disqus.html"><![CDATA[<p>最近几天看到多说官方发布消息, 多说评论系统将于2017年6月1日正式停止服务, 是时间考虑将评论系统换一下了.</p>
+
+<p>当初使用多说, 一是因为是国内的服务, 速度会比较快, 二是国内用的人确实不少, 沟通起来可以比较方便.</p>
+
+<p>现在多说不能使用了, 其实大可以直接将博客中的多说下掉, 但是以前的评论就没有了. 这些评论是从使用 WordPress 时就积累下来的, 如果丢失了, 真的比较可惜.</p>
+
+<p>所以将评论迁移, 第一个考虑切换的目标就是使用人最多的 Disqus 了.</p>
+
+<p>网上找了一番, 发现迁移脚本都是时间比较长的了, 害怕会有些变化, 所以打算自己写一个.</p>
+
+<p><a href="https://github.com/Wyntau/duoshuo2disqus">duoshuo2disqus</a></p>
+
+<p>参考了 Disqus 导入时的格式 WXR, 然后使用 Node 处理一下多说导出的数据.</p>
+
+<p>处理数据的时候还遇到了一个问题. 多说导出的文章和评论中, 都有一个 <code class="language-plaintext highlighter-rouge">thread_id</code> 和 <code class="language-plaintext highlighter-rouge">post_id</code> 的字段.
+这两个字段导出的类型为数字类型, 而且非常大. 导致 Node 在 require 这些内容的时候, 数字不准确, 造成非常多的重复和错乱.</p>
+
+<p>解决办法就是, 先把导出的内容中, 这两个字段由数字类型, 转为字符串类型, 即可解决.</p>]]></content><author><name></name></author><category term="Disqus" /><summary type="html"><![CDATA[最近几天看到多说官方发布消息, 多说评论系统将于2017年6月1日正式停止服务, 是时间考虑将评论系统换一下了.]]></summary></entry></feed>

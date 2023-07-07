@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>纯css鼠标放上去图片变大 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="纯css鼠标放上去图片变大" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="前两天从网上找关于实现安读者墙的代码.找到了一段.放在博客上效果还可以.但是在使用的时候遇到了一点问题. 就是用jquery实现鼠标放上去图片放大的效果. 我使用那个jquery函数的时候总是会发生图片放大后回不到原来位置的问题.问了原文作者.他也不知道该具体怎么修改.别人用的好好的.可以我用的时候就是不行.郁闷." />
+<meta property="og:description" content="前两天从网上找关于实现安读者墙的代码.找到了一段.放在博客上效果还可以.但是在使用的时候遇到了一点问题. 就是用jquery实现鼠标放上去图片放大的效果. 我使用那个jquery函数的时候总是会发生图片放大后回不到原来位置的问题.问了原文作者.他也不知道该具体怎么修改.别人用的好好的.可以我用的时候就是不行.郁闷." />
+<link rel="canonical" href="http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html" />
+<meta property="og:url" content="http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-08T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="纯css鼠标放上去图片变大" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-08T00:00:00+08:00","datePublished":"2011-04-08T00:00:00+08:00","description":"前两天从网上找关于实现安读者墙的代码.找到了一段.放在博客上效果还可以.但是在使用的时候遇到了一点问题. 就是用jquery实现鼠标放上去图片放大的效果. 我使用那个jquery函数的时候总是会发生图片放大后回不到原来位置的问题.问了原文作者.他也不知道该具体怎么修改.别人用的好好的.可以我用的时候就是不行.郁闷.","headline":"纯css鼠标放上去图片变大","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html"},"url":"http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  纯css鼠标放上去图片变大
+</p>
+<h1 class="lotus-pagetit">纯css鼠标放上去图片变大</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April  8, 2011">April  8, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>前两天从网上找关于实现安读者墙的代码.找到了一段.放在博客上效果还可以.但是在使用的时候遇到了一点问题.
+就是用jquery实现鼠标放上去图片放大的效果. 我使用那个jquery函数的时候总是会发生图片放大后回不到原来位置的问题.问了原文作者.他也不知道该具体怎么修改.别人用的好好的.可以我用的时候就是不行.郁闷.</p>
+
+<p>我又自己看着改了一下那个函数,基本上可以让图片放大之后再还原的时候能够回到原位.但是还有一点不爽的是,每次把鼠标放到图片的右下角一点的时候,图片会突然向左快速移动一次然后再快速回到原位,然后才会执行函数的动作. 因此这样就显得非常不流畅.
+所以权衡了一下,还是把那个图片放大的jquery函数删掉了.</p>
+
+<p>今天google的时候(google的什么我忘记啦.哈哈),看到了一篇文章,题目就叫”<a href="http://yangsongmao.blogbus.com/logs/67429062.html">纯css鼠标放上去图片变大</a>“,我很好奇啊.点进去后,看到一段 网页代码.我把代码复制到文本里面,改了后缀,然后浏览器查看就3个图片.放上鼠标,图片确实放大啦.哈哈.这个太厉害啦(知道原理的给俺讲讲,俺小白,不懂).于是我就把那段 css代码拿下来,放在了 那个读者墙上边.
+现在看看<a href="http://isayme.com/message">效果</a>吧.</p>
+
+<p>把我找到的读者墙的代码还有我找到的 css代码放上来 感兴趣的可以自己研究一下.</p>
+
+<p><del datetime="2011-04-29T08:59:26+00:00">首先是奋斗博客上的<a href="http://www.fendou.info/wordpress/wordpress-jquery-readerwall.html">WordPress添加JQuery效果读者墙</a></del>已经废弃不用了.采用我现在使用的读者墙</p>
+
+<p><strong>php函数部分.</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- start 读者墙 --&gt;
+&lt;ul id="hovershow"&gt;
+&lt;?php
+    $query="SELECT COUNT(comment_ID) AS cnt, comment_author, comment_author_url, comment_author_email FROM (SELECT * FROM $wpdb-&gt;comments LEFT OUTER JOIN $wpdb-&gt;posts ON ($wpdb-&gt;posts.ID=$wpdb-&gt;comments.comment_post_ID) WHERE comment_date &gt; date_sub( NOW(), INTERVAL 1 MONTH ) AND user_id='0' AND comment_author_email != 'a@gmail.com' AND post_password='' AND comment_approved='1' AND comment_type='') AS tempcmt GROUP BY comment_author_email ORDER BY cnt DESC LIMIT 48";
+    $wall = $wpdb-&gt;get_results($query);
+    foreach ($wall as $comment)
+    {
+        if( $comment-&gt;comment_author_url )
+        $url = $comment-&gt;comment_author_url;
+        else $url="#";
+        $tmp = "&lt;li&gt;&lt;a href='".$url."' target='_blank' title='".$comment-&gt;comment_author." (".$comment-&gt;cnt.")'&gt;&lt;img src='http://www.gravatar.com/avatar.php?gravatar_id=".md5(strtolower($comment-&gt;comment_author_email) )."&amp;size=80&amp;d=monsterid&amp;r=G'/&gt;&lt;/a&gt;&lt;/li&gt;";
+        $output .= $tmp;
+     }
+    echo $output ;
+?&gt;
+&lt;/ul&gt;
+&lt;!-- end 读者墙 --&gt;
+</code></pre></div></div>
+
+<p><strong>最后一个就是我找到的那个用css实现图片放大效果的代码了.</strong></p>
+
+<p><strong>你可以把下面这段代码复制到文本里面,改一下后缀看看效果</strong></p>
+
+<p>我觉得这个才是重点.呵呵.打算把这个代码也用到侧栏上的那个 active friends上.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;title&gt;a&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+        ul#hovershow{
+            list-style-type: none;
+            margin: 50px;
+            float: left;
+            display: inline;
+            clear: both;
+        }
+        ul#hovershow li{
+            float: left;
+            display: inline;
+            width:64px;
+            height: 64px;
+            margin: 2px;
+        }
+        ul#hovershow li a {
+            display: block;width:64px;
+            height: 64px;
+        }
+        ul#hovershow li a img{
+        border:1px #666 solid;
+        width:100%;
+            height:100%;
+
+        }
+        ul#hovershow li a:hover{
+
+        z-index:100;
+        margin: -32px 0 0 -32px;
+     position: absolute;
+        }
+        ul#hovershow li a:hover img{
+        width:128px;
+        height:128px;
+        border:1px red solid;
+
+        }
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul id="hovershow"&gt;
+    &lt;li&gt;&lt;a href="1#" title="test"&gt;&lt;img src="http://img3.cache.netease.com/auto/2009/11/12/2009111210415292664.jpg" width="128" height="128" alt="test" /&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="2#" title="test"&gt;&lt;img src="http://img3.cache.netease.com/auto/2009/11/12/2009111210415292664.jpg" width="128" height="128" alt="test" /&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="2#" title="test"&gt;&lt;img src="http://img3.cache.netease.com/auto/2009/11/12/2009111210415292664.jpg" width="128" height="128" alt="test" /&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="2#" title="test"&gt;&lt;img src="http://img3.cache.netease.com/auto/2009/11/12/2009111210415292664.jpg" width="128" height="128" alt="test" /&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="2#" title="test"&gt;&lt;img src="http://img3.cache.netease.com/auto/2009/11/12/2009111210415292664.jpg" width="128" height="128" alt="test" /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<p>我的css代码.备份一下.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*reader wall*/
+ul#hovershow{
+            list-style-type: none;
+            margin:15px;
+            float: left;
+            display: inline;
+            clear: both;
+        }
+        ul#hovershow li{
+            float: left;
+            display: inline;
+            width:30px;
+            height: 45px;
+            margin: 2px;
+        }
+        ul#hovershow li a {
+            display: block;width:40px;
+            height: 40px;
+        }
+       ul#hovershow li a img{
+        border:1px #666 solid;
+        width:100%;
+            height:100%;
+
+        }
+        ul#hovershow li a:hover{
+
+        z-index:20;
+        margin: -9px 0px 0px -10px;
+     position: absolute;
+        }
+        ul#hovershow li a:hover img{
+        width:60px;
+        height:60px;
+        border:1px red solid;}
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html" title="" rel="nofollow">纯css鼠标放上去图片变大 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/38-new-chrome-set-the-font.html" rel="prev">&laquo;&nbsp;解决Linux中chrome设置字体无效</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/40-record-for-modify-philna2-theme.html" rel="next">PhilNa2主题修改优化细节记录&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/39-pure-css-on-mouse-larger-picture.html";
+      this.page.identifier = "39";
+      this.page.title = "纯css鼠标放上去图片变大";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

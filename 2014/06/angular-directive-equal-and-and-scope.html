@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>angular创建directive时, &amp;与=在继承callback中的差异 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="angular创建directive时, &amp;与=在继承callback中的差异" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在看angular的一个小项目时,遇到了一个问题, 就是在创建directive的时候, 对于新scope的创建上." />
+<meta property="og:description" content="在看angular的一个小项目时,遇到了一个问题, 就是在创建directive的时候, 对于新scope的创建上." />
+<link rel="canonical" href="http://isay.me/2014/06/angular-directive-equal-and-and-scope.html" />
+<meta property="og:url" content="http://isay.me/2014/06/angular-directive-equal-and-and-scope.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2014-06-05T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="angular创建directive时, &amp;与=在继承callback中的差异" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2014-06-05T00:00:00+08:00","datePublished":"2014-06-05T00:00:00+08:00","description":"在看angular的一个小项目时,遇到了一个问题, 就是在创建directive的时候, 对于新scope的创建上.","headline":"angular创建directive时, &amp;与=在继承callback中的差异","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2014/06/angular-directive-equal-and-and-scope.html"},"url":"http://isay.me/2014/06/angular-directive-equal-and-and-scope.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  angular创建directive时, &与=在继承callback中的差异
+</p>
+<h1 class="lotus-pagetit">angular创建directive时, &与=在继承callback中的差异</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="June  5, 2014">June  5, 2014</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>在看angular的一个小项目时,遇到了一个问题, 就是在创建directive的时候, 对于新scope的创建上.</p>
+
+<p>html代码如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!doctype html&gt;
+&lt;html lang="en" ng-app="demoApp"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;angular test&lt;/title&gt;
+    &lt;style&gt;
+        .demo1, .demo2{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 200px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="output"&gt;&lt;/div&gt;
+    &lt;div ng-controller="demoCtrl"&gt;
+        &lt;demo x-cbk1="cbk1(arg1, arg2)" x-cbk2="cbk2"&gt;&lt;/demo&gt;
+    &lt;/div&gt;
+
+    &lt;script src="http://cdn.staticfile.org/angular.js/1.2.16/angular.js"&gt;&lt;/script&gt;
+    &lt;script src="demoapp.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<p>js代码如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>angular.module('demoApp', [])
+    .controller('demoCtrl', function($scope) {
+
+        var output = angular.element(document.getElementById('output'));
+        $scope.cbk1 = function(arg1, arg2) {
+            output.html('click demo1, calls cbk1, arg1: ' + arg1 + ' arg2: ' + arg2);
+        };
+        $scope.cbk2 = function(arg1, arg2) {
+            output.html('click demo2, calls cbk2, arg1: ' + arg1 + ' arg2: ' + arg2);
+        };
+    })
+    .directive('demo', function(){
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '&lt;div&gt;&lt;div class="demo1"&gt;demo1&lt;/div&gt;&lt;div class="demo2"&gt;demo2&lt;/div&gt;&lt;/div&gt;',
+            scope: {
+                cbk1: '&amp;',
+                cbk2: '='
+            },
+            link: function(scope, element){
+
+                console.log('cbk1 string:', scope.cbk1);
+
+                console.log('cbk2 string:', scope.cbk2);
+
+                var demos = element.children();
+
+                var demo1 = demos.eq(0);
+                var demo2 = demos.eq(1);
+
+                demo1.on('click', function(){
+                    scope.cbk1({
+                        // 这里的调用方法需要注意, 不是使用参数列表, 而是使用object的方法
+                        arg1: 'cbk1 arg1',
+                        arg2: 'cbk1 arg2'
+                    });
+                });
+
+                demo2.on('click', function(){
+                    // 同原函数一样进行调用即可
+                    scope.cbk2('cbk2 arg1', 'cbk2 arg2');
+                });
+            }
+
+        };
+    });
+</code></pre></div></div>
+
+<p>可以看到, scope的两个cbk函数其实是一样的, 只是在从demo这个directive向template中的scope传递的时候并不一样,
+传递cbk1的时候用的是 <code class="language-plaintext highlighter-rouge">&amp;</code>, 传递cbk2的时候用的是<code class="language-plaintext highlighter-rouge">=</code>.</p>
+
+<p>这样, 在template的新scope中, 接收到的cbk2是demo这个directive中的一个原样拷贝, 但是cbk1就不是了, 可以从上面获取两个函数的字符串表示中看到.</p>
+
+<p>cbk1的字符串表示是</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function (locals) {
+  return parentGet(scope, locals);
+}
+</code></pre></div></div>
+
+<p>cbk2的字符串表示是</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function (arg1, arg2) {
+    output.html('click demo2, calls cbk2, arg1: ' + arg1 + ' arg2: ' + arg2);
+}
+</code></pre></div></div>
+
+<p>证明上面说的是正确的.</p>
+
+<p>但是看angular官方文档的时候, 写的是, 如果需要传递一个callback的时候, 推荐使用<code class="language-plaintext highlighter-rouge">&amp;</code>.</p>
+
+<p>这里我的看法是, 如果这个callback不需要传递参数的话, 两种方法都没有问题.</p>
+
+<p>如果需要向这个callback传递参数的话,我习惯上还是用<code class="language-plaintext highlighter-rouge">=</code>, 因为这里获取的function是一个原来函数的引用, 而不是经过angular包装的方法, 调用这个function的时候会更加符合函数的写法.</p>
+
+<p>如果使用<code class="language-plaintext highlighter-rouge">&amp;</code>的话, 调用函数就需要注意. 在上面html代码<code class="language-plaintext highlighter-rouge">x-cbk1="cbk1(arg1, arg2)"</code>中, cbk1的调用方法是<code class="language-plaintext highlighter-rouge">cbk1(arg1, arg2)</code>, 所以在调用这个方法就需要注意传递参数的正确. 在link中click回调中, 参数的传递方法是使用object, 而不是普通的参数列表的方法. key值是<code class="language-plaintext highlighter-rouge">x-cbk1="cbk1(arg1, arg2)"</code>中的形参的名字, 不能使用其它的名字.</p>
+
+<p>以上.</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2014/06/angular-directive-equal-and-and-scope.html" title="" rel="nofollow">angular创建directive时, &与=在继承callback中的差异 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2014/05/do-debian-vps-locale-problem.html" rel="prev">&laquo;&nbsp;DO vps locale错误</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2014/06/angular-prerender-seo-and-use-resolve-for-page-flicker.html" rel="next">Angular Prerender SEO实践&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2014/06/angular-directive-equal-and-and-scope.html";
+      this.page.identifier = "2014060501";
+      this.page.title = "angular创建directive时, &与=在继承callback中的差异";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

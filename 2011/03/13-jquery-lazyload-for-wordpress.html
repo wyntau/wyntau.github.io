@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>给wordpress添加图片渐显效果 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="给wordpress添加图片渐显效果" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本文参考了KuKi的懒懒窝,只不过在调用地址的地方.稍微修改了一下.呵呵" />
+<meta property="og:description" content="本文参考了KuKi的懒懒窝,只不过在调用地址的地方.稍微修改了一下.呵呵" />
+<link rel="canonical" href="http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html" />
+<meta property="og:url" content="http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-03-24T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="给wordpress添加图片渐显效果" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-03-24T00:00:00+08:00","datePublished":"2011-03-24T00:00:00+08:00","description":"本文参考了KuKi的懒懒窝,只不过在调用地址的地方.稍微修改了一下.呵呵","headline":"给wordpress添加图片渐显效果","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html"},"url":"http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  给wordpress添加图片渐显效果
+</p>
+<h1 class="lotus-pagetit">给wordpress添加图片渐显效果</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 24, 2011">March 24, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>本文参考了KuKi的懒懒窝,只不过在调用地址的地方.稍微修改了一下.呵呵</p>
+
+<p>看到人家的wordpress都有那个什么图片渐显.很酷.同时对网页加载效果也好.所以也在网上热心人的帮助下.弄出了这个效果下面记录一下.以后换主题的时候直接就拿来用了.</p>
+
+<ol>
+  <li>下载 <a href="http://u.115.com/file/f05d729f24">jquery.lazyload.zip</a>（包含 jquery.lazyload.js 和 fill.gif ）</li>
+  <li>将上面2文件，放到 wordpress 的某个目录，比如放在 domain.com/js 目录下</li>
+  <li>
+    <p>在当前主题的  header.php 中适当位置(<em>我是加在了head.php文件的&lt;!– javascript START –&gt;后面,感觉这里统一加载js文件.效果会更好点</em>)添加下面 JS调用代码：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;script type="text/javascript" src="/js/jquery.lazyload.js"&gt;&lt;/script&gt;
+ &lt;script type="text/javascript"&gt;
+ jQuery(document).ready(
+     function($){
+     $("img").lazyload({
+     placeholder : "/js/fill.gif",
+     effect      : "fadeIn"
+     });
+ });
+ &lt;/script&gt;
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><em>网上讲的还要改路径.其实在路径上没有必要添加上自己的网址.直接用相对路径就可以了. 看我上面写的.没有我的网址.直接用目录就可以.</em></p>
+
+<p><strong>注意</strong>！！本文中使用的jQ库不能使用google的1.3.2版的mini的jQ库，1.4.2到是可以使用，不过太新太大，不推荐使用。</p>
+
+<p>推荐使用 WordPress 自带的jQ库，文件位于：/wp-includes/js/jquery/jquery.js。</p>
+
+<p>调用方法（可将此段代码加到上面第3步代码之前）：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.3.2'&gt;&lt;/script&gt;
+</code></pre></div></div>
+
+<p>这样就做完了.保存文件之后重新打开网页就可以看到效果了.呵呵.速度确实快了一点.不知道是不是我的心理原因.呵呵.总之效果挺好的</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html" title="" rel="nofollow">给wordpress添加图片渐显效果 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/03/16-pe-win7-ghost.html" rel="next">PE安装win7(安装版)图解,附带GHOST版安装思路&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/03/13-jquery-lazyload-for-wordpress.html";
+      this.page.identifier = "13";
+      this.page.title = "给wordpress添加图片渐显效果";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

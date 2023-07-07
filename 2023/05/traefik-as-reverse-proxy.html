@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>traefik 作为反向代理 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="traefik 作为反向代理" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="优点 不需要集中维护代理配置文件 和 docker 完美配合 docker label 自动更新时, 服务自动发现 docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务 缺点 docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理" />
+<meta property="og:description" content="优点 不需要集中维护代理配置文件 和 docker 完美配合 docker label 自动更新时, 服务自动发现 docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务 缺点 docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理" />
+<link rel="canonical" href="http://isay.me/2023/05/traefik-as-reverse-proxy.html" />
+<meta property="og:url" content="http://isay.me/2023/05/traefik-as-reverse-proxy.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="traefik 作为反向代理" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-15T00:00:00+08:00","datePublished":"2023-05-15T00:00:00+08:00","description":"优点 不需要集中维护代理配置文件 和 docker 完美配合 docker label 自动更新时, 服务自动发现 docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务 缺点 docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理","headline":"traefik 作为反向代理","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2023/05/traefik-as-reverse-proxy.html"},"url":"http://isay.me/2023/05/traefik-as-reverse-proxy.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  traefik 作为反向代理
+</p>
+<h1 class="lotus-pagetit">traefik 作为反向代理</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May 15, 2023">May 15, 2023</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<h3 id="优点">优点</h3>
+<ul>
+  <li>不需要集中维护代理配置文件</li>
+  <li>和 docker 完美配合</li>
+  <li>docker label 自动更新时, 服务自动发现</li>
+  <li>docker 各个服务启动顺序没有强制关系, 只要 label 中有 traefik 相关配置, 当 traefik 服务启动时, 都可以自动配置对应的反向代理服务
+    <h3 id="缺点">缺点</h3>
+  </li>
+  <li>docker 版本的 traefik 不好像群晖中的 nginx 反向代理一样, 可以方便的向局域网中的其它 IP 进行反向代理</li>
+</ul>
+
+<h1 id="traefik-配置">traefik 配置</h1>
+<p>traefik 配置分为两类, 静态配置和动态配置</p>
+<h2 id="静态配置">静态配置</h2>
+<p>静态配置一般在两个地方配置, ① traefik 启动时的命令行参数, ②静态配置文件.
+静态配置一般是用来定义 provider 和 entrypoint 用的. 另外, 在 entrypoint 的配置中, 还可以配置全局的 middleware 以及 tls 选项.
+动态配置的配置项就比较多, 除了静态配置之外的都可以配置.</p>
+
+<h1 id="群晖docker中使用-traefik">群晖docker中使用 traefik</h1>
+<p>traefik 启动配置就不再啰嗦, 但是有个地方需要重点注意.</p>
+
+<p>docker 中的 traefik 无法方便的访问宿主机(也就是群晖)所在的局域网, 最多只能从容器中访问宿主机, 此时需要在 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 中添加如下配置, 使容器内部可以请求到宿主机</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+</code></pre></div></div>
+<p>此时 traefik 可以将请求转发给宿主机, 但是仍然无法转发给局域网中的其它机器. 解决这个问题有两个方案.</p>
+
+<h3 id="方案一-搭配使用-traefik">方案一: 搭配使用 traefik</h3>
+<p>对, 就是再搭配使用一个 traefik 实例(以下就叫实例 2, 前面说的 traefik 服务叫做实例 1), 但是启动时选择的网络模式是 host 模式, 实例 2 就可以自由访问到局域网中的其它IP.</p>
+
+<p>此时实例 1 中通过动态配置新增一个服务, 服务IP为 <code class="language-plaintext highlighter-rouge">host.docker.internal</code>, 将请求转发给宿主机. 实例 2 在宿主机中监听所有请求, 然后再通过路由规则代理到对应的局域网IP.</p>
+
+<p>但是这里有个问题是</p>
+<ol>
+  <li>如果实例2启动时使用了 providers.docker, 那么两个实例都会尝试读取 docker label 中的信息, 并且由于两个 traefik 实例的dashboard 服务名字都叫 <code class="language-plaintext highlighter-rouge">api@internal</code>, 势必会造成冲突.</li>
+  <li>如果实例2未启用 providers.docker, 那么就需要在实例2的动态配置中定义好 dashboard 服务.</li>
+</ol>
+
+<p>但是我倾向于 dashboard 这种内建服务还是使用 docker label 动态化配置比较好. 而且实例 1 也无法在 docker label 中定义到宿主机的代理配置, 需要一个专门的动态配置才行(试验了一下, <code class="language-plaintext highlighter-rouge">loadbalancer.servers.url</code> 只能在动态配置文件中定义, 如果放在 docker label 中会提示 <code class="language-plaintext highlighter-rouge">servers</code> 字段不存在)</p>
+
+<p>所以如果使用两个 traefik 实例的话, 配置文件会变多, 并且容易造成冲突.  而我的倾向是能放在 docker label 中的配置尽量不使用动态配置文件来实现.</p>
+
+<p>所以我尝试了使用其它的方案.</p>
+
+<h3 id="方案二-搭配使用-nginx--群晖反向代理">方案二: 搭配使用 nginx + 群晖反向代理</h3>
+<p>我尝试的另一个方案是再加一个 nginx 实例, 但是需要和群晖的反向代理功能配合.</p>
+
+<p>nginx 实例的唯一作用是将 traefik 的请求转发给宿主机, 然后由宿主机也就是群晖的反向代理将请求转发给对应的服务上去.</p>
+
+<p>和方案一对比起来不一样的就是, 方案一是把到局域网的转发配置维护在 traefik 中, 方案二是把到局域网的转发配置维护在群晖中.(相对来说, 其实上面的方案更优, 但是在实践的过程中, 上面的方案总是会报错)</p>
+
+<p>相比方案一是在 traefik 实例中访问宿主机, 在方案二里是由 nginx 实例访问宿主机, nginx 作为 traefik 的一个承接服务, 这样就可以把 nginx 相关配置放在 docker label 中. nginx 实例的 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 配置如下</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">traefik-proxy</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:stable-alpine</span>
+  <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-proxy</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/volume2/docker/traefik/nginx-templates:/etc/nginx/templates:ro</span>
+  <span class="na">networks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">traefik</span>
+  <span class="na">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">NGINX_HOST_PORT=51080</span>
+  <span class="na">extra_hosts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">traefik.enable=true</span>
+
+    <span class="c1"># routers</span>
+    <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.entrypoints=websecure</span>
+    <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.rule=Host(`domain.com`)</span>
+</code></pre></div></div>
+
+<p>nginx 反向代理配置如下</p>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+  <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+
+  <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://host.docker.internal:</span>$<span class="p">{</span><span class="kn">NGINX_HOST_PORT</span><span class="err">}</span><span class="p">;</span>
+
+    <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+
+    <span class="c1"># proxy_http_version 1.1定义用于代理的HTTP协议版本，默认情况下将其设置为1.0。对于Websocket和keepalive连接，您需要使用1.1版。</span>
+    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+
+    <span class="c1"># proxy_cache_bypass $http_upgrade设置websocket不从缓存中获取响应，而是直接通过应用。</span>
+    <span class="kn">proxy_cache_bypass</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+
+    <span class="c1"># Upgrade $http_upgrade和Connection "upgrade"如果您的应用程序使用Websockets，则这些字段是必填字段。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">"upgrade"</span><span class="p">;</span>
+
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+    <span class="c1"># X-Real-IP $remote_addr 将真实的客户端地址转发到应用，如果没有设置，你应用获取到将会是Nginx服务器IP地址。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-For $proxy_add_x_forwarded_for转发客户端请求头的X-Forwarded-For字段到应用。</span>
+    <span class="c1"># 如果客户端请求头中不存在X-Forwarded-For字段，则$proxy_add_x_forwarded_for变量等同于$remote_addr变量</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-Proto $scheme这将会转发客户端所使用的HTTP协议或者是HTTPS协议。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="c1"># X-Forwarded-Host $host转发客户端请求的原始主机到应用。X-Forwarded-Port $server_port定义客户端请求的原始端口。</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Host</span> <span class="nv">$server_name</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Port</span> <span class="nv">$server_port</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="重回方案一">重回方案一</h3>
+<p>当我在写这篇总结的时候, 突然我意识到方案一我错在哪里了.</p>
+
+<p>实例2的docker labels 是给实例1看的, 但是我误认为实例2可以看到. 并且我在实例2的labels中定义的 dashboard router 名字和在实例 1 中的一样导致冲突, 结果实例 1 的 dashboard 也进入不了了, 所以我误认为是两个 traefik 一起使用的话会出现问题.</p>
+
+<p>仔细思考可以得出, 正确的做法应该是</p>
+<ol>
+  <li>实例1开启 <code class="language-plaintext highlighter-rouge">providers.docker</code> 以及 <code class="language-plaintext highlighter-rouge">providers.file</code>. 前者是用来自动发现其它的 docker 服务, 并提供反向代理服务. 后者是用来定义 https 以及从实例 1 到实例 2 的转发配置.</li>
+  <li>实例2只开启 <code class="language-plaintext highlighter-rouge">providers.file</code>, 所以它的 dashboard 以及其它各种配置只能在动态配置文件中定义.</li>
+  <li>由于实例 2 和实例 1 根本不在一个网络中, 并且实例 2 也没有开启 <code class="language-plaintext highlighter-rouge">providers.docker</code>, 所以实例2中的 docker label 没有意义, 所以不需要任何 docker label.</li>
+</ol>
+
+<p>通过前面的总结, 按照最新的方案一, 使用两个 traefik 终于完成了群晖中的 traefik 配置, 并且所有的配置都维护在 traefik 内部, 这样的话也方便迁移到非群晖的系统中去.</p>
+
+<p>完整的 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 配置如下</p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">traefik-docker</span><span class="pi">:</span>
+    <span class="c1"># The official v2 Traefik docker image</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">traefik:v2.9</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-docker</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="c1"># The HTTP port</span>
+      <span class="c1"># - 52080:52080</span>
+      <span class="pi">-</span> <span class="s">52443:52443</span>
+      <span class="c1"># The Web UI (enabled by --api.insecure=true)</span>
+      <span class="c1"># - "58080:8080"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="c1"># So that Traefik can listen to the Docker events</span>
+      <span class="pi">-</span> <span class="s">/var/run/docker.sock:/var/run/docker.sock:ro</span>
+      <span class="c1"># dynamic conf</span>
+      <span class="pi">-</span> <span class="s">/volume2/docker/traefik/traefik-docker:/etc/traefik/config:ro</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik</span>
+    <span class="na">extra_hosts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">host.docker.internal:host-gateway</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="c1"># - --entrypoints.web.address=:52080</span>
+      <span class="c1"># - --entrypoints.web.http.middlewares=shared-compress@docker</span>
+
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.address=:52443</span>
+      <span class="c1"># global config for response compress</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.http.middlewares=shared-compress@docker</span>
+      <span class="c1"># global config for https</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.websecure.http.tls=true</span>
+
+      <span class="pi">-</span> <span class="s">--api=true</span>
+
+      <span class="c1"># - --providers.docker=true</span>
+      <span class="pi">-</span> <span class="s">--providers.docker.exposedbydefault=false</span>
+      <span class="pi">-</span> <span class="s">--providers.file.directory=/etc/traefik/config</span>
+      <span class="pi">-</span> <span class="s">--providers.file.watch=true</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">traefik.enable=true</span>
+
+      <span class="c1"># global shared middlewares</span>
+      <span class="c1">## response compress</span>
+      <span class="pi">-</span> <span class="s">traefik.http.middlewares.shared-compress.compress=true</span>
+
+      <span class="c1"># service specific middlewares</span>
+      <span class="c1">## dashboard-auth</span>
+      <span class="c1"># 在 labels 中配置密码时, 需要将 $ 进行转义变成 2 个</span>
+      <span class="pi">-</span> <span class="s">traefik.http.middlewares.dashboard-auth.basicauth.users=user:passwd</span>
+
+      <span class="c1"># routers</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.rule=Host(`traefik.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.service=api@internal</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-docker.middlewares=dashboard-auth@docker</span>
+
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.rule=Host(`traefik-host.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.service=traefik-host@file</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.dashboard-traefik-host.middlewares=dashboard-auth@docker</span>
+
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.entrypoints=websecure</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.rule=Host(`op.example.com`)</span>
+      <span class="pi">-</span> <span class="s">traefik.http.routers.openwrt.service=traefik-host@file</span>
+
+  <span class="na">traefik-host</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">traefik:v2.9</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">traefik-host</span>
+    <span class="c1"># ports:</span>
+      <span class="c1"># - 52081:52081</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/volume2/docker/traefik/traefik-host:/etc/traefik/config:ro</span>
+    <span class="na">network_mode</span><span class="pi">:</span> <span class="s">host</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">--entrypoints.web.address=:52081</span>
+      <span class="c1"># - --entrypoints.web.http.middlewares=shared-compress@docker</span>
+
+      <span class="c1"># - --entrypoints.websecure.address=:52443</span>
+      <span class="c1"># global config for response compress</span>
+      <span class="c1"># - --entrypoints.websecure.http.middlewares=shared-compress@docker</span>
+      <span class="c1"># global config for https</span>
+      <span class="c1"># - --entrypoints.websecure.http.tls=true</span>
+
+      <span class="pi">-</span> <span class="s">--api=true</span>
+
+      <span class="c1"># - --providers.docker=true</span>
+      <span class="c1"># - --providers.docker.exposedbydefault=false</span>
+      <span class="pi">-</span> <span class="s">--providers.file.directory=/etc/traefik/config</span>
+      <span class="pi">-</span> <span class="s">--providers.file.watch=true</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">traefik</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>实例1 的动态配置文件如下所示
+动态配置的作用有两个</p>
+<ol>
+  <li>定义 https 证书</li>
+  <li>定义从 docker 转发请求到 host 的服务, 通过 host.docker.internal 指向宿主机.</li>
+</ol>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[[tls.certificates]]</span>
+  <span class="py">certFile</span> <span class="p">=</span> <span class="s">"/path/to/tls.cer"</span>
+  <span class="py">keyFile</span> <span class="p">=</span> <span class="s">"/path/do/tls.key"</span>
+
+<span class="nn">[[http.services.traefik-host.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://host.docker.internal:52081"</span>
+</code></pre></div></div>
+
+<p>实例2 的动态配置文件如下所示, 动态配置的作用就是定义 dashboard 和转发请求到局域网中的其它IP.</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># dashboard</span>
+<span class="nn">[http.routers.dashboard]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["web"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`traefik-host.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"api@internal"</span>
+
+<span class="c"># openwrt</span>
+<span class="nn">[http.routers.openwrt]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["web"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`op.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"openwrt@file"</span>
+<span class="nn">[[http.services.openwrt.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.88.4:80"</span>
+</code></pre></div></div>
+
+<h1 id="思考">思考</h1>
+<p>后续再思考一下</p>
+<ol>
+  <li>如果使用方案一, 实例2使用 traefik 或者 nginx 都可以, 唯一的区别可能是 traefik 支持在不重启的情况下修改路由规则就可以生效, 而 nginx 必须要重启才可以生效.</li>
+  <li>如果使用方案二, 局域网的转发配置也可以维护在 nginx 实例中, 此时就需要将 nginx 实例使用 <code class="language-plaintext highlighter-rouge">host</code> 网络模式启动, 和方案一中的 traefik 实例2 一样.</li>
+</ol>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2023/05/traefik-as-reverse-proxy.html" title="" rel="nofollow">traefik 作为反向代理 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2017/04/vue-projects-development-with-fis3.html" rel="prev">&laquo;&nbsp;使用 FIS3 构建 Vue 前端工程....</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2023/05/pve-enable-iommu.html" rel="next">PVE 启用 IOMMU 功能为虚拟机开启 sata...&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2023/05/traefik-as-reverse-proxy.html";
+      this.page.identifier = "20230515";
+      this.page.title = "traefik 作为反向代理";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

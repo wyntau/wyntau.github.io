@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>一段python代码显神通 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="一段python代码显神通" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="起因,在ubuntu中文论坛上乱逛,看到了一个帖子.具体需求就是楼主需要在一个包含数万个文件(具体多少不清楚,但是文件非常多)的文件夹中,寻找出所有的内容一样的文件. 这内容一样的文件,具体是什么样的呢?" />
+<meta property="og:description" content="起因,在ubuntu中文论坛上乱逛,看到了一个帖子.具体需求就是楼主需要在一个包含数万个文件(具体多少不清楚,但是文件非常多)的文件夹中,寻找出所有的内容一样的文件. 这内容一样的文件,具体是什么样的呢?" />
+<link rel="canonical" href="http://isay.me/2011/07/an-amazing-python-code.html" />
+<meta property="og:url" content="http://isay.me/2011/07/an-amazing-python-code.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-07-31T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="一段python代码显神通" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-07-31T00:00:00+08:00","datePublished":"2011-07-31T00:00:00+08:00","description":"起因,在ubuntu中文论坛上乱逛,看到了一个帖子.具体需求就是楼主需要在一个包含数万个文件(具体多少不清楚,但是文件非常多)的文件夹中,寻找出所有的内容一样的文件. 这内容一样的文件,具体是什么样的呢?","headline":"一段python代码显神通","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/07/an-amazing-python-code.html"},"url":"http://isay.me/2011/07/an-amazing-python-code.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  一段python代码显神通
+</p>
+<h1 class="lotus-pagetit">一段python代码显神通</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July 31, 2011">July 31, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>起因,在ubuntu中文论坛上乱逛,看到了一个帖子.具体需求就是楼主需要在一个包含数万个文件(具体多少不清楚,但是文件非常多)的文件夹中,寻找出所有的内容一样的文件.
+这内容一样的文件,具体是什么样的呢?</p>
+
+<ol>
+  <li>内容相同,但是文件名不同(可是是文件名不同,也可以是后缀不同).</li>
+  <li>文件名相同,内容也相同,但是位于不同的子文件夹</li>
+</ol>
+
+<p>最后需要将所有的相同文件 列表打印出来,以方便去掉相同的文件,或者是做进一步处理</p>
+
+<p>回帖中,有人说使用md5值检验.但是考虑到文件数目非常非常多.每计算一个文件的md5值就需要很多时间,总时间加起来可想而知.</p>
+
+<p>但是,ubuntu中文论坛的论坛管理员oneleaf(一叶)没用md5检验,给出一段python代码,完美解决 原文地址,点击<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=120&amp;t=87646&amp;start=15">此处</a></p>
+
+<p>上代码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env python
+#coding=utf-8
+import binascii,os
+
+filesizes={}
+samefiles=[]
+def filesize(path):
+    if os.path.isdir(path):
+        files=os.listdir(path)
+        for file in files:
+            filesize(path+"/"+file)
+    else:
+        size=os.path.getsize(path)
+        if not filesizes.has_key(size):
+             filesizes[size]=[]
+        filesizes[size].append(path)
+
+def filecrc(files):
+    filecrcs={}
+    for file in files:
+        f=open(file,'r')
+        crc = binascii.crc32(f.read())
+        f.close()
+        if not filecrcs.has_key(crc):
+             filecrcs[crc]=[]
+        filecrcs[crc].append(file)
+    for filecrclist in filecrcs.values():
+        if len(filecrclist)&gt;1:
+           samefiles.append(filecrclist)
+
+if __name__ == "__main__":
+    filesize("/home/oneleaf/test/")
+    for sizesamefilelist in filesizes.values():
+        if len(sizesamefilelist)&gt;1:
+            filecrc(sizesamefilelist)
+    for samefile in samefiles:
+        print "******* same files group **********"
+        for file in samefile:
+            print file 将以上内容保存为name.py,然后增加x权限. 注意将最后的 /home/oneleaf/test/目录改为你想要测试的目录. 然后执行py文件即可
+</code></pre></div></div>
+
+<p>下面是我的测试结果(将相同的文件散布于几个文件夹中)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lwent@lwent:~$ ./name.py
+******* same files group **********
+/home/lwent/test/2/aa.txt
+/home/lwent/test/aa.txt
+/home/lwent/test/1/test2/aa.txt
+/home/lwent/test/1/aa.txt
+lwent@lwent:~$
+</code></pre></div></div>
+
+<p>具体有什么用处呢?</p>
+
+<p>打个比方,自从接触wordpress后.我就一直在找主题,虽然没换过几个,但是找的主题确实有几百兆了.</p>
+
+<p>另外主题放的都比较乱.时间一长,当再遇到一个心仪的主题后,就会忘记,我到底收藏过没有.
+为了保险起见,还是会下载下来.虽然如果有存在的文件时,会提示覆盖,但是还是会有不少文件,因为存放到不同的文件夹的原因,而再次下载下来</p>
+
+<p>现在,用这段代码,就可以将所有的文件夹里面的主题全部搜索一遍,不管文件名是什么,只要文件内容相同的,统统找出来打印成列表.方便我将多余的文件剔除.</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/07/an-amazing-python-code.html" title="" rel="nofollow">一段python代码显神通 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/07/debian6-reinstall-note.html" rel="prev">&laquo;&nbsp;debian6再安装小记</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/08/ubuntu-install-dropbox.html" rel="next">ubuntu安装dropbox失败 解决方法&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/07/an-amazing-python-code.html";
+      this.page.identifier = "198";
+      this.page.title = "一段python代码显神通";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

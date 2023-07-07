@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>为什么我认定是我的!! | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="为什么我认定是我的!!" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="对于一个对PhilN2主题基本上了如指掌的人,我来给你说说为什么我看了几眼就认定是我的修改版,OK?" />
+<meta property="og:description" content="对于一个对PhilN2主题基本上了如指掌的人,我来给你说说为什么我看了几眼就认定是我的修改版,OK?" />
+<link rel="canonical" href="http://isay.me/2011/09/why-i-say-the-theme-is-mine.html" />
+<meta property="og:url" content="http://isay.me/2011/09/why-i-say-the-theme-is-mine.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-09-15T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="为什么我认定是我的!!" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-09-15T00:00:00+08:00","datePublished":"2011-09-15T00:00:00+08:00","description":"对于一个对PhilN2主题基本上了如指掌的人,我来给你说说为什么我看了几眼就认定是我的修改版,OK?","headline":"为什么我认定是我的!!","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/09/why-i-say-the-theme-is-mine.html"},"url":"http://isay.me/2011/09/why-i-say-the-theme-is-mine.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  为什么我认定是我的!!
+</p>
+<h1 class="lotus-pagetit">为什么我认定是我的!!</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="September 15, 2011">September 15, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>对于一个对PhilN2主题基本上了如指掌的人,我来给你说说为什么我看了几眼就认定是我的修改版,OK?</p>
+
+<p>从评论框的部分来说,BBcode是我加的,表情部分是我替换的,而且我看过你的表情位置,以及每个表情对应的图片顺序(1.gif对应的表情什么,2.gif对应的表情什么等等,依次类推).是我一个个图片去对应的.评论框下面的spamcheck 小墙部分的细节修改也是我做的.
+原版PhilNa2主题是无法使用小墙的,这个我想你可能不知道吧?但是,你的源代码告诉我,你用了小墙!</p>
+
+<p>另外你说是直接替换了js文件,这个应该是直接添加js文件才对.添加新的js文件,只要修改js.php文件,在其中的数组中添加上要添加的js文件名即可,但是对于app/javascript.php文件没有必要也一起替换吧?</p>
+
+<p>app/javascript.php这个文件对添加js代码,以及做其它修改不起任何作用,而我为了扩充功能,添加首页文章伸缩以及Ajax加载,在其中加上了一些东西. blogName是为了主题自带的社会化分享工具的博客名称做的.还有AjaxLoading LoadText两个选项.一个是Ajax加载的时候用的,一个是点击标题的时候用的.你的源代码的最后部分告诉我,这三个东西都是存在于你的主题中的,但是你用的社会化工具根本用不到这个东西!而你的js源代码中却有社会化分享工具的相关函数.</p>
+
+<p>另外关于js的,是最后一个js文件(Myjs.js),这是一个空的js文件,只留了一个jquery函数的框架,我留下这个文件是为了让用这个主题的人,可以将自己的其它js代码加到主题中直接调用,而不必修改其它的代码,你的源代码告诉我,你仍然有这个文件,但是如果只是借鉴侧栏还有BBcode的话,你没必要加这个文件.</p>
+
+<p>既然你修改了js.php文件中的作者信息,你就应该看到了js文件的加载方式,对于一个想提高网站速度,将网页html源代码的空格都用工具压缩去掉的人来说,怎么可能留一个空的js文件来浪费空间和带宽?!</p>
+
+<p>还有一个”关于”页面,这个页面没有任何的出彩的地方,如果你只是借鉴一些功能的话,这个页面没有任何理由被你使用.但是我知道,你仍然用了我的模板文件,原因是我看到了你的关于页面的ID号是content3,你的文章页面的ID号是content2,你的主页部分的ID号是content,这个修改也是我为了解决首页的伸缩和文章页部分的伸缩冲突做的,一开始关注我博客的朋友都知道我这么做的原因,至于你知道否,我就不知道了.</p>
+
+<p>还有post_content旁边的fontsize13,这个是因为原来主题的字体是12px,有人说字体太小,但是我又不想做太大的修改,所以我特意加上fontsize13来标明控制字体的,我仍然在你的主题中的源代码中看到了.</p>
+
+<p>最明显的一点,是侧栏上的feed订阅那个小工具,是主题自带的.但是我在那个小工具上看到了no_webshot类,还有webshot类.如果你只是借鉴侧栏和BBcode的话,这个订阅小工具和原版主题的是一模一样的,你根本没有任何必要将两个一样的小工具进行替换,除非你没事找事干.</p>
+
+<p>我加上no_webshot和webshot类,是当初使用网页缩略图小工具的时候,为了不在feed小工具以及其它的侧栏小工具上而只在友情链接上生成缩略图加的.Sorry,这个class类你依然有,但是这个类,没有任何作用,因为缩略图小工具我早就废弃不用了.同样的东西也出现在了标签云的class上,但是这个标签云也是主题原来就有的,我没做过任何改动.你依然”借鉴”来了.</p>
+
+<p>哦,对了,我还忘了说一句,你用的那主题的”自定义导航菜单”,就是我后来加的,原版主题不支持自定义导航菜单,只能显示全部页面或者全部分类,而且你没法添加那个”随便看看”哦~~</p>
+
+<p>既然你只是无意看到了我的博客,那肯定也没有看过我的几篇文章吧,但是为什么又有这么多的只有我做过但是又不用了的东西呢?奇迹啊!!它就那么发生了,至于你信不信,我反正信了.</p>
+
+<p>抱歉,当我想再多找一点东西来证明的时候,你已经将主题换掉了,所以我无法再找到更多的证明了,或许你可以将主题换过来,让我再找一下.因为我修改的次数太多,时间跨度也太大,好多不记得了.可能还会有更多惊喜也说不定.
+但是我想,我说的这些或许差不多够证明的了吧?</p>
+
+<p><strong>当我想要将这篇文章给你看看的时候,我惊喜的发现,你的评论已经被你关闭了…..</strong></p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/09/why-i-say-the-theme-is-mine.html" title="" rel="nofollow">为什么我认定是我的!! - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/09/tired-beginning-of-school.html" rel="prev">&laquo;&nbsp;开学真累啊</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/09/daily-write-2011-09-19.html" rel="next">无力吐槽&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/09/why-i-say-the-theme-is-mine.html";
+      this.page.identifier = "221";
+      this.page.title = "为什么我认定是我的!!";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

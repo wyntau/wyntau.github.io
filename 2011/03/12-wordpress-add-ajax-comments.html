@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>wordpress添加AJAX评论效果(非插件版) | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="wordpress添加AJAX评论效果(非插件版)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="由于此 篇文章倍受 Spam喜爱,所以关闭 评论,如有问题,请在其他任何地方留言.谢谢" />
+<meta property="og:description" content="由于此 篇文章倍受 Spam喜爱,所以关闭 评论,如有问题,请在其他任何地方留言.谢谢" />
+<link rel="canonical" href="http://isay.me/2011/03/12-wordpress-add-ajax-comments.html" />
+<meta property="og:url" content="http://isay.me/2011/03/12-wordpress-add-ajax-comments.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-03-25T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="wordpress添加AJAX评论效果(非插件版)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-03-25T00:00:00+08:00","datePublished":"2011-03-25T00:00:00+08:00","description":"由于此 篇文章倍受 Spam喜爱,所以关闭 评论,如有问题,请在其他任何地方留言.谢谢","headline":"wordpress添加AJAX评论效果(非插件版)","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/03/12-wordpress-add-ajax-comments.html"},"url":"http://isay.me/2011/03/12-wordpress-add-ajax-comments.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  wordpress添加AJAX评论效果(非插件版)
+</p>
+<h1 class="lotus-pagetit">wordpress添加AJAX评论效果(非插件版)</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 25, 2011">March 25, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p><strong>由于此 篇文章倍受  Spam喜爱,所以关闭 评论,如有问题,请在其他任何地方留言.谢谢</strong></p>
+
+<p>本文参考了<a href="http://www.forece.net/post/2466.htm">FORECE’S BLOG</a>,在这里表示十分感谢.因为我在网上找了很多的实现评论AJAX效果的代码或者是插件.效果都不理想.只有这一个让我真正的实现了AJAX效果.</p>
+
+<p>唯一不同的是.我把代码提到的那个google的js文件下载到了本地.然后上传到了服务器上.感觉这样比较奥保险一点吧.呵呵.</p>
+
+<p>下面说说我按照文章中提到的做法.由于我使用的是wordpress3.1.所以就直接下载了文章中提到的<a href="http://u.115.com/file/f0fc5193ce">comments-ajax-1.3.zip</a>.</p>
+
+<p>1.下载上面说的zip文件.</p>
+
+<p>2.下载后将里面的文件上传到当前使用的模板所在的目录里面.然后修改模板文件<em>head.php</em>.找到以下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?&gt;
+&lt;?php wp_head(); ?&gt;
+</code></pre></div></div>
+
+<p>用下面的几行代码代替(<em>我前面说了.我直接把google的那个js文件下载下来放在了服务器上,所以要在调用地址那里改一下,其实.下面的那个comments-ajax.js文件也可以放在一个专门放第三方js文件的地方,这样便于以后管理.</em>)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script type="text/javascript" src="/js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;?php wp_head(); ?&gt;
+&lt;?php if ( is_singular() ){ ?&gt;
+&lt;script type="text/javascript" src="&lt;?php bloginfo('template_directory'); ?&gt;/comments-ajax.js"&gt;&lt;/script&gt;
+&lt;?php } ?&gt;
+</code></pre></div></div>
+
+<p>原文中的话(<em>我不知道什么意思.所以直接粘过来了</em>):因为 comments-ajax.js 已合併了 WP 的 comment-reply.js, 所以不必再叫用原來的 wp_enqueue_script( ‘comment-reply’ )
+如果你的模板够标准, 这样就可以正常工作了</p>
+
+<p><em>Lue注:</em>“做到这里我保存后,再看效果就可以了.我使用的是mg12的 elegant box主题.感觉还是很标准的.呵呵.”</p>
+
+<p>但是原文还给出了 如果不成功的解决方法.应该对有些人很有帮助.所以顺便拿过来.可能以后换主题的时候能用的到.</p>
+
+<p><strong><em>以下为原文的文章.我直接粘过来了.</em></strong></p>
+
+<p><strong>如果有任何運行不正常, 請繼續看以下注意事項:</strong></p>
+
+<p>1.安裝前, 請先確認 WordPress 內置嵌套評論已正常運作. 如果不是內置嵌套評論, 會出問題的.(<em>注:我的主题支持嵌套评论.所以我没有遇到这个问题</em>)</p>
+
+<p>2.各式模板設計不同, 請檢查 comments.php 是否夠標準, 儘量不修改模板, 只要對應修改本文件, 以免 css 亂套.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>◎標準模板是指:
+"評論數" id="comments" (WP 3.0 用的是 id="comments-title")
+例: &lt;h3 id="comments"&gt;&lt;?php comments_number( ...有%條評論... &lt;/h3&gt;
+已知有不少模板用的不是 "comments", 它的 "comments" 已用到別地方,
+如果評論提交後, 評論數位置出現很多源代碼, 通常是這問題, 要特別留意!
+ps. WP 3.0 用的是 id="comments-title", 新版我已將 "comments" 改 "comments-title",
+如果你要用以前的 "comments", 請在 comments-ajax.js 第 25 行更改.
+"評論列表" id="commentlist"
+例: &lt;ol id="commentlist"&gt; 注意是 ol 不是 ul.
+"表單" id="commentform"
+例: &lt;form action="&lt;?php echo get_option('siteurl'); ?&gt;/wp-comments-post.php" method="post"id="commentform"&gt;
+"評論框" id="respond" (是含 author, email, url, comment)
+例: &lt;div id="respond" ... &gt;
+"評論區" id="comment"
+例: &lt;textarea name="comment" id="comment" ... &gt;
+"提交" id="submit"
+例: &lt;input ... id="submit" ... &gt;
+※以上所用的 id 標簽是 js 運作的重要關鍵! 請確認與模板對應無誤!
+</code></pre></div></div>
+
+<p>3.本程式主要提供 Ajax comments 功能, css 已儘量配合原模板輸出. 如果還有 css 需求, 請自行修改.</p>
+
+<p>4.在 comments-ajax.php 最下方有評論格式, 若你的 functions.php 有 mytheme_comment(), 請對應覆蓋, 且拿掉 “回覆” 鏈接.</p>
+
+<p>发现自己的模板就不是标准版的。。。修改了一下才搞定了~</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/03/12-wordpress-add-ajax-comments.html" title="" rel="nofollow">wordpress添加AJAX评论效果(非插件版) - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/03/11-slimbox-plugins-picture-slides.html" rel="prev">&laquo;&nbsp;slimbox插件,实现图片的幻灯片效果</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/03/18-history-command-enhance-efficiency-in-linux.html" rel="next">Linux中使用history命令提升效率&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/03/12-wordpress-add-ajax-comments.html";
+      this.page.identifier = "12";
+      this.page.title = "wordpress添加AJAX评论效果(非插件版)";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

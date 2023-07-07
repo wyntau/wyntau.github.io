@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>css3读者墙 源代码 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="css3读者墙 源代码" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="这两天累死了,每天干活,快受不鸟了….囧" />
+<meta property="og:description" content="这两天累死了,每天干活,快受不鸟了….囧" />
+<link rel="canonical" href="http://isay.me/2011/07/css3-readerwall-sourcecode.html" />
+<meta property="og:url" content="http://isay.me/2011/07/css3-readerwall-sourcecode.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-07-23T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="css3读者墙 源代码" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-07-23T00:00:00+08:00","datePublished":"2011-07-23T00:00:00+08:00","description":"这两天累死了,每天干活,快受不鸟了….囧","headline":"css3读者墙 源代码","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/07/css3-readerwall-sourcecode.html"},"url":"http://isay.me/2011/07/css3-readerwall-sourcecode.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  css3读者墙 源代码
+</p>
+<h1 class="lotus-pagetit">css3读者墙 源代码</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July 23, 2011">July 23, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>这两天累死了,每天干活,快受不鸟了….囧</p>
+
+<p>说说正事吧,这几天没有更新,不是个事啊 所以找点东西.
+前一阵子,曾经写过一篇文章,<a href="/2011/06/css3-readerwall.html">css3版读者墙</a></p>
+
+<p>那篇文章中就给大家看了一个效果,没有讲怎么弄.所以今天给大家说说怎么弄那个效果.</p>
+
+<p>css翻转效果来源 <a href="http://www.daqianduan.com/css3-wordpress-wall/">大前端</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>大前端中的效果中只有一个 翻转效果,我看原来我使用的读者墙中还有血条显示,所以就把两个效果整合到一起了.现在看来,这个效果还不错.具体请围观[留言版</td>
+      <td>读者墙](http://isayme.com/message/)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>还想说一句,<strong>chrome</strong>效果最好,可以看到翻转效果.<strong>FF</strong>好像看不到反转的效果.IE的话,你祈祷他不错位就大吉大利了.. :jiong:</p>
+
+<p>下面说说实现步骤吧. 说起来也挺简单的.按照我的理解,在大前端的demo中,他是把评论者的头像作为了背景来显示.因此,只要对原来读者墙的php代码进行修改就好了.</p>
+
+<p>上代码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- start 读者墙  Edited By iSayme--&gt;
+&lt;?php
+    $query="SELECT COUNT(comment_ID) AS cnt, comment_author, comment_author_url, comment_author_email FROM (SELECT * FROM $wpdb-&gt;comments LEFT OUTER JOIN $wpdb-&gt;posts ON ($wpdb-&gt;posts.ID=$wpdb-&gt;comments.comment_post_ID) WHERE comment_date &gt; date_sub( NOW(), INTERVAL 24 MONTH ) AND user_id='0' AND comment_author_email != 'admin@yourdomain.com' AND post_password='' AND comment_approved='1' AND comment_type='') AS tempcmt GROUP BY comment_author_email ORDER BY cnt DESC LIMIT 39";//大家把管理员的邮箱改成你的,最后的这个39是选取多少个头像，大家可以按照自己的主题进行修改,来适合主题宽度
+    $wall = $wpdb-&gt;get_results($query);
+    $maxNum = $wall[0]-&gt;cnt;
+    foreach ($wall as $comment)
+    {
+        $width = round(40 / ($maxNum / $comment-&gt;cnt),2);//此处是对应的血条的宽度
+        if( $comment-&gt;comment_author_url )
+        $url = $comment-&gt;comment_author_url;
+        else $url="#";
+        $tmp = "&lt;li&gt;&lt;a target="_blank" href="".$comment-&gt;comment_author_url.""&gt;&lt;span class="pic" style="background: url(http://www.gravatar.com/avatar/".md5(strtolower($comment-&gt;comment_author_email))."?s=36&amp;d=monsterid&amp;r=G) no-repeat;"&gt;pic&lt;/span&gt;&lt;span class="num"&gt;".$comment-&gt;cnt."&lt;/span&gt;&lt;span class="name"&gt;".$comment-&gt;comment_author."&lt;/span&gt;&lt;/a&gt;&lt;div class='active-bg'&gt;&lt;div class='active-degree' style='width:".$width."px'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;";
+        $output .= $tmp;
+     }
+    $output = "&lt;div class="readerwall"&gt;".$output."&lt;div class="clear"&gt;&lt;/div&gt;&lt;/div&gt;";
+    echo $output ;
+?&gt;
+&lt;!-- end 读者墙 --&gt;
+</code></pre></div></div>
+
+<p>上面中大家注意看那个获取评论者头像那部分就知道了.把获取到的头像作为了每个列表的背景来显示.然后再用css进行控制即可.获取头像是直接使用的地址,我感觉这里使用get_avatar函数的话,无法实现效果.</p>
+
+<p>css代码部分</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body{overflow-x: hidden;}
+.readerwall{padding:12px 0 12px 15px; font-size:12px;overflow:visible;}
+.readerwall li{width:40px;height:40px;margin:0;padding:5px 0 5px 5px;float:left;list-style:none;border: 1px solid #DFDFDF;-moz-border-radius:2px;-khtml-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;}
+.readerwall .active-bg{width:40px;height:2px;_font-size:0;margin:-3px 0 0 -2px;background:#DFDFDF; }
+.readerwall .active-degree{background:red;width:40px;height:2px;_font-size:0;}
+.readerwall a{width:36px;height:36px;display:inline-block;position:relative;margin:0 0px 2px 0; text-decoration:none}
+.readerwall .pic{position:absolute;top:0;left:0;z-index:100;width:36px;height:36px;display:block;-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;-webkit-transition:all .4s ease-in-out;-moz-transition:all .4s ease-in-out;-o-transition:all .4s ease-in-out;border-radius:4px; text-indent:-9999px}
+.readerwall .num{position:absolute;top:0;left:0;z-index:99;width:34px;height:34px;line-height:34px;color:#E02523;font-size:18px;font-weight:bold;display:block;background:#fff;text-align:center;border:#bbb 1px solid;box-shadow:0 0 4px #ccc;-webkit-transform:rotateY(-180deg);-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;transition:all .4s ease-in-out;-webkit-transition:all .4s ease-in-out;-moz-transition:all .4s ease-in-out;-o-transition:all .4s ease-in-out;border-radius:4px}
+.readerwall .name{position:absolute;top:0;left:0;color:#333;display:block;width:1px;height:1px;overflow:hidden;-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;text-align:center}
+.readerwall a:hover .pic{z-index:100;border-color:#eee;-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg)}
+.readerwall a:hover .num{z-index:101;-webkit-transform:rotateY(0deg);-moz-transform:rotateY(0deg);opacity:.8}
+.readerwall a:hover .name{top:-28px;left:-38px;z-index:101;padding:4px 6px;height:20px;line-height:20px;overflow:hidden;background:#fff;border-radius:2px;box-shadow:0 0 3px #000;min-width:100px;opacity:.8}
+</code></pre></div></div>
+
+<p>就是这么简单了.还想说一下,这里的头像大小是36px的,由于修改头像大小的时候还要涉及到css部分的修改.我感觉很麻烦.况且,我感觉36px的大小也挺合适的了.我感觉没有必要再加大了.所以,各位按照自己的意愿吧.呵呵</p>
+
+<p>上面的php代码和css就是我现在的读者墙的代码.因此,如果在你使用的过程中出现了什么问题的话,请大家自己根据主题找原因…..代码绝对没有问题~~</p>
+
+<p>今天的任务到此结束~~</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/07/css3-readerwall-sourcecode.html" title="" rel="nofollow">css3读者墙 源代码 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/07/talk-about-computer-system.html" rel="prev">&laquo;&nbsp;电脑系统之谈顺便推荐两个win7</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/07/simple-evaluation-for-edit-software.html" rel="next">Editplus notepad++ Gedit UltraEdit简单对比(评测)&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/07/css3-readerwall-sourcecode.html";
+      this.page.identifier = "192";
+      this.page.title = "css3读者墙 源代码";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

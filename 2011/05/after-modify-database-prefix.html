@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>修改数据库前缀之后 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="修改数据库前缀之后" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="由于当初我的域名不是现在使用的这个,建博客的时候,原域名使用的是wp默认的wp_前缀,但是后来感觉那个域名(lueeon.com)不好记,所以就送人了,换了现在的域名,在建博客的时候没用遗留的数据库,新建了一个数据库,名字是wp2,前缀改成了wp2_" />
+<meta property="og:description" content="由于当初我的域名不是现在使用的这个,建博客的时候,原域名使用的是wp默认的wp_前缀,但是后来感觉那个域名(lueeon.com)不好记,所以就送人了,换了现在的域名,在建博客的时候没用遗留的数据库,新建了一个数据库,名字是wp2,前缀改成了wp2_" />
+<link rel="canonical" href="http://isay.me/2011/05/after-modify-database-prefix.html" />
+<meta property="og:url" content="http://isay.me/2011/05/after-modify-database-prefix.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-05-07T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="修改数据库前缀之后" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-05-07T00:00:00+08:00","datePublished":"2011-05-07T00:00:00+08:00","description":"由于当初我的域名不是现在使用的这个,建博客的时候,原域名使用的是wp默认的wp_前缀,但是后来感觉那个域名(lueeon.com)不好记,所以就送人了,换了现在的域名,在建博客的时候没用遗留的数据库,新建了一个数据库,名字是wp2,前缀改成了wp2_","headline":"修改数据库前缀之后","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/05/after-modify-database-prefix.html"},"url":"http://isay.me/2011/05/after-modify-database-prefix.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  修改数据库前缀之后
+</p>
+<h1 class="lotus-pagetit">修改数据库前缀之后</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May  7, 2011">May  7, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>由于当初我的域名不是现在使用的这个,建博客的时候,原域名使用的是wp默认的wp_前缀,但是后来感觉那个域名(lueeon.com)不好记,所以就送人了,换了现在的域名,在建博客的时候没用遗留的数据库,新建了一个数据库,名字是wp2,前缀改成了wp2_</p>
+
+<p>建博客也有一段时间了,原来的数据库也早就删除了.我就在想要不要把前缀改过来,把数据库名字改过来.因为我怕以后要是换服务器的话,如果再改前缀,数据库名字神马的麻烦,所以现在看看怎么改了.</p>
+
+<p>我知道在wp-config.php中是有地方修改的.于是我把原数据库导出一份,然后新建一个名为wp前缀为wp_的数据库,把导出的备份导入,然后修改好前缀之后,又将wp-config.php里面的相关内容给改了.
+访问网站没有任何异常.我以为这样就可以了.没想到,只是这样做完还不行.
+当我访问后台的时候,悲剧的提示我”您没有足够的权限访问这个页面”.如下图.</p>
+
+<p><img src="/uploads/2011/05/07_01.png" alt="" /></p>
+
+<p>到网上一搜索,修改wp的数据库前缀,这种情况很常见.所以顺便摘抄一下.如果有童鞋在修改前缀的时候,遇到了这样的情况,不要害怕,很容易就解决啦.
+由于那些对于数据库的SQL语句 我不知道怎么用,所以找了一个手动修改的.就几个地方,也不是很麻烦.
+步骤+图片来源:<a href="http://www.forsuc.com/blog/wordpress/no-access-wordpress-wp-admin.html">信智恒盛</a> 本人只不过将图片下载后重新上传了.在这里表示感谢.</p>
+
+<p><em>首先</em>打开?_options表，修改optionname字段值为?_user_roles,修改为与你的前缀对应.</p>
+
+<p><img src="/uploads/2011/05/07_02.jpg" alt="" /></p>
+
+<p><em>然后</em>打开？_usermeta表，将meta-key字段中有旧前缀的值，更为新的前缀就OK。</p>
+
+<p><img src="/uploads/2011/05/07_03.jpg" alt="" /></p>
+
+<p>这样完成后就OK啦.网上那些SQL语句,我看了很害怕啊.就怕我操作失误会把wp搞挂了…..</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/05/after-modify-database-prefix.html" title="" rel="nofollow">修改数据库前缀之后 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/05/reinstall-system-again.html" rel="prev">&laquo;&nbsp;又一次重装系统</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/05/code-for-random-posts.html" rel="next">代码访问随机日志&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/05/after-modify-database-prefix.html";
+      this.page.identifier = "119";
+      this.page.title = "修改数据库前缀之后";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

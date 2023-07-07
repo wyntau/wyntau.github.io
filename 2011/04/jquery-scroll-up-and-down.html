@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>jQuery上下浮动滚动[4-22更新] | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="jQuery上下浮动滚动[4-22更新]" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="唉 几天没写点东西啦. 昨天到网上又转了一圈 看到了这个jQuery 上下浮动滚动.原来也看到人家的博客上有,效果不错所以就给自己也整上了.感觉还不错.呵呵" />
+<meta property="og:description" content="唉 几天没写点东西啦. 昨天到网上又转了一圈 看到了这个jQuery 上下浮动滚动.原来也看到人家的博客上有,效果不错所以就给自己也整上了.感觉还不错.呵呵" />
+<link rel="canonical" href="http://isay.me/2011/04/jquery-scroll-up-and-down.html" />
+<meta property="og:url" content="http://isay.me/2011/04/jquery-scroll-up-and-down.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-16T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="jQuery上下浮动滚动[4-22更新]" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-16T00:00:00+08:00","datePublished":"2011-04-16T00:00:00+08:00","description":"唉 几天没写点东西啦. 昨天到网上又转了一圈 看到了这个jQuery 上下浮动滚动.原来也看到人家的博客上有,效果不错所以就给自己也整上了.感觉还不错.呵呵","headline":"jQuery上下浮动滚动[4-22更新]","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/jquery-scroll-up-and-down.html"},"url":"http://isay.me/2011/04/jquery-scroll-up-and-down.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  jQuery上下浮动滚动[4-22更新]
+</p>
+<h1 class="lotus-pagetit">jQuery上下浮动滚动[4-22更新]</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April 16, 2011">April 16, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>唉 几天没写点东西啦.
+昨天到网上又转了一圈 看到了这个jQuery 上下浮动滚动.原来也看到人家的博客上有,效果不错所以就给自己也整上了.感觉还不错.呵呵</p>
+
+<p>下面说说折腾过程. 说来全部都是人家的东西.也就是记录一下吧.
+源代码地址 <a href="http://www.dao-gu.com/web/updown.html">捣鼓笔记</a>,在 安装的时候还遇到了问题.多亏 木木(此木木非彼木木,大家不要弄混了 :evil: ) 帮助我才弄好了.</p>
+
+<p><strong>首先</strong>是加载jquery库,已经有的就跳过了(philna2跳过).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
+<p>然后将html部分加入到&lt; /body&gt;前</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div id="updown"&gt;
+&lt;div id="up"&gt;&lt;/div&gt;
+&lt;div id="comt"&gt;&lt;/div&gt;
+&lt;div id="down"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+
+<p>然后将CSS部分加入到style.CSS文件中</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#updown {
+ display:block;
+ left:50%;
+ margin-left:-520px;  /*设置横向位置*/
+ position:absolute;
+ top:40%;  /*设置纵向位置*/
+ }
+ #up {
+ background:url(images/updown.gif) -34px 0 no-repeat;
+ cursor:pointer;
+ height:32px;
+ margin:10px 0;
+ position:relative;
+ width:32px;
+ }
+#comt {
+ background:url(images/updown.gif) no-repeat;
+ cursor:pointer;
+ height:32px;
+ margin:10px 0;
+ position:relative;
+ width:32px;
+ }
+ #down {
+ background:url(images/updown.gif) -68px 0 no-repeat;
+ cursor:pointer;
+ height:32px;
+ margin:10px 0;
+ position:relative;
+ width:32px;
+ }
+</code></pre></div></div>
+
+<p>最后是jquery函数部分啦</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> jQuery(document).ready(function (a) {
+    var c = a("#updown").offset().top;
+    $body = window.opera ? document.compatMode == "CSS1Compat" ? a("html") : a("body") : a("html,body");
+    a(window).scroll(function () {
+        a("#updown").animate({
+            top: a(window).scrollTop() + c + "px"
+        },
+ {
+     queue: false,
+     duration: 500
+ })
+    });
+    a("#up").click(function () {
+        $body.animate({
+            scrollTop: "0px"
+        },
+ 1000)
+    });
+    a("#down").click(function () {
+        $body.animate({
+            scrollTop: a("#footer").offset().top
+        },
+ 1000)
+    });
+    a("#comt").click(function () {
+        $body.animate({
+            scrollTop: a("#comments").offset().top
+        },
+ 1000)
+    })
+});
+</code></pre></div></div>
+
+<p><strong>针对philna2的做法</strong>是 在主题目录的js目录里面新建一个 updown.js文件,然后把上面的函数代码加到里面.然后修改js.php文件.添加上这个js文件的名字就好了.
+或者是在head中添加一条类似加载jquery库的方法,加载这个js文件即可.</p>
+
+<p>css部分针对自己的情况再改一下吧.
+哦 用到的图片,在 <a href="http://www.dao-gu.com/web/updown.html">捣鼓笔记</a>上有一个图标,我现在使用的图标是 <a href="http://erick.im">狼图腾</a>博客中使用的图标,希望他不要介意啊 :evil:
+好了.记录完毕.</p>
+
+<hr />
+
+<p>无事又到<a href="http://immmmm.com/sliding-navigation-final-version.html">木木</a>(此处的木木是林木木,额,两个木木,不知道该怎么区分了 :jiong: )博客上看了看.找了点东西.</p>
+
+<p>关于这个滑动导航的部分,他那里有一个貌似更好点的代码.可以放上鼠标慢慢向上向下滚动,只不过图标不是上下浮动而是固定位置的了.我发现貌似这样固定住更好,这样显得比较简单一点.于是我就把样式改成了那个了.
+下面只说我用到的部分,想要自己研究的,就去原文看吧.上面已经有了.</p>
+
+<p>html代码不变,css代码也不变,主要就是jquery函数部分变换一下就好了</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jQuery(document).ready(function($){
+$body=(window.opera)?(document.compatMode=="CSS1Compat"?$('html'):$('body')):$('html,body');//修复Opera滑动异常地，加过就不需要重复加了。
+$('#shang').mouseover(function(){//鼠标移到id=shang元素上触发事件
+        up();
+    }).mouseout(function(){//鼠标移出事件
+        clearTimeout(fq);
+    }).click(function(){//点击事件
+        $body.animate({scrollTop:0},400);//400毫秒滑动到顶部
+});
+$('#xia').mouseover(function(){
+        dn();
+    }).mouseout(function(){
+        clearTimeout(fq);
+    }).click(function(){
+        $body.animate({scrollTop:$(document).height()},400);//直接取得页面高度，不再是手动指定页尾ID
+});
+$('#comt').click(function(){
+    $body.animate({scrollTop:$('#comments').offset().top},400);//滑动到id=comments元素，遇到不规范的主题需调整
+});
+});
+//下面部分放jQuery外围，几个数值不妨自行改变试试
+function up(){
+   $wd = $(window);
+   $wd.scrollTop($wd.scrollTop() - 1);
+   fq = setTimeout("up()", 50);
+}
+function dn(){
+   $wd = $(window);
+   $wd.scrollTop($wd.scrollTop() + 1);
+   fq = setTimeout("dn()", 50);
+}
+</code></pre></div></div>
+
+<p>将上面的ID号换成你的html代码中的ID号就好了.具体的你可以试着改一下那些时间参数,让速度变得快些或者慢些</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/jquery-scroll-up-and-down.html" title="" rel="nofollow">jQuery上下浮动滚动[4-22更新] - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/48-javascript-function-bookmark.html" rel="prev">&laquo;&nbsp;咱也来段JavaScript功能书签(4.16更新)</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/a-data-structure-exercise.html" rel="next">数据结构习题一则&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/jquery-scroll-up-and-down.html";
+      this.page.identifier = "83";
+      this.page.title = "jQuery上下浮动滚动[4-22更新]";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>编译安装tig注意事项 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="编译安装tig注意事项" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tig 是一个 git 资源库浏览器,使用熟练的话,基本可以代替git的操作." />
+<meta property="og:description" content="Tig 是一个 git 资源库浏览器,使用熟练的话,基本可以代替git的操作." />
+<link rel="canonical" href="http://isay.me/2013/07/compile-install-tig.html" />
+<meta property="og:url" content="http://isay.me/2013/07/compile-install-tig.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-07-10T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="编译安装tig注意事项" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2013-07-10T00:00:00+08:00","datePublished":"2013-07-10T00:00:00+08:00","description":"Tig 是一个 git 资源库浏览器,使用熟练的话,基本可以代替git的操作.","headline":"编译安装tig注意事项","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2013/07/compile-install-tig.html"},"url":"http://isay.me/2013/07/compile-install-tig.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  编译安装tig注意事项
+</p>
+<h1 class="lotus-pagetit">编译安装tig注意事项</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July 10, 2013">July 10, 2013</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>Tig 是一个 git 资源库浏览器,使用熟练的话,基本可以代替git的操作.</p>
+
+<p>官方网址 <a href="http://jonas.nitro.dk/tig/">http://jonas.nitro.dk/tig/</a></p>
+
+<p>按照tig目录中的<code class="language-plaintext highlighter-rouge">INSTALL</code>文件中写的步骤,怎么安装都不成功,最后摸索一番,终于成功了,所以记录一下.</p>
+
+<p>为了防止安装完成后,中文log显示乱码.需要提前安装<code class="language-plaintext highlighter-rouge">libncursesw5 libncursesw5-dev</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo aptitude install libncursesw5 libncursesw5-dev
+git clone https://github.com/jonas/tig.git
+cd tig
+git checkout -t origin/release
+make configure
+./configure --prefix=/usr
+make
+sudo make install install-release-doc
+</code></pre></div></div>
+
+<p>这样就安装完了.</p>
+
+<p>执行<code class="language-plaintext highlighter-rouge">tig -v</code>显示如下结果</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tig -v
+tig version 1.1-97-g91a9cac
+</code></pre></div></div>
+
+<p>执行<code class="language-plaintext highlighter-rouge">whereis tig</code>显示如下结果</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ whereis tig
+tig: /usr/bin/tig /usr/share/man/man1/tig.1
+</code></pre></div></div>
+
+<p>tig官方截图</p>
+
+<ol>
+  <li>
+    <p><strong>blame-view</strong></p>
+
+    <p><img src="/uploads/2013/07/10_01-blame-view.png" alt="blame-view" /></p>
+  </li>
+  <li>
+    <p><strong>diff-view</strong></p>
+
+    <p><img src="/uploads/2013/07/10_02-diff-view.png" alt="diff-view" /></p>
+  </li>
+  <li>
+    <p><strong>log-view</strong></p>
+
+    <p><img src="/uploads/2013/07/10_03-log-view.png" alt="log-view" /></p>
+  </li>
+  <li>
+    <p><strong>main-view-split</strong></p>
+
+    <p><img src="/uploads/2013/07/10_04-main-view-split.png" alt="main-view-split" /></p>
+  </li>
+  <li>
+    <p><strong>main-view</strong></p>
+
+    <p><img src="/uploads/2013/07/10_05-main-view.png" alt="main-view" /></p>
+  </li>
+  <li>
+    <p><strong>rev-graph</strong></p>
+
+    <p><img src="/uploads/2013/07/10_06-rev-graph.png" alt="rev-graph" /></p>
+  </li>
+  <li>
+    <p><strong>tree-view</strong></p>
+
+    <p><img src="/uploads/2013/07/10_07-tree-view.png" alt="tree-view" /></p>
+  </li>
+</ol>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2013/07/compile-install-tig.html" title="" rel="nofollow">编译安装tig注意事项 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2013/06/ascii-art-generator.html" rel="prev">&laquo;&nbsp;ASCII Art 生成器</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2013/10/stack-vs-heap-allocation.html" rel="next">C语言中的堆栈小议&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2013/07/compile-install-tig.html";
+      this.page.identifier = "2013071001";
+      this.page.title = "编译安装tig注意事项";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>在Angular.js项目中使用异步加载(一) | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="在Angular.js项目中使用异步加载(一)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Angular.js 很好, 但是也很不好." />
+<meta property="og:description" content="Angular.js 很好, 但是也很不好." />
+<link rel="canonical" href="http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html" />
+<meta property="og:url" content="http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-02-26T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="在Angular.js项目中使用异步加载(一)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2016-02-26T00:00:00+08:00","datePublished":"2016-02-26T00:00:00+08:00","description":"Angular.js 很好, 但是也很不好.","headline":"在Angular.js项目中使用异步加载(一)","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html"},"url":"http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  在Angular.js项目中使用异步加载(一)
+</p>
+<h1 class="lotus-pagetit">在Angular.js项目中使用异步加载(一)</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="February 26, 2016">February 26, 2016</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>Angular.js 很好, 但是也很不好.</p>
+
+<p>Angular.js 好, 是因为它确实解决了前端开发中的很多问题, 带来了一套解决方案, 能够让人快速的构建出一个网站, 尤其是它的双向绑定技术, 解放了前端开发人员的双手, 让大家可以专注于数据及逻辑, 不用想着怎么和DOM进行打交道.</p>
+
+<p>Angular.js 不好, 是因为它的模块化机制, 天生就是不健全的. 和市面上流行的模块化方案格格不入, 更不用提按需加载和异步加载等方案. 因为它要求的是, 所有 controller, service, directive, factory 等在 bootstrap 之前就已经加载完毕.</p>
+
+<p>如果页面不多, 将所有的文件加载进来, 也没有不可以. 但是, 假如一个项目的页面很多, 同时又有很多的 controller, service, directive, factory 等等, 如果一次性将全部文件加载进来, 但是却又用不到, 那么对于带宽绝对是一种浪费.</p>
+
+<p>很多人都在尝试如果在以 Angular.js 为框架的项目中, 采用按需加载或者异步加载的方案. 在这方面最著名的可能就是 <a href="https://github.com/ocombe/ocLazyLoad"><code class="language-plaintext highlighter-rouge">ocLazyLoad</code></a>.</p>
+
+<p>但是, 我不打算使用它. 因为我更喜欢按照 <code class="language-plaintext highlighter-rouge">RequireJS</code> 的那种方式去加载代码. 同时这样做, 也是为后面从 require.js 到 webpack 的切换做准备. 这样, 在 Angular.js 的层面, 我是感知不到异步加载的存在的. 每个 controller, service, directive, factory 等, 我可以按照原生Angular.js的写法.</p>
+
+<p>那么如果在以 Angular.js 为框架的项目中使用 require.js 进行模块化加载呢?</p>
+
+<p>经过搜索, 找到了一小段代码完成这件事.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span>
+  <span class="dl">'</span><span class="s1">$controllerProvider</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">$compileProvider</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">$filterProvider</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">$provide</span><span class="dl">'</span><span class="p">,</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">$controllerProvider</span><span class="p">,</span> <span class="nx">$compileProvider</span><span class="p">,</span> <span class="nx">$filterProvider</span><span class="p">,</span> <span class="nx">$provide</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="nx">$controllerProvider</span><span class="p">.</span><span class="nx">register</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">directive</span> <span class="o">=</span> <span class="nx">$compileProvider</span><span class="p">.</span><span class="nx">directive</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">filter</span> <span class="o">=</span> <span class="nx">$filterProvider</span><span class="p">.</span><span class="nx">register</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">factory</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">factory</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">service</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">service</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">provider</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">provider</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">constant</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">constant</span><span class="p">;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">decorator</span> <span class="o">=</span> <span class="nx">$provide</span><span class="p">.</span><span class="nx">decorator</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">]);</span>
+</code></pre></div></div>
+
+<p>只要在 config 阶段, 使用 Angular.js 内部的方法, 将已经生成的 module 的方法进行覆盖即可. 这样, 异步加载进来的代码, 就可以正常的注册 controller, service, directive, factory 等.</p>
+
+<p>下一篇, 将讲一下怎么将这段代码应用到实际当中, 并使用 require.js 异步加载代码</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html" title="" rel="nofollow">在Angular.js项目中使用异步加载(一) - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2016/02/use-github-sync-dotfile.html" rel="prev">&laquo;&nbsp;使用Github管理配置文件</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2016/02/angular-used-project-from-requirejs-to-webpack-2.html" rel="next">在Angular.js项目中使用异步加载(二)&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2016/02/angular-used-project-from-requirejs-to-webpack-1.html";
+      this.page.identifier = "2016022601";
+      this.page.title = "在Angular.js项目中使用异步加载(一)";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

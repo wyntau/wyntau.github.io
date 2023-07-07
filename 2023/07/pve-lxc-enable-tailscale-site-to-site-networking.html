@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PVE LXC 安装 Tailscale 并开启 site-to-site networking | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="PVE LXC 安装 Tailscale 并开启 site-to-site networking" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 How Tailscale works." />
+<meta property="og:description" content="Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 How Tailscale works." />
+<link rel="canonical" href="http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html" />
+<meta property="og:url" content="http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-07T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PVE LXC 安装 Tailscale 并开启 site-to-site networking" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-07-07T00:00:00+08:00","datePublished":"2023-07-07T00:00:00+08:00","description":"Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 How Tailscale works.","headline":"PVE LXC 安装 Tailscale 并开启 site-to-site networking","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html"},"url":"http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  PVE LXC 安装 Tailscale 并开启 site-to-site networking
+</p>
+<h1 class="lotus-pagetit">PVE LXC 安装 Tailscale 并开启 site-to-site networking</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July  7, 2023">July  7, 2023</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 <a href="https://tailscale.com/blog/how-tailscale-works/">How Tailscale works</a>.</p>
+
+<p>本篇文章介绍如何在 PVE LXC 容器下安装 tailscale, 并在多个网络之间通过 tailscale 建立 <code class="language-plaintext highlighter-rouge">site-to-site networking</code> 连接.</p>
+
+<p>安装 tailscale 时选择的是在 pve 的 lxc 容器而不是通过 docker 安装, 因为我在测试过程中发现使用 docker 安装后, 无法开启 <code class="language-plaintext highlighter-rouge">site-to-site networking</code>, 具体原因还没搞清楚.</p>
+
+<p><strong>首先</strong> 建立 lxc 容器, 并做好相应的配置
+选择新建一个非特权CT容器, 模板我选择的是 <code class="language-plaintext highlighter-rouge">Debian 11(bullseye)</code>, 建立容器时, 网卡名称最好是叫 <code class="language-plaintext highlighter-rouge">eth0</code>, 因为后面配置 <code class="language-plaintext highlighter-rouge">site-to-site networking</code> 时会用到.</p>
+
+<p>由于是非特权容器, 容器启动后会缺少 tailscale 运行需要的东西, 所以先不启动而是对容器作一些配置修改.</p>
+
+<p>在 pve 宿主中, 确认 <code class="language-plaintext highlighter-rouge">/dev/net/tun</code> 存在并获取对应的信息, 具体命令和返回如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@pve:~# ls -al /dev/net/tun
+crw-rw-rw- 1 root root 10, 200 Jun 30 23:08 /dev/net/tun
+</code></pre></div></div>
+
+<p>记录其中的 <code class="language-plaintext highlighter-rouge">10, 200</code> 这两个数字, 后面需要用到.</p>
+
+<p>然后修改 <code class="language-plaintext highlighter-rouge">/etc/pve/lxc/CTID.conf</code> 文件, 新增如下两行</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+</code></pre></div></div>
+
+<p>上面的 <code class="language-plaintext highlighter-rouge">10:200</code> 需要和前面使用 <code class="language-plaintext highlighter-rouge">ls -al /dev/net/tun</code> 获取的结果对应起来.</p>
+
+<p>配置完成后启动容器, 然后按照 tailscale 官方的文档安装 tailscale. 具体文档可查看 <a href="https://tailscale.com/kb/1038/install-debian-bullseye/">Setting up Tailscale on Debian Bullseye</a></p>
+
+<p><strong>然后</strong> 是启动 tailscale
+由于是两个网络之间建立 <code class="language-plaintext highlighter-rouge">site-to-site networking</code>, 所以我这边会以两个网络举例.</p>
+
+<p>网络 A 为 <code class="language-plaintext highlighter-rouge">192.168.100.0/24</code>, 安装 tailscale 的机器 A IP 为 <code class="language-plaintext highlighter-rouge">192.168.100.16</code>, 网络 B 为 <code class="language-plaintext highlighter-rouge">192.168.88.0/24</code>, 安装 tailscale 的机器 B IP 为 <code class="language-plaintext highlighter-rouge">192.168.88.16</code>.</p>
+
+<p>机器 A 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tailscale up --authkey=xxxxx --accept-routes --advertise-routes=192.168.100.0/24  --hostname=tailscale-A
+</code></pre></div></div>
+
+<p>机器 B 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tailscale up --authkey=xxxxx --accept-routes --advertise-routes=192.168.88.0/24  --hostname=tailscale-B
+</code></pre></div></div>
+
+<p>上面 <code class="language-plaintext highlighter-rouge">--autkey=xxx</code> 中的 <code class="language-plaintext highlighter-rouge">xxxxx</code> 需要替换为 tailscale 后台生成的 authkey. 如果 authkey 没有配置 <code class="language-plaintext highlighter-rouge">autoApprovers</code> 的话, 需要到 tailscale 后台开启<code class="language-plaintext highlighter-rouge">子网路由(subnet router)</code> 功能, 将各自所在的子网暴露给 tailscale 虚拟局域网. autoApprovers 可以查看文档 <a href="https://tailscale.com/kb/1018/acls/#auto-approvers-for-routes-and-exit-nodes">Auto Approvers for routes and exit nodes</a>.</p>
+
+<p>此时机器 A 和 B 都已经处于 tailscale 虚拟局域网中, 机器 A 可以访问网络 B 中的所有设备, 机器 B 也可以访问网络 A 中的所有设备.</p>
+
+<p><strong>然后</strong> 是开启 <code class="language-plaintext highlighter-rouge">site-to-site networking</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">site-to-site networking</code> 能实现的效果是: 机器 A 和 B 安装了 tailscale, 他们就可以做为两个网络的桥梁, 允许两个网络中未安装 tailscale 的设备通过两个安装了 tailscale 设备的桥接, 实现互访. 官方文档 <a href="https://tailscale.com/kb/1214/site-to-site/">Site-to-site networking</a>.</p>
+
+<p>机器 A 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t mangle -A FORWARD -i tailscale0 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+</code></pre></div></div>
+
+<p>机器 B 执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -t mangle -A FORWARD -i tailscale0 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+</code></pre></div></div>
+
+<p>然后需要做的就是在每个网络的网关配置到另一个网络的静态路由. 以我使用的 RouterOS 路由器为例</p>
+
+<p>网络 A 网关执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ip route add dst-address=192.168.88.0/24 gateway=192.168.100.16
+</code></pre></div></div>
+
+<p>网络 B 网关执行命令</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ip route add dst-address=192.168.100.0/24 gateway=192.168.88.16
+</code></pre></div></div>
+
+<p>此时正常情况下, 网络 A 和 B 中未安装 tailscale 的设备就可以访问对方网络中的服务了.</p>
+
+<p><strong>最后</strong> 是一些说明</p>
+
+<p>在官方的 <a href="https://tailscale.com/kb/1214/site-to-site/">Site-to-site networking</a> 文档中, 有一个 <code class="language-plaintext highlighter-rouge">--snat-subnet-routes=false</code> 的选项, 我实践之后发现, 如果加了这个选项, 会导致所有请求都不通. 但是不加这个选项, 互访是正常的, 只是有一些小瑕疵. 网络 A 请求网络 B 中的服务时, 服务看到的来源 IP 会是网络 B 中安装了 tailscale 那台机器的 IP, 网络 B 请求网络 A 中的服务时, 服务看到的来源 IP 会是网络 A 中安装了 tailscale 那台机器的 IP. 如果对这个小的细节没有要求的话, 则不需要深究了.</p>
+
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html" title="" rel="nofollow">PVE LXC 安装 Tailscale 并开启 site-to-site networking - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2023/07/pve-lxc-install-jellyfin.html" rel="prev">&laquo;&nbsp;PVE LXC 安装 Jellyfin</a></div>
+  
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2023/07/pve-lxc-enable-tailscale-site-to-site-networking.html";
+      this.page.identifier = "2023070701";
+      this.page.title = "PVE LXC 安装 Tailscale 并开启 site-to-site networking";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

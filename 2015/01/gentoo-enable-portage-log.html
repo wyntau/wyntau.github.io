@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Gentoo开启portage log | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Gentoo开启portage log" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="每次使用Linux console安装软件后, 总是会有很多的log 或者 warn, 但是console的一个屏幕显示不下来, 也不能身上滚动. 如果能有一个方法能把这些log和warn保存到本地, 这样安装完软件后就能使用less或者more 之类的软件进行查看了." />
+<meta property="og:description" content="每次使用Linux console安装软件后, 总是会有很多的log 或者 warn, 但是console的一个屏幕显示不下来, 也不能身上滚动. 如果能有一个方法能把这些log和warn保存到本地, 这样安装完软件后就能使用less或者more 之类的软件进行查看了." />
+<link rel="canonical" href="http://isay.me/2015/01/gentoo-enable-portage-log.html" />
+<meta property="og:url" content="http://isay.me/2015/01/gentoo-enable-portage-log.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-01-30T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Gentoo开启portage log" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2015-01-30T00:00:00+08:00","datePublished":"2015-01-30T00:00:00+08:00","description":"每次使用Linux console安装软件后, 总是会有很多的log 或者 warn, 但是console的一个屏幕显示不下来, 也不能身上滚动. 如果能有一个方法能把这些log和warn保存到本地, 这样安装完软件后就能使用less或者more 之类的软件进行查看了.","headline":"Gentoo开启portage log","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2015/01/gentoo-enable-portage-log.html"},"url":"http://isay.me/2015/01/gentoo-enable-portage-log.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  Gentoo开启portage log
+</p>
+<h1 class="lotus-pagetit">Gentoo开启portage log</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="January 30, 2015">January 30, 2015</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>每次使用Linux console安装软件后, 总是会有很多的log 或者 warn, 但是console的一个屏幕显示不下来,
+也不能身上滚动. 如果能有一个方法能把这些log和warn保存到本地, 这样安装完软件后就能使用less或者more
+之类的软件进行查看了.</p>
+
+<p>经过搜索后, 发现了gentoo是支持这个的, 叫做portage log</p>
+
+<p>修改<code class="language-plaintext highlighter-rouge">/etc/portage/make.conf</code>, 添加如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PORT_LOGDIR="/var/log/portage"
+PORTAGE_ELOG_CLASSES="log warn error"
+PORTAGE_ELOG_SYSTEM="save"
+</code></pre></div></div>
+
+<p>更详细的解释在<code class="language-plaintext highlighter-rouge">/usr/share/portage/config/make.conf.example</code>文件中.</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2015/01/gentoo-enable-portage-log.html" title="" rel="nofollow">Gentoo开启portage log - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2015/01/gentoo-enable-usb-and-bluetooth.html" rel="prev">&laquo;&nbsp;Gentoo设置内核, 开启USB及蓝牙支持</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2015/09/one-css-bug-webkit-overflow-scrolling-touch.html" rel="next">-webkit-overflow-scrolling设置为touch的一个bug&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2015/01/gentoo-enable-portage-log.html";
+      this.page.identifier = "2015013001";
+      this.page.title = "Gentoo开启portage log";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

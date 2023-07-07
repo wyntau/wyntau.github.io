@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>IE浏览器中Image对象onload失效的解决办法 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="IE浏览器中Image对象onload失效的解决办法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="接昨天的上篇文章,设置图片的宽高到窗口的宽高." />
+<meta property="og:description" content="接昨天的上篇文章,设置图片的宽高到窗口的宽高." />
+<link rel="canonical" href="http://isay.me/2013/04/ie-dont-fire-img-onload.html" />
+<meta property="og:url" content="http://isay.me/2013/04/ie-dont-fire-img-onload.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-04-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="IE浏览器中Image对象onload失效的解决办法" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2013-04-11T00:00:00+08:00","datePublished":"2013-04-11T00:00:00+08:00","description":"接昨天的上篇文章,设置图片的宽高到窗口的宽高.","headline":"IE浏览器中Image对象onload失效的解决办法","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2013/04/ie-dont-fire-img-onload.html"},"url":"http://isay.me/2013/04/ie-dont-fire-img-onload.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  IE浏览器中Image对象onload失效的解决办法
+</p>
+<h1 class="lotus-pagetit">IE浏览器中Image对象onload失效的解决办法</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April 11, 2013">April 11, 2013</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>接昨天的上篇文章,设置图片的宽高到窗口的宽高.</p>
+
+<p>在chrome firefox safari中都没有问题,但是在IE中就不行了.
+会出现不管怎么弄,图片的宽高都不会被设置.</p>
+
+<p>测试了一下,是因为在IE中 img的onload事件不会被触发.网上搜索了一下找到了办法.</p>
+
+<p>具体原因是 图片下载时，浏览器会把图片缓存起来，再次加载此图片时就会从缓冲区里加载</p>
+
+<p>在上次文章中的代码是这样写的</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var img = new Image();
+img.src = "test.gif";
+img.onload = function(){
+    alert(this.src);
+    //other
+};
+</code></pre></div></div>
+
+<p>修改之后的代码是这样写的</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var img = new Image();
+img.onload = function(){
+    alert(this.src);
+    //other
+};
+img.src = "test.gif";
+</code></pre></div></div>
+
+<p>是的 只是把onload的定义放到了设置img src之前就行了.</p>
+
+<p>所以IE中img onload事件加载不了的原因是,不是因为IE浏览器不会触发onload事件，而是因为加载缓冲区的速度太快，在没有告诉它加载完要怎么办时，它已经加载完了。</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2013/04/ie-dont-fire-img-onload.html" title="" rel="nofollow">IE浏览器中Image对象onload失效的解决办法 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2013/04/img-for-fix-box.html" rel="prev">&laquo;&nbsp;固定大小的容器中图片宽高不一致处理办法</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2013/04/css3-progress.html" rel="next">CSS3进度条&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2013/04/ie-dont-fire-img-onload.html";
+      this.page.identifier = "256";
+      this.page.title = "IE浏览器中Image对象onload失效的解决办法";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>数据结构习题一则 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="数据结构习题一则" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="最近几天一直在为 一段程序上火.上周四下午的数据结构实验课,题目是 使用链表求两个多项式的乘法." />
+<meta property="og:description" content="最近几天一直在为 一段程序上火.上周四下午的数据结构实验课,题目是 使用链表求两个多项式的乘法." />
+<link rel="canonical" href="http://isay.me/2011/04/a-data-structure-exercise.html" />
+<meta property="og:url" content="http://isay.me/2011/04/a-data-structure-exercise.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-17T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="数据结构习题一则" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-17T00:00:00+08:00","datePublished":"2011-04-17T00:00:00+08:00","description":"最近几天一直在为 一段程序上火.上周四下午的数据结构实验课,题目是 使用链表求两个多项式的乘法.","headline":"数据结构习题一则","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/a-data-structure-exercise.html"},"url":"http://isay.me/2011/04/a-data-structure-exercise.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  数据结构习题一则
+</p>
+<h1 class="lotus-pagetit">数据结构习题一则</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April 17, 2011">April 17, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>最近几天一直在为 一段程序上火.上周四下午的数据结构实验课,题目是 <strong>使用链表求两个多项式的乘法</strong>.</p>
+
+<p>会的人听起来还是挺简单的吧.呵呵.就是嘛.会了不难,难了不会.俺上课的时候好像从来没有认真听过,所以这个对我来说就是有点难啦.连新建一个链表都不会的人,更别说使用链表求多项式乘法啦. 再加上C语言中最有意思的指针,当时就头大啦.没办法,临时从网上找了一段答案,先对付过去再说.</p>
+
+<p>到了机房里面,也没有老师.自己做.这下就更不想做啦.毕竟不是自己写的程序,看不懂啊.还是先看看人家的思想吧.然后再自己憋出来一个也算是那么回事嘛.</p>
+
+<p>今天来劲了,一直在鼓捣这个,确实学习到了不少东西啊.就像玩网页一样啊,弄的多了自然就懂了.看来以后要多多实践,多多练习.</p>
+
+<p>先<strong>分析</strong>一下题目要求,要求输入两个多项式.然后输出两个多项式以及两个多项式相乘后的结果. 要求使用动态链表的方法求解. 基本算法也很简单.无非就是 输入两个多项式,然后进行一下排序,合并同类项之类的.然后相乘,再将结果进行一下合并同类项即可.看似不难,实则不然.</p>
+
+<p>动态链表,我感觉挺难的地方就是指针的使用加上相应的判断条件,还有安全性检查等等.相乘的地方应该有很多可以挖掘的地方,但是对于我这样的算是自学的人来说只能使用最简单最笨的方法啦.就是使用两重循环逐次相乘即可. 大体的要点即是如此.</p>
+
+<p>总结一下遇到的问题.首先是输入多项式问题.怎么做到将乱序输入的函数排序再加上合并同类项.然后就是阻挠了我最长时间的<strong>多项式相乘</strong>的问题. 两重循环的跳出判断条件加错了,导致程序根本无法运行,总是出现内存错误.可是在编译的时候却检测不出来,这可是害苦我了. 编译错误可比运行错误还改多了啊.</p>
+
+<p>唉不说了. 直接上程序吧. 也算是学完C和C++以来的第一个程序吧.说来意义还是挺大的,所以记录一下,虽然程序很简单….而且还从网上借鉴了一点思想.</p>
+
+<p>额 还想说说这个程序我认为的好处,输入多项式的同时进行排序还有合并同类项,感觉少写了很多代码,而且复用性比较高吧,多项式乘法中的排学我用了同样的方法.然后就是这个排序合并同类项时候用到的方法,很新颖(对我来说).还有就是 循环的跳出条件 对我来说太具有新意啦,搞的我刚上来怎么都弄不出来.</p>
+
+<p>最后还想说一句,学完 谭浩强 的书,我真的没学会什么东西……
+还想借<a href="http://blog.ethansite.co.cc/vim-for-programmer">ethan</a>童鞋的一句话,<strong>程序员苦逼啊！</strong> :jiong:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**************************************************************
+多项式相乘算法,
+Date:4-16
+Author: lwent90
+***************************************************************/
+#include &lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+
+//多项式中的一项的结构
+typedef struct term
+	{
+		int coef,exp;
+		struct term* next;
+	}poly,*ppoly;
+
+//创建一个保存多项式的链表，返回指向头结点的指针。多项式按指数降序排列
+ppoly createpoly(int i)
+	{
+		poly *p,*q,*s,*head=NULL; //p做当前指针,q做下一个指针,s做输入指针,head固定链表的头指针.
+		int coef,exp;
+		head=(ppoly)malloc( sizeof(poly) );
+		if (head==NULL)
+			{ 	printf("failed!!n");
+				return NULL;
+			}
+		head-&gt;coef=0;
+		head-&gt;exp=0;
+		head-&gt;next=NULL;
+		if(i==1)
+		printf ("请输入A的系数和指数(输入"0 0"结束):n");
+		else printf ("请输入B的系数和指数(输入"0 0"结束):n");
+		scanf ("%d%d",&amp;coef,&amp;exp);//初次赋值
+
+		while (coef !=0 &amp;&amp; exp &gt;= 0) //循环输入系数和指数,合并同类项,并按照指数降序排列
+			{	s = (ppoly)malloc (sizeof (poly) );
+				s -&gt; coef = coef;
+				s -&gt; exp = exp;
+				p = head ;
+				q = head -&gt; next; //每次输入一个系数和指数.p当前结点.q指向下一个结点
+				while ( q &amp;&amp; exp &lt; q -&gt; exp )
+					{ 	p = q;
+			  			q = q -&gt; next;
+					}
+				if ( q == NULL || exp &gt; q -&gt; exp)
+					{ 	p -&gt;next = s;
+			  			s -&gt; next = q;
+					}
+				else { q -&gt; coef += coef;}
+				printf("请输入系数和指数:n");
+  				scanf("%d%d",&amp;coef,&amp;exp);
+			}
+		return head;
+	 }
+ppoly multiply (ppoly A, ppoly B)  //多项式相乘函数,返回结果的头指针
+	{	poly *pa, *pb, *pp, *pq, *s,*head;
+		head = (ppoly)malloc (sizeof (poly));
+		head-&gt;coef=0;
+		head-&gt;exp=0;
+		head-&gt;next=NULL;
+       //以上三步必须加,要不然在windows里面无法运行.因为head-&gt;next是未知的,需要变成NULL
+		for(pa=A-&gt;next ;pa!=NULL;pa=pa-&gt;next)
+			for (pb=B-&gt;next ; pb!=NULL;pb=pb-&gt;next)  //两重循环,判断条件为 此结点是否为空
+				{
+					s=(ppoly)malloc(sizeof (poly));
+					s-&gt;coef = (pa-&gt;coef)*(pb-&gt;coef);
+					s -&gt;exp = (pa -&gt;exp)+(pb-&gt;exp);
+					pp=head;pq=head-&gt;next;
+					while(pq &amp;&amp; (s-&gt;exp)&lt;(pq-&gt;exp))        //同输入函数,输入的过程中 进行排序以及合并同类项
+						{pp=pq;pq=pq-&gt;next;}
+					if (pq == NULL || (s-&gt;exp)&gt;(pq-&gt;exp))
+						{pp-&gt;next = s;s -&gt;next = pq;}
+					else pq-&gt;coef += s-&gt;coef;
+				}
+		return head;
+	}
+void Printpoly(ppoly head) //打印函数
+	{
+ 		poly *p=head-&gt;next;
+ 		while(p)
+ 			{
+  				printf("%d",p-&gt;coef);
+  				if(p-&gt;exp )
+   					printf("*x^%d",p-&gt;exp );
+  				if(p-&gt;next &amp;&amp; p-&gt;next-&gt;coef &gt;0)
+   					printf("+");
+  				p=p-&gt;next;
+ 			}
+	}
+int main()
+	{	ppoly A,B,C;
+		printf("***************************************************");
+		printf("nttPrograme:多项式相乘ntt");
+		printf("Date:4-16ttnttAuthor: lwent90n");
+		printf("***************************************************n");
+		A=createpoly(1);
+		printf("A(x)=");
+ 		Printpoly (A);
+ 		printf("n");
+ 		B=createpoly(2);
+ 		printf("B(x)=");
+ 		Printpoly (B);
+ 		printf("n");
+ 		C=multiply(A,B);
+ 		printf("C(x)=");
+ 		Printpoly (C);
+ 		printf("n");
+ 		return 0;
+ 	}
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/a-data-structure-exercise.html" title="" rel="nofollow">数据结构习题一则 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/jquery-scroll-up-and-down.html" rel="prev">&laquo;&nbsp;jQuery上下浮动滚动[4-22更新]</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/set-twitalker-bot.html" rel="next">TwiTalker bot搭建成功&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/a-data-structure-exercise.html";
+      this.page.identifier = "84";
+      this.page.title = "数据结构习题一则";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

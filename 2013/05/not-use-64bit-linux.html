@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>64位Debian安装感受 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="64位Debian安装感受" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="64位Debian安装感受" />
+<meta property="og:description" content="64位Debian安装感受" />
+<link rel="canonical" href="http://isay.me/2013/05/not-use-64bit-linux.html" />
+<meta property="og:url" content="http://isay.me/2013/05/not-use-64bit-linux.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-05-21T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="64位Debian安装感受" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2013-05-21T00:00:00+08:00","datePublished":"2013-05-21T00:00:00+08:00","description":"64位Debian安装感受","headline":"64位Debian安装感受","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2013/05/not-use-64bit-linux.html"},"url":"http://isay.me/2013/05/not-use-64bit-linux.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  64位Debian安装感受
+</p>
+<h1 class="lotus-pagetit">64位Debian安装感受</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May 21, 2013">May 21, 2013</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>前几天在淘宝上买了一个4G内存条，加上我电脑中已经有的2G内存条，共有6G。为了充分利用起来6G内存，我安装了64位的Win7.安装后没有什么问题。</p>
+
+<p>由于平时折腾、工作都需要Linux环境，所以我想装一个64位的Linux。所以下载了Debian 6.0.7 amd64 iso镜像。开始了安装之路。</p>
+
+<p>安装后感觉还好，但是在开始安装软件后问题就全部出来了。</p>
+
+<ol>
+  <li>so共享库缺失<br />
+  安装联网软件就遇到了缺少so文件的问题。我以前遇到过类似的问题。所以到32位镜像中找到就OK了。但是在使用firefox的时候，即使把so文件放入/lib /lib32 /lib64文件夹中都不行。没办法，先不用firefox了</li>
+  <li>Chrome秒崩溃<br />
+  安装64位的Chrome后，不论是看什么网页，突然就提示崩溃了，或者浏览器直接就没有任何提示的闪退，根本没有办法正常浏览网页。</li>
+  <li>软件支持比较少<br />
+  工作环境中需要使用node，因此需要把node安装上。下载了node官网上的64位包，然后配置一下开发环境。需要使用canvas包，可是无论怎么样都安装不上。提示amd64 xxxx，这应该是和系统有问题，软件对64位系统支持不够。安装其它的好多软件都是各种问题一堆，</li>
+</ol>
+
+<p>软件安装有问题，开发环境无法配置，最重要的Chrome浏览器无法使用。</p>
+
+<p>考虑到以上问题，只好换回了32位系统，暂时只利用了3G内存。目前一切正常，没有遇到任何兼容性或者崩溃事件。</p>
+
+<p>用某年高考语文的一个标题，“64位Debian，想说爱你不容易”。</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2013/05/not-use-64bit-linux.html" title="" rel="nofollow">64位Debian安装感受 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2013/05/full-site-use-pjax.html" rel="prev">&laquo;&nbsp;全站启用pjax加载</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2013/06/ascii-art-generator.html" rel="next">ASCII Art 生成器&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2013/05/not-use-64bit-linux.html";
+      this.page.identifier = "2013052101";
+      this.page.title = "64位Debian安装感受";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

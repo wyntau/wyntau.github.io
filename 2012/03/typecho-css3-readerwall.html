@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Typecho版 css3读者墙 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Typecho版 css3读者墙" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="昨天换上typecho没有怎么弄就去玩跑跑了,留下好多工作没有做完,所以今天要解决掉. 第一个任务就是做完使用wordpress时候弄的css3读者墙." />
+<meta property="og:description" content="昨天换上typecho没有怎么弄就去玩跑跑了,留下好多工作没有做完,所以今天要解决掉. 第一个任务就是做完使用wordpress时候弄的css3读者墙." />
+<link rel="canonical" href="http://isay.me/2012/03/typecho-css3-readerwall.html" />
+<meta property="og:url" content="http://isay.me/2012/03/typecho-css3-readerwall.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-03-16T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Typecho版 css3读者墙" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2012-03-16T00:00:00+08:00","datePublished":"2012-03-16T00:00:00+08:00","description":"昨天换上typecho没有怎么弄就去玩跑跑了,留下好多工作没有做完,所以今天要解决掉. 第一个任务就是做完使用wordpress时候弄的css3读者墙.","headline":"Typecho版 css3读者墙","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2012/03/typecho-css3-readerwall.html"},"url":"http://isay.me/2012/03/typecho-css3-readerwall.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  Typecho版 css3读者墙
+</p>
+<h1 class="lotus-pagetit">Typecho版 css3读者墙</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 16, 2012">March 16, 2012</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>昨天换上typecho没有怎么弄就去玩跑跑了,留下好多工作没有做完,所以今天要解决掉.
+第一个任务就是做完使用wordpress时候弄的css3读者墙.</p>
+
+<p>首先感谢 冰剑博客 的<a href="http://www.binjoo.net/2011/04/most-active-life">水榜之血条</a>给我的启示.因为我没弄过typecho,所以对typecho的函数什么的一点也不熟悉,就借用了冰剑博客的一段代码.</p>
+
+<p>具体效果请看本人<a href="http://isayme.com/message/">留言板</a></p>
+
+<p>下面就是主要的代码了.</p>
+
+<p>在主题文件夹的function.php文件中添加以下代码</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php
+function get_most_active_friends(){
+$db = Typecho_Db::get();
+$sql = $db-&gt;select('COUNT(author) AS cnt','author', 'url', 'mail')
+-&gt;from('table.comments')
+-&gt;where('status = ?', 'approved')
+-&gt;where('type = ?', 'comment')
+-&gt;where('authorId = ?', '0')
+-&gt;where('mail != ?', 'admin@localhost') //把这里的邮箱改成你自己的
+-&gt;group('author')
+-&gt;order('cnt', Typecho_Db::SORT_DESC)
+-&gt;limit('45'); //这里面填写读取的用户数
+$result = $db-&gt;fetchAll($sql);
+$output='';
+$maxNum = $result[0]['cnt'];
+foreach ($result as $one)
+{
+$width = round(40 / ($maxNum / $one['cnt']),2);//这里是血条长度的计算公式
+if($one['url'])
+$url =$one['url'];
+else $url='#';
+$output .="&lt;li&gt;&lt;a target="_blank" href="".$one['url'].""&gt;&lt;span class="pic" style="background: url(http://www.gravatar.com/avatar/".md5(strtolower($one['mail']))."?s=36&amp;d=monsterid&amp;r=G) no-repeat;"&gt;pic&lt;/span&gt;&lt;span class="num"&gt;".$one['cnt']."&lt;/span&gt;&lt;span class="name"&gt;".$one['author']."&lt;/span&gt;&lt;/a&gt;&lt;div class='active-bg'&gt;&lt;div class='active-degree' style='width:".$width."px'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;";
+} //我这里直接用的是gravatar服务器上的头像,如果你想使用本地缓存的话,请自己修改代码即可.
+$output = "&lt;div class="readerwall"&gt;".$output."&lt;div class="clear"&gt;&lt;/div&gt;&lt;/div&gt;";
+echo $output ;
+}
+?&gt;
+</code></pre></div></div>
+
+<p>新建一个页面模板,然后在</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php $this-&gt;content(); ?&gt;
+</code></pre></div></div>
+
+<p>的前面位置添加</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php get_most_active_friends(); ?&gt;
+</code></pre></div></div>
+
+<p>即可</p>
+
+<p>最后是css代码,和我在wordpress版的css3读者墙的css代码一样.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*readerwall*/
+body{overflow-x:hidden}
+.readerwall{padding:12px;font-size:12px;overflow:visible}
+.readerwall li{width:40px;height:40px;margin:0;padding:5px 0 5px 5px;float:left;list-style:none;border:0px solid #DFDFDF;-moz-border-radius:2px;-khtml-border-radius:2px;-webkit-border-radius:2px;border-radius:2px}
+.readerwall .active-bg{width:40px;height:2px;_font-size:0;margin:0 0 -1px -2px;background:#DFDFDF}
+.readerwall .active-degree{background:red;width:40px;height:2px;_font-size:0}
+.readerwall a{width:36px;height:36px;display:inline-block;position:relative;margin:0 0 2px;text-decoration:none}
+.readerwall .pic{position:absolute;top:0;left:0;z-index:100;width:36px;height:36px;display:block;-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;-webkit-transition:all .4s ease-in-out;-moz-transition:all .4s ease-in-out;-o-transition:all .4s ease-in-out;border-radius:4px;text-indent:-9999px}
+.readerwall .num{position:absolute;top:0;left:0;z-index:99;width:34px;height:34px;line-height:34px;color:#E02523;font-size:18px;font-weight:bold;display:block;background:#fff;text-align:center;border:#bbb 1px solid;box-shadow:0 0 4px #ccc;-webkit-transform:rotateY(-180deg);-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;transition:all .4s ease-in-out;-webkit-transition:all .4s ease-in-out;-moz-transition:all .4s ease-in-out;-o-transition:all .4s ease-in-out;border-radius:4px}
+.readerwall .name{position:absolute;top:0;left:0;color:#333;display:block;width:1px;height:1px;overflow:hidden;-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;-webkit-transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;text-align:center}
+.readerwall a:hover .pic{z-index:100;border-color:#eee;-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg)}
+.readerwall a:hover .num{z-index:101;-webkit-transform:rotateY(0deg);-moz-transform:rotateY(0deg);opacity:.8}
+.readerwall a:hover .name{top:-28px;left:-38px;z-index:101;padding:4px 6px;height:20px;line-height:20px;overflow:hidden;background:#fff;border-radius:2px;box-shadow:0 0 3px #000;min-width:100px;opacity:.8}
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2012/03/typecho-css3-readerwall.html" title="" rel="nofollow">Typecho版 css3读者墙 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2012/01/ready-for-go-home.html" rel="prev">&laquo;&nbsp;收拾行李,准备回家</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2012/03/ready-for-typecho.html" rel="next">准备更换typecho&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2012/03/typecho-css3-readerwall.html";
+      this.page.identifier = "243";
+      this.page.title = "Typecho版 css3读者墙";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>后台快速添加mp3按钮 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="后台快速添加mp3按钮" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="接上一篇短代码mp3player" />
+<meta property="og:description" content="接上一篇短代码mp3player" />
+<link rel="canonical" href="http://isay.me/2011/05/backeditor-add-audio-button.html" />
+<meta property="og:url" content="http://isay.me/2011/05/backeditor-add-audio-button.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-05-11T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="后台快速添加mp3按钮" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-05-11T00:00:00+08:00","datePublished":"2011-05-11T00:00:00+08:00","description":"接上一篇短代码mp3player","headline":"后台快速添加mp3按钮","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/05/backeditor-add-audio-button.html"},"url":"http://isay.me/2011/05/backeditor-add-audio-button.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  后台快速添加mp3按钮
+</p>
+<h1 class="lotus-pagetit">后台快速添加mp3按钮</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May 11, 2011">May 11, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>接上一篇<a href="/2011/05/shortcode-enable-mp3player.html">短代码mp3player</a></p>
+
+<p><strong>首先感谢荒野无灯分享的源代码,要不是这个源代码,我也不会修改的….太菜了,只能修改人家的东西,自己就是不会写..</strong></p>
+
+<p>在上一篇中讲到的在后台html编辑器模式添加mp3的时候需要 用[mp3][/mp3]将mp3文件的地址括起来,有点不够人性化,正好我看到 荒野无灯的那篇文章<a href="http://www.ihacklog.com/wordpress/plugins/add-media-quicktags-for-wp.html">在后台添加quicktags——续《不用audio-player插件也播放mp3》</a> 中,用functions.php中的函数就可以给后台quicktag添加按钮,由于荒野无灯也是为添加多媒体做的按钮,但是他添加了两个按钮,添加mp3的那个按钮没法设置是否自动播放.</p>
+
+<p>所以我只是稍微修改了一下,把输出内容修改了一下,另外又增加一个是否自动播放的参数选择.</p>
+
+<p>现在想要添加mp3文件的时候,只要按一下mp3的按钮,然后输入mp3文件的地址.再选择是否自动播放就可以了,0为不自动播放,1为自动播放.默认情况下是不自动播放.
+functions.php中的代码如下</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (strpos($_SERVER['REQUEST_URI'], 'post.php') || strpos($_SERVER['REQUEST_URI'], 'post-new.php') || strpos($_SERVER['REQUEST_URI'], 'page-new.php') || strpos($_SERVER['REQUEST_URI'], 'page.php'))
+{
+        function sayme_add_mp3_tags()
+        {
+        echo &lt;&lt;&lt;eot
+        &lt;script type="text/javascript"&gt;
+            function insertAudio()
+            {
+                var U=prompt('请输入mp3 URL','http://');
+                if(!U)
+                    return false;
+                var audio_url = jQuery.trim(U);
+                if(audio_url == null || audio_url == "" || audio_url =='http://')
+                {
+                alert('请输入正确的mp3 URL!');
+                return false;
+                }
+                else
+                {
+                var autostart = prompt('auto autostart?' , '0');
+                edInsertContent(edCanvas, "[ mp3 auto=" + autostart+"]" + audio_url + "[/mp3]");
+                }//注意将中括号和mp3之间的空格去掉,下同
+            }
+    if(document.getElementById("ed_toolbar"))
+    {
+        qt_toolbar = document.getElementById("ed_toolbar");
+        edButtons[edButtons.length] = new edButton('mp3' ,'mp3' ,'[ mp3]' ,'[/mp3]' ,'' );
+        var qt_button = qt_toolbar.lastChild;
+        while (qt_button.nodeType != 1){
+            qt_button = qt_button.previousSibling;
+        }
+        qt_button = qt_button.cloneNode(true);
+        qt_button.value = 'mp3';
+        qt_button.title = '插入mp3';
+        qt_button.onclick = function () { insertAudio();}
+        qt_button.id = "ed_audio";
+        qt_toolbar.appendChild(qt_button);
+    }
+&lt;/script&gt;
+EOT;
+        }
+    add_action('admin_footer','sayme_add_mp3_tags');
+} 这样做完 在后台的html编辑器模式就可以看到mp3按钮了.
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/05/backeditor-add-audio-button.html" title="" rel="nofollow">后台快速添加mp3按钮 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/05/wp-head-redundant-code.html" rel="prev">&laquo;&nbsp;转-去除wp头部代码中不需要的</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/05/shortcode-enable-mp3player.html" rel="next">短代码 mp3player&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/05/backeditor-add-audio-button.html";
+      this.page.identifier = "128";
+      this.page.title = "后台快速添加mp3按钮";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

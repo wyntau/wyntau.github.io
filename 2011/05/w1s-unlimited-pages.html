@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>W1免费版无限翻页 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="W1免费版无限翻页" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="效果我这里没有了,想要看的,去winy博客上看吧,很给力哟~~" />
+<meta property="og:description" content="效果我这里没有了,想要看的,去winy博客上看吧,很给力哟~~" />
+<link rel="canonical" href="http://isay.me/2011/05/w1s-unlimited-pages.html" />
+<meta property="og:url" content="http://isay.me/2011/05/w1s-unlimited-pages.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-05-27T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="W1免费版无限翻页" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-05-27T00:00:00+08:00","datePublished":"2011-05-27T00:00:00+08:00","description":"效果我这里没有了,想要看的,去winy博客上看吧,很给力哟~~","headline":"W1免费版无限翻页","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/05/w1s-unlimited-pages.html"},"url":"http://isay.me/2011/05/w1s-unlimited-pages.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  W1免费版无限翻页
+</p>
+<h1 class="lotus-pagetit">W1免费版无限翻页</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="May 27, 2011">May 27, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>效果我这里没有了,想要看的,去winy博客上看吧,很给力哟~~</p>
+
+<p>虽然我撤下了这个效果,但是我还是想说说方法,按照Winysky的博文<a href="http://winysky.com/unlimited-paging-effects">无限分页效果</a>讲得很清楚了,只要稍微一改jquery的选择器就正常工作了,原因应该是 winy是按照他用的W1说的,此免费版的W1s和收费版的W1p大体结构应该是差不多的啦.</p>
+
+<p>感谢winy最后给我的提示关于翻页后效果不好的修改.
+附上Winy的原文,最后再附上我修改后的版本
+原文开始</p>
+
+<hr />
+<p>使用方法：</p>
+
+<p><strong>首先</strong>下载 jquery.infinitescroll.js and minified are now on GitHub（官方）
+或者从我的站点下载 (大小5kb)</p>
+
+<p>使用方法很简单，加载jQuery库（1.26以上），假设你的首页有如下结构：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div id="indexpost"&gt;
+&lt;div id="post-xxx"&gt;xxx&lt;/div&gt;
+&lt;div id="post-xxx"&gt;xxx&lt;/div&gt;
+......
+&lt;/div&gt;
+&lt;div id="navigation"&gt;&lt;a href=""../page/2&gt;下一页&lt;/a&gt;&lt;/div&gt; 当然，因为只需要下一页，分页插件是不需要了，在index.php对应的地方就用默认的分页： next\_posts\_link(\_\_('MORE')) 在合适的地方加入一段js：（注意更改 对应的选择器适应自己的主题）
+
+$('#indexpost').infinitescroll({
+   //#indexpost 是包括所有文章的div元素id
+      navSelector  : "#navigation",
+                     // 页面分页元素(成功后隐藏)
+      nextSelector : "#navigation a",
+                     // 需要点击的下一页链接
+      itemSelector : "#indexpost div.post"   ,
+                     // 返回后文章对应的插入位置
+      loadingImg   : themeurl+"/images/ajax-loader.gif",
+                     //加载图片路径（绝对路径）
+      loadingText  : "加载中...",
+                   //显示的提示文字
+      animate      : true,
+                   //加载完毕是否采用动态效果
+      extraScrollPx: 150,
+                  //向下滚动的像素，必须开启动态效果
+      donetext     : "后面没有了" ,
+                //返回404，即到头了显示的文字
+    },function(arrayOfNewElems){
+       home_js();
+            //成功后执行的自定义的函数，如页面javascript的重载
+
+ }); 这样应该可以实现无限滚屏，就像google reader，到底部自动ajax载入下一页。但这样有时候页面很多，而访客并不想翻页，那么需要一个点击后再加载下页的功能，就像twitter底部点击more的效果。 那么继续在上一段js后加入：
+
+// 取消scroll绑定
+    $(window).unbind('.infscr');
+  // 手动点击的元素
+    $('#navigation a').click(function(){
+      $(document).trigger('retrieve.infscr');
+      return false;
+    });
+    // 如果没有下一页，去掉分页
+    $(document).ajaxError(function(e,xhr,opt){
+      if (xhr.status == 404) $('#navigation').remove();
+    }); 还需要设计more按钮的css，例如：
+
+#navigation{display:block!important; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; border: 1px solid #ddd; background: #EFEFEF;box-shadow: 2px 2px 2px rgba(50,50,50,0.4); color: #444; text-decoration: none;width:60%;margin:0 0 0 90px; padding: 10px;text-align: center;} 自己可以设计以适应模板，注意“display:block!important;”成功后还要显示下一页的分页链接，不能隐藏。
+</code></pre></div></div>
+
+<p>这样应该就可以了。</p>
+
+<hr />
+
+<p>以上为原文
+然后该我说几点了,</p>
+
+<ol>
+  <li>文中讲到的那个从官方或者从winy博客下载的js文件. 我没有写链接. 算是我不盗链吧.当然这个也可以不下载. 我提供的修改好的代码中已经包含了.</li>
+  <li>修改分页代码. 这个位于home.php的最下面.将pagenavi();修改为next_posts_link(__(‘MORE’))就好了.</li>
+  <li>对应的选择器的修改也不说了. 我的版本已经修改好了(只对应免费版W1s)</li>
+  <li>最后的display:block!important;不需要. 要不然效果就会很难看. 我的文件中已经修改了. 再次感谢winy的指导!!</li>
+  <li>修改后的js文件.将其中的代码. 添加到你的js文件中就好了.点击<a target="_blank" href="http://isayme.com/wp-content/uploads/2011/05/page.js">下载</a></li>
+</ol>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/05/w1s-unlimited-pages.html" title="" rel="nofollow">W1免费版无限翻页 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/05/unlimited-page-to-new-version.html" rel="prev">&laquo;&nbsp;停用无限翻页,准备换新版~</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/05/philna2-use-google-custom-search.html" rel="next">PhilNa2使用google自定义搜索&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/05/w1s-unlimited-pages.html";
+      this.page.identifier = "147";
+      this.page.title = "W1免费版无限翻页";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

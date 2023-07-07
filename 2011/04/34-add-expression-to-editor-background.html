@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>wp后台编辑器添加表情 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="wp后台编辑器添加表情" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="今天又弄了个侧边栏3栏显示,感觉不错. 但是我发现我在编辑的时候喜欢加点表情,觉得只有表情才能表达某个时刻的心情." />
+<meta property="og:description" content="今天又弄了个侧边栏3栏显示,感觉不错. 但是我发现我在编辑的时候喜欢加点表情,觉得只有表情才能表达某个时刻的心情." />
+<link rel="canonical" href="http://isay.me/2011/04/34-add-expression-to-editor-background.html" />
+<meta property="og:url" content="http://isay.me/2011/04/34-add-expression-to-editor-background.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-04T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="wp后台编辑器添加表情" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-04T00:00:00+08:00","datePublished":"2011-04-04T00:00:00+08:00","description":"今天又弄了个侧边栏3栏显示,感觉不错. 但是我发现我在编辑的时候喜欢加点表情,觉得只有表情才能表达某个时刻的心情.","headline":"wp后台编辑器添加表情","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/34-add-expression-to-editor-background.html"},"url":"http://isay.me/2011/04/34-add-expression-to-editor-background.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  wp后台编辑器添加表情
+</p>
+<h1 class="lotus-pagetit">wp后台编辑器添加表情</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April  4, 2011">April  4, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>今天又弄了个侧边栏3栏显示,感觉不错. 但是我发现我在编辑的时候喜欢加点表情,觉得只有表情才能表达某个时刻的心情.</p>
+
+<p>原来是在前台的评论框里面 点击想要的表情看看是数目转义字符,然后复制到编辑器里面.可是又写了几次,感觉这样好麻烦啊.给编辑器添加表情该多好啊.所以到网上去找找.果真有人有这样的需求,所以我也顺便弄下来啦 :lol:
+效果图</p>
+
+<p><img src="/uploads/2011/04/04_01.png" alt="" /></p>
+
+<p>参考地址是<a href="http://www.ihacklog.com/wordpress/wpskills/add-wp-smiley-for-html-and-rich-text-editor.html">荒野无灯weblog</a></p>
+
+<p>具体代码如下.(哈哈,最近一直在鼓捣这个wordpress,越来越喜欢了 :evil: )</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*add smiles to editor*/
+        if (strpos($_SERVER['REQUEST_URI'], 'post.php') || strpos($_SERVER['REQUEST_URI'], 'post-new.php') || strpos($_SERVER['REQUEST_URI'], 'page-new.php') || strpos($_SERVER['REQUEST_URI'], 'page.php'))
+{
+    function ihacklog_add_smiley()
+    {
+        echo &lt;&lt;&lt;eot
+        &lt;script type="text/javascript"&gt;
+
+
+        function grin(tag)
+        {
+        var myField;
+        tag = ' ' + tag + ' ';
+        if (document.getElementById('content') &amp;&amp; document.getElementById('content').style.display != 'none' &amp;&amp; document.getElementById('content').type == 'textarea')
+        {
+            myField = document.getElementById('content');
+
+            if (document.selection)
+            {
+            myField.focus();
+            sel = document.selection.createRange();
+            sel.text = tag;
+            myField.focus();
+            }
+            else
+                if (myField.selectionStart || myField.selectionStart == '0')
+                {
+                var startPos = myField.selectionStart;
+                var endPos = myField.selectionEnd;
+                var cursorPos = endPos;
+                myField.value = myField.value.substring(0, startPos) + tag + myField.value.substring(endPos, myField.value.length);
+                cursorPos += tag.length;
+                myField.focus();
+                myField.selectionStart = cursorPos;
+                myField.selectionEnd = cursorPos;
+                }
+                else
+                {
+                myField.value += tag;
+                myField.focus();
+                }
+        }
+        else
+        {
+        tinyMCE.execCommand('mceInsertContent', false, tag);
+        }
+    }
+
+    var smiley='&lt;p&gt;&lt;a href="javascript:grin(':no:')"&gt;&lt;img src="../wp-includes/images/smilies/1.gif"  /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':razz:')"&gt;&lt;img src="../wp-includes/images/smilies/17.gif" alt="冷笑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':sad:')"&gt;&lt;img src="../wp-includes/images/smilies/30.gif" alt="伤心" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':evil:')"&gt;&lt;img src="../wp-includes/images/smilies/2.gif" alt="邪恶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':eat:')"&gt;&lt;img src="../wp-includes/images/smilies/3.gif" alt="感叹" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':smile:')"&gt;&lt;img src="../wp-includes/images/smilies/33.gif" alt="微笑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':sex:')"&gt;&lt;img src="../wp-includes/images/smilies/13.gif" alt="微笑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':oops:')"&gt;&lt;img src="../wp-includes/images/smilies/25.gif" alt="红脸" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':grin:')"&gt;&lt;img src="../wp-includes/images/smilies/4.gif" alt="咧嘴笑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':eek:')"&gt;&lt;img src="../wp-includes/images/smilies/18.gif" alt="吃惊" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':han:')"&gt;&lt;img src="../wp-includes/images/smilies/6.gif" alt="吃惊" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':zzz:')"&gt;&lt;img src="../wp-includes/images/smilies/29.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':shock:')"&gt;&lt;img src="../wp-includes/images/smilies/7.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':mask:')"&gt;&lt;img src="../wp-includes/images/smilies/27.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':surprise:')"&gt;&lt;img src="../wp-includes/images/smilies/26.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':jiong:')"&gt;&lt;img src="../wp-includes/images/smilies/8.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':cold:')"&gt;&lt;img src="../wp-includes/images/smilies/14.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':han:')"&gt;&lt;img src="../wp-includes/images/smilies/15.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':shut:')"&gt;&lt;img src="../wp-includes/images/smilies/23.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':???:')"&gt;&lt;img src="../wp-includes/images/smilies/5.gif" alt="困惑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':cool:')"&gt;&lt;img src="../wp-includes/images/smilies/10.gif" alt="耍酷" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':ool:')"&gt;&lt;img src="../wp-includes/images/smilies/32.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':lol:')"&gt;&lt;img src="../wp-includes/images/smilies/24.gif" alt="大笑" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':mad:')"&gt;&lt;img src="../wp-includes/images/smilies/31.gif" alt="抓狂" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':love:')"&gt;&lt;img src="../wp-includes/images/smilies/20.gif" alt="惊讶" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':twisted:')"&gt;&lt;img src="../wp-includes/images/smilies/19.gif" alt="痛苦" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':roll:')"&gt;&lt;img src="../wp-includes/images/smilies/21.gif" alt="转眼珠" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':wink:')"&gt;&lt;img src="../wp-includes/images/smilies/22.gif" alt="眨眼" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':idea:')"&gt;&lt;img src="../wp-includes/images/smilies/9.gif" alt="好主意" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':arrow:')"&gt;&lt;img src="../wp-includes/images/smilies/16.gif" alt="" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':neutral:')"&gt;&lt;img src="../wp-includes/images/smilies/12.gif" alt="自然" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':cry:')"&gt;&lt;img src="../wp-includes/images/smilies/28.gif" alt="哭" /&gt;&lt;/a&gt; &lt;a href="javascript:grin(':mrgreen:')"&gt;&lt;img src="../wp-includes/images/smilies/11.gif" alt="绿脸先生" /&gt;&lt;/a&gt;&lt;/p&gt;';
+            jQuery('#quicktags').before(smiley);
+
+&lt;/script&gt;
+EOT;
+        }
+
+    add_action('admin_footer','ihacklog_add_smiley');
+} 里面的那些表情转义字符还有图片名称和alt描述还需要你改一下才可以哦.要不然后台一片难堪啊 :eek:
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/34-add-expression-to-editor-background.html" title="" rel="nofollow">wp后台编辑器添加表情 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/33-three-column-friends-sidebar.html" rel="prev">&laquo;&nbsp;侧栏友链3栏显示</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/35-modify-comment-editor-note.html" rel="next">评论框编辑器修改小记&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/34-add-expression-to-editor-background.html";
+      this.page.identifier = "34";
+      this.page.title = "wp后台编辑器添加表情";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

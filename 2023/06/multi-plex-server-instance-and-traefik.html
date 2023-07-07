@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="安装Plex Media Server 后, 有几种方式可以访问到 plex 可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问 在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问 在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问" />
+<meta property="og:description" content="安装Plex Media Server 后, 有几种方式可以访问到 plex 可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问 在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问 在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问" />
+<link rel="canonical" href="http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html" />
+<meta property="og:url" content="http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-29T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-29T00:00:00+08:00","datePublished":"2023-06-29T00:00:00+08:00","description":"安装Plex Media Server 后, 有几种方式可以访问到 plex 可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问 在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问 在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问","headline":"通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html"},"url":"http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问
+</p>
+<h1 class="lotus-pagetit">通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="June 29, 2023">June 29, 2023</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>安装Plex Media Server 后, 有几种方式可以访问到 plex</p>
+<ol>
+  <li>可以直接使用局域网的方式, http://{局域网IP}:32400 的方式访问</li>
+  <li>在未开启 plex 远程访问但是路由器中正确配置了端口转发后, 直接使用对应的公网 IP 加端口号32400 的方式访问</li>
+  <li>在成功开启了 plex 远程访问功能并且路由器中正确配置了端口转发后, 直接使用 https://app.plex.tv 的访问</li>
+</ol>
+
+<p>上面 2 和 3 的区别就是, 在开启了 plex 远程访问功能后, plex 会获取当前 plex 服务器的内网IP以及公网IP. 然后在使用 https://app.plex.tv 访问时, 会尝试使用公网IP及对应的端口号访问, 转发到内网的 plex 服务器.</p>
+
+<p>但是在不开启 plex 的远程访问功能的情况下, 如果我们已经知道了公网IP, 也可以直接访问公网IP加端口号. 只是在通过 https://app.plex.tv 访问时, 由于 plex 并不知道这个公网IP, 所以会无法请求数据.</p>
+
+<p>支持的访问方式多, 但是各自都有一些不方便及不完美的地方</p>
+<ol>
+  <li>上面方式1只能在内网访问, 如果在外网就需要用方式2和方式3</li>
+  <li>上面方式2, 需要记住公网IP, 如果有域名以及 ddns 配合的话就方便一些, 这是在只有一个 plex server 的情况下. 但是假如有多个 plex server 的话, 就需要频繁切换域名访问, 此时可能就需要使用方式3</li>
+  <li>方式3的话, 则需要在路由器中为 plex 单独映射一个端口, 并且为了安全起见, 还需要单独配置 SSL 证书, 比较麻烦. 如果已经有了统一的 traefik 或者 nginx 等反向代理工具的话, 则显的有些多余.</li>
+</ol>
+
+<p>那么有没有什么更好的方式能解决上面3点呢, 通过查看 plex 设置后台, 发现了 自定义服务器访问 URL 这个功能, 经过测试, 搭配本地的反向代理工具可以完美解决. 并且可以实现如下效果.</p>
+<ol>
+  <li>不需要开启 plex 后台设置中的远程访问功能</li>
+  <li>所有 plex 服务器都可以统一通过 https://app.plex.tv 访问</li>
+  <li>当在内网时, 直接请求的是 plex 服务器的内网IP</li>
+  <li>当在公网时, 请求的是路由器的公网IP, 并通过路由器及反向代理工具, 转发到内网对应的 plex 服务器</li>
+  <li>统一由 traefik 或 nginx 等反向代理工具配置 SSL 证书</li>
+  <li>除 app.plex.tv 外, 还可以使用自定义域名的方式访问, 并且由于统一配置了 SSL 证书, 请求类型也是 https 的, 更安全.</li>
+</ol>
+
+<p>下面会以两个 plex 服务器实现来讲具体实现. 假设两个 plex 服务器分别为</p>
+<ol>
+  <li>Plex 服务器a, 对应内网IP 为 192.168.88.10, 路由器已配置了泛解析 ddns 域名 *.foo.example.com, 端口号 3456, 路由器转发所有请求到内网的 traefik 实例上</li>
+  <li>Plex 服务器b, 对应内网IP 为 192.168.100.47, 路由器已配置了泛解析 ddns 域名 *.bar.example.com, 端口号 5678, 路由器转发所有请求到内网的 traefik 实例上.</li>
+</ol>
+
+<p>首先配置 traefik, 针对 plex-a 以及 plex-b 分别添加内网转发配置.</p>
+
+<p>Plex-a 配置</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[http.routers.plex]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["websecure"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`plex.foo.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"plex@file"</span>
+
+<span class="nn">[[http.services.plex.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.88.10:32400"</span>
+</code></pre></div></div>
+
+<p>Plex-b 配置</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[http.routers.plex]</span>
+  <span class="py">entryPoints</span> <span class="p">=</span> <span class="nn">["websecure"]</span>
+  <span class="py">rule</span> <span class="p">=</span> <span class="s">"Host(`plex.bar.example.com`)"</span>
+  <span class="py">service</span> <span class="p">=</span> <span class="s">"plex@file"</span>
+
+<span class="nn">[[http.services.plex.loadBalancer.servers]]</span>
+  <span class="py">url</span> <span class="p">=</span> <span class="s">"http://192.168.100.47:32400"</span>
+</code></pre></div></div>
+
+<p>然后, plex 后台配置自定义服务器访问 URL, 具体设置位置为 设置=&gt;网络=&gt;自定义服务器访问URL</p>
+
+<p>Plex-a 后台配置</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://192.168.88.10:32400,https://plex.foo.example.com:3456
+</code></pre></div></div>
+
+<p>Plex-b 后台配置</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://192.168.100.47:32400,https://plex.bar.example.com:5678
+</code></pre></div></div>
+
+<p>注意上面的自定义服务器访问 URL 分别设置了两个值, 一个内网, 一个外网.</p>
+
+<p>当这样设置后, plex 会为当前 plex 服务器分配一个 https://192-168-100-47.xxxxxxx.plex.direct 这样的域名, 实际解析到的地址就是内网的 192.168.100.47.</p>
+
+<p>具体这样做的原因是因为, https://app.plex.tv 是使用 https 方式访问, 浏览器安全策略会禁止在 https 页面访问 http 资源的行为. 所以 plex 为了解决这个问题, 为每个 plex 服务器的内网IP分配了一个单独 https 的地址并在 plex 服务器上为  https://192-168-100-47.xxxxxxx.plex.direct 这样的单独域名安装上对应的SSL证书.</p>
+
+<p>此时, 当你的路由器端口转发正常, 并且 traefik 正确配置了 SSL 泛解析证书的情况下, 访问 app.plex.tv 页面可以同时看到你的 plex-a 以及 plex-b 两个服务器的数据.</p>
+
+<ul>
+  <li>当在 plex-a 所在的内网访问 app.plex.tv 时, 请求的是 plex-a 的内网IP, plex-b 的公网IP</li>
+  <li>当在 plex-b 所在的内网访问 app.plex.tv 时, 请求的是 plex-a 的公网IP, plex-b 的内网IP</li>
+  <li>当在公网访问 app.plex.tv 时, 请求的是 plex-a 的公网IP, plex-b 的公网IP</li>
+</ul>
+
+<p><strong>注意</strong>
+如果你内网使用了 OpenWrt DNS 的话, 还需要多设置一步.</p>
+
+<p>由于 https://192-168-100-47.xxx.plex.direct  这样的域名解析出的 IP 实际是内网IP, 会被 OpenWrt 的 DNS 策略拦截, 此时 app.plex.tv 页面在浏览器请求 https://192-168-100-47.xxx.plex.direct 这个地址会被报告 DNS 解析错误, 所以 app.plex.tv 会 fallback 到公网地址.</p>
+
+<p>具体配置位置为 网络=&gt; DHCP/DNS=&gt;重绑定保护, 取消打勾后就可以了.</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html" title="" rel="nofollow">通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2023/05/aria2-traefik.html" rel="prev">&laquo;&nbsp;使用 traefik 代理 aria2</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2023/07/pve-lxc-nvidia-gpu-passthrough.html" rel="next">PVE LXC 容器直通 Nvidia 显卡...&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2023/06/multi-plex-server-instance-and-traefik.html";
+      this.page.identifier = "2023062901";
+      this.page.title = "通过 Plex 自定义服务器访问 URL 搭配反向代理工具优化内外网访问";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

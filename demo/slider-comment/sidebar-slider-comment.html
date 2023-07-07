@@ -1,0 +1,80 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+ul, li {list-style:none}
+ul{overflow:hidden;}
+ul li{padding-top:5px;overflow:hidden;}
+ul li img.avatar{height:20px;width:20px;}
+#tab-slider{height:207px;overflow:hidden;position: relative;}
+</style>
+<script type="text/javascript">
+function H$(i) {return document.getElementById(i)}
+function H$$(c, p) {return p.getElementsByTagName(c)}
+var slider = function () {
+	function init (o) {
+		this.id = o.id;
+		this.at = o.auto ? o.auto : 3;
+		this.o = 0;
+		this.pos();
+	}
+	init.prototype = {
+		pos : function () {
+			clearInterval(this.__b);
+			this.o = 0;
+			var el = H$(this.id), li = H$$('li', el), l = li.length;
+			var _t = li[l-1].offsetHeight;
+			var cl = li[l-1].cloneNode(true);
+			cl.style.opacity = 0; cl.style.filter = 'alpha(opacity=0)';
+			el.insertBefore(cl, el.firstChild);
+			el.style.top = -_t + 'px';
+			this.anim();
+		},
+		anim : function () {
+			var _this = this;
+			this.__a = setInterval(function(){_this.animH()}, 20);
+		},
+		animH : function () {
+			var _t = parseInt(H$(this.id).style.top), _this = this;
+			if (_t >= -1) {
+				clearInterval(this.__a);
+				H$(this.id).style.top = 0;
+				var list = H$$('li',H$(this.id));
+				H$(this.id).removeChild(list[list.length-1]);
+				this.__c = setInterval(function(){_this.animO()}, 20);
+				//this.auto();
+			}else {
+				var __t = Math.abs(_t) - Math.ceil(Math.abs(_t)*.07);
+				H$(this.id).style.top = -__t + 'px';
+			}
+		},
+		animO : function () {
+			this.o += 2;
+			if (this.o == 100) {
+				clearInterval(this.__c);
+				H$$('li',H$(this.id))[0].style.opacity = 1;
+				H$$('li',H$(this.id))[0].style.filter = 'alpha(opacity=100)';
+				this.auto();
+			}else {
+				H$$('li',H$(this.id))[0].style.opacity = this.o/100;
+				H$$('li',H$(this.id))[0].style.filter = 'alpha(opacity='+this.o+')';
+			}
+		},
+		auto : function () {
+			var _this = this;
+			this.__b = setInterval(function(){_this.pos()}, this.at*1000);
+		}
+	}
+	return init;
+}();//以上是评论轮回展示js
+</script>
+<ul id="tab-slider">
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/6ca6c6611136a3e05ce30d872da1b551.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/message/comment-page-13/#comment-1924" rel="external nofollow" title="@weizi 欢迎常来.呵呵.次数多了就有了.@weizi 第一次嘛,好像大家基本上都是设置的 第一次评论要审核">Lwent</a></span><span class="r_excerpt">Lwent测试1</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/6ca6c6611136a3e05ce30d872da1b551.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/my-blog-name-is-a-failure/comment-page-2/#comment-1923" rel="external nofollow" title="@土木坛子＠比利时 thx~~一般的spam都是纯英文的 我没用akistem插件 所以就用这个中文 检查了.嘿嘿">Lwent</a></span><span class="r_excerpt">@土木坛子＠比利时 th...</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/6ca6c6611136a3e05ce30d872da1b551.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/upgrade-to-wordpress-v32/comment-page-2/#comment-1922" rel="external nofollow" title="@phoetry 升级 我也是不注意 以后就得注意一下@yesureadmin 赶快升了吧 应该提升很多的@liveme 那个主题还没用过.试试去">Lwent</a></span><span class="r_excerpt">Lwent测试2</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/60178eb97cadbb9674e424304f560729.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/upgrade-to-wordpress-v32/comment-page-2/#comment-1921" rel="external nofollow" title="喜欢3.2的那个主题，嘿嘿">liveme</a></span><span class="r_excerpt">喜欢3.2的那个主题，...</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/d4aa12519670fe291cdcfcae3aa792a4.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/upgrade-to-wordpress-v32/comment-page-2/#comment-1920" rel="external nofollow" title="受不了了,马上去升了他">yesureadmin</a></span><span class="r_excerpt">受不了了,马上去升了...</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/a4368b0f22f9820265d7d2431addc8da.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/my-blog-name-is-a-failure/comment-page-2/#comment-1919" rel="external nofollow" title="i also use isayme to refer to your site.不欢迎纯英文的评论呀。">土木坛子＠比利时</a></span><span class="r_excerpt">Lwent测试</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/67ee2117db40f6eb7f4d75a91037a634.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/message/comment-page-13/#comment-1918" rel="external nofollow" title="郁闷。。被你审了">weizi</a></span><span class="r_excerpt">郁闷。。被你审了...</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/67ee2117db40f6eb7f4d75a91037a634.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/message/comment-page-13/#comment-1917" rel="external nofollow" title="木有我。。。我要第一。 :ool:">weizi</a></span><span class="r_excerpt">木有我。。。我要第一...</span></div><div class="clear"></div></li> 
+<li class="r_item"><div class="row"><img title='' alt='' src='http://ISayMe.com/wp-content/avatar/6ca6c6611136a3e05ce30d872da1b551.jpg' class='avatar avatar-30 photo' height='30' width='30' /><span class="r_name"><a href="http://ISayMe.com/2011/07/my-blog-name-is-a-failure/comment-page-2/#comment-1916" rel="external nofollow" title="@phoetry 囧囧囧,原来我的名字这么失败~~">Lwent</a></span><span class="r_excerpt">@phoetry 囧囧囧,原来...</span></div><div class="clear"></div></li> 
+</ul>
+<script type="text/javascript">new slider({id:'tab-slider'});</script>

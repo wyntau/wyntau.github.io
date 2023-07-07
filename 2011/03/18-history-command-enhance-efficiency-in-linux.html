@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Linux中使用history命令提升效率 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Linux中使用history命令提升效率" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Wyntau’s Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程." />
+<meta property="og:description" content="Wyntau’s Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程." />
+<link rel="canonical" href="http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html" />
+<meta property="og:url" content="http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-03-25T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Linux中使用history命令提升效率" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-03-25T00:00:00+08:00","datePublished":"2011-03-25T00:00:00+08:00","description":"Wyntau’s Individual Blog. 自说Me话,一个前端开发新手的网络记录,同喜欢网络,Linux,前端开发,爱折腾的人共同分享,记录折腾心得还有学习过程.","headline":"Linux中使用history命令提升效率","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html"},"url":"http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  Linux中使用history命令提升效率
+</p>
+<h1 class="lotus-pagetit">Linux中使用history命令提升效率</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="March 25, 2011">March 25, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p><img src="/uploads/2011/03/25_01.png" alt="" /></p>
+
+<p>无论你是linux命令行新手还是老鸟,这些技巧都可以让您得到提升,节省时间,提升效率,增加兴趣….</p>
+
+<p><strong>历史命令</strong></p>
+
+<p>这些技巧大部分是利用 历史(history) 命令,我们首先输入</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>history
+</code></pre></div></div>
+
+<p>然后你就会看到类似下图</p>
+
+<p><img src="/uploads/2011/03/25_02.png" alt="" /></p>
+
+<p>要想执行历史中的某一条命令,只要用 !加上命令前的行号就可以了.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!510
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_03.png" alt="" /></p>
+
+<p>你也可以看一条命令是什么时候被执行的,我们来看看3条命令之前的命令是什么.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!-3
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_04.png" alt="" /></p>
+
+<p><strong>快速替换</strong></p>
+
+<p>假设你想执行上一条命令.直接输入两个感叹号即可(译者注:此时或许不如方向键方便,但下面才是真正的作用).当你在执行一条命令之后才发现忘记加上sudo了,这个命令就发挥了作用.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo !!
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_05.png" alt="" /></p>
+
+<p>假设你想要运行一个命令,而此命令的参数,在上一个命令中已经有了,但是再打出来就太麻烦了,好了,直接用!$代替即可.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd !$
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_06.png" alt="" /></p>
+
+<p>如果你已经运行了一个带有两个参数的命令,但是接下来想要使用第一个参数的话,就可以使用!^命令,这个命令在你备份一个文件,然后想再编辑原文件的时候非常有用.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano !^
+</code></pre></div></div>
+
+<p>(注意看图中的上一条命令)</p>
+
+<p><img src="/uploads/2011/03/25_07.png" alt="" /></p>
+
+<p>接下来让我们从你历史中搜索某条特定的命令.按下Ctrl+R,当你输入的时候,就会自动搜索.你可以使用方向键找到你想要的命令.</p>
+
+<p><img src="/uploads/2011/03/25_08.png" alt="" /></p>
+
+<p>如果你知道你运行过的命令的特定的关键字,可以跳过搜索步骤,直接找到.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!keyword(keyword换成你的关键字即可)
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_09.png" alt="" /></p>
+
+<p><strong>清空历史</strong></p>
+
+<p>如果你想要清空历史
+使用下面命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>history –c
+</code></pre></div></div>
+
+<p>如果你想要禁用历史命令的话 使用如下命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HISTSIZE=0
+</code></pre></div></div>
+
+<p>想要再次启用的话,可以把0 换成某个数值.(默认数值通常是500或者1000)
+使用如下命令可以使历史忽略以空格开头的命令.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HISTCONTROL=ignorespace
+</code></pre></div></div>
+
+<p>在下面的第四行中,cd前面是空格,所以历史中忽略了</p>
+
+<p><img src="/uploads/2011/03/25_10.png" alt="" /></p>
+
+<p><strong>去掉重复</strong></p>
+
+<p>使用如下命令忽略重复命令.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HISTCONTROL=ignoredups
+</code></pre></div></div>
+
+<p><img src="/uploads/2011/03/25_10.png" alt="" /></p>
+
+<p>如果你既想忽略空格,也想忽略重复的话,使用如下命令</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HISTCONTROL=ignoreboth
+</code></pre></div></div>
+
+<p>文章<a href="http://www.howtogeek.com/howto/44997/how-to-use-bash-history-to-improve-your-command-line-productivity/">来源</a></p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html" title="" rel="nofollow">Linux中使用history命令提升效率 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/03/12-wordpress-add-ajax-comments.html" rel="prev">&laquo;&nbsp;wordpress添加AJAX评论效果(非插件版)</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/03/9-wordpresss-feed-output-copyright-information.html" rel="next">wordpress的feed输出版权信息&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/03/18-history-command-enhance-efficiency-in-linux.html";
+      this.page.identifier = "18";
+      this.page.title = "Linux中使用history命令提升效率";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PhilNa2增加自定义导航菜单 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="PhilNa2增加自定义导航菜单" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="使用PhilNa2主题的人肯定一直都梦想着能够添加自定义导航菜单吧.这样我们就可以随便添加自己想要的栏目,不管是内链还是外链.据我所知,大部分童鞋使用的都是 新建一个页面,然后使用page link to插件改写那个页面的链接,然后连接到一个新的地方. 今天我就给你们一个解放." />
+<meta property="og:description" content="使用PhilNa2主题的人肯定一直都梦想着能够添加自定义导航菜单吧.这样我们就可以随便添加自己想要的栏目,不管是内链还是外链.据我所知,大部分童鞋使用的都是 新建一个页面,然后使用page link to插件改写那个页面的链接,然后连接到一个新的地方. 今天我就给你们一个解放." />
+<link rel="canonical" href="http://isay.me/2011/04/philna2-add-nav-menu.html" />
+<meta property="og:url" content="http://isay.me/2011/04/philna2-add-nav-menu.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-19T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PhilNa2增加自定义导航菜单" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-19T00:00:00+08:00","datePublished":"2011-04-19T00:00:00+08:00","description":"使用PhilNa2主题的人肯定一直都梦想着能够添加自定义导航菜单吧.这样我们就可以随便添加自己想要的栏目,不管是内链还是外链.据我所知,大部分童鞋使用的都是 新建一个页面,然后使用page link to插件改写那个页面的链接,然后连接到一个新的地方. 今天我就给你们一个解放.","headline":"PhilNa2增加自定义导航菜单","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/philna2-add-nav-menu.html"},"url":"http://isay.me/2011/04/philna2-add-nav-menu.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  PhilNa2增加自定义导航菜单
+</p>
+<h1 class="lotus-pagetit">PhilNa2增加自定义导航菜单</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April 19, 2011">April 19, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>使用PhilNa2主题的人肯定一直都梦想着能够添加自定义导航菜单吧.这样我们就可以随便添加自己想要的栏目,不管是内链还是外链.据我所知,大部分童鞋使用的都是 新建一个页面,然后使用<strong>page link to</strong>插件改写那个页面的链接,然后连接到一个新的地方.
+今天我就给你们一个解放.</p>
+
+<p>再说方法之前,首先要万分感谢 此方法的发明者.<a href="http://loosky.net/">自由的风</a>,一位非常厉害的博主,大家可以去他的博客看看,自由的风大公无私的把自己修改的接近完美的私用PhilNa2主题贡献了出来.</p>
+
+<p>当我在慢慢修改PhilNa2主题的时候无意间看到了 博主的主题,而且是功能异常强大的主题哟.侧栏可以关闭.而且还实现了我在<a href="/2011/04/46-entangled-in-the-wp-theme.html">纠结于WP主题</a>中提到的想要把首页文章 隐藏以来,等到想要进一步看的时候才显示出来的效果.还有集成了<a href="http://zmingcx.com/">知更鸟</a>的HotNews Pro 主题中侧栏上的最新文章,最近文章,热门文章的显示效果.还有好多新的页面模板.这些我们都可以积极学习一下哦.</p>
+
+<p>好了,广告到此结束.有兴趣的同学可以去看看哦.你一定会喜欢的.</p>
+
+<p>下面说说正题吧,就是给PhilNa2主题添加自定义导航菜单的问题.这个是我在自由的风的博文中看到的.但是博主没有在博文中提到是怎么添加的.于是我就接连给博主发了好几封邮件请求博主能够共享一下主题或者教一下修改主题的方法,可能是我感动了博主或者是博主被我问烦了吧, :jiong: ,正好博主在我发邮件前的几天在wp中文论坛上 发了一个帖子说准备发布自己修改的主题了.可能我的邮件起了加速的作用.所以博主就很快发布了自己修改的主题,同时给我发了邮件告知(看看这位博主多好.没有忘记俺.感动ing :cry: ).</p>
+
+<p>于是我马上下载了主题进行一番研究.虽然新发布的主题里面有好多新鲜的功能.但是我感觉有些地方 我并不是很需要,而且有些地方不是很和我的口味.毕竟现在使用的主题是自己一点一点优化出来的,突然不用很是舍不得.所以打算把自己能用到的,有能力移植的,移植到自己使用的主题上.第一个需要的就是自定义导航菜单功能了.我想这也是众多使用这个主题的人想要急切知道的答案吧.</p>
+
+<p>原来想Mod导航栏的时候费了不少劲,请教了 <a href="http://imluren.com">路人</a> 童鞋,可是遇到了问题. 还是歪打正着才最终得以解决了.但是那个方法不能调整分类在导航菜单上的顺序和需要显示的条目.所以不是很好. 大家看我现在的导航菜单,是不是看不出什么异样?但是查看网页源代码就能看出和你们的导航菜单的源代码不一样了吧.就是使用了自定义导航菜单的原因.</p>
+
+<p>汗,说了这么多还没有说到真正的方法, :cold: 请大家不要着急.我这人就是性子慢,感觉有好多想说的,不说难受.大家见谅.</p>
+
+<p>正题开始咯.</p>
+
+<p>首先是修改一下当前使用的主题文件,涉及到的文件好像是一个,也可能是多个.大家注意看看吧.
+具体文件就是 template.php文件(可能还有那几个页面模板吧.像links.php,contact.php那样的,注意看看吧),这个template.php好像要用FTP工具在主题文件夹里面修改,在后台修改的话.好像看到的template.php的内容没有这句话.
+把下面这句话注释掉.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php wp_page_menu('show_home=1&amp;menu_class=navigation'); ?&gt;
+</code></pre></div></div>
+
+<p>变成如下或者直接删掉</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php //wp_page_menu('show_home=1&amp;menu_class=navigation'); ?&gt;
+</code></pre></div></div>
+
+<p>这样如果进入网站的时候会看到没有导航栏了,不用着急.解决方法在下面.
+在和上面相同的位置添加如下内容</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div id="menu"&gt;
+    &lt;?php wp_nav_menu(array( 'theme_location'=&gt;'primary','container'=&gt; 'ul','container_class' =&gt; 'primary','menu_class'=&gt; 'menunav')); ?&gt;
+&lt;/div&gt;
+</code></pre></div></div>
+
+<p>然后向css中添加如下内容.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* Top Menu */
+div.wrapper {  height: 32px;z-index: 333;}
+#menu { margin:0; padding:0;height:32px;}
+#menu .menunav {position:relative;z-index:300; font-size:12px;}
+#menu .menunav li{padding:0;position:relative;z-index:1;height:30px;float:left;position:relative;width:auto; color:#000;display:inline-block;line-height:30px;}
+#menu .menunav li a{color:#000 !important;text-decoration:none;display:block;padding:0 10px; cursor:pointer;}
+#menu .menunav li.current-menu-item a{background-color:#000;color:#FFF !important;text-decoration:none;display:block;padding:0 12px; cursor:pointer;}
+#menu .menunav li a:hover{background-color:#222;color:#FFF !important;text-decoration:none;display:block; cursor:pointer;}
+#menu .menunav &gt; a{display:block}
+#menu .menunav li:hover{text-decoration:none;background-color:#999;color:#FFF !important; cursor:pointer;display:block;}
+#menu .menunav li:hover ul,
+#menu .menunav li.over ul{display:block;overflow:hidden; margin:0px;}
+#menu .menunav ul{position:absolute;top:30px;display:none;padding:10px 0 0px;z-index:300}
+#menu .menunav li ul { margin:0; padding:0; width:100px;background:#999;}
+#menu .menunav li ul li{ width:100px; border-right:none;}
+</code></pre></div></div>
+
+<p>最后在functions.php顶部,即note上面添加如下内容.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//激活菜单项
+if ( function_exists('register_nav_menus') ) {
+    register_nav_menus(array('primary' =&gt; '头部导航栏'));
+    //register_nav_menus(array('bottom' =&gt; '底部导航栏'));
+}
+</code></pre></div></div>
+
+<p><strong>UPdate:4-21</strong>今天又到自由的风博客上看到了一点东西.怪我原来没有看清楚.呵呵.
+修改了philna2中的一个小bug，这会导致在添加菜单的时候出错；
+具体在app/template.php中的philnaCreateTitle函数，注释掉add_filter(‘wp_insert_post_data’,’philnaCreateTitle’);即可；
+这样到后台菜单看看 是不是就有了添加自定义 导航菜单了?</p>
+
+<p><strong>OK!! Have a Enjoy!!</strong>扔掉你的更改链接插件吧!!
+还有什么不懂的可以问我.</p>
+
+<p>再次感谢 <a href="http://loosky.net/">自由的风</a></p>
+
+<p>最后再次做一下广告. <a href="/2011/04/set-twitalker-bot.html">本人搭建的TwiTalker bot</a> ,免番羽墙发送推特,接收推特信息.欢迎大家Fo <a href="http://twitter.com/vinntoe">@vinntoe</a></p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/philna2-add-nav-menu.html" title="" rel="nofollow">PhilNa2增加自定义导航菜单 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/set-twitalker-bot.html" rel="prev">&laquo;&nbsp;TwiTalker bot搭建成功</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/take-in-aim-by-liuliangbao.html" rel="next">昨天无故被流量宝瞄上&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/philna2-add-nav-menu.html";
+      this.page.identifier = "86";
+      this.page.title = "PhilNa2增加自定义导航菜单";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

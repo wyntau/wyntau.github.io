@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>我的wordpress文章版权折腾记 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="我的wordpress文章版权折腾记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="昨天在feedburner里面开启了邮件订阅的功能.现在用chrome(FF会直接出现我的文章列表,没有订阅器选项)打开我的feedburner地址,可以看到除了我列出来的众多RSS订阅器外,下面还给出了一个使用EMail订阅的功能.点击一下,就弹出了一个高550宽520px的新窗口.输入邮箱地址就订阅OK啦." />
+<meta property="og:description" content="昨天在feedburner里面开启了邮件订阅的功能.现在用chrome(FF会直接出现我的文章列表,没有订阅器选项)打开我的feedburner地址,可以看到除了我列出来的众多RSS订阅器外,下面还给出了一个使用EMail订阅的功能.点击一下,就弹出了一个高550宽520px的新窗口.输入邮箱地址就订阅OK啦." />
+<link rel="canonical" href="http://isay.me/2011/04/26-toss-my-wordpress-copyright.html" />
+<meta property="og:url" content="http://isay.me/2011/04/26-toss-my-wordpress-copyright.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-04-02T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="我的wordpress文章版权折腾记" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-04-02T00:00:00+08:00","datePublished":"2011-04-02T00:00:00+08:00","description":"昨天在feedburner里面开启了邮件订阅的功能.现在用chrome(FF会直接出现我的文章列表,没有订阅器选项)打开我的feedburner地址,可以看到除了我列出来的众多RSS订阅器外,下面还给出了一个使用EMail订阅的功能.点击一下,就弹出了一个高550宽520px的新窗口.输入邮箱地址就订阅OK啦.","headline":"我的wordpress文章版权折腾记","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/04/26-toss-my-wordpress-copyright.html"},"url":"http://isay.me/2011/04/26-toss-my-wordpress-copyright.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  我的wordpress文章版权折腾记
+</p>
+<h1 class="lotus-pagetit">我的wordpress文章版权折腾记</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="April  2, 2011">April  2, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>昨天在feedburner里面开启了邮件订阅的功能.现在用chrome(FF会直接出现我的文章列表,没有订阅器选项)打开<a href="http://feedburner.google.com/fb/a/mailverify?uri=isayme">我的feedburner地址</a>,可以看到除了我列出来的众多RSS订阅器外,下面还给出了一个使用EMail订阅的功能.点击一下,就弹出了一个高550宽520px的新窗口.输入邮箱地址就订阅OK啦.</p>
+
+<p>看到这个指定大小的新窗口效果,我比较喜欢,想着该怎么在文章中出现.我现在的效果是 点击链接之后就出现了一个新标签而不是一个指定大小的新窗口.所以去网上找找嘛.
+找是找到了,就是用以下的标签方法实现</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a href="#" onclick="window.open('http://feedburner.google.com/fb/a/mailverify?uri=isayme','_blank','width=520,height=550')"&gt;邮箱订阅&lt;/a&gt;
+</code></pre></div></div>
+
+<p>但是在操作的过程中还是遇到了一点问题.</p>
+
+<p>我在文章最后添加版权使用的方法是我的文章<a href="/2011/03/9-wordpresss-feed-output-copyright-information.html">wordpress的feed输出版权信息</a>中提到的在functions.php里面添加一个函数实现的.具体方法请前往我的那篇文章.</p>
+
+<p>于是我把a标签换成上面说的那种格式.保存.额哦.进不去网站啦.我还以为是把什么标点删掉了.于是看了看,不是因为标点的问题.那问题是什么呢? 找了好一会才知道.原来就是新增加的这句话的问题.这句话导致整个网站进不去. 删掉链接就可以.</p>
+
+<p>那我就试试另外一种方法.把版权那段话加在文章页模板的content后面.一试,咦,这次可以使用啦,点击链接也是我想要的指定大小的新开窗口.看来这句话使用的地方还是有要求的.这是什么情况?我很纳闷.</p>
+
+<p>但是后面这种方法只能在文章页添加版权声明(可否加判断实现我还真不知道),而没法在 feed输出中添加.而且那个函数里面的当前网址’.get_permalink().’和标题’.get_the_title().’的变量在这里不能正常使用.</p>
+
+<p>权衡了一下啊.还是不要那个指定大小的新开窗口了.就使用_blank标签就行了.我也不想再更改代码了,整不好.又把网站搞的进不去了.</p>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/04/26-toss-my-wordpress-copyright.html" title="" rel="nofollow">我的wordpress文章版权折腾记 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/04/24-increase-the-expression-of-wp.html" rel="prev">&laquo;&nbsp;给WP增加多套表情</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/04/27-wp-add-background-expression.html" rel="next">wp后台回复添加表情&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/04/26-toss-my-wordpress-copyright.html";
+      this.page.identifier = "26";
+      this.page.title = "我的wordpress文章版权折腾记";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>

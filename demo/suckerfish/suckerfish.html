@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>suckerfish纯CSS下拉菜单</title>
+<style>
+body{
+position:absolute;
+left:25%;
+top:25%;}
+ul.nav,ul.nav ul{
+margin:0;
+padding:0;
+list-style-type:none;
+float:left;
+border:1px solid #486b02;
+background-color:#8bd400;
+}
+ul.nav li{
+float:left;
+width:8em;
+background-color:#8bd400;
+}
+ul.nav li ul{
+width:8em;
+position:absolute;
+left:-999em;
+}
+.nav li:hover ul{
+left:auto;
+}
+ul.nav a{
+display:block;
+color:#2b3f00;
+text-decoration:none;
+padding:0.3em 1em;
+border-right:1px solid #486b02;
+border-left:1px solid #e4ffd3;
+}
+ul.nav li li a{
+border-top:1px solid #e4ffd3;
+border-bottom:1px solid #486b02;
+border-left:0;
+border-right:0;
+}
+ul.nav li:last-child a{
+border-right:0;
+border-bottom:0;
+}
+ul a:hover,ul a:focus{
+color:#e4ffd3;
+background-color:#6da203;
+}
+</style>
+</head>
+<body>
+<ul class="nav">
+	<li><a href="/home/">home</a></li>
+	<li><a href="/products/">products</a>
+		<ul>
+			<li><a href="/products/silverback/">silverback</a></li>
+			<li><a href="/products/fontdeck/">font deck</a></li>
+		</ul>
+	</li>
+	<li><a href="/services/">services</a>
+		<ul>
+			<li><a href="/services/design/">design</a></li>
+			<li><a href="/services/development/">development</a></li>
+			<li><a href="/services/consultancy/">consultancy</a></li>
+		</ul>
+	</li>
+	<li><a href="/contact/">contanct us</a></li>
+</ul>
+</body></html>

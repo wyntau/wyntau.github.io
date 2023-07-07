@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html id="J-html" class="">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>我选择Fcitx 3.6.3 | 自说Me话</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="我选择Fcitx 3.6.3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="我用过的linux中的中文输入法,一共就两种.ibus和Fcitx. 由于使用fcitx的时间比较长,已经形成了习惯,所以这次装上ubuntu后,直接将ubuntu自带的ibus删掉了.换上了我原来备份好的fcitx输入法. 尽管现在fcitx已经出到了4.0.1,但是我还是使用的旧版本." />
+<meta property="og:description" content="我用过的linux中的中文输入法,一共就两种.ibus和Fcitx. 由于使用fcitx的时间比较长,已经形成了习惯,所以这次装上ubuntu后,直接将ubuntu自带的ibus删掉了.换上了我原来备份好的fcitx输入法. 尽管现在fcitx已经出到了4.0.1,但是我还是使用的旧版本." />
+<link rel="canonical" href="http://isay.me/2011/07/i-prefer-fcitx-363.html" />
+<meta property="og:url" content="http://isay.me/2011/07/i-prefer-fcitx-363.html" />
+<meta property="og:site_name" content="自说Me话" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-07-28T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="我选择Fcitx 3.6.3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2011-07-28T00:00:00+08:00","datePublished":"2011-07-28T00:00:00+08:00","description":"我用过的linux中的中文输入法,一共就两种.ibus和Fcitx. 由于使用fcitx的时间比较长,已经形成了习惯,所以这次装上ubuntu后,直接将ubuntu自带的ibus删掉了.换上了我原来备份好的fcitx输入法. 尽管现在fcitx已经出到了4.0.1,但是我还是使用的旧版本.","headline":"我选择Fcitx 3.6.3","mainEntityOfPage":{"@type":"WebPage","@id":"http://isay.me/2011/07/i-prefer-fcitx-363.html"},"url":"http://isay.me/2011/07/i-prefer-fcitx-363.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://isay.me/feed.xml" title="自说Me话" />
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/style.css" />
+  
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" class="home blog lotus index">
+  
+  <nav class="lotus-nav">
+  <ul>
+    
+    
+    
+    
+    
+    <li class="home ">
+      
+      <a href="/" rel="bookmark" title="首页">
+        <i class="fa fa-home"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/archives.html" rel="bookmark" title="文章归档">
+        <i class="fa fa-reorder"></i>
+      </a>
+      
+    </li>
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/tags.html" rel="bookmark" title="文章标签">
+        <i class="fa fa-tags"></i>
+      </a>
+      
+    </li>
+    
+
+    
+    
+    
+    
+    
+    <li class=" ">
+      
+      <a href="/contact.html" rel="bookmark" title="关于我">
+        <i class="fa fa-user"></i>
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+
+  <p class="lotus-breadcrub">
+  <a href="/" rel="nofollow" rel="nofollow" title="首页">首页</a>
+  <span> &gt; </span>
+  <a href="/archives.html" rel="nofollow" >文章归档</a>
+  <span> &gt; </span>
+  我选择Fcitx 3.6.3
+</p>
+<h1 class="lotus-pagetit">我选择Fcitx 3.6.3</h1>
+<p class="lotus-meta">Publish: <time class="date" pubdate="July 28, 2011">July 28, 2011</time></p>
+<article  itemscope itemtype="http://schema.org/Article" class="lotus-post lotus-post-columns-1">
+<p>我用过的linux中的中文输入法,一共就两种.ibus和Fcitx.
+由于使用fcitx的时间比较长,已经形成了习惯,所以这次装上ubuntu后,直接将ubuntu自带的ibus删掉了.换上了我原来备份好的fcitx输入法.
+尽管现在fcitx已经出到了4.0.1,但是我还是使用的旧版本.</p>
+
+<p>在选择安装哪个版本的时候,我原来一直用的是从googlecode上下载的 fcitx-utf8-svn版本.没有使用ubuntu中文论坛wiki中说的带有图形配置界面的最新版的原因是,最新版对我来说,在用户体验上不如旧版.</p>
+
+<p>比如打开一个浏览器,在每一个标签页,如果想输入中文的话,都要按CTRL+SPACE进行转换.而旧版的,只需要转换一次即可在所有的标签页进行中文输入.就这一点,我就决定一直使用旧版.
+今天更是解决了旧版的fcitx的配置文件问题.</p>
+
+<p>网上大家说的fcitx的配置文件位于 <code class="language-plaintext highlighter-rouge">~/.fcitx/config</code>文件中,但是此 fcitx-utf8-svn版本不是在此处,而是位于<code class="language-plaintext highlighter-rouge">~/.config/fcitx-utf8/config</code>文件中.
+正常情况下,安装完后,是没有config文件的.产生config文件,只需要在终端输入</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fcitx -c 即可.然后就可以进行字体修改,以及快捷键的修改了.
+</code></pre></div></div>
+
+<p>在此记录一下,以后当再次重装的时候就可以直接拿来用了</p>
+
+<p><a href="http://forum.ubuntu.org.cn/viewtopic.php?f=8&amp;t=311341&amp;start=0">Fcitx 小技巧：巧用“快速输入”，提高文字输入效率</a></p>
+
+<p>关于 Fcitx 的介绍我就不多说了，进入正题：</p>
+
+<p>在进行文字录入时，有很多时候，会有大量重复的语句需要录入，比如：“热烈欢迎 LZ 来到地球”、“我是打酱油的~”等等</p>
+
+<p>Fcitx 有没有什么的方法既能减少敲键盘的量，同时又提高重复语句的输入效率呢？</p>
+
+<p>当然有！
+“快速输入”现真身~！！</p>
+
+<p>在<code class="language-plaintext highlighter-rouge">~/.config/fcitx</code>目录中创建一个<code class="language-plaintext highlighter-rouge">QuickPhrase.mb</code>文件，并在其中输入自己的常用语句，而后保存
+排版格式为：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>编码      要输入的内容 激活 Fcitx，按下 Ctrl+5 刷新一遍，按下分号键`;`，接着再敲入对应的编号，预录入的语句就出现了~
+</code></pre></div></div>
+
+</article>
+<p class="lotus-anno">声明: 本文采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow" target="_blank" title="自由转载-非商用-非衍生-保持署名">BY-NC-SA</a> 授权。转载请注明转自: <a href="http://isay.me/2011/07/i-prefer-fcitx-363.html" title="" rel="nofollow">我选择Fcitx 3.6.3 - 自说Me话</a></p>
+<section class="lotus-nextpage fn-clear">
+  
+  <div class="lotus-nextpage-left"><a class="prev" href="/2011/07/fix-wget-for-zh-cn.html" rel="prev">&laquo;&nbsp;wget中文乱码</a></div>
+  
+  
+  <div class="lotus-nextpage-right"><a class="next" href="/2011/07/debian6-reinstall-note.html" rel="next">debian6再安装小记&nbsp;&raquo;</a></div>
+  
+</section>
+
+
+  <div id="comments">
+  
+      
+        <div id="disqus_thread"></div>
+<script>
+  function disqus_config() {
+      this.page.url = "http://isay.me/2011/07/i-prefer-fcitx-363.html";
+      this.page.identifier = "196";
+      this.page.title = "我选择Fcitx 3.6.3";
+  };
+
+  (function() {
+      var d = document, s = d.createElement('script');
+      s.src = '//isaymesite.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+      
+  
+  </div>
+
+
+
+
+  <footer class="lotus-footer">
+  <p>Copyright © 2011–2023 自说Me话 All rights reserved. Design by <a href="http://www.zhanxin.info" target="_blank">zhanxin</a>.</p>
+</footer>
+  
+</body>
+</html>
