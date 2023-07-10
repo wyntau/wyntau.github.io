@@ -35,6 +35,21 @@ lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
 
 配置完成后启动容器, 然后按照 tailscale 官方的文档安装 tailscale. 具体文档可查看 [Setting up Tailscale on Debian Bullseye](https://tailscale.com/kb/1038/install-debian-bullseye/)
 
+**然后** 是开启 lxc 的 IP 转发功能
+
+编辑 `/etc/sysctl.conf` 文件, 将以下两行的注释去掉. 如果没有这两行, 需要添加
+
+```
+net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding=1
+```
+
+编辑完成后, 使用 `sysctl` 命令 reload
+
+```
+sysctl -p /etc/sysctl.conf
+```
+
 **然后** 是启动 tailscale
 由于是两个网络之间建立 `site-to-site networking`, 所以我这边会以两个网络举例.
 
