@@ -36,7 +36,7 @@ apt update && apt install pve-headers nvidia-driver
 
 **然后**是确认驱动及对应模块配置正确，并屏蔽掉开源的显卡驱动 nouveau
 
-在 `/etc/modules-load.d/nvidia.conf` 文件中，确认以下内容存在，如果有缺少的需要补全。在我的机器上安装完 nvidia-driver 后，这个文件里只有一个 nvidia-drm, 导致后面在直通时缺少对应的设备，需要把 `nvidia` 和 `nvidia_uvm` 补全。
+在 `/etc/modules-load.d/nvidia.conf` 文件中，确认以下内容存在，如果有缺少的需要补全。在我的机器上安装完 nvidia-driver 后，这个文件里只有一个 `nvidia-drm`, 导致后面在直通时缺少对应的设备，需要把 `nvidia` 和 `nvidia_uvm` 补全。
 
 ```
 nvidia-drm
@@ -178,11 +178,11 @@ lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
 
 ## LXC 容器配置
 
-**首先**是确认宿主机的相关设备映射成功。使用 `ls -al /dev/nvidia*` 以及 `ls -al /dev/dri` 命令应该会得到和宿主机一样的输出。
+**首先**是确认容器的相关设备映射成功。使用 `ls -al /dev/nvidia*` 以及 `ls -al /dev/dri` 命令应该会得到和宿主机一样的输出。
 
 **然后**是安装驱动。
 
-注意 LXC 容器安装的驱动版本需要和宿主机完全一致。并且不能使用内核模块。所以在容器中安装驱动，我没有再使用源来安装，因为源中的驱动不支持指定 `--no-kernel-module` 选项，但是这个选项在 LXC 容器直通显卡时是必须的。
+注意 LXC 容器安装的驱动版本需要和宿主机**完全一致**。并且不能使用内核模块。所以在容器中安装驱动，我没有再使用源来安装，因为源中的驱动不支持指定 `--no-kernel-module` 选项，但是这个选项在 LXC 容器直通显卡时是必须的。
 
 所以在容器中通过下载 nvidia 驱动安装文件的方式进行安装。对应的官网地址为 https://www.nvidia.com/en-us/drivers/unix/ ，找到和宿主版本相同的驱动下载即可。我使用的 470.182.03 版本驱动文件下载命令如下
 
