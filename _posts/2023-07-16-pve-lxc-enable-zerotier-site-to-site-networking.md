@@ -65,6 +65,8 @@ zerotier-cli join <NETWORK ID>
 
 **然后** 是开启 `site-to-site networking`
 
+zerotier 官方文档地址 [Route between ZeroTier and Physical Networks](https://zerotier.atlassian.net/wiki/spaces/SD/pages/224395274/Route+between+ZeroTier+and+Physical+Networks), 下面的内容是结合官方文档以及个人的实际情况举例.
+
 由于是两个网络之间建立 `site-to-site networking`, 所以我这边会以两个网络举例.
 
 网络 A 为 `192.168.100.0/24`, 安装 zerotier 的机器 A IP 为 `192.168.100.17`, 网络 B 为 `192.168.88.0/24`, 安装 zerotier 的机器 B IP 为 `192.168.88.17`.
@@ -79,12 +81,18 @@ zerotier-cli join <NETWORK ID>
 
 **然后** 是客户端配置 iptables
 
-通过 `ip a` 命令可以查询到 zerotier 虚拟网卡的名称是什么, 这里假设 zerotier 网卡名称为 `ztabcdef`, 物理网卡名称为 `eth0`. 分别在两个 zerotier 客户端上运行下面 3 条 iptables 规则.
+通过 `ip a` 命令可以查询到 zerotier 虚拟网卡的名称是什么, 这里假设 zerotier 网卡名称为 `ztabcdef`, 物理网卡名称为 `eth0`. 对以下变量进行赋值
 
 ```
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth0 -o ztabcdef -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -i ztabcdef -o eth0 -j ACCEPT
+PHY_IFACE=eth0; ZT_IFACE=ztabcdef
+```
+
+分别在两个 zerotier 客户端上运行下面 3 条 iptables 规则.
+
+```
+iptables -t nat -A POSTROUTING -o $PHY_IFACE -j MASQUERADE
+iptables -A FORWARD -i $PHY_IFACE -o $ZT_IFACE -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i $ZT_IFACE -o $PHY_IFACE -j ACCEPT
 ```
 
 **然后** 是配置各个子网的静态路由.
