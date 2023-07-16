@@ -13,21 +13,21 @@ tags: [RouterOS]
 chatGPT 给出了答案, 根据自己的实际情况稍微改了一下就利用起来了. 下面是 chatGPT 给出的原脚本代码
 
 ```
-:local ipToCheck "192.168.1.100"  # 要检查的 IP
-:local onlineGateway "192.168.1.1"  # 在线时的网关
-:local onlineDNS "8.8.8.8"  # 在线时的 DNS
-:local offlineGateway "192.168.1.2"  # 不在线时的备用网关
-:local offlineDNS "8.8.4.4"  # 不在线时的备用 DNS
+:local ipToCheck "192.168.100.4" # 要检查的 IP
+:local onlineGateway "'192.168.100.4'" # 在线时的网关和DNS
+:local offlineGateway "'192.168.100.1'" # 不在线时的备用网关和DNS
 
 :if ([ping $ipToCheck count=2] = 0) do={
-  # IP 不在线
-  :log info "IP $ipToCheck 不在线，设置备用网关和 DNS"
+  # IP offline
+  :log warning "IP $ipToCheck offline, set fallback gateway and DNS"
   /ip dhcp-server option set [find name=gateway] value=$offlineGateway
-  /ip dhcp-server option set [find name=dns] value=$offlineDNS
+  /ip dhcp-server option set [find name=dns] value=$offlineGateway
 } else={
-  # IP 在线
-  :log info "IP $ipToCheck 在线，设置网关和 DNS"
+  # IP online
+  :log info "IP $ipToCheck online, set gateway and DNS"
   /ip dhcp-server option set [find name=gateway] value=$onlineGateway
-  /ip dhcp-server option set [find name=dns] value=$onlineDNS
+  /ip dhcp-server option set [find name=dns] value=$onlineGateway
 }
 ```
+
+这里有个地方需要注意, 检查 IP 是否在线时, 使用的是 `192.168.100.4`, 对 gateway 和 dns 赋值时, 使用是 `'192.168.100.4'` 和 `'192.168.100.1'`, 值是带有单引号的. 如果直接使用 `192.168.100.4` 和 `192.168.100.1` 时会导致设置失败.
