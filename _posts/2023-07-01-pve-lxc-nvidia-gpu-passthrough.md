@@ -1,7 +1,7 @@
 ---
 title: PVE LXC 容器直通 Nvidia 显卡
 pid: 2023070101
-tags: [PVE, Nvidia]
+tags: [PVE, Nvidia, LXC]
 ---
 
 一直看到网上有讨论说在 PVE 下直通显卡给虚拟机或容器来作为 Plex、emby或者jeffyin 的解码/编码工具, 所以一直在关注这个.

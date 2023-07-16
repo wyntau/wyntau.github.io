@@ -1,7 +1,7 @@
 ---
 title: PVE LXC 安装 Tailscale 并开启 site-to-site networking
 pid: 2023070701
-tags: [PVE, Tailscale]
+tags: [PVE, Tailscale, LXC]
 ---
 
 Tailscale 是一个很方便的组网工具, 官方发布了文章介绍 tailscale 的工作原理是什么样的 [How Tailscale works](https://tailscale.com/blog/how-tailscale-works/).

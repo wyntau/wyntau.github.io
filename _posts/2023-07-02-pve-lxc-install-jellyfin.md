@@ -1,7 +1,7 @@
 ---
 title: PVE LXC 安装 Jellyfin
 pid: 2023070201
-tags: [Jellyfin, PVE]
+tags: [Jellyfin, PVE, LXC]
 ---
 
 LXC 容器首先按照昨天讲的 nvidia 显卡直通步骤, 开启显卡直通功能. 下面是安装 Jellyfin 的步骤
