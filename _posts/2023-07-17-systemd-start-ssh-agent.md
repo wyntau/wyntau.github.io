@@ -4,7 +4,7 @@ pid: 20230701701
 tags: [Systemd, SSH]
 ---
 
-最近在整理自己的 sshkey, 看了网上大家的讨论, 虽然 sshkey 普遍用在无密码登录场景场景, 但是最好也给 sshkey 加一个密码. 加密码的好处是为了更好的安全性, 即使密钥丢失, 没有密码也可以保证安全. 至于 ssh 连接时需要输入密码的问题, 可以使用 ssh-agent 来解决.
+最近在整理自己的 sshkey, 看了网上大家的讨论, 虽然 sshkey 普遍用在无密码登录场景, 但是最好也给 sshkey 加一个密码. 加密码的好处是为了更好的安全性, 即使密钥丢失, 没有密码也可以保证安全. 至于 ssh 连接时需要输入密码的问题, 可以使用 ssh-agent 来解决.
 
 所以搜索了一些关于 ssh-agent 的知识, 打算重新生成一批 sshkey 并添加密码, 然后交给 ssh-agent 进行管理.
 
@@ -18,7 +18,7 @@ Description=SSH key agent
 [Service]
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
-ExecStartPost=/usr/bin/ssh-add -t 1h
+# ExecStartPost=/usr/bin/ssh-add -t 1h
 
 [Install]
 WantedBy=default.target
@@ -31,6 +31,10 @@ WantedBy=default.target
 `ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK` 的作用是让 ssh-agent 以守护进程（daemon）模式运行.
 
 `ssh-add -t 1h` 命令，它的作用是将私钥添加到ssh-agent代理中，并设置私钥的有效时间为1小时（1h）。这样，在成功登录到远程服务器后，私钥将在ssh-agent中保持有效状态1小时，而无需再次输入密码。此功能可以提高安全性，因为私钥在有效时间过后将自动从代理中移除，减少了私钥长时间暴露在内存中的风险。一旦有效时间到期，就需要重新输入密码来重新加载私钥到ssh-agent，以继续使用该私钥进行SSH连接。
+
+但是看上面 `ExecStartPost` 被注释掉了，在这里被注释的原因是，如果私钥都是无密码的那就没问题，但是如果私钥是有密码的，那么这个命令会出现一个输入密码的 prompt, 由于 systemd 无法输入密码， 所以会导致启动失败，因此 `ExecStartPost` 在这里注释掉。
+
+当 ssh-agent 启动成功后，后续可以执行 `ssh-add` 命令，手动将 `~/.ssh` 目录下的私钥添加到 ssh-agent 中并输入密码。添加成功后， 后续再通过 ssh 连接时就不需要输入密码了。
 
 **然后** 是配置 ssh 使用 ssh-agent
 
@@ -75,6 +79,8 @@ systemctl --user start ssh-agent
 
 现在，当登录到用户帐户时，ssh-agent 将自动启动，并且可以通过 `ssh-add` 命令添加私钥并将其保存在代理中。这样，在使用 ssh 连接到远程服务器时将不再需要每次输入密码。
 
+---
+
 **后记**
 
 在 PVE LXC 容器中， 由于是使用的 root 用户登录，按照上面的步骤配置时， 当执行 `systemctl --user enable ssh-agent` 时会遇到报错
@@ -94,7 +100,7 @@ Description=SSH key agent
 [Service]
 Environment=SSH_AUTH_SOCK=/var/run/user/ssh-agent.socket
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
-ExecStartPost=/usr/bin/ssh-add -t 1h
+# ExecStartPost=/usr/bin/ssh-add -t 1h
 
 [Install]
 WantedBy=default.target
