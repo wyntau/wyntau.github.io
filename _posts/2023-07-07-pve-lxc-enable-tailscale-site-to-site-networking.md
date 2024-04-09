@@ -88,12 +88,16 @@ iptables -t mangle -A FORWARD -i tailscale0 -o eth0 -p tcp -m tcp --tcp-flags SY
 网络 A 网关执行命令
 ```
 /ip route add dst-address=192.168.88.0/24 gateway=192.168.100.16
+/ip route add dst-address=100.64.0.0/10 gateway=192.168.100.16
 ```
 
 网络 B 网关执行命令
 ```
 /ip route add dst-address=192.168.100.0/24 gateway=192.168.88.16
+/ip route add dst-address=100.64.0.0/10 gateway=192.168.100.16
 ```
+
+100.64.0.0/10 是 tailscale 固定的子网.
 
 此时正常情况下, 网络 A 和 B 中未安装 tailscale 的设备就可以访问对方网络中的服务了.
 
