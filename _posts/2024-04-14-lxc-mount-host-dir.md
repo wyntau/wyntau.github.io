@@ -4,7 +4,7 @@ pid: 2024041401
 tags: [PVE, lxc]
 ---
 
-命令行方式, 在 PVE shell 中运行以下命令
+**命令行方式**, 在 PVE shell 中运行以下命令
 
 ```
 pct set PID -mp0 /path/to/host/dir0,mp=/path/to/lxc/dir0
@@ -15,7 +15,7 @@ pct set PID -mp1 /path/to/host/dir1,mp=/path/to/lxc/dir1
 
 `mp=` 后面的路径表示在 lxc 容器中的位置.
 
-除命令行方式外, 还可以直接修改 lxc 窗口的配置文件
+**直接修改配置文件方式**, 除命令行方式外, 还可以直接修改 lxc 窗口的配置文件
 
 ```
 $ cat 510.conf
