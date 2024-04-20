@@ -61,3 +61,5 @@ tmpfs                         7.8G   46M  7.7G   1% /dev/shm
 tmpfs                         5.0M     0  5.0M   0% /run/lock
 efivarfs                      512K  115K  393K  23% /sys/firmware/efi/efivars
 ```
+
+参考文章: [https://gist.github.com/dergachev/6828967](https://gist.github.com/dergachev/6828967)
