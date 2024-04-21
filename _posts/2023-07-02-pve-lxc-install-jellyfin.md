@@ -46,4 +46,4 @@ apt install jellyfin-ffmpeg5
 安装完毕后, 去 jellyfin 后台开启硬件转码功能即可. jellyfin web 端的端口号是 8096.
 
 开启路径: `控制台` => `播放` => `硬件加速`.
-![](/uploads/2023/07/070201.png)
+![](/uploads/2023/07/2023070201-01.png)

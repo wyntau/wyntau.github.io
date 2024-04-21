@@ -41,15 +41,15 @@ tags: [Chrome, Linux, 原创]
 最受欢迎的Google 浏览器扩充功能，拥有超过150 万位使用者！阻挡网路上所有的广告
 下面就贴两张图对比一下
 
-![](/uploads/2011/03/24_19.png)
+![](/uploads/2011/03/20110324-21-01.png)
 
-![](/uploads/2011/03/24_20.png)
+![](/uploads/2011/03/20110324-21-02.png)
 
 [2  Discuz! 论坛助手](https://chrome.google.com/extensions/detail/bpcbeglppddgdmmlcdbeigkhbmjnldme)
 
 去除 Discuz! 论坛中的广告，支持Discuz! 和 Discuz!X.
 
-![](/uploads/2011/03/24_21.png)
+![](/uploads/2011/03/20110324-21-03.png)
 
 [3  Google Reader Auto Https](https://chrome.google.com/extensions/detail/kkeglijakjolgbmcbfhnmijhijgkmclh)
 
@@ -65,57 +65,57 @@ tags: [Chrome, Linux, 原创]
 
 说明一下 Smooth Gestures 事大多数人推荐的,但是这个在linux中的chrome中不能用,因为这个插件要求chrome的版本&gt;=8.0,而linux中的stable版本只有7.0,所以就用Mouse Stroke 足够了
 
-![](/uploads/2011/03/24_22.png)
+![](/uploads/2011/03/20110324-21-04.png)
 
 [5  No BaiduAd](https://chrome.google.com/extensions/detail/amdhfoilnhpfanohkineenoakiffblec)
 
 本扩展程序可以有效屏蔽或高亮百度竞价排名广告
 
-![](/uploads/2011/03/24_23.png)
+![](/uploads/2011/03/20110324-21-05.png)
 
 [6  One Number](https://chrome.google.com/extensions/detail/cfkohgkpafhkpdcnfadadcibfboapggi)
 
 Check GMail, Google Reader, Google Voice, and Google Wave. Many sources, one number.让你一次就可以知道多个东西是否有了更新
 
-![](/uploads/2011/03/24_24.png)
+![](/uploads/2011/03/20110324-21-06.png)
 
-![](/uploads/2011/03/24_25.png)
+![](/uploads/2011/03/20110324-21-07.png)
 
 [7  RSS Subscription Extension（由 Google 提供）](https://chrome.google.com/extensions/detail/nlbjncdgjeocebhnmkbbbdekmmmcbfjd)
 
 在您的工具栏上添加一键订阅。谷歌浏览器本身没有RSS订阅功能,所以用这个扩展就可以随意订阅想要的网站了,只要这个网站支持RSS输出,此扩展程序就会在地址栏出现RSS订阅标志,
 
-![](/uploads/2011/03/24_26.png)
+![](/uploads/2011/03/20110324-21-08.png)
 
 [8  SearchPreview for Google](https://chrome.google.com/extensions/detail/hcjdanpjacpeeppdjkppebobilhaglfo)
 
 Adds preview images (thumbnails) to your Google search results.就是可以看到搜索到的网页的缩略图,看看是不是被墙掉了,顺便大体了解一下网站上到底是什么内容.
 
-![](/uploads/2011/03/24_27.png)
+![](/uploads/2011/03/20110324-21-09.png)
 
 [9  Webmail Ad Blocker](https://chrome.google.com/extensions/detail/cbhfdchmklhpcngcgjmpdbjakdggkkjp)
 
 在屏幕上时，使用雅虎邮件，Hotmail和Gmail的空间，从而扩大您的消息右边座广告
 
-![](/uploads/2011/03/24_28.png)
+![](/uploads/2011/03/20110324-21-10.png)
 
 [10  人人网改造器](https://chrome.google.com/extensions/detail/bafellppfmjodafekndapfceggodmkfc)
 
 为人人网（[renren.com](http://renren.com/)，原校内网[xiaonei.com](http://xiaonei.com/)）清理广告、新鲜事、各种烦人的通告，增加更多功能……
 
-![](/uploads/2011/03/24_29.png)
+![](/uploads/2011/03/20110324-21-11.png)
 
 [11  自动回贴机](https://chrome.google.com/extensions/detail/lbkdfmcbclnoggeijjjakleeealgoncm)
 
 帮助用户快速回复<http://bbs.chinaunix.net>的隐藏贴好像其他论坛也可以回复,因为我在雨林木风论坛上遇到的隐藏贴就自动回复了
 
-![](/uploads/2011/03/24_30.png)
+![](/uploads/2011/03/20110324-21-12.png)
 
 [12  百科抄抄](https://chrome.google.com/extensions/detail/agfhhcchechmgiabincfjdgolmpbnkkc)
 
 可以自动删除掉百度百科里\[编辑本段\] 这个链接，可以更方便的复制。
 
-![](/uploads/2011/03/24_31.png)
+![](/uploads/2011/03/20110324-21-13.png)
 
 [13  回到顶部](https://chrome.google.com/extensions/detail/aadikfohengoplibnbfjhmhafjlgiooo)
 

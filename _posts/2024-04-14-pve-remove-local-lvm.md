@@ -15,7 +15,7 @@ PVE 安装完系统后, 会自动把系统所在硬盘划分为 `local` 和 `loc
 
 可以直接通过 webui 进行操作, 如下图
 
-![](/uploads/2024/04/140201.jpg)
+![](/uploads/2024/04/2024041402-01.jpg)
 
 也可以直接编辑 `/etc/pve/storage.cfg` 文件, 将 `local-lvm` 部分的 content 内容 `rootdir,images` 两项与 `local` 的 content 内容进行合并, 然后删掉 `local-lvm` 相关配置.
 
@@ -40,7 +40,7 @@ resize2fs /dev/mapper/pve-root
 ```
 
 **然后**到数据中心中, 删掉 `local-lvm` 所在的目录配置即可.
-![](/uploads/2024/04/140202.jpg)
+![](/uploads/2024/04/2024041402-02.jpg)
 
 **最后** 可以通过 `lvs` 或者 `df -h` 命令确认新的空间分布情况.
 

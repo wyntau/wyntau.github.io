@@ -38,28 +38,28 @@ tig官方截图
 
 1. **blame-view**
 
-    ![blame-view](/uploads/2013/07/10_01-blame-view.png)
+    ![blame-view](/uploads/2013/07/2013071001-01.png)
 
 2. **diff-view**
 
-    ![diff-view](/uploads/2013/07/10_02-diff-view.png)
+    ![diff-view](/uploads/2013/07/2013071001-02.png)
 
 3. **log-view**
 
-    ![log-view](/uploads/2013/07/10_03-log-view.png)
+    ![log-view](/uploads/2013/07/2013071001-03.png)
 
 4. **main-view-split**
 
-    ![main-view-split](/uploads/2013/07/10_04-main-view-split.png)
+    ![main-view-split](/uploads/2013/07/2013071001-04.png)
 
 5. **main-view**
 
-    ![main-view](/uploads/2013/07/10_05-main-view.png)
+    ![main-view](/uploads/2013/07/2013071001-05.png)
 
 6. **rev-graph**
 
-    ![rev-graph](/uploads/2013/07/10_06-rev-graph.png)
+    ![rev-graph](/uploads/2013/07/2013071001-06.png)
 
 7. **tree-view**
 
-    ![tree-view](/uploads/2013/07/10_07-tree-view.png)
+    ![tree-view](/uploads/2013/07/2013071001-07.png)

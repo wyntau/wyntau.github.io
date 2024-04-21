@@ -16,7 +16,7 @@ ls /dev/disk/by-id
 
 查看存储设备的id
 
-![](/uploads/2024/04/2101-01.png)
+![](/uploads/2024/04/2024042101-01.png)
 
 图上划红线即为硬盘ID号，复制下来
 
@@ -38,4 +38,4 @@ update VM 100: -sata1 /dev/disk/by-id/ata-WDC_XXXX_XXXX_XXXX
 
 进入PVE对应虚拟机的硬件页面，查看是否硬盘是否已经在虚拟机里，如图所示说明已成功，这时打开虚拟机就能找到对应硬盘。
 
-![](/uploads/2024/04/2101-02.png)
+![](/uploads/2024/04/2024042101-02.png)

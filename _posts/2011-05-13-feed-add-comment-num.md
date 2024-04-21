@@ -11,7 +11,7 @@ tags: [PhilNa2, WordPress]
 
 今天又到主题作者yinheli的博客上又转了转,看到了好多的技术文,可惜咱神马都不懂,只能看看热闹.可是我看到了好玩的东西.在rss中 输出评论条数.增强和读者的交互性.就像这样.
 ---
-![](/uploads/2011/05/13_02.png)
+![](/uploads/2011/05/20110513-131-01.png)
 
 当时在winysky的文章[WordPress订阅源里显示评论数](http://winysky.com/show-feeds-in-wordpress-comments)就看到winysky说代码参考自 philna2主题.这里说的代码应该就是我看到的这个.但是不知道为什么,在我用的主题里面没有,只在yinheli的博文中看到了.于是我就弄过来放到了rss输出里面.恰好feedburner抓取rss,就看到了上图的结果.
 

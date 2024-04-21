@@ -7,7 +7,7 @@ tags: [Chrome, JavaScript]
 
 下面是demo,仅限Chrome.鼠标放上去就可以看到效果了
 
-<img id="logo" src="/uploads/2012/11/17_01.png" alt="chrome" style="width: 123px;cursor: pointer;">
+<img id="logo" src="/uploads/2012/11/20121117-251-01.png" alt="chrome" style="width: 123px;cursor: pointer;">
 <script type="text/javascript">
 	var _pro1 = 0,
 		_logo = document.getElementById('logo');

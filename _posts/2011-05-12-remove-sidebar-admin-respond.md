@@ -9,7 +9,7 @@ tags: [PhilNa2, WordPress, 原创]
 去掉博主回复这个也是无意间鼓捣的.
 效果图如下所示
 
-![](/uploads/2011/05/12_01.png)
+![](/uploads/2011/05/20110512-129-01.png)
 
 在本地的wordpress乱翻那些php文件,就翻到了app/recentcomments.php文件.然后打开看了看.网上好多人侧栏去掉博主评论都是用的那种直接从数据库中读取评论时不读取mail等于博主邮箱的评论.但是philna2主题不是用的直接从数据库中读取,而是使用了wp官方的get_comments()函数.
 
