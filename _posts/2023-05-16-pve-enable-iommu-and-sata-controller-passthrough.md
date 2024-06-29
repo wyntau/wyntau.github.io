@@ -11,7 +11,8 @@ PVE 安装了个黑群晖, PVE 系统安装在 U 盘上, 所以想把 sata 控�
 
 1. 编辑 grub 文件 `/etc/default/grub`
 2. 找到 `GRUB_CMDLINE_LINUX_DEFAULT="quiet"` 修改为 `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"`
-3. 使用 `update-grub` 更新 grub
+3. `update-initramfs -u -k all`
+4. 使用 `update-grub` 更新 grub
 
 ### 增加虚拟化驱动，加载vifo系统模块
 修改 `/etc/modules` 文件, 添加如下内容
@@ -20,7 +21,7 @@ PVE 安装了个黑群晖, PVE 系统安装在 U 盘上, 所以想把 sata 控�
 vfio
 vfio_iommu_type1
 vfio_pci
-vfio_virqfd
+vfio_virqfd #not needed if on kernel 6.2 or newer
 ```
 
 ### 重启验证
