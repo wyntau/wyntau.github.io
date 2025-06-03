@@ -187,7 +187,7 @@ lxc.mount.entry: /dev/dri dev/dri none bind,optional,create=dir
 所以在容器中通过下载 nvidia 驱动安装文件的方式进行安装。对应的官网地址为 https://www.nvidia.com/en-us/drivers/unix/ ，找到和宿主版本相同的驱动下载即可。我使用的 470.182.03 版本驱动文件下载命令如下
 
 ```
-wget https://us.download.nvidia.com/XFree86/Linux-x86_64/470.182.03/NVIDIA-Linux-x86_64-470.182.03.run
+wget https://cn.download.nvidia.cn/XFree86/Linux-x86_64/470.182.03/NVIDIA-Linux-x86_64-470.182.03.run
 ```
 
 下载后，添加可执行权限并进行安装。
