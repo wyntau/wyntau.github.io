@@ -65,7 +65,7 @@ zerotier-cli join <NETWORK ID>
 
 **然后** 是开启 `site-to-site networking`
 
-zerotier 官方文档地址 [Route between ZeroTier and Physical Networks](https://zerotier.atlassian.net/wiki/spaces/SD/pages/224395274/Route+between+ZeroTier+and+Physical+Networks), 下面的内容是结合官方文档以及个人的实际情况举例.
+zerotier 官方文档地址 [Route between ZeroTier and Physical Networks](https://docs.zerotier.com/route-between-phys-and-virt/), 下面的内容是结合官方文档以及个人的实际情况举例.
 
 由于是两个网络之间建立 `site-to-site networking`, 所以我这边会以两个网络举例.
 
